@@ -1,16 +1,23 @@
-FROM python:3.8-slim-buster
+# Use an official Node.js runtime as the base image
+FROM node:14-alpine
 
-# create app folder and copy in code 
+# Set the working directory inside the container
 WORKDIR /app
 
-# install requirements from requirements.txt
-COPY ./requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt 
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
 
-COPY . /app 
+# Install app dependencies
+RUN npm install
 
-EXPOSE 8080
+# Copy the entire app directory (including the node_modules) to the container
+COPY . .
 
-# entrypoint command - tells dockerfile to execute backend flask app
-# binded to port 8000
-CMD gunicorn --bind 0.0.0.0:8080 --timeout=150 app:app
+# Build the React app
+RUN npm run build
+
+# Expose port 80 for the React app
+EXPOSE 80
+
+# Define the command to run the app when the container starts
+CMD ["npm", "start"]
