@@ -1,0 +1,23 @@
+{
+  "name": "personalsite",
+  "version": "1.0.0",
+  "description": "Cole Stainsby's Personal website for showing off qualifications and expirience.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cstainsby/PersonalWebsite.git"
+  },
+  "author": "Cole Stainsby",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cstainsby/PersonalWebsite/issues"
+  },
+  "homepage": "https://github.com/cstainsby/PersonalWebsite#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
