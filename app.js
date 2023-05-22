@@ -56,6 +56,88 @@
 // }
 
 
+// create skill icon name element 
+function createSkillIconElement(iconName) {
+    iconName = iconName.toLowerCase(); 
+    const element = document.createElement('div');
+    element.className = 'skill-icon-element';
+    
+    const icon = document.createElement('img');
+    icon.src = 'media/' + iconName + '.png';
+    
+    const text = document.createElement('p');
+    text.textContent = iconName.charAt(0).toUpperCase() + iconName.slice(1);
+    
+    element.appendChild(icon);
+    element.appendChild(text);
+    
+    return element;
+}
+
+// dynamically fills the skill section with a dictionary
+function fillSkillIcons(skillSectionDict) {
+    const sectionContent = document.getElementById("skills-section-content");
+
+    console.log(sectionContent);
+  
+    for (const section in skillSectionDict) {
+      const skillSection = skillSectionDict[section];
+      const skillSetOfType = document.createElement('div');
+      skillSetOfType.className = 'skillset-of-type';
+  
+      const sectionTitle = document.createElement('h1');
+      sectionTitle.textContent = section;
+  
+      skillSetOfType.appendChild(sectionTitle);
+  
+      const iconSection = document.createElement('div');
+      iconSection.className = 'icon-section';
+  
+      skillSection.forEach(skill => {
+        const iconElement = createSkillIconElement(skill);
+        iconSection.appendChild(iconElement);
+      });
+  
+      skillSetOfType.appendChild(iconSection);
+      sectionContent.appendChild(skillSetOfType);
+    }
+    
+
+  }
+
+skillDict = {
+    "Languages": [
+        "python",
+        "java",
+        "c++",
+        "mysql",
+        "js"
+    ],
+    "Frontend": [
+        "react",
+        "html",
+        "css"
+    ],
+    "Backend": [
+        "Flask",
+        "fastapi",
+        "node.js"
+    ],
+    "Data Science": [
+        "jupyter",
+        "pandas",
+        "numpy",
+        "sklearn",
+        "pytorch"
+    ],
+    "Dev Practicies": [
+        "agile",
+        "cicd"
+    ]
+}
+fillSkillIcons(skillDict);
+
+
 // send email 
 document.getElementById('email-form')
     .addEventListener('submit', (e) => {

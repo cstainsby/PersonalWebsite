@@ -119,6 +119,33 @@ section {
   }
 }
 
+#skills-section {
+  & .section-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+    
+    & .skillset-of-type {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      & img {
+        height: 40px;
+        width: 40px;
+      }
+    }
+
+    // override skillset of type for the full stack section
+    // & #full-stack-skillset {
+    //   display: flex;
+    //   flex-direction: row;
+    // }
+  }
+}
+
 #contact-section {
 
   & .content {
