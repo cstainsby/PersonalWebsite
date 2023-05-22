@@ -1,111 +1,238 @@
-#greeting-section,
-#accomplishments-section,
-#projects-section,
-#contact-section {
-    height: 100vh;
-    width: 100vw;
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  margin: 0px;
 }
 
-body {
-    font-family: 'Source Sans Pro', sans-serif;
+ul {
+  list-style-type: none;
 }
+
+// #greeting-section,
+// #accomplishments-section,
+// #projects-section,
+// #contact-section {
+//   display: grid;
+//   gap: 50px 100px; // 50px gap on rows, 100px on columns
+//   height: 100vh;
+//   width: 100vw;
+// }
+
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+button > * {
+  padding: 4px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+
+// for each section
+section {
+  display: flex;
+  flex-direction: column;
+  width: inherit;
+  padding: 24px;
+  padding-left: 72px;
+  margin-bottom: 48px;
+
+
+  .section-header {
+    & .section-title {
+      text-align: left;
+      font-size: 48px;
+    }
+  }
+
+  .section-footer {
+    display: flex;
+  }
+}
+
+// special changes to the greeting section
+// there will be some overrides from the standard section selection
+#greeting-section {
+
+  & .section-title {
+    font-size: 64px;
+  }
+
+  & .section-footer {
+    padding-top: 24px;
+    justify-content: start;
+  }
+
+  & .nav-button {
+    height:48px;
+    width:128px;
+    border-radius: 0px;
+    background: none;
+    cursor: pointer;
+  }
+}
+
+#projects-section {
+
+  & .project {
+    padding-left: 24px;
+    padding-right: 24px;
+    margin-bottom: 48px;
+  }
+
+  & .project-links {
+    display: flex;
+    padding-left: 24px;
+    padding-right: 24px;
+
+    & .project-link {
+      margin-right: 24px;
+      padding-right: 12px;
+      padding-left: 12px;
+      display: inline-block;
+      background-color: #4CAF50; /* Set your desired background color */
+      color: white; /* Set the text color */
+      text-decoration: none; /* Remove the underline */
+      border-radius: 4px; /* Round the corners */
+      border: none; /* Remove the border */
+      transition: background-color 0.3s ease; /* Add a smooth transition */
+    }
+    & .project-link:hover {
+      background-color: #45a049;
+    } 
+  }
+}
+
+#education-and-work-section {
+  display: flex;
+
+  & #education-column {
+    max-width: 200px;
+  }
+
+  & #work-column {
+    max-width: 200px;
+  }
+}
+
+#contact-section {
+
+  & .content {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    & #email-form {
+      min-width: 800px;
+    }
+  }
+}
+
+
+
+
+
+
+
 
 .circle-container {
-    position: relative;
-    width: 400px;
-    height: 400px;
-  }
+  position: relative;
+  width: 400px;
+  height: 400px;
+}
   
-  .circle {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 200px;
-    height: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
-  }
+.circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  position: relative;
+}
   
-  .small-circle {
-    position: absolute;
-    --circle-radius: 8px;
-    --offset: 100px;
-    width: var(--circle-radius);
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background-color: black;
-    // left: calc(var(--offset)/2);
 
-    transform:
-      translate (
-        calc(cos(var(--degrees)) * var(--offset)),
-        calc(sin(var(--degrees)) * var(--offset))
-      );
-    
-    animation: circleHorizontal circleVertical 6s linear alternate infinite;
-  }
 
-  @keyframes circleHorizontal {
-    to {
-      transform: translateX(-200%);
-    }
-  }
 
-  @keyframes circleVertical {
-    to {
-      transform: translateY(-200%);
-    }
+@keyframes circleHorizontal {
+  from {
+    transform: translateX(0%);
   }
+  to {
+    transform: translateX(-200%);
+  }
+}
 
-  $total-small-circles: 10;
-  @for $i from 0 through ($total-small-circles - 1) {
-    .small-circle:nth-of-type(#{$i} + 1) {
-      --degrees: #{$i} * 360deg / #{$total-small-circles};
-    }
+@keyframes circleVertical {
+  from {
+    transform: translateY(0%);
   }
- 
-  .small-circle:nth-of-type(1) {
-    --degrees: 0deg;
+  to {
+    transform: translateY(-200%);
   }
+}
+
+@mixin setSmallCircleStyles($degrees) {
+  position: absolute;
+  --circle-radius: 8px;
+  --offset: 100px;
+  width: var(--circle-radius);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: black;
+  // left: calc(var(--offset)/2);
+
+  transform:
+    translate (
+      calc(cos(var(--degrees)) * var(--offset)),
+      calc(sin(var(--degrees)) * var(--offset))
+    );
   
-  .circle-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform-origin: top center;
-    background-color: white;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-top: -25px; /* Half of button height */
-    margin-left: -25px; /* Half of button width */
+  animation: circleHorizontal circleVertical 6s linear alternate infinite;
+}
+
+
+$total-small-circles: 3;
+@for $i from 0 through ($total-small-circles - 1) {
+  .small-circle:nth-of-type(#{$i} + 1) {
+    @include setSmallCircleStyles(#{$i} * 360deg / #{$total-small-circles});
   }
+}
+
+
+.circle-button {
+  position: absolute;
+  background-color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  // margin-top: -25px; /* Half of button height */
+  // margin-left: -25px; /* Half of button width */
+}
+
+$total-number-buttons: 3;
+@for $i from 0 through ($total-number-buttons - 1) {
+  .ani-circle-button:nth-of-type(#{$i}) {
+    --delta-theta: calc(360deg / $total-number-buttons);
+    --curr-theta: calc($i * var(--delta-theta));
+    transform: rotate(var(--curr-theta)) translateX(100px) rotate(-var(--curr-theta));
+  }
+}
+
+// .content {
+//   display: none;
+// }
   
-  #ani-circle-button-1 {
-    transform: rotate(45deg) translateX(100px) rotate(-45deg);
-  }
-  
-  #ani-circle-button-2 {
-    transform: rotate(135deg) translateX(100px) rotate(-135deg);
-  }
-  
-  #ani-circle-button-3 {
-    transform: rotate(225deg) translateX(100px) rotate(-225deg);
-  }
-  
-  #ani-circle-button-4 {
-    transform: rotate(315deg) translateX(100px) rotate(-315deg);
-  }
-  
-  .content {
-    display: none;
-  }
-  
-  .expanded {
-    display: block;
-    font-size: 24px;
-    color: white;
-  }
+.expanded {
+  display: block;
+  font-size: 24px;
+  color: white;
+}

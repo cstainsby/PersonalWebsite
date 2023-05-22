@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./server.js localhost 8080"
+    "start": "nodemon ./server.js localhost 8080",
+    "compile:scss": "node-sass --include-path sass scss/styles.scss styles.css"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/cstainsby/PersonalWebsite#readme",
   "dependencies": {
+    "@emailjs/browser": "^3.11.0",
     "express": "^4.18.2",
     "node-sass": "^9.0.0",
     "nodemon": "^2.0.22"
