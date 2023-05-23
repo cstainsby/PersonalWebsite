@@ -55,6 +55,16 @@
 //     aniCircle.appendChild(smallCircle);
 // }
 
+// for the bottom right navigator button, only make it appear if the user has scrolled down
+window.addEventListener('scroll', function() {
+    var link = document.getElementById('bottom-right-link');
+    if (window.pageYOffset < 256) {
+      link.style.display = 'none'; // Hide the link when at the top of the page
+    } else {
+      link.style.display = 'block'; // Show the link when scrolling down
+    }
+  });
+  
 
 // create skill icon name element 
 function createSkillIconElement(iconName) {
@@ -77,8 +87,6 @@ function createSkillIconElement(iconName) {
 // dynamically fills the skill section with a dictionary
 function fillSkillIcons(skillSectionDict) {
     const sectionContent = document.getElementById("skills-section-content");
-
-    console.log(sectionContent);
   
     for (const section in skillSectionDict) {
       const skillSection = skillSectionDict[section];
@@ -128,6 +136,12 @@ skillDict = {
         "pandas",
         "numpy",
         "sklearn"
+    ],
+    "Tools and Platforms": [
+        "docker",
+        "aws",
+        "github",
+        "linux"
     ],
     "Dev Practicies": [
         "agile",

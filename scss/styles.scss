@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Source Sans Pro', sans-serif;
   margin: 0px;
@@ -7,30 +11,29 @@ ul {
   list-style-type: none;
 }
 
-// #greeting-section,
-// #accomplishments-section,
-// #projects-section,
-// #contact-section {
-//   display: grid;
-//   gap: 50px 100px; // 50px gap on rows, 100px on columns
-//   height: 100vh;
-//   width: 100vw;
-// }
-
-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+input[type="text"], input[type="email"] {
+  font-size: medium;
 }
-button > * {
-  padding: 4px;
+textarea { 
+  font-size: 16px; 
 }
 
-form {
-  display: flex;
-  flex-direction: column;
+.word-link {
+  margin-right: 24px;
+  padding: 12px;
+  display: inline-block;
+  background-color: #4CAF50; /* Set your desired background color */
+  color: white; /* Set the text color */
+  text-decoration: none; /* Remove the underline */
+  border-radius: 4px; /* Round the corners */
+  border: none; /* Remove the border */
+  transition: background-color 0.3s ease; /* Add a smooth transition */
 }
+.word-link:hover {
+  background-color: #45a049;
+} 
 
+// for links with images displayed rather than words
 .image-link {
   display: inline-block;
   position: relative;
@@ -40,6 +43,16 @@ form {
 }
 .image-link:hover img {
   transform: scale(1.15); /* Increase the size of the image on hover */
+}
+
+
+#bottom-right-link {
+  display: none; /* Hide the link by default */
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  padding: 10px;
+  z-index: 9999;
 }
 
 
@@ -74,16 +87,8 @@ section {
   }
 
   & .section-footer {
-    padding-top: 24px;
-    justify-content: start;
-  }
-
-  & .nav-button {
-    height:48px;
-    width:128px;
-    border-radius: 0px;
-    background: none;
-    cursor: pointer;
+    padding-top: 48px;
+    justify-content: center;
   }
 
   & #greeting-links {
@@ -106,25 +111,8 @@ section {
   }
 
   & .project-links {
-    display: flex;
     padding-left: 24px;
     padding-right: 24px;
-
-    & .project-link {
-      margin-right: 24px;
-      padding-right: 12px;
-      padding-left: 12px;
-      display: inline-block;
-      background-color: #4CAF50; /* Set your desired background color */
-      color: white; /* Set the text color */
-      text-decoration: none; /* Remove the underline */
-      border-radius: 4px; /* Round the corners */
-      border: none; /* Remove the border */
-      transition: background-color 0.3s ease; /* Add a smooth transition */
-    }
-    & .project-link:hover {
-      background-color: #45a049;
-    } 
   }
 }
 
@@ -138,6 +126,7 @@ section {
 
     & #education-column-title {
       justify-content: center;
+      
     }
   }
 
@@ -152,6 +141,8 @@ section {
     flex-direction: row;
     justify-content: space-between;
     align-items: start;
+    margin-left: 36px;
+    margin-right: 36px;
     
     & .skillset-of-type {
       display: flex;
@@ -175,118 +166,51 @@ section {
 
 #contact-section {
 
-  & .content {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+    // display: flex;
+    // align-items: center;
+    // justify-content: space-evenly;
 
-    & #email-form {
-      min-width: 800px;
+  & #email-form {
+    display: grid;
+    grid-template-areas: 
+      "fullname fullname  email email"
+      "message message    message message"
+      "none none          none submit";
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 6px;
+    align-items: center;
+    justify-content: center;
+    margin: 24px;
+    margin-right: 72px;
+    margin-left: 72px;
+
+    #from_name { 
+      grid-area: fullname;
+      height: 36px;
+    }
+    #from_email { 
+      grid-area: email;
+      height: 36px;
+    }
+    #message { 
+      grid-area: message;
+      height: 128px;
+      resize: vertical;
+    }
+    #email_submit { 
+      grid-area: submit;
     }
   }
-}
 
+  & #contact-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 48px;
 
-
-
-
-
-
-
-.circle-container {
-  position: relative;
-  width: 400px;
-  height: 400px;
-}
-  
-.circle {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 200px;
-  height: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: transparent;
-  position: relative;
-}
-  
-
-
-
-@keyframes circleHorizontal {
-  from {
-    transform: translateX(0%);
+    & .image-link {
+      margin-right: 24px;
+    }
   }
-  to {
-    transform: translateX(-200%);
-  }
-}
-
-@keyframes circleVertical {
-  from {
-    transform: translateY(0%);
-  }
-  to {
-    transform: translateY(-200%);
-  }
-}
-
-@mixin setSmallCircleStyles($degrees) {
-  position: absolute;
-  --circle-radius: 8px;
-  --offset: 100px;
-  width: var(--circle-radius);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background-color: black;
-  // left: calc(var(--offset)/2);
-
-  transform:
-    translate (
-      calc(cos(var(--degrees)) * var(--offset)),
-      calc(sin(var(--degrees)) * var(--offset))
-    );
-  
-  animation: circleHorizontal circleVertical 6s linear alternate infinite;
-}
-
-
-$total-small-circles: 3;
-@for $i from 0 through ($total-small-circles - 1) {
-  .small-circle:nth-of-type(#{$i} + 1) {
-    @include setSmallCircleStyles(#{$i} * 360deg / #{$total-small-circles});
-  }
-}
-
-
-.circle-button {
-  position: absolute;
-  background-color: white;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  // margin-top: -25px; /* Half of button height */
-  // margin-left: -25px; /* Half of button width */
-}
-
-$total-number-buttons: 3;
-@for $i from 0 through ($total-number-buttons - 1) {
-  .ani-circle-button:nth-of-type(#{$i}) {
-    --delta-theta: calc(360deg / $total-number-buttons);
-    --curr-theta: calc($i * var(--delta-theta));
-    transform: rotate(var(--curr-theta)) translateX(100px) rotate(-var(--curr-theta));
-  }
-}
-
-// .content {
-//   display: none;
-// }
-  
-.expanded {
-  display: block;
-  font-size: 24px;
-  color: white;
 }
