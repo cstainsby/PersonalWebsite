@@ -4,3 +4,4 @@ docker.py
 
 node_modules
 vars.env
+aws_info

@@ -15,6 +15,8 @@
 <body>
 
   <!-- space theme -->
+
+  <!-- greeting section -->
   <section id="greeting-section">
     <div class="section-header">
       <div class="section-title">Hello!</div>
@@ -22,7 +24,7 @@
     </div>
 
     <div class="section-body">
-      <p>Aspiring Thing doer</p>
+      <p>Recent College Grad, Aspiring Data Engineer.</p>
     </div>
 
     <div class="section-footer">
@@ -42,6 +44,21 @@
         <b>Contact Me</b>
         <!-- <img src="media/right-arrow.png" height="20px" width="20px" style="transform: rotate(90deg);"/> -->
       </button>
+    </div>
+
+    <div id="greeting-links">
+      <a class="image-link" href="https://www.linkedin.com/in/colestainsby/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+        <img src="media/linkedin-link-icon.png" alt="LinkedIn" height="40px" width="40px" />
+      </a>      
+      <a class="image-link" href="https://github.com/cstainsby" target="_blank" rel="noopener noreferrer" title="GitHub">
+        <img src="media/github-link-icon.png" alt="GitHub" height="40px" width="40px"/>
+      </a>
+      <a class="image-link" href="https://www.kaggle.com/colestainsby" target="_blank" rel="noopener noreferrer" title="Kaggle">
+        <img src="media/kaggle-link-icon.png" height="40px" width="40px"/>
+      </a>
+      <a class="image-link" href="https://coles-resume-bucket.s3.us-west-2.amazonaws.com/ColeStainsbyResume.pdf" target="_blank" rel="noopener noreferrer" title="Resume">
+        <img src="media/resume-link-icon.png" height="40px" width="40px"/>
+      </a>
     </div>
   </section>
 
@@ -76,9 +93,17 @@
       <h1>Hockey Data Project</h1>
       <p>In a team of three members, we used Kaggle and NHL data for exploratory data analysis in conjunction with self-made and self-trained machine learning models (decision trees, random forests, KNN, and Naïve Bayes) to predict which NHL teams would make the playoffs (classification).</p>
       <div class="project-links">
-        <a class="project-link"><p>Code</p><!-- <img/> --></a>
-        <a class="project-link"><p>Demo</p></a>
-        <a class="project-link"><p>Poster</p></a>
+        <a class="project-link" href="https://github.com/cstainsby/HockeyDataProject"  target="_blank" rel="noopener noreferrer">
+          <p>Code</p></a>
+      </div>
+    </div>
+
+    <div class="project">
+      <h1>CHOL/SQRT Matrix Generator</h1>
+      <p>I created a script to help my linear algebra research group quickly find matrices of nxn size over a specified field. It uses recursive tree generation and branch pruning to find all possible paths to any given upper triangle square root matrix or “Cholesky root” matrix.</p>
+      <div class="project-links">
+        <a class="project-link" href="https://github.com/cstainsby/CholeskyRootsOverF2"  target="_blank" rel="noopener noreferrer">
+          <p>Code</p></a>
       </div>
     </div>
   </section>
@@ -86,7 +111,7 @@
   <!-- education and work section -->
   <section id="education-and-work-section">
     <div id="education-column">
-      <h1>Education</h1>
+      <div id="education-column-title">Education</div>
       <div id="education-gonzaga">
         <h1>Computer Science B.S.</h1>
         <p>With a concentration in Data Science</p>
@@ -95,7 +120,7 @@
       </div>
     </div>
     <div id="work-column">
-      <h1>Work</h1>
+      <h1 id="work-column-title">Work</h1>
       <div id="work-math-research">
         <h1>Math Research</h1>
         <p>In this paid research position, I work with two professors and a five-person team to create proofs and solve problems that are important to the larger math community. Our work has included finding proofs to show a relation between upper triangle square root matrices and “Cholesky root” matrices over a field of two, as well as finding how Kneser graphs total roman domination number behave over a range of sizes. </p>
@@ -115,7 +140,7 @@
       <div class="section-title">Skills</div>
     </div>
 
-    <div id="skills-section-content" class="section-content">...</div>
+    <div id="skills-section-content" class="section-content"></div>
   </section>
 
   <!-- about me section -->
@@ -136,6 +161,13 @@
     </div>
 
     <div class="section-content">
+      <form id="email-form">
+        <input type="text" id="from_name" name="from_name" placeholder="Full Name" required>
+        <input type="email" id="from_email" name="from_email" placeholder="Email" required>
+        <textarea id="message" name="message" placeholder="Message" required></textarea>
+        <button type="submit">Send Email</button>
+      </form>
+      
       <div id="contact-info">
         <h2>Contact Info</h2>
         <ul>
@@ -148,27 +180,21 @@
             <p>c.p.stainsby@outlook.com</p>
           </li>
           <li>
-            <a href="https://www.linkedin.com/" target="_blank" class="list-group-item list-group-item-action active">
-              <img src={linkedinLogo} alt="LinkedIn" width="50"/>
+            <a class="image-link" href="https://www.linkedin.com/in/colestainsby/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+              <img src="media/linkedin-link-icon.png" alt="LinkedIn" height="40px" width="40px" />
+            </a>      
+            <a class="image-link" href="https://github.com/cstainsby" target="_blank" rel="noopener noreferrer" title="GitHub">
+              <img src="media/github-link-icon.png" alt="GitHub" height="40px" width="40px"/>
             </a>
-            <a href="https://github.com/" target="_blank" class="list-group-item list-group-item-action">
-              <img src={githubLogo} alt="GitHub" width="50"/>
+            <a class="image-link" href="https://www.kaggle.com/colestainsby" target="_blank" rel="noopener noreferrer" title="Kaggle">
+              <img src="media/kaggle-link-icon.png" height="40px" width="40px"/>
             </a>
-            <a href="https://www.kaggle.com/" target="_blank" class="list-group-item list-group-item-action">
-              <img src={kaggleLogo} alt="Kaggle" width="50"/>
+            <a class="image-link" href="https://coles-resume-bucket.s3.us-west-2.amazonaws.com/ColeStainsbyResume.pdf" target="_blank" rel="noopener noreferrer" title="Resume">
+              <img src="media/resume-link-icon.png" height="40px" width="40px"/>
             </a>
           </li>
         </ul>
       </div>
-  
-  
-      <form id="email-form">
-        <input type="text" id="from_name" name="from_name" placeholder="Full Name" required>
-        <input type="email" id="from_email" name="from_email" placeholder="Email" required>
-        <textarea id="message" name="message" placeholder="Message" required></textarea>
-        <button type="submit">Send Email</button>
-      </form>
-      
     </div>
   </section>
 

@@ -127,8 +127,7 @@ skillDict = {
         "jupyter",
         "pandas",
         "numpy",
-        "sklearn",
-        "pytorch"
+        "sklearn"
     ],
     "Dev Practicies": [
         "agile",
