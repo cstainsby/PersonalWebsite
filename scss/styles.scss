@@ -1,21 +1,23 @@
 html {
   scroll-behavior: smooth;
   font-family: 'Source Sans Pro', sans-serif;
+  background-color: #e0e0e0;
+  font-size: 16px; 
 }
 
 body {
   margin: 0px;
+  font-size: 1rem;
 }
 
-input[type="text"], input[type="email"] {
-  font-size: medium;
-}
-textarea { 
-  font-size: 16px; 
+input[type="text"], 
+input[type="email"],
+textarea {
+  font-size: 1rem;
 }
 
 .word-link {
-  margin-right: 24px;
+  margin-right: 1%;
   padding: 12px;
   display: inline-block;
   background-color: #4CAF50; /* Set your desired background color */
@@ -24,6 +26,7 @@ textarea {
   border-radius: 4px; /* Round the corners */
   border: none; /* Remove the border */
   transition: background-color 0.3s ease; /* Add a smooth transition */
+  margin: 1%;
 }
 .word-link:hover {
   background-color: #45a049;
@@ -57,10 +60,10 @@ section {
   display: flex;
   flex-direction: column;
   width: inherit;
-  padding: 24px;
-  padding-left: 72px;
-  padding-right: 72px;
-  margin-bottom: 48px;
+  padding: 2%;
+  padding-left: 4%;
+  padding-right: 4%;
+  margin-bottom: 2%;
 
 
   .section-header {
@@ -84,11 +87,7 @@ section {
     text-align: left;
   }
 
-  & .section-footer {
-    padding-top: 48px;
-    justify-content: center;
-  }
-
+  // links to indeed, github, etc
   & #greeting-links {
     display: flex;
     justify-content: start;
@@ -97,6 +96,12 @@ section {
     & .image-link {
       margin-right: 24px;
     }
+  }
+
+  & .section-footer {
+    padding-top: 48px;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 }
 
@@ -116,8 +121,13 @@ section {
 
 #education-and-work-section {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: space-evenly;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 
   & .column-title {
     text-align: center;
@@ -125,15 +135,27 @@ section {
   }
 
   & #education-column {
-    max-width: 300px;
+    width: 45%;
   }
 
   & #work-column {
-    max-width: 300px;
+    width: 45%;
+  }
+
+  & .eaw-section-item {
+    border-radius: 6px;
+    border-style: solid;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-color: #969997;
   }
 }
 
 #skills-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   & .section-title {
     text-align: center;
   }
@@ -141,9 +163,20 @@ section {
   & .section-content {
     display: grid;
     grid-template-areas: auto;
-    grid-template-columns: 1fr 1fr;
-    margin-left: 36px;
-    margin-right: 36px;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 8px;
+    margin: 0 auto;
+    max-width: 1200px;
+
+    @media (min-width: 768px) {
+      /* For screens larger than 768px, have two columns */
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @media (min-width: 1024px) {
+      /* For screens larger than 1024px, have three columns */
+      grid-template-columns: repeat(3, 1fr);
+    }
     
     & .skillset-of-type {
       display: flex;
@@ -152,8 +185,8 @@ section {
       align-items: center;
 
       & img {
-        height: 40px;
-        width: 40px;
+        max-height: 40px;
+        max-width: 40px;
       }
 
       & .icon-section {
@@ -177,6 +210,11 @@ section {
   }
 }
 
+#about-me-section {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 #contact-section {
   & .section-title {
     text-align: center;
@@ -192,9 +230,9 @@ section {
     gap: 6px;
     align-items: center;
     justify-content: center;
-    margin: 24px;
-    margin-right: 72px;
-    margin-left: 72px;
+    margin: 5%;
+    margin-right: 15%;
+    margin-left: 15%;
 
     #from_name { 
       grid-area: fullname;
@@ -206,7 +244,7 @@ section {
     }
     #message { 
       grid-area: message;
-      height: 128px;
+      height: 72px;
       resize: vertical;
     }
     #email_submit { 
@@ -217,6 +255,7 @@ section {
   & #contact-info {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
     margin-top: 48px;
