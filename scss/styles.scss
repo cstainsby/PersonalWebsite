@@ -1,14 +1,10 @@
 html {
   scroll-behavior: smooth;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 body {
-  font-family: 'Source Sans Pro', sans-serif;
   margin: 0px;
-}
-
-ul {
-  list-style-type: none;
 }
 
 input[type="text"], input[type="email"] {
@@ -63,12 +59,13 @@ section {
   width: inherit;
   padding: 24px;
   padding-left: 72px;
+  padding-right: 72px;
   margin-bottom: 48px;
 
 
   .section-header {
     & .section-title {
-      text-align: left;
+      text-align: center;
       font-size: 48px;
     }
   }
@@ -84,6 +81,7 @@ section {
 
   & .section-title {
     font-size: 64px;
+    text-align: left;
   }
 
   & .section-footer {
@@ -121,13 +119,13 @@ section {
   flex-direction: row;
   justify-content: space-evenly;
 
+  & .column-title {
+    text-align: center;
+    font-size: 48px;
+  }
+
   & #education-column {
     max-width: 300px;
-
-    & #education-column-title {
-      justify-content: center;
-      
-    }
   }
 
   & #work-column {
@@ -136,11 +134,14 @@ section {
 }
 
 #skills-section {
+  & .section-title {
+    text-align: center;
+  }
+
   & .section-content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: start;
+    display: grid;
+    grid-template-areas: auto;
+    grid-template-columns: 1fr 1fr;
     margin-left: 36px;
     margin-right: 36px;
     
@@ -154,21 +155,32 @@ section {
         height: 40px;
         width: 40px;
       }
-    }
 
-    // override skillset of type for the full stack section
-    // & #full-stack-skillset {
-    //   display: flex;
-    //   flex-direction: row;
-    // }
+      & .icon-section {
+        display: flex;
+        flex-direction: row;
+
+        & .skill-icon-element {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding-right: 4px;
+          padding-left: 4px;
+
+          & p {
+            margin-top: 4px;
+          }
+        }
+      }
+    }
   }
 }
 
 #contact-section {
-
-    // display: flex;
-    // align-items: center;
-    // justify-content: space-evenly;
+  & .section-title {
+    text-align: center;
+  }
 
   & #email-form {
     display: grid;
