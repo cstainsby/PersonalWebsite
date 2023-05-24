@@ -160,22 +160,85 @@ document.getElementById('email-form')
         //  2) from_email
         //  3) message
 
-        emailjs.sendForm(
-            "service_tknknfq", 
-            "template_9kiv18q", 
-            document.getElementById("email-form"), 
-            "yl51Nnibdor99pN-H") 
+        const button = document.getElementById('email_submit');
+        const spinner = document.createElement('div');
+        spinner.className = 'spinner email-response-item'; 
 
-            .then(function() {
-                
-                console.log('SUCCESS!');
-                e.target.from_name.value = "";
-                e.target.from_email.value = "";
-                e.target.message.value = "";
-            }, function(error) {
-                console.log('FAILED...', error);
-            })
-            .catch(err => {
-                console.log("ERROR on email submission " + JSON.stringify(err));
-            });
+        button.disabled = true;
+
+        // Replace the button with the spinner
+        button.parentNode.replaceChild(spinner, button);
+
+        // Remove the spinner and display the result message after the result
+        // returns from the request
+        const message = document.createElement('p');
+        message.className = 'email-response-item';
+
+        emailjs
+        .sendForm(
+            "service_tknknfq",
+            "template_9kiv18q",
+            document.getElementById("email-form"),
+            "yl51Nnibdor99pN-H"
+        )
+        .then(function() {
+            console.log('SUCCESS!');
+            message.textContent = 'Email Sent Successfully!';
+        })
+        .catch(function(error) {
+            console.log('FAILED...', error);
+            message.textContent = 'Error occurred trying to send email.';
+        })
+        .finally(function() {
+            // Replace the spinner with the result message
+            spinner.parentNode.replaceChild(message, spinner);
+
+            // Re-enable the button after a brief delay
+            setTimeout(function() {
+            button.disabled = false;
+            message.parentNode.replaceChild(button, message);
+            }, 2000);
+        });
+
     });
+
+// js elements to handle email send interactions 
+// Get the button and spinner elements
+const button = document.getElementById('email_submit');
+const spinner = document.createElement('div');
+spinner.className = 'spinner'; // Add a CSS class to style the spinner
+
+// Attach the event listener to the button
+button.addEventListener('click', () => {
+  // Disable the button
+  button.disabled = true;
+
+  // Show the spinner
+  button.appendChild(spinner);
+
+  // Simulate an asynchronous request (replace with your actual request code)
+  setTimeout(() => {
+    const success = Math.random() < 0.5; // Randomly determine success or failure
+
+    // Remove the spinner
+    button.removeChild(spinner);
+
+    // Display the result message
+    const message = document.createElement('p');
+    if (success) {
+      message.textContent = 'Request successful!';
+      message.className = 'success'; // Add a CSS class to style the success message
+    } else {
+      message.textContent = 'Error occurred during the request.';
+      message.className = 'error'; // Add a CSS class to style the error message
+    }
+
+    button.appendChild(message);
+
+    // Re-enable the button after a brief delay
+    setTimeout(() => {
+      button.disabled = false;
+      button.removeChild(message);
+    }, 2000);
+  }, 2000); // Simulate a 2-second delay for the request
+});
