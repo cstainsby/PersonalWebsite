@@ -38,7 +38,7 @@ app.get("/*", (req, res) => {
     res.sendFile(path.resolve("index.html"))
 });
 
-app.listen(80, "172.31.47.100",
+app.listen(8080, "172.31.47.100",
     () => console.log("Server has been started..."))
 
 // Compile SCSS on server start
