@@ -62,7 +62,7 @@ skillDict = {
         "java",
         "c++",
         "mysql",
-        "js"
+        "javascript"
     ],
     "Frontend": [
         "react",
@@ -186,4 +186,35 @@ button.addEventListener('click', () => {
       button.removeChild(message);
     }, 2000);
   }, 2000); // Simulate a 2-second delay for the request
+});
+
+
+// modal implementation
+let currentOpenModal = null;
+const openModalButton = document.querySelector(".open-modal-button");
+const closeModalButton = document.querySelector(".close-modal-button");
+
+const modalOpenBtnIdToModalId = {
+  "AITAprojDescBtn": "AITAprojModal",
+  "BioPathprojDescBtn": "BioPathprojModal"
+}
+
+openModalButton.addEventListener("click", (e) => {
+  const modalId = modalOpenBtnIdToModalId[e.target.id];
+  if (!modalId) {
+    console.log("ERROR: modal lookup table missing button element");
+    return;
+  } 
+
+  console.log("Looking for modal: " + modalId);
+  const modal = document.querySelector("#" + modalId);
+  modal.showModal();
+  currentOpenModal = modal;
+});
+
+closeModalButton.addEventListener("click", () => {
+  if (currentOpenModal) {
+    currentOpenModal.close();
+    currentOpenModal = null;
+  }
 });

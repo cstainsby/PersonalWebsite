@@ -38,7 +38,15 @@ app.get("/*", (req, res) => {
     res.sendFile(path.resolve("index.html"))
 });
 
-app.listen(8080, "172.31.47.100",
+
+let runningIP = "127.0.0.1";
+// if (process.env.NODE_ENV === "development") {
+//   runningIP = "127.0.0.1";
+// } else {
+//   runningIP = "172.31.47.100";
+// }
+
+app.listen(8080, runningIP,
     () => console.log("Server has been started..."))
 
 // Compile SCSS on server start

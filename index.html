@@ -28,10 +28,6 @@
       <div class="section-title">I'm Cole Stainsby.</div>
     </div>
 
-    <div class="section-body">
-      <p>Recent Computer Science College Grad, Aspiring Data Engineer.</p>
-    </div>
-
     <div id="greeting-links">
       <a class="image-link" href="https://www.linkedin.com/in/colestainsby/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
         <img src="media/linkedin-link-icon.png" alt="LinkedIn" height="40px" width="40px" />
@@ -45,6 +41,10 @@
       <a class="image-link" href="https://coles-resume-bucket.s3.us-west-2.amazonaws.com/ColeStainsbyResume.pdf" target="_blank" rel="noopener noreferrer" title="Resume">
         <img src="media/resume-link-icon.png" height="40px" width="30px"/>
       </a>
+    </div>
+
+    <div class="section-body">
+      <p>Recent Computer Science B.S. Grad, Aspiring Data Engineer.</p>
     </div>
 
     <div class="section-footer">
@@ -76,41 +76,98 @@
 
     <!-- Biopath Project -->
     <div class="project">
-      <h1>Biopath</h1>
-      <b>Senior Capstone Project</b>
-      <p>My team was partnered with the GU Biochemistry department to create a web app which aids students in learning Biochemical pathways. My responsibilities included deploying the application, creating a CI/CD workflow for the project as well as collaborating with my group to create a React frontend for the tool. I also built out user authentication within our Django backend with JWTs.</p>
-    
-      <div class="award">
-        <p><b>Award:</b> 2023 Best Computer Science Project</p>
+      <div class="project-info">
+        <h1>Biopath</h1>
+        <b>Senior Capstone Project</b>
+
+        <div class="award">
+          <p><b>Award:</b> 2023 Best Computer Science Project</p>
+        </div>
+
+        <ul class="skills-used">
+          <li>JavaScript</li>
+          <li>React</li>
+          <li>AWS</li>
+          <li>Docker</li>
+          <li>PostgreSQL</li>
+          <li>Python</li>
+          <li>Django</li>
+        </ul>
+        <p>My small team partnered with the GU Biochemistry department to create a web app which aids students in learning Biochemical pathways. My responsibilities included deploying the application, creating a CI/CD workflow for the project as well as collaborating with my group to create a React frontend for the tool. I also built out user authentication within our Django backend with JWTs.</p>
+        
+        <button id="BioPathprojDescBtn" class="button open-modal-button word-link">More Details</button>
+        <dialog id="BioPathprojModal" class="modal">
+          <h1>BioPath</h1>
+          <div class="proj-dialog-body">
+            <div class="dialog-body-text">
+              <h3 class="dialog-body-section-header">About The Project</h3>
+              <p>My small team partnered with the GU Biochemistry department to create a web app which aids students in learning Biochemical pathways. My responsibilities included deploying the application, creating a CI/CD workflow for the project as well as collaborating with my group to create a React frontend for the tool. I also built out user authentication within our Django backend with JWTs.</p>
+              <h3 class="dialog-body-section-header">My Contributions</h3>
+              <p>Even though there was a lot of crossover in terms of each memebers contribution to the project. My work on this project consisted mainly of work with the fr</p>
+              <h3 class="dialog-body-section-header">Stack Overview</h3>
+            </div>
+            <div class="project-links">
+              <a class="word-link" href="https://github.com/SD-2022-CPSC-10/BioPath" target="_blank" rel="noopener noreferrer">
+                Code</a>
+              <a class="word-link" href="https://ifdfgjpy82.us-west-2.awsapprunner.com" target="_blank" rel="noopener noreferrer">
+                Demo</a>
+              <a class="word-link" href="https://github.com/cstainsby/BiopathPoster" target="_blank" rel="noopener noreferrer">
+                Poster</a>
+            </div>
+          </div>
+          <button class="button close-modal-button word-link">Back</button>
+        </dialog>
       </div>
-      <div class="project-links">
-        <a class="word-link" href="https://github.com/SD-2022-CPSC-10/BioPath" target="_blank" rel="noopener noreferrer">
-          Code</a>
-        <a class="word-link" href="https://ifdfgjpy82.us-west-2.awsapprunner.com" target="_blank" rel="noopener noreferrer">
-          Demo</a>
-        <a class="word-link" href="https://github.com/cstainsby/BiopathPoster" target="_blank" rel="noopener noreferrer">
-          Poster</a>
+      <img class="project-img" src="media/biopath-screenshot.png"/>
+    </div>
+
+    <!-- AITA Project -->
+    <div class="project">
+      <div class="project-info">
+        <h1>Reddit r/AITA NLP Sentiment Classifier</h1>
+        <ul class="skills-used">
+          <li>Python</li>
+          <li>ML Data Structures</li>
+          <li>Docker</li>
+          <li>GCP Bigquery</li>
+          <li>GCP CloudRun</li>
+          <li>Flask</li>
+          <li>HuggingFace</li>
+          <li>Jupyter Notebooks</li>
+        </ul>
+        <p>In this project, I created a data pipeline where I was able to retrieve posts for the subreddit r/amitheasshole, make transformations on them, and then store them in google bigquery. At which point I was able to fine-tune a HuggingFace BERT-based transformer to generate sentiment based classifications on the post data. I also created a basic flask application in which you could import posts live from the subreddit, run the model against them, and then respond to the post.</p> 
+        <button id="AITAprojDescBtn" class="button open-modal-button word-link">More Details</button>
+        <dialog id="AITAprojModal" class="modal">
+          <p>Hello</p>
+          <button class="button close-modal-button word-link">Back</button>
+        </dialog>
       </div>
     </div>
 
     <!-- Hockey Data -->
     <div class="project">
-      <h1>Hockey Data Project</h1>
-      <p>In a team of three members, we used Kaggle and NHL data for exploratory data analysis in conjunction with self-made and self-trained machine learning models (decision trees, random forests, KNN, and Naïve Bayes) to predict which NHL teams would make the playoffs (classification).</p>
-      <div class="project-links">
-        <a class="word-link" href="https://github.com/cstainsby/HockeyDataProject"  target="_blank" rel="noopener noreferrer">
-          Code</a>
+      <div class="project-info">
+        <h1>Hockey Data Project</h1>
+        <ul class="skills-used">
+          <li>Python</li>
+          <li>ML Data Structures</li>
+        </ul>
+        <p>In a team of three members, we used Kaggle and NHL data for exploratory data analysis in conjunction with self-made and self-trained machine learning models (decision trees, random forests, KNN, and Naïve Bayes) to predict which NHL teams would make the playoffs (classification).</p>
+        <div class="project-links">
+          <a class="word-link" href="https://github.com/cstainsby/HockeyDataProject"  target="_blank" rel="noopener noreferrer">
+            Code</a>
+        </div>
       </div>
     </div>
 
-    <div class="project">
+    <!-- <div class="project">
       <h1>CHOL/SQRT Matrix Generator</h1>
       <p>I created a script to help my linear algebra research group quickly find matrices of nxn size over a specified field. It uses recursive tree generation and branch pruning to find all possible paths to any given upper triangle square root matrix or “Cholesky root” matrix.</p>
       <div class="project-links">
         <a class="word-link" href="https://github.com/cstainsby/CholeskyRootsOverF2"  target="_blank" rel="noopener noreferrer">
           Code</a>
       </div>
-    </div>
+    </div> -->
   </section>
   
   <!-- education and work section -->

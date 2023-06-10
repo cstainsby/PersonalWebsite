@@ -19,6 +19,46 @@ textarea {
   font-size: 1rem;
 }
 
+
+// ------------------------------------------------------------------
+//    modal styling
+// ------------------------------------------------------------------
+.modal {
+  padding: 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  border-radius: 4px; /* Round the corners */
+  width: 75%;
+
+  // & h1 {
+    
+  // }
+
+  & .proj-dialog-body {
+    display: flex;
+    flex-direction: row;
+    
+    & .project-links {
+      display: flex;
+      flex-direction: column;
+
+      & a {
+        margin-bottom: 16px;
+      }
+    }
+  }
+
+  & .close-modal-button {
+    justify-self: end;
+    cursor: pointer;
+  }
+}
+
+.modal::backdrop {
+  background-color: black;
+  opacity: .4;
+}
+
+
 // ------------------------------------------------------------------
 //    global link classes
 // ------------------------------------------------------------------
@@ -102,14 +142,13 @@ section {
   flex-direction: column;
   width: inherit;
   padding: 2%;
-  padding-left: 4%;
-  padding-right: 4%;
+  padding-left: 8%;
+  padding-right: 8%;
   margin-bottom: 2%;
-
 
   .section-header {
     & .section-title {
-      text-align: center;
+      text-align: start;
       font-size: 48px;
     }
   }
@@ -127,6 +166,8 @@ section {
 // special changes to the greeting section
 // there will be some overrides from the standard section selection
 #greeting-section {
+  height: 100vh;
+  background-color: #ccc;
 
   & .section-title {
     font-size: 64px;
@@ -145,8 +186,9 @@ section {
   }
 
   & .section-footer {
-    padding-top: 48px;
     justify-content: center;
+    margin-top: auto;
+    margin-bottom: 64px;
     flex-wrap: wrap;
   }
 }
@@ -154,14 +196,60 @@ section {
 #projects-section {
 
   & .project {
-    padding-left: 24px;
-    padding-right: 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    padding: 24px;
     margin-bottom: 48px;
-  }
+    background-color: #ccc;
+    border-radius: 4px;
 
-  & .project-links {
-    padding-left: 24px;
-    padding-right: 24px;
+    // @media (min-width: 768px) {
+    //   flex-direction: column;
+    // }
+
+    & .award > p {
+      width: fit-content;
+      padding: 2px;
+      background-color: goldenrod;
+      border-radius: 4px;
+    }
+
+    h1 {
+      font-size: 48px;
+      margin: 0px;
+      margin-bottom: 16px;
+    }
+
+    ul {
+      list-style: none;
+      display: flex;
+      flex-direction: row;
+      padding-left: 0px;
+  
+      & li {
+        margin-right: 8px;
+        padding: 8px;
+        background-color: black;
+        font-weight: bold;
+        color: #e0e0e0;
+      }
+    }
+
+    & .project-info {
+      margin-right: 16px;
+
+      & button {
+        cursor: pointer;
+      }
+    }
+
+    & .project-img {
+      align-self: center;
+      max-height: 300px;
+      width: auto;
+      border-radius: 4px;
+    }
   }
 }
 
@@ -181,11 +269,13 @@ section {
   }
 
   & #education-column {
-    width: 45%;
+    max-width: 45%;
+    min-width: 256px;
   }
 
   & #work-column {
-    width: 45%;
+    max-width: 45%;
+    min-width: 256px;
   }
 
   & .eaw-section-item {
@@ -243,15 +333,22 @@ section {
         flex-direction: row;
 
         & .skill-icon-element {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          padding-right: 4px;
-          padding-left: 4px;
+          display: grid;
+          grid-template-areas: 
+            "skilliconimg"
+            "description";
+          grid-template-rows: 1fr 0.5fr;
+          padding-right: 8px;
+          padding-left: 8px;
 
+          & img {
+            grid-area: skilliconimg;
+            justify-self: center;
+          }
           & p {
+            grid-area: description;
             margin-top: 4px;
+            text-align: center;
           }
         }
       }
