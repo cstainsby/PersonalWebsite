@@ -92,19 +92,55 @@
           <li>PostgreSQL</li>
           <li>Python</li>
           <li>Django</li>
+          <li>REST API</li>
         </ul>
-        <p>My small team partnered with the GU Biochemistry department to create a web app which aids students in learning Biochemical pathways. My responsibilities included deploying the application, creating a CI/CD workflow for the project as well as collaborating with my group to create a React frontend for the tool. I also built out user authentication within our Django backend with JWTs.</p>
+        <p>My small team partnered with the Gonzaga University Biochemistry department to create a web app which aids students in learning Biochemical pathways.</p>
         
         <button id="BioPathprojDescBtn" class="button open-modal-button word-link">More Details</button>
         <dialog id="BioPathprojModal" class="modal">
-          <h1>BioPath</h1>
+          <div class="proj-dialog-header">
+            <h1>BioPath</h1>
+            <a class="close-modal-button image-link">
+              <img src="media/close.png" height="20">
+            </a>
+          </div>
+          <hr>
           <div class="proj-dialog-body">
             <div class="dialog-body-text">
               <h3 class="dialog-body-section-header">About The Project</h3>
-              <p>My small team partnered with the GU Biochemistry department to create a web app which aids students in learning Biochemical pathways. My responsibilities included deploying the application, creating a CI/CD workflow for the project as well as collaborating with my group to create a React frontend for the tool. I also built out user authentication within our Django backend with JWTs.</p>
+              <p>
+                My small team partnered with the GU Biochemistry department to create a web app which aids students in learning Biochemical pathways. 
+                To achieve this, we built an interactive graph based tool to model the complex interactions of a biochemical pathway in a simplified manner.
+                Our tool would allow the student to build their own pathways and simulate how a change in an input into the system (substrate concentration) can propagrate through the the rest of the system.
+                The teachers will also have special permission to add "verified pathways" for all students to be able to check their work against.
+              </p>
+              <h3 class="dialog-body-section-header">Project Stack Diagram</h3>
+              <div class="dialog-body-diagram-section">
+                <p>Project stack</p>
+                <img src="media/biopath-architecture.png">
+              </div>
+              <h3 class="dialog-body-section-header">Cloud Diagram</h3>
+              <div class="dialog-body-diagram-section">
+                <p>Cloud</p>
+                <img src="media/biopath-dev-workflow.png">
+              </div>
               <h3 class="dialog-body-section-header">My Contributions</h3>
-              <p>Even though there was a lot of crossover in terms of each memebers contribution to the project. My work on this project consisted mainly of work with the fr</p>
-              <h3 class="dialog-body-section-header">Stack Overview</h3>
+              <h4>Technical</h4>
+              <p>
+                Even though I worked on many parts of this project, as did the rest of my group, my work on this project was generally focused building out the frontend application and pushing the project to AWS.
+              </p>
+              <h4>Non-technical</h4>
+              <p></p>
+              <p>
+                A major portion of the project which our group had to undertake was speaking with stakeholders, understanding their needs for the project, and making sure our design was well thought out and documented. 
+                It was very important to us a group to set a good foundation for the project knowing that this project will be inherited.
+                On top of machine generated documentation, we also wrote design docs which explained the intention behind the decisions that we made and how to get started with our code.
+              </p>
+              <p>
+                Something that was also important to us was making sure that the inteded audience was actually getting something out of using our app.
+                To ensure this we regularly met with our sponser to demo our work to ensure we were on the right track.
+                We also rolled our app out to be used by students to gather data on how our app is used and how it performed.
+              </p>
             </div>
             <div class="project-links">
               <a class="word-link" href="https://github.com/SD-2022-CPSC-10/BioPath" target="_blank" rel="noopener noreferrer">
@@ -115,7 +151,6 @@
                 Poster</a>
             </div>
           </div>
-          <button class="button close-modal-button word-link">Back</button>
         </dialog>
       </div>
       <img class="project-img" src="media/biopath-screenshot.png"/>
@@ -229,7 +264,7 @@
         <input type="text" id="from_name" name="from_name" placeholder="Full Name" required>
         <input type="email" id="from_email" name="from_email" placeholder="Email" required>
         <textarea id="message" name="message" placeholder="Message" required></textarea>
-        <button class="word-link" type="submit" id="email_submit" name="email_submit">Send Email</button>
+        <button class="word-link button" type="submit" id="email_submit" name="email_submit">Send Email</button>
       </form>
       
       <div id="contact-info">

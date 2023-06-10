@@ -1,14 +1,3 @@
-// for the bottom right navigator button, only make it appear if the user has scrolled down
-window.addEventListener('scroll', function() {
-    var link = document.getElementById('bottom-right-link');
-    if (window.pageYOffset < 256) {
-      link.style.display = 'none'; // Hide the link when at the top of the page
-    } else {
-      link.style.display = 'block'; // Show the link when scrolling down
-    }
-  });
-  
-
 // create skill icon name element 
 function createSkillIconElement(iconName) {
     iconName = iconName.toLowerCase(); 
@@ -60,7 +49,6 @@ skillDict = {
     "Languages": [
         "python",
         "java",
-        "c++",
         "mysql",
         "javascript"
     ],
@@ -189,8 +177,20 @@ button.addEventListener('click', () => {
 });
 
 
+// Function to enable scrolling
+function enableScroll() {
+  const body = document.body;
+  body.classList.remove('no-scroll');
+}
+
+// Function to disable scrolling
+function disableScroll() {
+  const body = document.body;
+  body.classList.add('no-scroll');
+}
+
 // modal implementation
-let currentOpenModal = null;
+let currentOpenModal = null; // modal object
 const openModalButton = document.querySelector(".open-modal-button");
 const closeModalButton = document.querySelector(".close-modal-button");
 
@@ -199,22 +199,66 @@ const modalOpenBtnIdToModalId = {
   "BioPathprojDescBtn": "BioPathprojModal"
 }
 
+// on refresh check local storage, reopen
+const modalIdentifier = localStorage.getItem("currentOpenModal");
+if (modalIdentifier) {
+  openModal(modalIdentifier);
+}
+
+function openModal(modalIdentifier) {
+  const modal = document.querySelector("#" + modalIdentifier);
+
+  modal.showModal();
+  currentOpenModal = modal;
+
+  // hide the "to top" arrow
+  var link = document.getElementById('bottom-right-link');
+  link.style.display = 'none'; 
+  // save modalIdentifier to localStorage
+  localStorage.setItem("currentOpenModal", modalIdentifier);
+
+  disableScroll();
+}
+
+function closeModal() {
+  // remove modal from screen
+  if (currentOpenModal) {
+    currentOpenModal.close();
+    currentOpenModal = null;
+  }
+  // repaint the "to top" arrow
+  var link = document.getElementById('bottom-right-link');
+  link.style.display = 'block'
+  // remove modalIdentifier from the localStorage
+  localStorage.removeItem("currentOpenModal");
+
+  enableScroll();
+}
+
+
+// event listeners for buttons
 openModalButton.addEventListener("click", (e) => {
   const modalId = modalOpenBtnIdToModalId[e.target.id];
   if (!modalId) {
     console.log("ERROR: modal lookup table missing button element");
     return;
   } 
-
-  console.log("Looking for modal: " + modalId);
-  const modal = document.querySelector("#" + modalId);
-  modal.showModal();
-  currentOpenModal = modal;
+  openModal(modalId);
+});
+closeModalButton.addEventListener("click", () => {
+  closeModal();
 });
 
-closeModalButton.addEventListener("click", () => {
-  if (currentOpenModal) {
-    currentOpenModal.close();
-    currentOpenModal = null;
+
+
+
+// for the bottom right navigator button, only make it appear if the user has scrolled down
+// make sure a modal is not being displayed before displaying the arrow link
+window.addEventListener('scroll', function() {
+  var link = document.getElementById('bottom-right-link');
+  if (window.scrollY < 1 || currentOpenModal) {
+    link.style.display = 'none'; // Hide the link when at the top of the page
+  } else {
+    link.style.display = 'block'; // Show the link when scrolling down
   }
 });

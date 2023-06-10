@@ -19,11 +19,20 @@ textarea {
   font-size: 1rem;
 }
 
+button {
+  cursor: pointer;
+}
+
+a {
+  cursor: pointer;
+}
+
 
 // ------------------------------------------------------------------
 //    modal styling
 // ------------------------------------------------------------------
 .modal {
+  max-height: 80%;
   padding: 24px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   border-radius: 4px; /* Round the corners */
@@ -36,8 +45,14 @@ textarea {
   & .proj-dialog-body {
     display: flex;
     flex-direction: row;
+    align-items: start;
+    position: relative;
     
     & .project-links {
+      position: sticky;
+      top: 0;
+      margin-top: 24px;
+      margin-left: 24px;
       display: flex;
       flex-direction: column;
 
@@ -49,13 +64,16 @@ textarea {
 
   & .close-modal-button {
     justify-self: end;
-    cursor: pointer;
   }
 }
 
 .modal::backdrop {
   background-color: black;
   opacity: .4;
+}
+
+.no-scroll {
+  overflow: hidden;
 }
 
 
@@ -238,10 +256,6 @@ section {
 
     & .project-info {
       margin-right: 16px;
-
-      & button {
-        cursor: pointer;
-      }
     }
 
     & .project-img {
@@ -249,6 +263,41 @@ section {
       max-height: 300px;
       width: auto;
       border-radius: 4px;
+    }
+
+
+    & dialog {
+      & .proj-dialog-header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        // & h1 {
+        //   margin-left: 24px;
+        // }
+
+        & a {
+          margin-left: auto;
+          margin-right: 24px;
+        }
+      }
+      & .proj-dialog-body {
+        padding: 12px;
+
+        & p {
+          padding-left: 12px;
+        }
+
+        & .dialog-body-diagram-section {
+          display: flex;
+          flex-direction: row;
+
+          & img {
+            width: 50%;
+            margin-left: auto;
+          }
+        }
+      }
     }
   }
 }
