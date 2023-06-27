@@ -74,7 +74,7 @@ skillDict = {
         "github",
         "linux"
     ],
-    "Dev Practicies": [
+    "Dev. Practicies": [
         "agile",
         "cicd"
     ]
@@ -191,8 +191,10 @@ function disableScroll() {
 
 // modal implementation
 let currentOpenModal = null; // modal object
-const openModalButton = document.querySelector(".open-modal-button");
-const closeModalButton = document.querySelector(".close-modal-button");
+const openModalButtonElements = document.querySelectorAll(".open-modal-button");
+const closeModalButtonElements = document.querySelectorAll(".close-modal-button");
+const openModalButtons = Array.from(openModalButtonElements);
+const closeModalButtons = Array.from(closeModalButtonElements)
 
 const modalOpenBtnIdToModalId = {
   "AITAprojDescBtn": "AITAprojModal",
@@ -237,20 +239,21 @@ function closeModal() {
 
 
 // event listeners for buttons
-openModalButton.addEventListener("click", (e) => {
-  const modalId = modalOpenBtnIdToModalId[e.target.id];
-  if (!modalId) {
-    console.log("ERROR: modal lookup table missing button element");
-    return;
-  } 
-  openModal(modalId);
+openModalButtons.forEach(button => {
+  button.addEventListener("click", (e) => {
+    const modalId = modalOpenBtnIdToModalId[e.target.id];
+    if (!modalId) {
+      console.log("ERROR: modal lookup table missing button element");
+      return;
+    } 
+    openModal(modalId);
+  });
 });
-closeModalButton.addEventListener("click", () => {
-  closeModal();
+closeModalButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    closeModal();
+  });
 });
-
-
-
 
 // for the bottom right navigator button, only make it appear if the user has scrolled down
 // make sure a modal is not being displayed before displaying the arrow link
