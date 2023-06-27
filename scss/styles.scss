@@ -1,16 +1,40 @@
 // ------------------------------------------------------------------
+//    root variables
+// ------------------------------------------------------------------
+:root {
+  // color palatte
+  --white: #e7e6e6;
+  --blue: #007acc;
+  --darkT-grey-1: #3e3e42;
+  --darkT-grey-2: #2d2d30;
+  --darkT-black-1: #252526;
+  --darkT-black-2: #1e1e1e;
+
+  // transition timers 
+  --button-transition-time: 0.2s;
+
+  // z-index indices
+  --zind-perm-top: 999;
+  --zind-foreground: 4;
+  --zind-middleground: 3;
+  --zind-background: 2; 
+  --zind-perm-end: 1;
+}
+
+// ------------------------------------------------------------------
 //    overrides of html provided elements
 // ------------------------------------------------------------------
 html {
   scroll-behavior: smooth;
   font-family: 'Source Sans Pro', sans-serif;
-  background-color: #e0e0e0;
+  background-color: var(--darkT-grey-1);
   font-size: 16px; 
 }
 
 body {
   margin: 0px;
   font-size: 1rem;
+  color: var(--white);
 }
 
 input[type="text"], 
@@ -19,23 +43,172 @@ textarea {
   font-size: 1rem;
 }
 
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+// styling for elements inside the dialog modal
+dialog {
+  & .proj-dialog-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    & a {
+      margin-left: auto;
+      margin-right: 24px;
+    }
+  }
+  & .proj-dialog-body {
+    padding: 12px;
+
+    & p {
+      padding-left: 12px;
+    }
+
+    & .dialog-body-diagram-section {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 32px;
+
+      // adjust diagram display direction when screen gets too small
+      @media (min-width: 0px) and (max-width: 1024px) {
+        flex-direction: column;
+      }
+
+      & .dialog-body-stack-lists {
+        display: flex;
+        flex-direction: row;
+
+        & div {
+          padding-right: 12px;
+        }
+      }
+
+      & img {
+        @media (min-width: 1024px) {
+          max-width: 45%;
+          max-height: 300px;
+        }
+
+        // ensure diagram stays a readable size on smaller screens
+        @media (min-width: 0px) and (max-width: 1024px) {
+          width: 75%;
+          height: auto;
+        }
+      }
+
+      & h3 {
+        max-width: 128px;
+        margin-right: 12px;
+      }
+    }
+  }
+}
+
+
+// ------------------------------------------------------------------
+//    modal styling
+// ------------------------------------------------------------------
+.modal {
+  max-height: 80%;
+  padding: 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  border-radius: 4px; /* Round the corners */
+  width: 75%;
+
+  // & h1 {
+    
+  // }
+
+  & .proj-dialog-body {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    position: relative;
+
+    // adjust items to fit in a condensed view
+    @media (min-width: 0px) and (max-width: 500px) {
+      flex-direction: column;
+    }
+    
+    & .project-links {
+      display: flex;
+
+      @media (min-width: 500px) {
+        margin-top: 24px;
+        margin-left: 24px;
+        position: sticky;
+        top: 0;
+        flex-direction: column;
+      }
+
+      @media (min-width: 0px) and (max-width: 500px) {
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: 100%;
+      }
+
+      & a {
+        margin-bottom: 16px;
+      }
+    }
+  }
+
+  & .close-modal-button {
+    justify-self: end;
+  }
+}
+
+.modal::backdrop {
+  background-color: var(--darkT-black-2);
+  opacity: .4;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+
 // ------------------------------------------------------------------
 //    global link classes
 // ------------------------------------------------------------------
 .word-link {
-  margin-right: 1%;
-  padding: 12px;
+  max-height: 48px;
+  margin-right: 2%;
+  margin-top: 2%;
+  // padding: 12px;
+  // display: inline-block;
+  // background-color: #4CAF50; /* Set your desired background color */
+  // color: white; /* Set the text color */
+  // text-decoration: none; /* Remove the underline */
+  // border-radius: 4px; /* Round the corners */
+  // border: none; /* Remove the border */
   display: inline-block;
-  background-color: #4CAF50; /* Set your desired background color */
-  color: white; /* Set the text color */
-  text-decoration: none; /* Remove the underline */
-  border-radius: 4px; /* Round the corners */
-  border: none; /* Remove the border */
-  transition: background-color 0.3s ease; /* Add a smooth transition */
-  margin: 1%;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  color: var(--white);
+  border-radius: 4px;
+  background-color: var(--blue);
+  transition: transform var(--button-transition-time) ease-in-out, box-shadow var(--button-transition-time);/* Add a smooth transition */
+  // margin: 1%;
 }
 .word-link:hover {
-  background-color: #45a049;
+  background-color: var(--blue);
+  box-shadow: 2px 8px var(--darkT-black-2);
+  transform: translate(0px, -4px);
+
 } 
 
 // for links with images displayed rather than words
@@ -44,7 +217,7 @@ textarea {
   position: relative;
 }
 .image-link img {
-  transition: transform 0.2s ease-in-out;
+  transition: transform var(--button-transition-time) ease-in-out;
 }
 .image-link:hover img {
   transform: scale(1.15); /* Increase the size of the image on hover */
@@ -56,7 +229,7 @@ textarea {
   bottom: 12px;
   right: 12px;
   padding: 10px;
-  z-index: 9999;
+  z-index: var(--zind-perm-top);
 }
 
 
@@ -101,21 +274,69 @@ section {
   display: flex;
   flex-direction: column;
   width: inherit;
-  padding: 2%;
-  padding-left: 4%;
-  padding-right: 4%;
-  margin-bottom: 2%;
-
+  padding-left: 8%;
+  padding-right: 8%;
+  // margin-bottom: 2%;
+  z-index: var(--zind-foreground);
 
   .section-header {
     & .section-title {
-      text-align: center;
+      text-align: start;
       font-size: 48px;
     }
   }
 
   .section-footer {
     display: flex;
+  }
+}
+
+.non-greeting-section {
+  margin-bottom: 16px;
+}
+
+
+
+#greeting-section-background-imgs {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: var(--zind-background);
+
+  & #mountain-png {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    bottom: 0px;
+    left: 0px;
+  }
+
+  & #side-cloud-png {
+    position: absolute;
+    width: 25%;
+    height: auto;
+    top: 200px;
+    right: 0px;
+  }
+
+  & #planet-png {
+    position: absolute;
+    width: 10%;
+    height: auto;
+    top: 50px;
+    right: 15%;
+  }
+
+  & #middle-cloud-png {
+    position: absolute;
+    width: 20%;
+    height: auto;
+    top: 200px;
+    right: 30%;
+
+    @media (max-width: 1000px) {
+      visibility: hidden;
+    }
   }
 }
 
@@ -127,10 +348,18 @@ section {
 // special changes to the greeting section
 // there will be some overrides from the standard section selection
 #greeting-section {
+  height: 100vh;
+  background-color: var(--darkT-black-1);
+  z-index: var(--zind-foreground);
 
   & .section-title {
+    margin-top: 12px;
     font-size: 64px;
     text-align: left;
+  }
+
+  & .section-body {
+    z-index: var(--zind-foreground);
   }
 
   // links to indeed, github, etc
@@ -138,65 +367,85 @@ section {
     display: flex;
     justify-content: start;
     padding-top: 24px;
+    z-index: var(--zind-foreground);
 
     & .image-link {
       margin-right: 24px;
     }
   }
 
-  & .section-footer {
-    padding-top: 48px;
-    justify-content: center;
+  & #navigation-links {
+    display: flex;
     flex-wrap: wrap;
+    & a {
+      z-index: var(--zind-foreground);
+    }
   }
 }
 
 #projects-section {
+  // background-color: aqua;
+  // margin-left: 2%;
+  // margin-right: 2%;
 
   & .project {
-    padding-left: 24px;
-    padding-right: 24px;
-    margin-bottom: 48px;
-  }
-
-  & .project-links {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-}
-
-#education-and-work-section {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-
-  @media (min-width: 768px) {
-    flex-direction: row;
-  }
-
-  & .column-title {
-    text-align: center;
-    font-size: 48px;
-  }
-
-  & #education-column {
-    width: 45%;
-  }
-
-  & #work-column {
-    width: 45%;
-  }
-
-  & .eaw-section-item {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: space-evenly;
-    border-radius: 6px;
-    border-style: solid;
-    padding-left: 8px;
-    padding-right: 8px;
-    border-color: #969997;
+    padding: 24px;
+    margin-bottom: 48px;
+    background-color: var(--darkT-grey-2);
+    border-radius: 4px;
+    border: 2px solid var(--blue);
+
+    @media (min-width: 1024px) {
+      /* For screens larger than 768px, have two columns */
+      flex-direction: row;
+    }
+
+    & .award > p {
+      width: fit-content;
+      padding: 2px;
+      background-color: goldenrod;
+      border-radius: 4px;
+      color: var(--darkT-black-2);
+    }
+
+    h2 {
+      font-size: 32px;
+      margin: 0px;
+      margin-bottom: 16px;
+    }
+
+    ul {
+      list-style: none;
+      display: flex;
+      flex-direction: row;
+      padding-left: 0px;
+      flex-wrap: wrap;
+  
+      & li {
+        margin-right: 8px;
+        margin-bottom: 8px;
+        padding: 8px;
+        background-color: var(--darkT-black-2);
+        font-weight: bold;
+        color: var(--white);
+      }
+    }
+
+    & .project-info {
+      margin-right: 16px;
+    }
+
+    & .project-img {
+      align-self: center;
+      border-radius: 4px;
+      margin-top: 12px;
+      width: 100%;
+      max-width: 512px;
+      height: auto;
+    }
   }
 }
 
@@ -206,7 +455,7 @@ section {
   align-items: center;
 
   & .section-title {
-    text-align: center;
+    font-size: 36px;
   }
 
   & .section-content {
@@ -214,8 +463,10 @@ section {
     grid-template-areas: auto;
     grid-template-columns: repeat(1, 1fr);
     gap: 8px;
+    column-gap: 16px;
     margin: 0 auto;
     max-width: 1200px;
+
 
     @media (min-width: 768px) {
       /* For screens larger than 768px, have two columns */
@@ -232,6 +483,10 @@ section {
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      padding: 12px;
+      border-radius: 4px;
+      background-color: var(--darkT-grey-2);
+      border: 2px solid var(--blue);
 
       & img {
         max-height: 40px;
@@ -243,15 +498,22 @@ section {
         flex-direction: row;
 
         & .skill-icon-element {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          padding-right: 4px;
-          padding-left: 4px;
+          display: grid;
+          grid-template-areas: 
+            "skilliconimg"
+            "description";
+          grid-template-rows: 1fr 0.5fr;
+          padding-right: 8px;
+          padding-left: 8px;
 
+          & img {
+            grid-area: skilliconimg;
+            justify-self: center;
+          }
           & p {
+            grid-area: description;
             margin-top: 4px;
+            text-align: center;
           }
         }
       }
@@ -262,6 +524,61 @@ section {
 #about-me-section {
   display: flex;
   justify-content: space-evenly;
+  flex-wrap: wrap;
+
+  & .section-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    @media (min-width: 0px) and (max-width: 845px) {
+      flex-direction: column;
+    }
+
+    & > * {
+      // max-width: 30%;
+      margin: 16px;
+
+      @media (min-width: 1024px) {
+        max-width: 30%;
+      }
+
+      & h2 {
+        font-size: 32px;
+        text-align: center;
+      }
+    }
+
+    & .row-section {
+
+      & .listed-item {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin: 12px;
+        background-color: var(--darkT-grey-2);
+        border-radius: 4px;
+        padding: 24px;
+        border: 2px solid var(--blue);
+
+        @media (min-width: 0px) and (max-width: 845px) {
+          justify-content: center;
+        }
+
+        & div {
+          margin-right: 16px;
+        }
+
+        & img {
+          margin-left: auto;
+
+          @media (min-width: 0px) and (max-width: 845px) {
+            margin-left: 12px;
+          }
+        }
+      }
+    }
+  }
 }
 
 #contact-section {
