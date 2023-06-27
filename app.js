@@ -83,98 +83,98 @@ fillSkillIcons(skillDict);
 
 
 // send email 
-document.getElementById('email-form')
-    .addEventListener('submit', (e) => {
-        e.preventDefault();
-        // Email Payload needs 
-        //  1) from_name
-        //  2) from_email
-        //  3) message
+// document.getElementById('email-form')
+//     .addEventListener('submit', (e) => {
+//         e.preventDefault();
+//         // Email Payload needs 
+//         //  1) from_name
+//         //  2) from_email
+//         //  3) message
 
-        const button = document.getElementById('email_submit');
-        const spinner = document.createElement('div');
-        spinner.className = 'spinner email-response-item'; 
+//         const button = document.getElementById('email_submit');
+//         const spinner = document.createElement('div');
+//         spinner.className = 'spinner email-response-item'; 
 
-        button.disabled = true;
+//         button.disabled = true;
 
-        // Replace the button with the spinner
-        button.parentNode.replaceChild(spinner, button);
+//         // Replace the button with the spinner
+//         button.parentNode.replaceChild(spinner, button);
 
-        // Remove the spinner and display the result message after the result
-        // returns from the request
-        const message = document.createElement('p');
-        message.className = 'email-response-item';
+//         // Remove the spinner and display the result message after the result
+//         // returns from the request
+//         const message = document.createElement('p');
+//         message.className = 'email-response-item';
 
-        emailjs
-        .sendForm(
-            "service_tknknfq",
-            "template_9kiv18q",
-            document.getElementById("email-form"),
-            "yl51Nnibdor99pN-H"
-        )
-        .then(function() {
+//         emailjs
+//         .sendForm(
+//             "service_tknknfq",
+//             "template_9kiv18q",
+//             document.getElementById("email-form"),
+//             "yl51Nnibdor99pN-H"
+//         )
+//         .then(function() {
             
 
-            console.log('SUCCESS!');
-            message.textContent = 'Email Sent Successfully!';
-        })
-        .catch(function(error) {
-            console.log('FAILED...', error);
-            message.textContent = 'Error occurred trying to send email.';
-        })
-        .finally(function() {
-            // Replace the spinner with the result message
-            spinner.parentNode.replaceChild(message, spinner);
+//             console.log('SUCCESS!');
+//             message.textContent = 'Email Sent Successfully!';
+//         })
+//         .catch(function(error) {
+//             console.log('FAILED...', error);
+//             message.textContent = 'Error occurred trying to send email.';
+//         })
+//         .finally(function() {
+//             // Replace the spinner with the result message
+//             spinner.parentNode.replaceChild(message, spinner);
 
-            // Re-enable the button after a brief delay
-            setTimeout(function() {
-            button.disabled = false;
-            message.parentNode.replaceChild(button, message);
-            }, 2000);
-        });
+//             // Re-enable the button after a brief delay
+//             setTimeout(function() {
+//             button.disabled = false;
+//             message.parentNode.replaceChild(button, message);
+//             }, 2000);
+//         });
 
-    });
+//     });
 
 // js elements to handle email send interactions 
 // Get the button and spinner elements
-const button = document.getElementById('email_submit');
-const spinner = document.createElement('div');
-spinner.className = 'spinner'; // Add a CSS class to style the spinner
+// const button = document.getElementById('email_submit');
+// const spinner = document.createElement('div');
+// spinner.className = 'spinner'; // Add a CSS class to style the spinner
 
-// Attach the event listener to the button
-button.addEventListener('click', () => {
-  // Disable the button
-  button.disabled = true;
+// // Attach the event listener to the button
+// button.addEventListener('click', () => {
+//   // Disable the button
+//   button.disabled = true;
 
-  // Show the spinner
-  button.appendChild(spinner);
+//   // Show the spinner
+//   button.appendChild(spinner);
 
-  // Simulate an asynchronous request (replace with your actual request code)
-  setTimeout(() => {
-    const success = Math.random() < 0.5; // Randomly determine success or failure
+//   // Simulate an asynchronous request (replace with your actual request code)
+//   setTimeout(() => {
+//     const success = Math.random() < 0.5; // Randomly determine success or failure
 
-    // Remove the spinner
-    button.removeChild(spinner);
+//     // Remove the spinner
+//     button.removeChild(spinner);
 
-    // Display the result message
-    const message = document.createElement('p');
-    if (success) {
-      message.textContent = 'Request successful!';
-      message.className = 'success'; // Add a CSS class to style the success message
-    } else {
-      message.textContent = 'Error occurred during the request.';
-      message.className = 'error'; // Add a CSS class to style the error message
-    }
+//     // Display the result message
+//     const message = document.createElement('p');
+//     if (success) {
+//       message.textContent = 'Request successful!';
+//       message.className = 'success'; // Add a CSS class to style the success message
+//     } else {
+//       message.textContent = 'Error occurred during the request.';
+//       message.className = 'error'; // Add a CSS class to style the error message
+//     }
 
-    button.appendChild(message);
+//     button.appendChild(message);
 
-    // Re-enable the button after a brief delay
-    setTimeout(() => {
-      button.disabled = false;
-      button.removeChild(message);
-    }, 2000);
-  }, 2000); // Simulate a 2-second delay for the request
-});
+//     // Re-enable the button after a brief delay
+//     setTimeout(() => {
+//       button.disabled = false;
+//       button.removeChild(message);
+//     }, 2000);
+//   }, 2000); // Simulate a 2-second delay for the request
+// });
 
 
 // Function to enable scrolling
@@ -195,10 +195,11 @@ const openModalButtonElements = document.querySelectorAll(".open-modal-button");
 const closeModalButtonElements = document.querySelectorAll(".close-modal-button");
 const openModalButtons = Array.from(openModalButtonElements);
 const closeModalButtons = Array.from(closeModalButtonElements)
-
+// modal mappings to buttons
 const modalOpenBtnIdToModalId = {
   "AITAprojDescBtn": "AITAprojModal",
-  "BioPathprojDescBtn": "BioPathprojModal"
+  "BioPathprojDescBtn": "BioPathprojModal",
+  "MathResearchBtn": "MathResearchModal"
 }
 
 // on refresh check local storage, reopen

@@ -52,6 +52,67 @@ a {
   cursor: pointer;
 }
 
+// styling for elements inside the dialog modal
+dialog {
+  & .proj-dialog-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    & a {
+      margin-left: auto;
+      margin-right: 24px;
+    }
+  }
+  & .proj-dialog-body {
+    padding: 12px;
+
+    & p {
+      padding-left: 12px;
+    }
+
+    & .dialog-body-diagram-section {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 32px;
+
+      // adjust diagram display direction when screen gets too small
+      @media (min-width: 0px) and (max-width: 1024px) {
+        flex-direction: column;
+      }
+
+      & .dialog-body-stack-lists {
+        display: flex;
+        flex-direction: row;
+
+        & div {
+          padding-right: 12px;
+        }
+      }
+
+      & img {
+        @media (min-width: 1024px) {
+          max-width: 45%;
+          max-height: 300px;
+        }
+
+        // ensure diagram stays a readable size on smaller screens
+        @media (min-width: 0px) and (max-width: 1024px) {
+          width: 75%;
+          height: auto;
+        }
+      }
+
+      & h3 {
+        max-width: 128px;
+        margin-right: 12px;
+      }
+    }
+  }
+}
+
 
 // ------------------------------------------------------------------
 //    modal styling
@@ -131,7 +192,7 @@ a {
   // border-radius: 4px; /* Round the corners */
   // border: none; /* Remove the border */
   display: inline-block;
-  padding: 10px 20px;
+  padding: 12px 24px;
   font-size: 1rem;
   font-weight: bold;
   text-align: center;
@@ -230,6 +291,12 @@ section {
   }
 }
 
+.non-greeting-section {
+  margin-bottom: 16px;
+}
+
+
+
 #greeting-section-background-imgs {
   position: absolute;
   width: 100%;
@@ -257,7 +324,7 @@ section {
     width: 10%;
     height: auto;
     top: 50px;
-    right: 150px;
+    right: 15%;
   }
 
   & #middle-cloud-png {
@@ -286,9 +353,13 @@ section {
   z-index: var(--zind-foreground);
 
   & .section-title {
-    margin-top: 24px;
+    margin-top: 12px;
     font-size: 64px;
     text-align: left;
+  }
+
+  & .section-body {
+    z-index: var(--zind-foreground);
   }
 
   // links to indeed, github, etc
@@ -337,6 +408,7 @@ section {
       padding: 2px;
       background-color: goldenrod;
       border-radius: 4px;
+      color: var(--darkT-black-2);
     }
 
     h2 {
@@ -374,68 +446,6 @@ section {
       max-width: 512px;
       height: auto;
     }
-
-
-    // styling for elements inside the dialog modal
-    & dialog {
-      & .proj-dialog-header {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-
-        & a {
-          margin-left: auto;
-          margin-right: 24px;
-        }
-      }
-      & .proj-dialog-body {
-        padding: 12px;
-
-        & p {
-          padding-left: 12px;
-        }
-
-        & .dialog-body-diagram-section {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: center;
-          margin-bottom: 32px;
-
-          // adjust diagram display direction when screen gets too small
-          @media (min-width: 0px) and (max-width: 1024px) {
-            flex-direction: column;
-          }
-
-          & .dialog-body-stack-lists {
-            display: flex;
-            flex-direction: row;
-
-            & div {
-              padding-right: 12px;
-            }
-          }
-
-          & img {
-            @media (min-width: 1024px) {
-              max-width: 45%;
-              max-height: 300px;
-            }
-
-            // ensure diagram stays a readable size on smaller screens
-            @media (min-width: 0px) and (max-width: 1024px) {
-              width: 75%;
-              height: auto;
-            }
-          }
-
-          & h3 {
-            max-width: 128px;
-            margin-right: 12px;
-          }
-        }
-      }
-    }
   }
 }
 
@@ -445,7 +455,7 @@ section {
   align-items: center;
 
   & .section-title {
-    text-align: center;
+    font-size: 36px;
   }
 
   & .section-content {
