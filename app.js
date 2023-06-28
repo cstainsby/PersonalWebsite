@@ -1,3 +1,6 @@
+// -----------------------------------------------------------------------------------------------
+//    Skill Icon Dynamic Fill
+// -----------------------------------------------------------------------------------------------
 // create skill icon name element 
 function createSkillIconElement(iconName) {
     iconName = iconName.toLowerCase(); 
@@ -74,66 +77,86 @@ skillDict = {
         "github",
         "linux"
     ],
-    "Dev. Practicies": [
+    "Dev. Practices": [
         "agile",
         "cicd"
     ]
 }
 fillSkillIcons(skillDict);
 
-
+// -----------------------------------------------------------------------------------------------
+//    Email Form
+// -----------------------------------------------------------------------------------------------
 // send email 
-// document.getElementById('email-form')
-//     .addEventListener('submit', (e) => {
-//         e.preventDefault();
-//         // Email Payload needs 
-//         //  1) from_name
-//         //  2) from_email
-//         //  3) message
+const emailContactForm = document.getElementById('email-form');
+const emailContactSubmitBtn = document.getElementById('email_submit');
 
-//         const button = document.getElementById('email_submit');
-//         const spinner = document.createElement('div');
-//         spinner.className = 'spinner email-response-item'; 
+emailContactSubmitBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    // Email Payload needs 
+    //  1) from_name
+    //  2) from_email
+    //  3) message
 
-//         button.disabled = true;
+    const spinner = document.createElement('div');
+    spinner.className = 'spinner email-response-item'; 
 
-//         // Replace the button with the spinner
-//         button.parentNode.replaceChild(spinner, button);
+    emailContactSubmitBtn.disabled = true;
 
-//         // Remove the spinner and display the result message after the result
-//         // returns from the request
-//         const message = document.createElement('p');
-//         message.className = 'email-response-item';
+    // Replace the button with the spinner
+    emailContactSubmitBtn.parentNode.replaceChild(spinner, emailContactSubmitBtn);
 
-//         emailjs
-//         .sendForm(
-//             "service_tknknfq",
-//             "template_9kiv18q",
-//             document.getElementById("email-form"),
-//             "yl51Nnibdor99pN-H"
-//         )
-//         .then(function() {
-            
+    // Remove the spinner and display the result message after the result
+    // returns from the request
+    const displayMessage = document.createElement('p');
+    displayMessage.className = 'email-response-item';
 
-//             console.log('SUCCESS!');
-//             message.textContent = 'Email Sent Successfully!';
-//         })
-//         .catch(function(error) {
-//             console.log('FAILED...', error);
-//             message.textContent = 'Error occurred trying to send email.';
-//         })
-//         .finally(function() {
-//             // Replace the spinner with the result message
-//             spinner.parentNode.replaceChild(message, spinner);
 
-//             // Re-enable the button after a brief delay
-//             setTimeout(function() {
-//             button.disabled = false;
-//             message.parentNode.replaceChild(button, message);
-//             }, 2000);
-//         });
 
-//     });
+    // Get form values
+    const from_name = document.getElementById('from_name').value;
+    const from_email = document.getElementById('from_email').value;
+    const email_message = document.getElementById('message').value;
+
+    // Create a FormData object to send the values as JSON
+    let formData = JSON.stringify({
+      from_name: from_name,
+      from_email: from_email,
+      message: email_message
+    });
+
+    fetch('/send-email', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: formData
+    })
+    .then((response) => response.text())
+    .then((result) => {
+      console.log(result); // Optional: Log the server response
+      // Handle success or display a success message to the user
+      displayMessage.textContent = "Successfully Sent!"
+      document.getElementById('from_name').value = "";
+      document.getElementById('from_email').value = "";
+      document.getElementById('message').value = "";
+    })
+    .catch(function(error) {
+        console.log('FAILED...', error);
+        displayMessage.textContent = 'Error occurred trying to send email.';
+    })
+    .finally(function() {
+        // Replace the spinner with the result message
+        spinner.parentNode.replaceChild(displayMessage, spinner);
+
+        // Re-enable the button after a brief delay
+        setTimeout(function() {
+          emailContactSubmitBtn.disabled = false;
+          message.parentNode.replaceChild(emailContactSubmitBtn, displayMessage);
+        }, 2000);
+    });
+
+});
 
 // js elements to handle email send interactions 
 // Get the button and spinner elements
@@ -177,6 +200,9 @@ fillSkillIcons(skillDict);
 // });
 
 
+// -----------------------------------------------------------------------------------------------
+//    Modal implementation
+// -----------------------------------------------------------------------------------------------
 // Function to enable scrolling
 function enableScroll() {
   const body = document.body;
@@ -266,3 +292,20 @@ window.addEventListener('scroll', function() {
     link.style.display = 'block'; // Show the link when scrolling down
   }
 });
+
+// -----------------------------------------------------------------------------------------------
+//    Scroll Animations
+// -----------------------------------------------------------------------------------------------
+// scroll animations 
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+    } else {
+      entry.target.remove("show");
+    }
+  });
+});
+
+const slideInElements = document.querySelectorAll(".slideIn");
+slideInElements.forEach((element) => { observer.observe(element) });
