@@ -19,7 +19,13 @@
   },
   "homepage": "https://github.com/cstainsby/PersonalWebsite#readme",
   "dependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.363.0",
+    "@aws-sdk/client-ssm": "^3.363.0",
+    "@aws-sdk/util-base64-node": "^3.209.0",
+    "@aws-sdk/util-utf8-node": "^3.259.0",
     "@emailjs/browser": "^3.11.0",
+    "aws-sdk": "^2.1408.0",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "node-sass": "^9.0.0",
     "nodemailer": "^6.9.3",
