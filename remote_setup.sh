@@ -10,3 +10,8 @@ sudo cp nginx.conf /etc/nginx/conf.d/
 # rename the file
 sudo mv /etc/nginx/conf.d/nginx.conf /etc/nginx/conf.d/colestainsby.com.conf
 sudo systemctl restart nginx
+
+# setup pm2 sever
+cd /home/ec2-user/PersonalWebsite/
+pm2 delete all
+pm2 start server.js

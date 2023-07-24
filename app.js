@@ -62,7 +62,7 @@ skillDict = {
     ],
     "Backend": [
         "Flask",
-        "fastapi",
+        "django",
         "node.js"
     ],
     "Data Science": [
