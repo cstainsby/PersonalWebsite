@@ -19,6 +19,9 @@
   --zind-middleground: 3;
   --zind-background: 2; 
   --zind-perm-end: 1;
+
+  // font 
+  --font: 'Source Sans Pro';
 }
 
 // ------------------------------------------------------------------
@@ -26,7 +29,7 @@
 // ------------------------------------------------------------------
 html {
   scroll-behavior: smooth;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: var(--font), sans-serif;
   background-color: var(--darkT-grey-1);
   font-size: 16px; 
 }
@@ -41,10 +44,7 @@ input[type="text"],
 input[type="email"],
 textarea {
   font-size: 1rem;
-}
-
-button {
-  cursor: pointer;
+  font-family: var(--font), sans-serif;
 }
 
 a {
@@ -111,6 +111,27 @@ dialog {
       }
     }
   }
+}
+
+// ------------------------------------------------------------------
+//    animations 
+// ------------------------------------------------------------------
+.slideIn {
+  opacity: 0;
+  transition: all 1s;
+  filter: blur(5px);
+  transform: translateX(-10%);
+}
+@media (prefers-reduced-motion) {
+  .slideIn {
+    transition: none;
+  }
+}
+
+.show {
+  opacity: 1s;
+  filter: blur(0px);
+  transform: translateX(0%);
 }
 
 
@@ -194,7 +215,7 @@ dialog {
   display: inline-block;
   padding: 12px 24px;
   font-size: 1rem;
-  font-weight: bold;
+  // font-weight: bold;
   text-align: center;
   text-decoration: none;
   border: none;
@@ -227,7 +248,7 @@ dialog {
   display: none; /* Hide the link by default */
   position: fixed;
   bottom: 12px;
-  right: 12px;
+  right: 2%;
   padding: 10px;
   z-index: var(--zind-perm-top);
 }
@@ -427,6 +448,7 @@ section {
       & li {
         margin-right: 8px;
         margin-bottom: 8px;
+        border-radius: 4px;
         padding: 8px;
         background-color: var(--darkT-black-2);
         font-weight: bold;
@@ -531,50 +553,58 @@ section {
     flex-direction: row;
     justify-content: space-evenly;
 
-    @media (min-width: 0px) and (max-width: 845px) {
+    @media (min-width: 0px) and (max-width: 976px) {
       flex-direction: column;
     }
 
-    & > * {
-      // max-width: 30%;
-      margin: 16px;
-
-      @media (min-width: 1024px) {
-        max-width: 30%;
-      }
-
-      & h2 {
-        font-size: 32px;
-        text-align: center;
+    // ensure only the child divs recieve this spacing
+    > div {
+      @media (min-width: 976px) {
+        width: 30%;
       }
     }
 
     & .row-section {
+      width: 100%;
+      // margin: 16px;
+      padding-left: 6px;
+      padding-right: 6px;
+
+      & h2 {
+        font-size: 32px;
+        text-align: center;
+        // width: fit-content;
+      }
 
       & .listed-item {
         display: flex;
         flex-direction: row;
+        justify-content: space-evenly;
         align-items: center;
-        margin: 12px;
+        // margin-top: 12px;
+        margin-bottom: 12px;
         background-color: var(--darkT-grey-2);
         border-radius: 4px;
-        padding: 24px;
         border: 2px solid var(--blue);
+        width: 100%;
 
-        @media (min-width: 0px) and (max-width: 845px) {
+        @media (min-width: 0px) and (max-width: 976px) {
           justify-content: center;
         }
 
-        & div {
-          margin-right: 16px;
+        // space the text from the images slightly
+        & .listed-item-text-section {
+          // margin-right: 16px;
+          width: 65%;
+          padding: 24px;
+
+          & p {
+            margin-left: 8px;
+          }
         }
 
         & img {
-          margin-left: auto;
-
-          @media (min-width: 0px) and (max-width: 845px) {
-            margin-left: 12px;
-          }
+          margin-right: 24px;
         }
       }
     }
@@ -582,9 +612,20 @@ section {
 }
 
 #contact-section {
+  margin-top: 24px;
   & .section-title {
     text-align: center;
   }
+
+  // & #email-contact-section {
+  //   display: flex;
+  //   flex-direction: row;
+  //   justify-content: center;
+
+  //   & #email-contact-section-header {
+  //     max-width: 200px;
+  //   }
+  // }
 
   & #email-form {
     display: grid;
@@ -596,9 +637,9 @@ section {
     gap: 6px;
     align-items: center;
     justify-content: center;
-    margin: 5%;
-    margin-right: 15%;
-    margin-left: 15%;
+    // margin: 5%;
+    // margin-right: 15%;
+    // margin-left: 15%;
 
     #from_name { 
       grid-area: fullname;
