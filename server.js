@@ -11,8 +11,8 @@ const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 const { SecretsManagerClient, GetSecretValueCommand } = require("@aws-sdk/client-secrets-manager");
-const { fromBase64 } = require("@aws-sdk/util-base64-node");
-const { fromUtf8 } = require("@aws-sdk/util-utf8-node");
+// const { fromBase64 } = require("@aws-sdk/util-base64-node");
+// const { fromUtf8 } = require("@aws-sdk/util-utf8-node");
 
 
 // -----------------------------------------------------------------------------------------------
@@ -21,16 +21,13 @@ const { fromUtf8 } = require("@aws-sdk/util-utf8-node");
 const region = 'us-east-2'
 const port = 8080;
 const runningIP = "127.0.0.1";
-const secret_name = "personal_email_password";
+const secret_name = "cole_personal";
 
 const app = express();
-console.log("ACCESS KEY " + process.env.AWS_ACCESS_KEY_ID);
-// AWS.config.update({
-//   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-//   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-//   region: "us-east-2"
-// })
-const secretManagerClient = new SecretsManagerClient();
+
+const client = new SecretsManagerClient({
+  region: "us-east-2",
+});
 
 // -----------------------------------------------------------------------------------------------
 //    SCSS CONFIGURATION
@@ -70,51 +67,37 @@ app.use(express.static('.', {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// var timeout = express.timeout // express v3 and below
+// var timeout = require('connect-timeout'); //express v4
+
+// app.use(timeout(120000));
+// app.use(haltOnTimedout);
+
 
 // -----------------------------------------------------------------------------------------------
 //    HELPER FUNCTIONS
 // -----------------------------------------------------------------------------------------------
-// function getSSMParameter(parameterName, isEncrypted) {
-//   // get an SSM parameter from AWS
-//   const params = {
-//     Name: parameterName,
-//     WithDecryption: isEncrypted // Set this to true if the parameter value is encrypted
-//   };
-  
-//   ssm.getParameter(params, function (err, data) {
-//     if (err) {
-//       console.error('Error retrieving parameter:', err);
-//       return null;
-//     } else {
-//       const parameterValue = data.Parameter.Value;
-//       console.log('Retrieved parameter value:', parameterValue);
-//       // Use the parameter value for your application logic
-//       return parameterValue;
-//     }
-//   });
-// }
+async function getEmailPassword() {
+  let response;
 
-// email endpoint helpers 
-async function getAWSSecret(secretName) {
   try {
-    const command = new GetSecretValueCommand({ SecretId: secretName });
-    const response = await secretManagerClient.send(command);
-
-    if (response.SecretString) {
-      return JSON.parse(response.SecretString);
-    } else if (response.SecretBinary) {
-      const buff = fromBase64(response.SecretBinary);
-      return JSON.parse(fromUtf8(buff));
-    } else {
-      throw new Error("Invalid secret response");
-    }
-  } catch (err) {
-    console.error("Error retrieving secret:", err);
-    throw err;
+    response = await client.send(
+      new GetSecretValueCommand({
+        SecretId: secret_name,
+        VersionStage: "AWSCURRENT", // VersionStage defaults to AWSCURRENT if unspecified
+      })
+    );
+  } catch (error) {
+    // For a list of exceptions thrown, see
+    // https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
+    throw error;
   }
-}
 
-function sendFormattedEmail(from_name, from_email, message, sendFromEmail, sendFromEmailPassword) {
+  const secret = response.SecretString;
+  return secret;
+} 
+
+async function sendEmail(formattedEmail, sendFromEmail, sendFromEmailPassword) {
   // Create a Nodemailer transporter
   const transporter = nodemailer.createTransport({
     // Specify your email provider details here
@@ -125,6 +108,29 @@ function sendFormattedEmail(from_name, from_email, message, sendFromEmail, sendF
     }
   });
 
+  transporter.verify(function(error, success) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Server is ready to take our messages');
+
+      // Send the email
+      transporter.sendMail(formattedEmail, (error, info) => {
+        if (error) {
+          console.error(error);
+          res.status(500).send('Error sending email');
+        } else {
+          console.log('Email sent: ' + info.response);
+          res.send('Email sent successfully');
+        }
+      });
+    }
+  });
+
+
+}
+
+function formatEmail(from_name, from_email, message, sendFromEmail) {
   // Define the email options
   const mailOptions = {
     from: sendFromEmail,
@@ -132,17 +138,7 @@ function sendFormattedEmail(from_name, from_email, message, sendFromEmail, sendF
     subject: 'Message from colestainsby.com',
     text: `Name: ${from_name}\nEmail: ${from_email}\n\nMessage: ${message}`
   };
-
-  // Send the email
-  // transporter.sendMail(mailOptions, (error, info) => {
-  //   if (error) {
-  //     console.error(error);
-  //     res.status(500).send('Error sending email');
-  //   } else {
-  //     console.log('Email sent: ' + info.response);
-  //     res.send('Email sent successfully');
-  //   }
-  // });
+  return mailOptions;
 }
 
 
@@ -153,21 +149,27 @@ function sendFormattedEmail(from_name, from_email, message, sendFromEmail, sendF
 app.post("/send-email", (req, res) => {
   const { from_name, from_email, message } = req.body;
   const myEmail = "c.p.stainsby@outlook.com";
-  const myEmailPassword = getAWSSecret("personal_email_password")
-    .then(secret => { return secret.password; })
+  getEmailPassword()
+    .then(resJson => { 
+      const myEmailPassword = JSON.parse(resJson).personal_email_password; 
+      
+      if (myEmailPassword !== null) {
+        console.log("email password " + myEmailPassword);
+        const formattedEmail = formatEmail(from_name, from_email, message, myEmail);
+        sendEmail(formattedEmail, myEmail, myEmailPassword)
+          .then(_ => {
+            res.status(200).send("Email Sent");
+          });
+      } else {
+        console.log("Error getting email password from AWS");
+        res.status(500).send("Error sending email");
+      }
+    })
     .catch(err => { throw err; })
-
-  console.log("current email " + myEmail);
-  if (myEmailPassword !== null) {
-    console.log("sending email " + myEmailPassword);
-    // sendFormattedEmail(from_name, from_email, message, myEmail, myEmailPassword);
-  } else {
-    console.log("Error getting email password from AWS");
-  }
 });
 
 app.get("/*", (req, res) => {
-    res.sendFile(path.resolve("index.html"))
+  res.sendFile(path.resolve("index.html"))
 });
 
 

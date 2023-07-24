@@ -158,47 +158,6 @@ emailContactSubmitBtn.addEventListener('click', (e) => {
 
 });
 
-// js elements to handle email send interactions 
-// Get the button and spinner elements
-// const button = document.getElementById('email_submit');
-// const spinner = document.createElement('div');
-// spinner.className = 'spinner'; // Add a CSS class to style the spinner
-
-// // Attach the event listener to the button
-// button.addEventListener('click', () => {
-//   // Disable the button
-//   button.disabled = true;
-
-//   // Show the spinner
-//   button.appendChild(spinner);
-
-//   // Simulate an asynchronous request (replace with your actual request code)
-//   setTimeout(() => {
-//     const success = Math.random() < 0.5; // Randomly determine success or failure
-
-//     // Remove the spinner
-//     button.removeChild(spinner);
-
-//     // Display the result message
-//     const message = document.createElement('p');
-//     if (success) {
-//       message.textContent = 'Request successful!';
-//       message.className = 'success'; // Add a CSS class to style the success message
-//     } else {
-//       message.textContent = 'Error occurred during the request.';
-//       message.className = 'error'; // Add a CSS class to style the error message
-//     }
-
-//     button.appendChild(message);
-
-//     // Re-enable the button after a brief delay
-//     setTimeout(() => {
-//       button.disabled = false;
-//       button.removeChild(message);
-//     }, 2000);
-//   }, 2000); // Simulate a 2-second delay for the request
-// });
-
 
 // -----------------------------------------------------------------------------------------------
 //    Modal implementation
