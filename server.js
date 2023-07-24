@@ -157,9 +157,7 @@ app.post("/send-email", (req, res) => {
         console.log("email password " + myEmailPassword);
         const formattedEmail = formatEmail(from_name, from_email, message, myEmail);
         sendEmail(formattedEmail, myEmail, myEmailPassword)
-          .then(_ => {
-            res.status(200).send("Email Sent");
-          });
+        res.status(200).send("Email Sent");
       } else {
         console.log("Error getting email password from AWS");
         res.status(500).send("Error sending email");
@@ -168,7 +166,7 @@ app.post("/send-email", (req, res) => {
     .catch(err => { throw err; })
 });
 
-app.get("/*", (req, res) => {
+app.get("/", (req, res) => {
   res.sendFile(path.resolve("index.html"))
 });
 
