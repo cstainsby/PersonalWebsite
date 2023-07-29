@@ -102,6 +102,7 @@ async function sendEmail(formattedEmail, sendFromEmail, sendFromEmailPassword) {
   const transporter = nodemailer.createTransport({
     // Specify your email provider details here
     service: 'outlook',
+    port: 587,
     auth: {
       user: sendFromEmail,
       pass: sendFromEmailPassword
@@ -154,7 +155,6 @@ app.post("/send-email", (req, res) => {
       const myEmailPassword = JSON.parse(resJson).personal_email_password; 
       
       if (myEmailPassword !== null) {
-        console.log("email password " + myEmailPassword);
         const formattedEmail = formatEmail(from_name, from_email, message, myEmail);
         sendEmail(formattedEmail, myEmail, myEmailPassword)
         res.status(200).send("Email Sent");
