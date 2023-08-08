@@ -87,6 +87,7 @@ fillSkillIcons(skillDict);
 // -----------------------------------------------------------------------------------------------
 //    Email Form
 // -----------------------------------------------------------------------------------------------
+
 // send email 
 const emailContactForm = document.getElementById('email-form');
 const emailContactSubmitBtn = document.getElementById('email_submit');
