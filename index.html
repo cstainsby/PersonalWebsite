@@ -97,9 +97,12 @@
         </ul>
         <p>My small team partnered with the Gonzaga University Biochemistry department to create a web app which aids students in learning Biochemical pathways.</p>
         
-        <a class="word-link" href="https://ifdfgjpy82.us-west-2.awsapprunner.com" target="_blank" rel="noopener noreferrer">
-          Demo</a>
-        <a id="BioPathprojDescBtn" class=" open-modal-button word-link">Details</a>
+        <div class="button-group">
+          <a class="word-link" href="https://ifdfgjpy82.us-west-2.awsapprunner.com" target="_blank" rel="noopener noreferrer">
+            Demo</a>
+          <a id="BioPathprojDescBtn" class=" open-modal-button word-link">Details</a>
+        </div>
+        
         <dialog id="BioPathprojModal" class="modal">
           <div class="proj-dialog-header">
             <h1>BioPath</h1>
@@ -203,10 +206,12 @@
           An app which leverages a HuggingFace BERT multiclass classifier to judge reddit posts from the popular r/AmITheAsshole subreddit according to their defined classification rules.
         </p> 
         
-        <a class="word-link" href="https://backend-model-service-zkidffnq6a-uc.a.run.app/models/AITAclassmodel" target="_blank" rel="noopener noreferrer">
-          Demo</a>
-          
-        <a id="AITAprojDescBtn" class="button open-modal-button word-link">Details</a>
+        <div class="button-group">
+          <a class="word-link" href="https://backend-model-service-zkidffnq6a-uc.a.run.app/models/AITAclassmodel" target="_blank" rel="noopener noreferrer">
+            Demo</a>
+            
+          <a id="AITAprojDescBtn" class="button open-modal-button word-link">Details</a>
+        </div>
         <dialog id="AITAprojModal" class="modal">
           <div class="proj-dialog-header">
             <h1>Reddit r/AITA NLP Sentiment Classifier</h1>
@@ -286,6 +291,95 @@
         </dialog>
       </div>
       <img class="project-img" src="media/AITA-screenshot.png">
+    </div>
+
+     <!-- This Website -->
+     <div class="project">
+      <div class="project-info">
+        <h2>Personal Website</h2>
+        <b>This Website</b>
+        <ul class="skills-used">
+          <li>JavaScript</li>
+          <li>AWS</li>
+          <li>Linux</li>
+          <li>SASS</li>
+          <li>HTML</li>
+          <li>NGINX</li>
+          <li>Node.js</li>
+          <li>Express</li>
+        </ul>
+        <p>
+          A website shich shows off 
+        </p> 
+        
+        <div class="button-group">
+          <a class="word-link" href="https://backend-model-service-zkidffnq6a-uc.a.run.app/models/AITAclassmodel" target="_blank" rel="noopener noreferrer">
+            Demo</a>
+          
+          <a id="AITAprojDescBtn" class="button open-modal-button word-link">Details</a>
+        </div>
+        <dialog id="AITAprojModal" class="modal">
+          <div class="proj-dialog-header">
+            <h1>Reddit r/AITA NLP Sentiment Classifier</h1>
+            <a class="close-modal-button image-link">
+              <img src="media/close.png" height="20">
+            </a>
+          </div>
+          <hr>
+          <div class="proj-dialog-body">
+            <div class="dialog-body-text">
+              <h3 class="dialog-body-section-header">About The Project</h3>
+              <p>
+                In this project, I created a data pipeline where I was able to retrieve posts from the subreddit r/amitheasshole via the reddit api, make transformations on them, and then store them in google bigquery. 
+                At which point I was able to fine-tune a HuggingFace BERT-based transformer to generate sentiment based classifications on the post data. 
+                I also created a basic flask application in which you could import posts live from the subreddit, run the model against them, and then respond to the post.
+              </p>
+              <p><b>Please Note:</b> The demo for this project is slow, the UI is purely for demonstration purposes and is not efficient. I would appreciate if you could keep your usage of it to minimum so my limited budget doesn't suffer too much :).</p>
+              <div class="dialog-body-diagram-section">
+                <h3 class="dialog-body-section-header">Project Stack Diagram</h3>
+                <div class="dialog-body-stack-lists">
+                  <div>
+                    <h4>FullStack Tools:</h4>
+                    <ol>
+                      <li>Flask</li>
+                      <li>Bootstrap</li>
+                      <li>Docker</li>
+                      <li>GCP</li>
+                    </ol>
+                  </div>
+                  <div>
+                    <h4>Data Science Tools:</h4>
+                    <ol>
+                      <li>HuggingFace</li>
+                      <li>Jupyter Notebook</li>
+                      <li>Numpy</li>
+                      <li>Pandas</li>
+                      <li>Matplotlib</li>
+                      <li>sklearn</li>
+                    </ol>
+                  </div>
+                </div>
+                <img src="media/AITA-architecture.png">
+              </div>
+              <div class="dialog-body-diagram-section">
+                <h3 class="dialog-body-section-header">Data Flow Diagram</h3>
+                <p>
+                  Before I launched my model, I had to gather the data and transform it into something storeable and useable to the model.
+                  This took place in <b>Google BigQuery</b> where I stored my data in a SQL tables.
+                  From there I was able to batch and extract the data as I needed it in order to train my BERT model.
+                </p>
+                <img src="media/AITA-data-flow.png">
+              </div>
+            </div>
+            <div class="project-links">
+              <a class="word-link" href="https://github.com/cstainsby/B-Onion" target="_blank" rel="noopener noreferrer">
+                Code</a>
+              <a class="word-link" href="https://backend-model-service-zkidffnq6a-uc.a.run.app/models/AITAclassmodel" target="_blank" rel="noopener noreferrer">
+                Demo</a>
+            </div>
+          </div>
+        </dialog>
+      </div>
     </div>
 
     <!-- Hockey Data -->
@@ -371,6 +465,7 @@
                     <p>
                       In this paid research position, I work with two professors and a five-person team to create proofs and solve problems that are important to the larger math community. Our work has included finding proofs to show a relation between upper triangle square root matrices and “Cholesky root” matrices over a field of two, as well as finding how Kneser graphs total roman domination number behave over a range of sizes.
                     </p>
+                    <hr/>
                     <div class="dialog-body-diagram-section">
                       <h3 class="dialog-body-section-header">Cholesky</h3>
                       <p>I created a script to help my linear algebra research group quickly find matrices of nxn size over a specified field. It uses recursive tree generation and branch pruning to find all possible paths to any given upper triangle square root matrix or “Cholesky root” matrix. 
@@ -409,7 +504,7 @@
   <!-- contact me section -->
   <section id="contact-section" class="non-greeting-section">
     <div>
-      <!--<div id="email-contact-section">
+      <div id="email-contact-section">
         <div id="email-contact-section-header">
           <h2>Contact Me</h2>
           <p>Send me a quick message if you're interesed in working with me!</p>
@@ -420,7 +515,7 @@
           <textarea id="message" name="message" placeholder="Message" required></textarea>
           <a class="word-link button" type="submit" id="email_submit" name="email_submit">Send</a>
         </form>
-      </div>-->
+      </div>
       
       <div id="contact-info">
         <div>

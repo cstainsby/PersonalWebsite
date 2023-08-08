@@ -297,6 +297,7 @@ section {
   width: inherit;
   padding-left: 8%;
   padding-right: 8%;
+  min-height: auto;
   // margin-bottom: 2%;
   z-index: var(--zind-foreground);
 
@@ -330,6 +331,8 @@ section {
     height: 50%;
     bottom: 0px;
     left: 0px;
+
+    max-height: 30%;
   }
 
   & #side-cloud-png {
@@ -369,7 +372,7 @@ section {
 // special changes to the greeting section
 // there will be some overrides from the standard section selection
 #greeting-section {
-  height: 100vh;
+  min-height: 100vh;
   background-color: var(--darkT-black-1);
   z-index: var(--zind-foreground);
 
@@ -457,7 +460,19 @@ section {
     }
 
     & .project-info {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
       margin-right: 16px;
+
+      & .button-group {
+        display: flex;
+        flex-direction: row;
+
+        & > * {
+          margin-right: 8px;
+        }
+      }
     }
 
     & .project-img {

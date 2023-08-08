@@ -6,11 +6,11 @@ const path = require("path");
 const sass = require('node-sass');
 const fs = require('fs');
 const bodyParser = require('body-parser');
-const nodemailer = require('nodemailer');
-// const AWS = require('aws-sdk');
+const AWS = require('aws-sdk');
 require('dotenv').config();
 
 const { SecretsManagerClient, GetSecretValueCommand } = require("@aws-sdk/client-secrets-manager");
+const { SESv2Client, SendEmailCommand } = require("@aws-sdk/client-sesv2");
 // const { fromBase64 } = require("@aws-sdk/util-base64-node");
 // const { fromUtf8 } = require("@aws-sdk/util-utf8-node");
 
@@ -25,8 +25,15 @@ const secret_name = "cole_personal";
 
 const app = express();
 
+AWS.config.update({
+  region: region
+});
+
+const SESClient = new SESv2Client({ 
+  region: region 
+});
 const client = new SecretsManagerClient({
-  region: "us-east-2",
+  region: region,
 });
 
 // -----------------------------------------------------------------------------------------------
@@ -99,47 +106,95 @@ async function getEmailPassword() {
 
 async function sendEmail(formattedEmail, sendFromEmail, sendFromEmailPassword) {
   // Create a Nodemailer transporter
-  const transporter = nodemailer.createTransport({
-    // Specify your email provider details here
-    service: 'outlook',
-    port: 587,
-    auth: {
-      user: sendFromEmail,
-      pass: sendFromEmailPassword
-    }
-  });
+  // const transporter = nodemailer.createTransport({
+  //   // Specify your email provider details here
+  //   service: 'outlook',
+  //   port: 587,
+  //   auth: {
+  //     user: sendFromEmail,
+  //     pass: sendFromEmailPassword
+  //   }
+  // });
 
-  transporter.verify(function(error, success) {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log('Server is ready to take our messages');
+  // transporter.verify(function(error, success) {
+  //   if (error) {
+  //     console.log(error);
+  //   } else {
+  //     console.log('Server is ready to take our messages');
 
-      // Send the email
-      transporter.sendMail(formattedEmail, (error, info) => {
-        if (error) {
-          console.error(error);
-          res.status(500).send('Error sending email');
-        } else {
-          console.log('Email sent: ' + info.response);
-          res.send('Email sent successfully');
+  //     // Send the email
+  //     transporter.sendMail(formattedEmail, (error, info) => {
+  //       if (error) {
+  //         console.error(error);
+  //         res.status(500).send('Error sending email');
+  //       } else {
+  //         console.log('Email sent: ' + info.response);
+  //         res.send('Email sent successfully');
+  //       }
+  //     });
+  //   }
+  // });
+
+  var params = {
+    Destination: {
+      ToAddresses: [
+        'c.p.stainsby@outlook.com' // my email
+      ]
+    },
+    Message: {
+      Body: {
+        Text: {
+          Charset: "UTF-8",
+          Data: message
         }
-      });
-    }
-  });
-
+      },
+      Subject: {
+        Charset: 'UTF-8',
+        Data: 'New message from ' + fromName
+      }
+    },
+    Source: fromEmail,
+    ReplyToAddresses: [
+      fromEmail
+    ],
+  };
+  
+  try {
+    const command = new SendEmailCommand(params);
+    const data = await SESClient.send(command);
+    console.log(data.MessageId);
+  } catch (err) {
+    console.error(err, err.stack);
+  }
 
 }
 
 function formatEmail(from_name, from_email, message, sendFromEmail) {
   // Define the email options
-  const mailOptions = {
-    from: sendFromEmail,
-    to: sendFromEmail, 
-    subject: 'Message from colestainsby.com',
-    text: `Name: ${from_name}\nEmail: ${from_email}\n\nMessage: ${message}`
+
+  var params = {
+    Destination: {
+      ToAddresses: [
+        'c.p.stainsby@outlook.com' // my email
+      ]
+    },
+    Body: {
+      Text: {
+        Charset: "UTF-8",
+        Data: `New message from Name: ${from_name}\nEmail: ${from_email}\n\nMessage: ${message}`
+      }
+    },
+    Subject: {
+      Charset: 'UTF-8',
+      Data: 'New message from ' + from_name
+    },
+    Source: sendFromEmail,
+    ReplyToAddresses: [
+      sendFromEmail
+    ],
   };
-  return mailOptions;
+  
+  return params;
 }
 
 
