@@ -1,10 +1,5 @@
-import Skill from "./Skill"
-
-interface Stack {
-    stackType: "Frontend" | "Backend" | "Data Science" | "Cloud" | "Other"
-
-    stackDiagram?: String
-}
+import type Skill from "./Skill"
+import type Stack from "./Stack"
 
 interface ProjectDetails {
     aboutTheProject: String
@@ -16,11 +11,12 @@ interface ProjectDetails {
 }
 
 export default interface Project {
-    projectName: String
+    name: String
     shortDescription: String
     skillsUsed: Skill[]
     award?: String 
     description: String
+    screenShotImgPath?: String
 
     details?: ProjectDetails
 }
