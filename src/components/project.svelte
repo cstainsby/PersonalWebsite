@@ -20,7 +20,6 @@
     .project {
         display: flex;
         flex-direction: column;
-        justify-content: space-evenly;
         padding: 24px;
         margin-bottom: 48px;
         background-color: var(--darkT-grey-2);
@@ -33,11 +32,11 @@
         }
 
         & .award > p {
-        width: fit-content;
-        padding: 2px;
-        background-color: goldenrod;
-        border-radius: 4px;
-        color: var(--darkT-black-2);
+            width: fit-content;
+            padding: 2px;
+            background-color: goldenrod;
+            border-radius: 4px;
+            color: var(--darkT-black-2);
         }
 
         h2 {
@@ -47,37 +46,38 @@
         }
 
         ul {
-        list-style: none;
-        display: flex;
-        flex-direction: row;
-        padding-left: 0px;
-        flex-wrap: wrap;
-    
-        & li {
-            margin-right: 8px;
-            margin-bottom: 8px;
-            border-radius: 4px;
-            padding: 8px;
-            background-color: var(--darkT-black-2);
-            font-weight: bold;
-            color: var(--white);
-        }
-        }
-
-        & .project-info {
-        display: flex;
-        flex-direction: column;
-        align-items: start;
-        margin-right: 16px;
-
-        & .button-group {
+            list-style: none;
             display: flex;
             flex-direction: row;
-
-            & > * {
-            margin-right: 8px;
+            padding-left: 0px;
+            flex-wrap: wrap;
+        
+                & li {
+                    margin-right: 8px;
+                    margin-bottom: 8px;
+                    border-radius: 4px;
+                    padding: 8px;
+                    background-color: var(--darkT-black-2);
+                    font-weight: bold;
+                    color: var(--white);
+                }
             }
-        }
+
+            & .project-info {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            margin-right: 4px;
+
+
+            & .button-group {
+                display: flex;
+                flex-direction: row;
+                // make sure there is some margin between the buttons
+                & > * {
+                margin-right: 8px;
+                }
+            }
         }
 
         & .project-img {
@@ -98,7 +98,7 @@
         <b>{project.shortDescription}</b>
         {#if (project.award)}
             <div class="award">
-                <p><b>Award:</b> 2023 Best Computer Science Project</p>
+                <p><b>Award:</b> {project.award}</p>
             </div>
         {/if}
 
@@ -112,9 +112,21 @@
         
         <!-- buttons -->
         <div class="button-group">
-        <a class="word-link" href="https://ifdfgjpy82.us-west-2.awsapprunner.com" target="_blank" rel="noopener noreferrer">
-            Demo</a>
-        <a id="BioPathprojDescBtn" class=" open-modal-button word-link">Details</a>
+            {#if (project.demoLink)}
+                <a class="word-link" href={String(project.demoLink)} target="_blank" rel="noopener noreferrer">
+                    Demo</a>
+            {/if}
+            {#if (project.details)}
+                <a id="BioPathprojDescBtn" class=" open-modal-button word-link">Details</a>
+            {/if}
+            {#if (project.repositoryLink)}
+                <a class="word-link" href={String(project.repositoryLink)} target="_blank" rel="noopener noreferrer">
+                    Code</a>
+            {/if}
+            {#if (project.posterLink)}
+                <a class="word-link" href={String(project.posterLink)} target="_blank" rel="noopener noreferrer">
+                    Poster</a>
+            {/if}
         </div>
         
         <!-- modal -->

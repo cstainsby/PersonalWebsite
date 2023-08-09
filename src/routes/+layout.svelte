@@ -1,0 +1,158 @@
+<style lang="scss">
+    // ------------------------------------------------------------------
+    //    root variables
+    // ------------------------------------------------------------------
+    :root {
+        // color palatte
+        --white: #e7e6e6;
+        --blue: #007acc;
+        --darkT-grey-1: #3e3e42;
+        --darkT-grey-2: #2d2d30;
+        --darkT-black-1: #252526;
+        --darkT-black-2: #1e1e1e;
+
+        // transition timers 
+        --button-transition-time: 0.2s;
+
+        // z-index indices
+        --zind-perm-top: 999;
+        --zind-foreground: 4;
+        --zind-middleground: 3;
+        --zind-background: 2; 
+        --zind-perm-end: 1;
+
+        // font 
+        --font: 'Source Sans Pro';
+
+        scroll-behavior: smooth;
+        font-family: var(--font), sans-serif;
+        color: var(--white);
+        background-color: var(--darkT-grey-1);
+    }
+
+
+    // ------------------------------------------------------------------
+    //    overrides of html provided elements
+    // ------------------------------------------------------------------
+
+    :global(html) {
+        scroll-behavior: smooth;
+        font-family: var(--font), sans-serif;
+        background-color: var(--darkT-grey-1);
+        font-size: 16px; 
+    }
+    :global(header) {
+        height: 0px;
+    }
+
+    :global(body) {
+        margin: 0px;
+        font-size: 1rem;
+        color: var(--white);
+    }
+    input[type="text"], 
+    input[type="email"],
+    textarea {
+        font-size: 1rem;
+        font-family: var(--font), sans-serif;
+    }
+    // ------------------------------------------------------------------
+    //    global link classes
+    // ------------------------------------------------------------------
+    :global(.word-link) {
+        max-height: 48px;
+        margin-right: 2%;
+        margin-top: 2%;
+        display: inline-block;
+        padding: 12px 24px;
+        font-size: 1rem;
+        // font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        border: none;
+        color: var(--white);
+        border-radius: 4px;
+        background-color: var(--blue);
+        transition: transform var(--button-transition-time) ease-in-out, box-shadow var(--button-transition-time);/* Add a smooth transition */
+        // margin: 1%;
+    }
+    :global(.word-link:hover) {
+        background-color: var(--blue);
+        box-shadow: 1px 4px var(--darkT-black-2);
+        transform: translate(0px, -4px);
+    } 
+
+    // for links with images displayed rather than words
+    :global(.image-link) {
+        display: inline-block;
+        position: relative;
+    }
+    :global(.image-link img) {
+        transition: transform var(--button-transition-time) ease-in-out;
+    }
+    :global(.image-link:hover img) {
+        transform: scale(1.15); /* Increase the size of the image on hover */
+    }
+
+    // :global(.gradient-border) {
+    //     border: 10px solid transparent; /* Set a transparent solid border */
+    //     border-image: linear-gradient(to right, #f06, #00f); /* Define the linear gradient */
+    //     border-image-slice: 1; /* Slice the border image */
+    // }
+
+    // :global(.fade-border) {
+    //     position: relative; // Required for pseudo-element
+    //     border: 2px solid #007bff; // Initial border
+    //     transition: border-color 0.3s ease; // Smooth transition for border color
+
+    //     &:before {
+    //         content: "";
+    //         position: absolute;
+    //         top: -4px;
+    //         left: -4px;
+    //         right: -4px;
+    //         bottom: -4px;
+    //         border: 2px solid transparent;
+    //         transition: border-color 0.3s ease;
+    //     }
+
+    //     &:hover {
+    //         border-color: transparent; // Fading out the border on hover
+    //         &:before {
+    //             border-color: #007bff; // Highlight the border on hover
+    //         }
+    //     }
+    // }
+
+    :global(.gradient-border) {
+        position: relative;
+        border-radius: 4px;
+    }
+
+    :global(.gradient-border::before) {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        border: 10px solid transparent;
+        border-image: linear-gradient(to right, rgba(255, 0, 0, 0.5), rgba(0, 0, 255, 0.2));
+        border-image-slice: 1;
+    }
+
+
+    // ------------------------------------------------------------------
+    //    layout css
+    // ------------------------------------------------------------------
+    #bottom-right-link {
+        display: none; /* Hide the link by default */
+        position: fixed;
+        bottom: 12px;
+        right: 2%;
+        padding: 10px;
+        z-index: var(--zind-perm-top);
+    }
+</style>
+
+<slot />

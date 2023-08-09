@@ -3,10 +3,6 @@ import type Stack from "./Stack"
 
 interface ProjectDetails {
     aboutTheProject: String
-    repositoryLink?: String
-    demoLink?: String
-    posterLink?: String
-
     stacksUsed?: Stack[]
 }
 
@@ -17,6 +13,11 @@ export default interface Project {
     award?: String 
     description: String
     screenShotImgPath?: String
+
+    // links
+    demoLink?: String
+    repositoryLink?: String
+    posterLink?: String
 
     details?: ProjectDetails
 }

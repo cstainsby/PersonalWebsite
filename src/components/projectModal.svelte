@@ -1,4 +1,21 @@
 
+<script lang="ts">
+    import type Project from "../templates/Project";
+    import type Skill from "../templates/Skill";
+    import ProjectModal from "./projectModal.svelte";
+
+    import SkillComponent from "./skillSection.svelte";
+
+    interface ProjectModalProps {
+        project: Project 
+        projectIndex: number
+    }
+
+    // props 
+    export let project: ProjectProps["project"];
+    export let projectIndex: ProjectProps["projectIndex"];
+</script>
+
 <dialog id="BioPathprojModal" class="modal">
     <div class="proj-dialog-header">
         <h1>BioPath</h1>

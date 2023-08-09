@@ -6,8 +6,8 @@
     // projects
     import ProjectComponent from "./project.svelte";
 
-    const sampleSkills: Skill[] = [
-        {name: "Javascipt"},
+    const biopathSkills: Skill[] = [
+        {name: "Javascript"},
         {name: "React"},
         {name: "Bootstrap"},
         {name: "AWS"},
@@ -17,15 +17,65 @@
         {name: "Django"},
         {name: "REST API"}
     ]
+    const aitaSkills: Skill[] = [
+        {name: "Python"},
+        {name: "ML Data Structures"},
+        {name: "Docker"},
+        {name: "GCP BigQuery"},
+        {name: "GCP CloudRun"},
+        {name: "Flask"},
+        {name: "HuggingFace"},
+        {name: "Jupyter Notebooks"}
+    ]
+    const personalWebsiteSkills: Skill[] = [
+        {name: "Typescript"},
+        {name: "AWS EC2"},
+        {name: "Svelte"},
+        {name: "HTML"},
+        {name: "SCSS"},
+        {name: "NGINX"}
+    ]
+    const hockeyDataProject: Skill[] = [
+        {name: "Python"},
+        {name: "ML Data Structures"},
+        {name: "Jupyter Notebooks"},
+        {name: "EDA"}
+    ]
 
     const sampleProjects: Project[] = [
         {
             name: "BioPath",
             shortDescription: "Senior Capstone Project",
-            award: "2023 Best Computer Science Project",
+            award: "Gonzaga SEAS 2023 Best Computer Science Project",
             description: "My small team partnered with the Gonzaga University Biochemistry department to create a web app which aids students in learning Biochemical pathways.",
             screenShotImgPath: "../../media/biopath-screenshot.png",
-            skillsUsed: sampleSkills
+            demoLink: "https://ifdfgjpy82.us-west-2.awsapprunner.com",
+            posterLink: "https://github.com/cstainsby/BiopathPoster",
+            repositoryLink: "https://github.com/SD-2022-CPSC-10/BioPath",
+            skillsUsed: biopathSkills
+        },
+        {
+            name: "Reddit r/AITA NLP Sentiment Classifier",
+            shortDescription: "Personal Project",
+            description: "An app which leverages a HuggingFace BERT multiclass classifier to judge reddit posts from the popular r/AmITheAsshole subreddit according to their defined classification rules.",
+            screenShotImgPath: "../../media/AITA-screenshot.png",
+            demoLink: "https://backend-model-service-zkidffnq6a-uc.a.run.app/models/AITAclassmodel",
+            repositoryLink: "https://github.com/cstainsby/B-Onion",
+            skillsUsed: aitaSkills
+        },
+        {
+            name: "Personal Website",
+            shortDescription: "This Website",
+            description: "A website which shows off every",
+            repositoryLink: "https://github.com/cstainsby/PersonalWebsite",
+            skillsUsed: personalWebsiteSkills
+        },
+        {
+            name: "Hockey Data Project",
+            shortDescription: "Class Project",
+            description: "In a team of three members, we used Kaggle and NHL data for exploratory data analysis in conjunction with self-made and self-trained machine learning models (decision trees, random forests, KNN, and Naïve Bayes) to predict which NHL teams would make the playoffs (classification).",
+            repositoryLink: "https://github.com/cstainsby/HockeyDataProject",
+            skillsUsed: hockeyDataProject
         }
     ]
 </script>
@@ -33,7 +83,7 @@
 
 <div id="ProjectSection">
     {#each sampleProjects as project, projectIndex}
-        <ProjectComponent {project} {projectIndex} />
+        <ProjectComponent {project} {projectIndex}/>
     {/each}
 
     <!-- AITA Project -->
