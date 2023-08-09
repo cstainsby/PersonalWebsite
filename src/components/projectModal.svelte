@@ -12,8 +12,8 @@
     }
 
     // props 
-    export let project: ProjectProps["project"];
-    export let projectIndex: ProjectProps["projectIndex"];
+    export let project: ProjectModalProps["project"];
+    export let projectIndex: ProjectModalProps["projectIndex"];
 </script>
 
 <dialog id="BioPathprojModal" class="modal">

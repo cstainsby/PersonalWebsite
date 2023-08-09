@@ -4,7 +4,7 @@
     import type Skill from "../templates/Skill";
     import ProjectModal from "./projectModal.svelte";
 
-    import SkillComponent from "./skill.svelte";
+    import SkillComponent from "./skillSection.svelte";
 
     interface ProjectProps {
         project: Project 
@@ -133,6 +133,6 @@
         <ProjectModal />
     </div>
     {#if (project.screenShotImgPath)}
-        <img class="project-img" src={project.screenShotImgPath}/>           
+        <img class="project-img" alt="project screenshot" src={project.screenShotImgPath.toString()}/>           
     {/if}   
 </div>
