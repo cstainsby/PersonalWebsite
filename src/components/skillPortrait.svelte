@@ -12,7 +12,7 @@
 </script>
 
 <style lang="scss">
-    & .skill-icon-element {
+    .skill-portrait {
         display: grid;
         grid-template-areas: 
             "skillIconImg"
@@ -21,9 +21,11 @@
         padding-right: 8px;
         padding-left: 8px;
 
-        & img {
+        img {
             grid-area: skillIconImg;
             justify-self: center;
+            max-height: 40px;
+            max-width: 40px;
         }
         & p {
             grid-area: description;
@@ -35,5 +37,5 @@
 
 <div class="skill-portrait">
     <p>{name}</p>
-    <img src={imgPath.toString()} alt="skill image"/>
+    <img src={imgPath.toString()} alt="{name} skill image"/>
 </div>

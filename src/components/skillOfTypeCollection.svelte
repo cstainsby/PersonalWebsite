@@ -14,7 +14,7 @@
 </script>
 
 <style lang="scss">
-    & .skillset-of-type {
+    .skillset-of-type {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -24,12 +24,7 @@
         background-color: var(--darkT-grey-2);
         border: 2px solid var(--blue);
 
-        & img {
-            max-height: 40px;
-            max-width: 40px;
-        }
-
-        & .icon-section {
+        & .portrait-section {
             display: flex;
             flex-direction: row;
         }
@@ -38,7 +33,9 @@
 
 <div class="skillset-of-type">
     <h1>{typeName}</h1>
-    {#each skillsOfType as skill}
-        <SkillPortrait name={String(skill.name)} imgPath={String(skill.iconPath)}/>
-    {/each}
+    <div class="portrait-section">
+        {#each skillsOfType as skill}
+            <SkillPortrait name={String(skill.name)} imgPath={String(skill.iconPath)}/>
+        {/each}
+    </div>
 </div>

@@ -3,60 +3,120 @@
     import SkillOfTypeCollection from "./skillOfTypeCollection.svelte";
 
     // interface for typifying expected raw data
-    interface SkillList {
+    interface SkillAndTypeList {
         skillType: String
-        skillsAssociated: String[]
+        skillsAssociated: Skill[]
     }
 
-    const skillList: SkillList = [
+    const skillAndTypeList: SkillAndTypeList[] = [
         {
             skillType: "Languages",
             skillsAssociated: [
-                "python",
-                "java",
-                "mysql",
-                "javascript"
+                {
+                    name: "Python",
+                    iconPath: "../../media/python.png"
+                },
+                {
+                    name: "Java",
+                    iconPath: "../../media/java.png"
+                },
+                {
+                    name: "MySQL",
+                    iconPath: "../../media/mysql.png"
+                },
+                {
+                    name: "Javascript",
+                    iconPath: "../../media/javascript.png"
+                }
             ]
         },
         {
             skillType: "Frontend",
             skillsAssociated: [
-                "react",
-                "html",
-                "css"
+                {
+                    name: "React",
+                    iconPath: "../../media/react.png"
+                },
+                {
+                    name: "HTML",
+                    iconPath: "../../media/html.png"
+                },
+                {
+                    name: "CSS",
+                    iconPath: "../../media/css.png"
+                }
             ]
         },
         {
             skillType: "Backend",
             skillsAssociated: [
-                "Flask",
-                "django",
-                "node.js"
+                {
+                    name: "Flask",
+                    iconPath: "../../media/flask.png"
+                },
+                {
+                    name: "Django",
+                    iconPath: "../../media/django.png"
+                },
+                {
+                    name: "Node.js",
+                    iconPath: "../../media/node.js.png"
+                }
             ]
         },
         {
             skillType: "Data Science",
             skillsAssociated: [
-                "jupyter",
-                "pandas",
-                "numpy",
-                "sklearn"
+                {
+                    name: "Jupyter",
+                    iconPath: "../../media/jupyter.png"
+                },
+                {
+                    name: "Pandas",
+                    iconPath: "../../media/pandas.png"
+                },
+                {
+                    name: "Numpy",
+                    iconPath: "../../media/numpy.png"
+                },
+                {
+                    name: "SKLearn",
+                    iconPath: "../../media/sklearn.png"
+                }
             ]
         },
         {
             skillType: "Tools and Platform",
             skillsAssociated: [
-                "docker",
-                "aws",
-                "github",
-                "linux"
+                {
+                    name: "Docker",
+                    iconPath: "../../media/docker.png"
+                },
+                {
+                    name: "AWS",
+                    iconPath: "../../media/aws.png"
+                },
+                {
+                    name: "Github",
+                    iconPath: "../../media/github.png"
+                },
+                {
+                    name: "Linux",
+                    iconPath: "../../media/linux.png"
+                }
             ]
         },
         {
             skillType: "Dev. Practices",
             skillsAssociated: [
-                "agile",
-                "cicd"
+                {
+                    name: "Agile",
+                    iconPath: "../../media/agile.png"
+                },
+                {
+                    name: "CI/CD",
+                    iconPath: "../../media/cicd.png"
+                }
             ]
         }
     ]
@@ -65,6 +125,7 @@
 <style lang="scss">
     #skills-section {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
 
@@ -98,8 +159,8 @@
 <section id="skills-section">
     <h2 class="section-title">Skills</h2>
     <div id="skills-section-content" class="section-content">
-        {#each skillList as skillCollection}
-            <SkillOfTypeCollection typeName={skillCollection.}/>
+        {#each skillAndTypeList as skillCollection}
+            <SkillOfTypeCollection typeName={String(skillCollection.skillType)} skillsOfType={skillCollection.skillsAssociated}/>
         {/each}
     </div>
 </section>

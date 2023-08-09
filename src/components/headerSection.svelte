@@ -1,3 +1,7 @@
+<script>
+    import ProfessionalLinkRow from "./professionalLinkRow.svelte";
+
+</script>
 
 <style lang="scss">
     #greeting-section-background-imgs {
@@ -99,20 +103,7 @@
             <div class="section-title">I'm Cole Stainsby.</div>
         </div>
     
-        <div id="greeting-links">
-            <a class="image-link" href="https://www.linkedin.com/in/colestainsby/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
-            <img src="media/linkedin-link-icon.png" alt="LinkedIn" height="40px" width="40px" />
-            </a>      
-            <a class="image-link" href="https://github.com/cstainsby" target="_blank" rel="noopener noreferrer" title="GitHub">
-            <img src="media/github-link-icon.png" alt="GitHub" height="40px" width="40px"/>
-            </a>
-            <a class="image-link" href="https://www.kaggle.com/colestainsby" target="_blank" rel="noopener noreferrer" title="Kaggle">
-            <img src="media/kaggle-link-icon.png" height="40px" width="40px"/>
-            </a>
-            <a class="image-link" href="https://coles-resume-bucket.s3.us-west-2.amazonaws.com/ColeStainsbyResume.pdf" target="_blank" rel="noopener noreferrer" title="Resume">
-            <img src="media/resume-link-icon.png" height="40px" width="30px"/>
-            </a>
-        </div>
+        <ProfessionalLinkRow/>
     
         <div class="section-body">
             <p>Gonzaga Computer Science B.S. Graduate.</p>
