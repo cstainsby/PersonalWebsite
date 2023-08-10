@@ -14,6 +14,10 @@
     // props 
     export let project: ProjectProps["project"];
     export let projectIndex: ProjectProps["projectIndex"];
+
+    let showModal: boolean = false;
+    console.log("showModal val " + showModal);
+    
 </script>
 
 <style lang="scss">
@@ -35,8 +39,14 @@
 
         & .project-content {
             display: flex;
-            flex-direction: row;
-            margin-bottom: 48px;
+            flex-direction: column;
+            // margin-bottom: 48px;
+            height:auto;
+
+            @media (min-width: 1024px) {
+                /* For screens larger than 768px, have two columns */
+                flex-direction: row;
+            }
 
             & .project-info {
                 display: flex;
@@ -90,18 +100,14 @@
         & .button-group {
             display: flex;
             flex-direction: row;
+            flex-wrap: wrap;
             height: fit-content;
-            position: absolute;
-            bottom: 24px;
+            // position: absolute;
+            // bottom: 24px;
             // make sure there is some margin between the buttons
             & > * {
                 margin-right: 8px;
             }
-        }
-
-        @media (min-width: 1024px) {
-            /* For screens larger than 768px, have two columns */
-            flex-direction: row;
         }
     }
 </style>
@@ -132,8 +138,6 @@
             </ul>
             <p>{ project.description }</p>
             
-            <!-- modal -->
-            <ProjectModal />
         </div> 
         {#if (project.screenShotImgPath)}
             <img class="project-img" alt="project screenshot" src={project.screenShotImgPath.toString()}/>           
@@ -157,5 +161,9 @@
             <a class="word-link" href={String(project.posterLink)} target="_blank" rel="noopener noreferrer">
                 Poster</a>
         {/if}
+
+        <!-- modal -->
+        <button on:click={() => (showModal = true)} class="open-modal-button word-link">Details</button>
+        <ProjectModal {project} {projectIndex}/>
     </div>
 </div>

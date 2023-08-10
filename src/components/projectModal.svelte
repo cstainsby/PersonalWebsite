@@ -14,6 +14,19 @@
     // props 
     export let project: ProjectModalProps["project"];
     export let projectIndex: ProjectModalProps["projectIndex"];
+
+
+    // Function to enable scrolling
+    function enableScroll() {
+        const body = document.body;
+        body.classList.remove('no-scroll');
+    }
+
+    // Function to disable scrolling
+    function disableScroll() {
+        const body = document.body;
+        body.classList.add('no-scroll');
+    }
 </script>
 
 <dialog id="BioPathprojModal" class="modal">
@@ -57,7 +70,7 @@
                 </ol>
             </div>
             </div>
-            <img src="media/biopath-architecture.png">
+            <img alt="biopath architecture" src="media/biopath-architecture.png">
         </div>
         <div class="dialog-body-diagram-section">
             <h3 class="dialog-body-section-header">Cloud Diagram</h3>
@@ -67,7 +80,7 @@
             At Which point the app runner service will grab the new container and run it.
             Our app will have access to <b>AWS SSM</b> which houses our sensitive information as well as our <b>AWS RDS Postgres</b> instance.
             </p>
-            <img src="media/biopath-dev-workflow.png">
+            <img alt="biopath workflow" src="media/biopath-dev-workflow.png">
         </div>
         <h3 class="dialog-body-section-header">My Contributions</h3>
         <h4>Technical</h4>
