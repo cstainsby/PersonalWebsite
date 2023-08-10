@@ -1,6 +1,19 @@
 
 
 <style lang="scss">
+    // links to indeed, github, etc
+    .proffesional-link-row {
+        position: relative;
+        display: flex;
+        justify-content: start;
+        padding-top: 24px;
+        z-index: var(--zind-foreground);
+
+        & .image-link {
+            margin-right: 24px;
+        }
+    }
+
     // for links with images displayed rather than words
     .image-link {
         display: inline-block;
@@ -14,7 +27,7 @@
     }
 </style>
 
-<div>
+<div class="proffesional-link-row">
     <a class="image-link" href="https://www.linkedin.com/in/colestainsby/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
         <img src="media/linkedin-link-icon.png" alt="LinkedIn" height="40px" width="40px" />
     </a>      

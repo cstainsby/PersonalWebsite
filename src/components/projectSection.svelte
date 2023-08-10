@@ -5,6 +5,7 @@
 
     // projects
     import ProjectComponent from "./project.svelte";
+    import ProjectModal from "./projectModal.svelte";
 
     const biopathSkills: Skill[] = [
         {name: "Javascript"},
@@ -52,7 +53,8 @@
             demoLink: "https://ifdfgjpy82.us-west-2.awsapprunner.com",
             posterLink: "https://github.com/cstainsby/BiopathPoster",
             repositoryLink: "https://github.com/SD-2022-CPSC-10/BioPath",
-            skillsUsed: biopathSkills
+            skillsUsed: biopathSkills,
+            importance: "High"
         },
         {
             name: "Reddit r/AITA NLP Sentiment Classifier",
@@ -61,27 +63,59 @@
             screenShotImgPath: "../../media/AITA-screenshot.png",
             demoLink: "https://backend-model-service-zkidffnq6a-uc.a.run.app/models/AITAclassmodel",
             repositoryLink: "https://github.com/cstainsby/B-Onion",
-            skillsUsed: aitaSkills
+            skillsUsed: aitaSkills,
+            importance: "High"
         },
         {
             name: "Personal Website",
             shortDescription: "This Website",
             description: "A website which shows off every",
             repositoryLink: "https://github.com/cstainsby/PersonalWebsite",
-            skillsUsed: personalWebsiteSkills
+            skillsUsed: personalWebsiteSkills,
+            importance: "Medium"
         },
         {
             name: "Hockey Data Project",
             shortDescription: "Class Project",
             description: "In a team of three members, we used Kaggle and NHL data for exploratory data analysis in conjunction with self-made and self-trained machine learning models (decision trees, random forests, KNN, and Naïve Bayes) to predict which NHL teams would make the playoffs (classification).",
             repositoryLink: "https://github.com/cstainsby/HockeyDataProject",
-            skillsUsed: hockeyDataProject
+            skillsUsed: hockeyDataProject,
+            importance: "Medium"
         }
     ]
+
+    interface ProjectImportanceObject {
+        High: Project[], Medium: Project[], Low: Project[]
+    }
+
+    function groupProjectByImportance(projects: Project[]): ProjectImportanceObject {
+        const importanceObj: ProjectImportanceObject = {
+            High: [], Medium: [], Low: []
+        }
+        projects.forEach(project => {
+            const projectImportance = project.importance;
+            importanceObj[projectImportance].push(project)
+        });
+        return importanceObj;
+    }
+
+    const projectsGroupedByImportance = groupProjectByImportance(sampleProjects);
 </script>
 
+<style lang="scss">
+    #projects-section {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 6%;
+        background-color: var(--darkT-grey-1);
+    }
+</style>
 
-<div id="ProjectSection">
+
+<div id="projects-section">
+
     {#each sampleProjects as project, projectIndex}
         <ProjectComponent {project} {projectIndex}/>
     {/each}
@@ -301,10 +335,3 @@
       <img class="project-img" src="media/hockey.png">
     </div> -->
 </div>
-
-
-
-
-<style lang="scss">
-
-</style>

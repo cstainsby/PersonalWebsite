@@ -13,6 +13,7 @@ export default interface Project {
     award?: String 
     description: String
     screenShotImgPath?: String
+    importance: "High" | "Medium" | "Low"
 
     // links
     demoLink?: String

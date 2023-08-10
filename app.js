@@ -48,40 +48,40 @@
 
 //   }
 
-// skillDict = {
-//     "Languages": [
-//         "python",
-//         "java",
-//         "mysql",
-//         "javascript"
-//     ],
-//     "Frontend": [
-//         "react",
-//         "html",
-//         "css"
-//     ],
-//     "Backend": [
-//         "Flask",
-//         "django",
-//         "node.js"
-//     ],
-//     "Data Science": [
-//         "jupyter",
-//         "pandas",
-//         "numpy",
-//         "sklearn"
-//     ],
-//     "Tools and Platforms": [
-//         "docker",
-//         "aws",
-//         "github",
-//         "linux"
-//     ],
-//     "Dev. Practices": [
-//         "agile",
-//         "cicd"
-//     ]
-// }
+skillDict = {
+    "Languages": [
+        "python",
+        "java",
+        "mysql",
+        "javascript"
+    ],
+    "Frontend": [
+        "react",
+        "html",
+        "css"
+    ],
+    "Backend": [
+        "Flask",
+        "django",
+        "node.js"
+    ],
+    "Data Science": [
+        "jupyter",
+        "pandas",
+        "numpy",
+        "sklearn"
+    ],
+    "Tools and Platforms": [
+        "docker",
+        "aws",
+        "github",
+        "linux"
+    ],
+    "Dev. Practices": [
+        "agile",
+        "cicd"
+    ]
+}
 // fillSkillIcons(skillDict);
 
 // // -----------------------------------------------------------------------------------------------

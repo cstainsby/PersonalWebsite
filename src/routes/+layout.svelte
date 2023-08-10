@@ -23,22 +23,25 @@
 
         // font 
         --font: 'Source Sans Pro';
-
-        scroll-behavior: smooth;
-        font-family: var(--font), sans-serif;
-        color: var(--white);
-        background-color: var(--darkT-grey-1);
     }
 
 
     // ------------------------------------------------------------------
     //    overrides of html provided elements
     // ------------------------------------------------------------------
-
+    :global(html) {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            outline: 0;
+            font-size: 100%;
+            vertical-align: baseline;
+            background: transparent;
+        }
     :global(html) {
         scroll-behavior: smooth;
         font-family: var(--font), sans-serif;
-        background-color: var(--darkT-grey-1);
+        background-color: var(--darkT-black-1);
         font-size: 16px; 
     }
     :global(header) {

@@ -4,86 +4,78 @@
 </script>
 
 <style lang="scss">
-    #greeting-section-background-imgs {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        z-index: var(--zind-background);
-
-        & #mountain-png {
-            position: absolute;
-            width: 100%;
-            height: 50%;
-            bottom: 0px;
-            left: 0px;
-
-            max-height: 30%;
-        }
-
-        & #side-cloud-png {
-            position: absolute;
-            width: 25%;
-            height: auto;
-            top: 200px;
-            right: 0px;
-        }
-
-        & #planet-png {
-            position: absolute;
-            width: 10%;
-            height: auto;
-            top: 50px;
-            right: 15%;
-        }
-
-        & #middle-cloud-png {
-            position: absolute;
-            width: 20%;
-            height: auto;
-            top: 200px;
-            right: 30%;
-
-            @media (max-width: 1000px) {
-            visibility: hidden;
-            }
-        }
-    }
-
     #greeting-section {
-        min-height: 100vh;
+        min-height: 100svh;
         background-color: var(--darkT-black-1);
         z-index: var(--zind-foreground);
 
-        & .section-title {
-            margin-top: 12px;
-            font-size: 64px;
-            text-align: left;
-        }
+        #greeting-section-background-imgs {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: var(--zind-background);
 
-        & .section-body {
-            z-index: var(--zind-foreground);
-        }
+            & #mountain-png {
+                position: absolute;
+                width: 100%;
+                height: 50%;
+                bottom: 0px;
+                left: 0px;
 
-        // links to indeed, github, etc
-        & #greeting-links {
-            display: flex;
-            justify-content: start;
-            padding-top: 24px;
-            z-index: var(--zind-foreground);
+                max-height: 30%;
+            }
 
-            & .image-link {
-            margin-right: 24px;
+            & #side-cloud-png {
+                position: absolute;
+                width: 25%;
+                height: auto;
+                top: 200px;
+                right: 0px;
+            }
+
+            & #planet-png {
+                position: absolute;
+                width: 10%;
+                height: auto;
+                top: 50px;
+                right: 15%;
+            }
+
+            & #middle-cloud-png {
+                position: absolute;
+                width: 20%;
+                height: auto;
+                top: 200px;
+                right: 30%;
+
+                @media (max-width: 1000px) {
+                visibility: hidden;
+                }
             }
         }
 
-        & #navigation-links {
-            display: flex;
-            flex-wrap: wrap;
-            & a {
-            z-index: var(--zind-foreground);
+
+        & .section-content {
+            margin: 32px;
+            & .section-title {
+                margin-top: 12px;
+                font-size: 64px;
+                text-align: left;
+            }
+
+            & .section-body {
+                z-index: var(--zind-foreground);
+            }
+
+            & #navigation-links {
+                display: flex;
+                flex-wrap: wrap;
+                & a {
+                z-index: var(--zind-foreground);
+                }
             }
         }
-        }
+    }
 </style>
 
 
@@ -91,10 +83,10 @@
 <div id="greeting-section">
     <!-- static imgs used in decorating the header section -->
     <div id="greeting-section-background-imgs">
-        <img id="planet-png" src="media/planet.png">
-        <img id="side-cloud-png" src="media/cloud.png">
-        <img id="mountain-png" src="media/mountain.png">
-        <img id="middle-cloud-png" src="media/middlecloud.png">
+        <img id="planet-png" alt="planet" src="media/planet.png">
+        <img id="side-cloud-png" alt="cloud" src="media/cloud.png">
+        <img id="mountain-png" alt="mountain" src="media/mountain.png">
+        <img id="middle-cloud-png" alt="cloud" src="media/middlecloud.png">
     </div>
 
     <div class="section-content">
