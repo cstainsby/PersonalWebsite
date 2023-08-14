@@ -9,6 +9,9 @@
 
 <style lang="scss">
     #personal-website-home {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         background-color: var(--darkT-grey-1);
     }
 </style>

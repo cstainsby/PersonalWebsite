@@ -129,6 +129,10 @@
         justify-content: center;
         align-items: center;
         background-color: var(--darkT-grey-1);
+        margin-top: 24px;
+        padding-bottom: 24px;
+        padding-left: 6%;
+        padding-right: 6%;
 
         & .section-title {
             font-size: 36px;

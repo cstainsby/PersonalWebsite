@@ -9,11 +9,23 @@
     export let buttonText: ModalProps["buttonText"];
   
     let showDialog = false;
+
+
+    // Function to enable scrolling
+    function enableScroll() {
+        const body = document.body;
+        body.classList.remove('no-scroll');
+    }
+
+    // Function to disable scrolling
+    function disableScroll() {
+        const body = document.body;
+        body.classList.add('no-scroll');
+    }
   
     const openDialog = () => {
         showDialog = true;
     };
-  
     const closeDialog = () => {
         showDialog = false;
     };

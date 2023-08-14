@@ -5,8 +5,14 @@
 
 <style lang="scss">
     #contact-section {
-        // margin-top: 24px;
-        background-color: var(--darkT-grey-1);
+        margin-top: 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        background-color: var(--darkT-grey-2);
+        border-top: 2px solid var(--darkT-black-2);
+        
         & .section-title {
             text-align: center;
         }
@@ -20,6 +26,11 @@
         //     max-width: 200px;
         //   }
         // }
+        #email-contact-section {
+            margin: 24px;
+            padding: 24px;
+            width: 80%;
+        }
 
         & #email-form {
             display: grid;
@@ -61,41 +72,37 @@
             flex-wrap: wrap;
             justify-content: space-evenly;
             align-items: center;
-            margin-top: 48px;
-
-            & .image-link {
-            margin-right: 24px;
-            }
+            margin: 24px;
+            width: 80%;
+            text-align: start;
         }
         }
 </style>
 
 
 <div id="contact-section">
-    <div>
-        <div id="email-contact-section">
-            <div id="email-contact-section-header">
-                <h2>Contact Me</h2>
-                <p>Send me a quick message if you're interesed in working with me!</p>
-            </div>
-            <form id="email-form">
-                <input type="text" id="from_name" name="from_name" placeholder="Full Name" required>
-                <input type="email" id="from_email" name="from_email" placeholder="Email" required>
-                <textarea id="message" name="message" placeholder="Message" required></textarea>
-                <a class="word-link button" type="submit" id="email_submit" name="email_submit">Send</a>
-            </form>
+    <div id="email-contact-section">
+        <div id="email-contact-section-header">
+            <h2>Contact Me</h2>
+            <p>Send me a quick message if you're interesed in working with me!</p>
         </div>
-        
-        <div id="contact-info">
-            <div>
-                <h3>Phone</h3>
-                <p>425-214-3518</p>
-            </div>
-            <div>
-                <h3>Email</h3>
-                <p>c.p.stainsby@outlook.com</p>
-            </div>
-            <ProfessionalLinkRow/>
+        <form id="email-form">
+            <input type="text" id="from_name" name="from_name" placeholder="Full Name" required>
+            <input type="email" id="from_email" name="from_email" placeholder="Email" required>
+            <textarea id="message" name="message" placeholder="Message" required></textarea>
+            <a class="word-link button" type="submit" id="email_submit" name="email_submit">Send</a>
+        </form>
+    </div>
+    
+    <div id="contact-info">
+        <div>
+            <h3>Phone</h3>
+            <p>425-214-3518</p>
         </div>
+        <div>
+            <h3>Email</h3>
+            <p>c.p.stainsby@outlook.com</p>
+        </div>
+        <ProfessionalLinkRow/>
     </div>
 </div>

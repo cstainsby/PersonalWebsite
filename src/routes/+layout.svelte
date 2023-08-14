@@ -29,20 +29,21 @@
     // ------------------------------------------------------------------
     //    overrides of html provided elements
     // ------------------------------------------------------------------
-    :global(html) {
-            margin: 0;
-            padding: 0;
-            border: 0;
-            outline: 0;
-            font-size: 100%;
-            vertical-align: baseline;
-            background: transparent;
-        }
+    // :global(html) {
+    //         margin: 0;
+    //         padding: 0;
+    //         border: 0;
+    //         outline: 0;
+    //         font-size: 100%;
+    //         vertical-align: baseline;
+    //         background: transparent;
+    //     }
     :global(html) {
         scroll-behavior: smooth;
         font-family: var(--font), sans-serif;
         background-color: var(--darkT-black-1);
         font-size: 16px; 
+        overflow: auto;
     }
     :global(header) {
         height: 0px;

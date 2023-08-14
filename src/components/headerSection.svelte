@@ -6,6 +6,7 @@
 <style lang="scss">
     #greeting-section {
         min-height: 100svh;
+        min-width: 100vw;
         background-color: var(--darkT-black-1);
         z-index: var(--zind-foreground);
 

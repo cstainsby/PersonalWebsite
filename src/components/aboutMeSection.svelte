@@ -13,7 +13,7 @@
         {
             title: "Linear Algebra Researcher",
             employer: "Gonzaga University",
-            imgPath: "",
+            imgPath: "media/Math-research-screenshot.png",
             imgAltText: "Petersen Graph",
             startDate: new Date(2022, 1),
             endDate: new Date(2023, 5)
@@ -53,12 +53,24 @@
         imgPath: String,
         imgAltText: String,
     }[] = [
-        {
-            title: "About me",
-            textContent: "I am an entry-level software engineer based in the Greater Seattle Area with a passion for data looking for a full-time programming position that will allow me to provide business impact, solve problems and contribute to a team.",
-            imgPath: "media/space-needle.png",
-            imgAltText: "space needle icon"
-        }
+        // {
+        //     title: "M's Fan",
+        //     textContent: "I am an entry-level software engineer based in the Greater Seattle Area with a passion for data looking for a full-time programming position that will allow me to provide business impact, solve problems and contribute to a team.",
+        //     imgPath: "media/space-needle.png",
+        //     imgAltText: "space needle icon"
+        // },
+        // {
+        //     title: "Fishing",
+        //     textContent: "",
+        //     imgPath: "",
+        //     imgAltText: "fishing picture"
+        // },
+        // {
+        //     title: "Gaming",
+        //     textContent: "I love to game, my favorites currently being Civilization 6 and Baldur's Gate 3.",
+        //     imgPath: "",
+        //     imgAltText: ""
+        // }
     ]
 
     function convertDateToDisplayDateString(date: Date) {
@@ -89,12 +101,37 @@
 
 <style lang="scss">
     #about-me-section {
-        // background-color: var(--darkT-grey-1);
-        margin-left: 12rem;
-        margin-right: 12rem;
         display: flex;
         flex-direction: column;
+        width: 80%;
+        margin-left: 6%;
+        margin-right: 6%;
+        padding: 24px;
+        justify-content: center;
+
         background-color: var(--darkT-grey-2);
+        border-radius: 4px;
+        border: 2px solid var(--darkT-black-2);
+    }
+    #about-me-personal {
+        
+        & p {
+            font-size: large;
+        }
+    }
+
+    .vertical-border {
+        border-left: 2px solid var(--darkT-black-2);
+        height: 90px;
+    }
+
+
+    .list-container {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-items: center;
+        // justify-content: space-evenly;
     }
 
     #main-description {
@@ -114,83 +151,116 @@
         justify-content: space-evenly;
         align-items: center;
         // margin-top: 12px;
-        margin: 12px;
+        margin-right: 12px;
         padding: 12px;
         border-radius: 4px;
-        width: 18rem;
+        width: fit-content;
+
+        border-radius: 4px;
+        // border: 2px solid var(--white);
+        background-color: var(--darkT-grey-2);
+        border-radius: 4px;
+        min-height: 160px;
 
         @media (min-width: 0px) and (max-width: 976px) {
-          justify-content: center;
+            justify-content: center;
         }
 
         // space the text from the images slightly
         & .listed-item-text-section {
           // margin-right: 16px;
-          width: 65%;
-          padding: 24px;
+            width: 65%;
+            padding: 24px;
 
-          & p {
-            margin-left: 8px;
-          }
+            & p {
+                margin-left: 8px;
+            }
         }
 
+
+
         & img {
-          margin-right: 24px;
-          height: 6rem;
+            margin-right: 24px;
+            height: 6rem;
         }
     }
 </style>
 
 <div id="about-me-section" class="non-greeting-section">
-    <h2>A Bit About Me</h2>
-    <div id="main-description">
+    <div id="about-me-personal">
+        <h1>A Bit About Me</h1>
         <p>I am an entry-level software engineer based in the Greater Seattle Area with a passion for data looking for a full-time programming position that will allow me to provide business impact, solve problems and contribute to a team.</p>
-        <img src="media/space-needle.png" alt="space needle icon"/>
-    </div>
-    
-    <!-- <div id="about-me-personal">
-        <h2>A Bit About Me</h2>
-        {#each aboutMePersonally as personalItem}
-            <div class="listed-item">
-                <div>
-                    <h3>{personalItem.title}</h3>
-                    <p>{personalItem.textContent}</p>
+        <!-- <img src="media/space-needle.png" alt="space needle icon"/> -->
+
+        <div class="list-container">
+            {#each aboutMePersonally as personalItem, personalItemIndex}
+                <div class="listed-item">
+                    <div>
+                        <h3>{personalItem.title}</h3>
+                        <p>{personalItem.textContent}</p>
+                    </div>
+                    <img src={String(personalItem.imgPath)} alt={String(personalItem.imgAltText)}/>
                 </div>
-                <img src={String(personalItem.imgPath)} alt={String(personalItem.imgAltText)}/>
-            </div>
-        {/each}
-    </div> -->
+                {#if personalItemIndex < aboutMePersonally.length - 1}
+                    <div class="vertical-border"></div>
+                {/if}
+            {/each}
+        </div>
+    </div>
 
     <div id="about-me-education-and-credentials">
         <h2>Education/Credentials</h2>
-
-        {#each educationAndCredentials as edOrCred}
-            <div class="listed-item">
-                <div>
-                    <h3>{edOrCred.title}</h3>
-                    {#if edOrCred.titleCaption}
-                        <p>{edOrCred.titleCaption}</p>
-                    {/if}
-                    <p>{edOrCred.fromWho}</p>
-                    <p>
-                        {convertDateToDisplayDateString(edOrCred.startDate)} - 
-                        {#if edOrCred.endDate}
-                            {convertDateToDisplayDateString(edOrCred.endDate)}
-                        {:else}
-                            In Progress
+        <div class="list-container">
+            {#each educationAndCredentials as edOrCred, edOrCredIndex}
+                <div class="listed-item">
+                    <div>
+                        <h3>{edOrCred.title}</h3>
+                        {#if edOrCred.titleCaption}
+                            <p>{edOrCred.titleCaption}</p>
                         {/if}
-                    </p>
+                        <p>{edOrCred.fromWho}</p>
+                        <p>
+                            {convertDateToDisplayDateString(edOrCred.startDate)} - 
+                            {#if edOrCred.endDate}
+                                {convertDateToDisplayDateString(edOrCred.endDate)}
+                            {:else}
+                                In Progress
+                            {/if}
+                        </p>
+                    </div>
+                    <img src={String(edOrCred.imgPath)} alt={String(edOrCred.imgAltText)}/>
                 </div>
-                <img src={String(edOrCred.imgPath)} alt={String(edOrCred.imgAltText)}/>
-            </div>
-        {/each}
+                {#if edOrCredIndex < educationAndCredentials.length - 1}
+                    <div class="vertical-border"></div>
+                {/if}
+            {/each}
+        </div>
     </div>
 
     <div id="about-me-work">
-        
+        <h2>Work History</h2>
+        <div class="list-container">
+            {#each jobs as job}
+                <div class="listed-item">
+                    <div class="listed-item-text">
+                        <h3>{job.title}</h3>
+                        <p>{job.employer}</p>
+                        <p>
+                            {convertDateToDisplayDateString(job.startDate)} - 
+                            {#if job.endDate}
+                                {convertDateToDisplayDateString(job.endDate)}
+                            {:else}
+                                In Progress
+                            {/if}
+                        </p>
+                    </div>
+                    <img src={String(job.imgPath)} alt={String(job.imgAltText)}/>
+                </div>
+            {/each}
+        </div>
     </div>
 
-      <div id="about-me-work">
+      <!-- <div id="about-me-work">
         <div class="row-section">
           <h2>Work</h2>
           <div class="listed-item">
@@ -239,5 +309,5 @@
             <img src="media/Math-research-screenshot.png" alt="research screenshot" height="100px">
           </div>
         </div>
-    </div>
+    </div> -->
 </div>
