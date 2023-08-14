@@ -128,6 +128,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        background-color: var(--darkT-grey-1);
 
         & .section-title {
             font-size: 36px;
@@ -156,11 +157,11 @@
     }
 </style>
 
-<section id="skills-section">
+<div id="skills-section">
     <h2 class="section-title">Skills</h2>
     <div id="skills-section-content" class="section-content">
         {#each skillAndTypeList as skillCollection}
             <SkillOfTypeCollection typeName={String(skillCollection.skillType)} skillsOfType={skillCollection.skillsAssociated}/>
         {/each}
     </div>
-</section>
+</div>

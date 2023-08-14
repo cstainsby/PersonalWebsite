@@ -5,7 +5,8 @@
 
 <style lang="scss">
     #contact-section {
-        margin-top: 24px;
+        // margin-top: 24px;
+        background-color: var(--darkT-grey-1);
         & .section-title {
             text-align: center;
         }
@@ -35,22 +36,22 @@
             // margin-left: 15%;
 
             #from_name { 
-            grid-area: fullname;
-            height: 36px;
+                grid-area: fullname;
+                height: 36px;
             }
             #from_email { 
-            grid-area: email;
-            height: 36px;
+                grid-area: email;
+                height: 36px;
             }
             #message { 
-            grid-area: message;
-            height: 72px;
-            resize: vertical;
+                grid-area: message;
+                height: 72px;
+                resize: vertical;
             }
             // allow the load spinner and response messages to be put into the submit area
             & .email-response-item,
             #email_submit { 
-            grid-area: submit;
+                grid-area: submit;
             }
         }
 

@@ -32,7 +32,7 @@
 </style>
 
 <div class="skillset-of-type">
-    <h1>{typeName}</h1>
+    <h2>{typeName}</h2>
     <div class="portrait-section">
         {#each skillsOfType as skill}
             <SkillPortrait name={String(skill.name)} imgPath={String(skill.iconPath)}/>

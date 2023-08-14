@@ -2,6 +2,7 @@
 <script lang="ts">
     import type Project from "../templates/Project";
     import type Skill from "../templates/Skill";
+    import Modal from "./modal.svelte";
     import ProjectModal from "./projectModal.svelte";
 
     import SkillComponent from "./skillSection.svelte";
@@ -14,9 +15,6 @@
     // props 
     export let project: ProjectProps["project"];
     export let projectIndex: ProjectProps["projectIndex"];
-
-    let showModal: boolean = false;
-    console.log("showModal val " + showModal);
     
 </script>
 
@@ -25,7 +23,7 @@
         max-width: 100%;
     }
     .medium-importance {
-        max-width: 40%;
+        width: 43%;
     }
 
     .project {
@@ -107,6 +105,7 @@
             // make sure there is some margin between the buttons
             & > * {
                 margin-right: 8px;
+                height: 20px;
             }
         }
     }
@@ -163,7 +162,8 @@
         {/if}
 
         <!-- modal -->
-        <button on:click={() => (showModal = true)} class="open-modal-button word-link">Details</button>
-        <ProjectModal {project} {projectIndex}/>
+        <!-- <button on:click={() => (showModal = true)} class="open-modal-button word-link">Details</button>
+        <ProjectModal bind:showModal {project} {projectIndex}/> -->
+        <Modal buttonText={"Details"}/>
     </div>
 </div>

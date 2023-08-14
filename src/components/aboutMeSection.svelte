@@ -1,42 +1,195 @@
+<script lang="ts">
+    import AboutMeGroupComponent from "./aboutMeGroupComponent.svelte";
 
 
-<section id="about-me-section" class="non-greeting-section">
-    <!-- <div class="section-header">
-      <div class="section-title">About Me</div>
+    const jobs: {
+        title: String,
+        employer: String,
+        imgPath: String,
+        imgAltText: String,
+        startDate: Date,
+        endDate?: Date
+    }[] = [
+        {
+            title: "Linear Algebra Researcher",
+            employer: "Gonzaga University",
+            imgPath: "",
+            imgAltText: "Petersen Graph",
+            startDate: new Date(2022, 1),
+            endDate: new Date(2023, 5)
+        }
+    ]
+
+    const educationAndCredentials: {
+        title: String,
+        titleCaption?: String,
+        fromWho: String,
+        imgPath: String,
+        imgAltText: String,
+        startDate: Date,
+        endDate?: Date
+    }[] = [
+        {
+            title: "Computer Science B.S.",
+            titleCaption: "With a concentration in Data Science",
+            fromWho: "Gonzaga University",
+            imgPath: "media/gonzaga.png",
+            imgAltText: "gonzaga logo",
+            startDate: new Date(2019, 9),
+            endDate: new Date(2023, 5)
+        },
+        {
+            title: "AWS Solutions Architect Certification",
+            fromWho: "Amazon Web Services",
+            imgPath: "media/AWS-solutions-architect-ass.png",
+            imgAltText: "aws sol. arch. logo",
+            startDate: new Date(2023, 6)
+        }
+    ]
+
+    const aboutMePersonally: {
+        title: String,
+        textContent: String,
+        imgPath: String,
+        imgAltText: String,
+    }[] = [
+        {
+            title: "About me",
+            textContent: "I am an entry-level software engineer based in the Greater Seattle Area with a passion for data looking for a full-time programming position that will allow me to provide business impact, solve problems and contribute to a team.",
+            imgPath: "media/space-needle.png",
+            imgAltText: "space needle icon"
+        }
+    ]
+
+    function convertDateToDisplayDateString(date: Date) {
+        let dateString = "";
+        
+        if (date) {
+            const dateStringList = date.toDateString().split(" ");
+
+            if (dateStringList.length === 4) {
+                // toDateString() should return "Day Month DayInMonth Year"
+                const month = dateStringList[1]
+                const year = dateStringList[3]
+                dateString += month;
+
+                // add period indicating contraction if month word length greater than 4
+                if (month.toLowerCase() !== "may" || 
+                    month.toLowerCase() !== "june" || 
+                    month.toLowerCase() !== "july") {
+                        dateString += ".";
+                }
+                dateString += (" " + year);
+            }
+        }
+        return dateString;
+    }
+</script>
+
+
+<style lang="scss">
+    #about-me-section {
+        // background-color: var(--darkT-grey-1);
+        margin-left: 12rem;
+        margin-right: 12rem;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--darkT-grey-2);
+    }
+
+    #main-description {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        
+        & img {
+            height: 8rem;
+            width: 8rem; 
+        }
+    }
+
+    .listed-item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        // margin-top: 12px;
+        margin: 12px;
+        padding: 12px;
+        border-radius: 4px;
+        width: 18rem;
+
+        @media (min-width: 0px) and (max-width: 976px) {
+          justify-content: center;
+        }
+
+        // space the text from the images slightly
+        & .listed-item-text-section {
+          // margin-right: 16px;
+          width: 65%;
+          padding: 24px;
+
+          & p {
+            margin-left: 8px;
+          }
+        }
+
+        & img {
+          margin-right: 24px;
+          height: 6rem;
+        }
+    }
+</style>
+
+<div id="about-me-section" class="non-greeting-section">
+    <h2>A Bit About Me</h2>
+    <div id="main-description">
+        <p>I am an entry-level software engineer based in the Greater Seattle Area with a passion for data looking for a full-time programming position that will allow me to provide business impact, solve problems and contribute to a team.</p>
+        <img src="media/space-needle.png" alt="space needle icon"/>
+    </div>
+    
+    <!-- <div id="about-me-personal">
+        <h2>A Bit About Me</h2>
+        {#each aboutMePersonally as personalItem}
+            <div class="listed-item">
+                <div>
+                    <h3>{personalItem.title}</h3>
+                    <p>{personalItem.textContent}</p>
+                </div>
+                <img src={String(personalItem.imgPath)} alt={String(personalItem.imgAltText)}/>
+            </div>
+        {/each}
     </div> -->
-    <div class="section-content">
-      <div>
-        <div class="row-section">
-          <h2>A Bit About Me</h2>
-          <div class="listed-item">
-            <div class="listed-item-text-section">
-              <p>I am an entry-level software engineer based in the Greater Seattle Area with a passion for data looking for a full-time programming position that will allow me to provide business impact, solve problems and contribute to a team.</p>
+
+    <div id="about-me-education-and-credentials">
+        <h2>Education/Credentials</h2>
+
+        {#each educationAndCredentials as edOrCred}
+            <div class="listed-item">
+                <div>
+                    <h3>{edOrCred.title}</h3>
+                    {#if edOrCred.titleCaption}
+                        <p>{edOrCred.titleCaption}</p>
+                    {/if}
+                    <p>{edOrCred.fromWho}</p>
+                    <p>
+                        {convertDateToDisplayDateString(edOrCred.startDate)} - 
+                        {#if edOrCred.endDate}
+                            {convertDateToDisplayDateString(edOrCred.endDate)}
+                        {:else}
+                            In Progress
+                        {/if}
+                    </p>
+                </div>
+                <img src={String(edOrCred.imgPath)} alt={String(edOrCred.imgAltText)}/>
             </div>
-            <img src="media/space-needle.png" alt="space needle" height="100px">
-          </div>
-        </div>
-      </div>
-      <div id="about-me-education">
-        <div class="row-section">
-          <h2>Education/Credentials</h2>
-          <div class="listed-item">
-            <div class="listed-item-text-section">
-              <h3>Computer Science B.S.</h3>
-              <p>With a concentration in Data Science</p>
-              <p>Gonzaga University</p>
-              <p>Sep. 2019 - May 2023</p>
-            </div>
-            <img src="media/gonzaga.png" alt="gonzaga logo" height="100px">
-          </div>
-          <div class="listed-item">
-            <div class="listed-item-text-section">
-              <h3>AWS Solutions Architect Certification</h3>
-              <p>June 2023 - In Progress</p>
-            </div>
-            <img src="media/AWS-solutions-architect-ass.png" alt="AWS logo" height="100px">
-          </div>
-        </div>
-      </div>
+        {/each}
+    </div>
+
+    <div id="about-me-work">
+        
+    </div>
+
       <div id="about-me-work">
         <div class="row-section">
           <h2>Work</h2>
@@ -86,6 +239,5 @@
             <img src="media/Math-research-screenshot.png" alt="research screenshot" height="100px">
           </div>
         </div>
-      </div>
     </div>
-  </section>
+</div>

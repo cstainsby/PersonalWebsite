@@ -7,8 +7,14 @@
 
 </script>
 
+<style lang="scss">
+    #personal-website-home {
+        background-color: var(--darkT-grey-1);
+    }
+</style>
 
-<div id="PersonalWebsiteHome">
+
+<div id="personal-website-home">
     <HeaderSection/>
     <ProjectSection/>
     <AboutMeSection/>

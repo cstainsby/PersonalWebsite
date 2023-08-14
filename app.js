@@ -163,95 +163,95 @@ skillDict = {
 // // -----------------------------------------------------------------------------------------------
 // //    Modal implementation
 // // -----------------------------------------------------------------------------------------------
-// // Function to enable scrolling
-// function enableScroll() {
-//   const body = document.body;
-//   body.classList.remove('no-scroll');
-// }
+// Function to enable scrolling
+function enableScroll() {
+  const body = document.body;
+  body.classList.remove('no-scroll');
+}
 
-// // Function to disable scrolling
-// function disableScroll() {
-//   const body = document.body;
-//   body.classList.add('no-scroll');
-// }
+// Function to disable scrolling
+function disableScroll() {
+  const body = document.body;
+  body.classList.add('no-scroll');
+}
 
-// // modal implementation
-// let currentOpenModal = null; // modal object
-// const openModalButtonElements = document.querySelectorAll(".open-modal-button");
-// const closeModalButtonElements = document.querySelectorAll(".close-modal-button");
-// const openModalButtons = Array.from(openModalButtonElements);
-// const closeModalButtons = Array.from(closeModalButtonElements)
-// // modal mappings to buttons
-// const modalOpenBtnIdToModalId = {
-//   "AITAprojDescBtn": "AITAprojModal",
-//   "BioPathprojDescBtn": "BioPathprojModal",
-//   "MathResearchBtn": "MathResearchModal"
-// }
+// modal implementation
+let currentOpenModal = null; // modal object
+const openModalButtonElements = document.querySelectorAll(".open-modal-button");
+const closeModalButtonElements = document.querySelectorAll(".close-modal-button");
+const openModalButtons = Array.from(openModalButtonElements);
+const closeModalButtons = Array.from(closeModalButtonElements)
+// modal mappings to buttons
+const modalOpenBtnIdToModalId = {
+  "AITAprojDescBtn": "AITAprojModal",
+  "BioPathprojDescBtn": "BioPathprojModal",
+  "MathResearchBtn": "MathResearchModal"
+}
 
-// // on refresh check local storage, reopen
-// const modalIdentifier = localStorage.getItem("currentOpenModal");
-// if (modalIdentifier) {
-//   openModal(modalIdentifier);
-// }
+// on refresh check local storage, reopen
+const modalIdentifier = localStorage.getItem("currentOpenModal");
+if (modalIdentifier) {
+  openModal(modalIdentifier);
+}
 
-// function openModal(modalIdentifier) {
-//   const modal = document.querySelector("#" + modalIdentifier);
+function openModal(modalIdentifier) {
+  const modal = document.querySelector("#" + modalIdentifier);
 
-//   modal.showModal();
-//   currentOpenModal = modal;
+  modal.showModal();
+  currentOpenModal = modal;
 
-//   // hide the "to top" arrow
-//   var link = document.getElementById('bottom-right-link');
-//   link.style.display = 'none'; 
-//   // save modalIdentifier to localStorage
-//   localStorage.setItem("currentOpenModal", modalIdentifier);
+  // hide the "to top" arrow
+  var link = document.getElementById('bottom-right-link');
+  link.style.display = 'none'; 
+  // save modalIdentifier to localStorage
+  localStorage.setItem("currentOpenModal", modalIdentifier);
 
-//   disableScroll();
-// }
+  disableScroll();
+}
 
-// function closeModal() {
-//   // remove modal from screen
-//   if (currentOpenModal) {
-//     currentOpenModal.close();
-//     currentOpenModal = null;
-//   }
-//   // repaint the "to top" arrow
-//   var link = document.getElementById('bottom-right-link');
-//   link.style.display = 'block'
-//   // remove modalIdentifier from the localStorage
-//   localStorage.removeItem("currentOpenModal");
+function closeModal() {
+  // remove modal from screen
+  if (currentOpenModal) {
+    currentOpenModal.close();
+    currentOpenModal = null;
+  }
+  // repaint the "to top" arrow
+  var link = document.getElementById('bottom-right-link');
+  link.style.display = 'block'
+  // remove modalIdentifier from the localStorage
+  localStorage.removeItem("currentOpenModal");
 
-//   enableScroll();
-// }
+  enableScroll();
+}
 
 
-// // event listeners for buttons
-// openModalButtons.forEach(button => {
-//   button.addEventListener("click", (e) => {
-//     const modalId = modalOpenBtnIdToModalId[e.target.id];
-//     if (!modalId) {
-//       console.log("ERROR: modal lookup table missing button element");
-//       return;
-//     } 
-//     openModal(modalId);
-//   });
-// });
-// closeModalButtons.forEach(button => {
-//   button.addEventListener("click", () => {
-//     closeModal();
-//   });
-// });
+// event listeners for buttons
+openModalButtons.forEach(button => {
+  button.addEventListener("click", (e) => {
+    const modalId = modalOpenBtnIdToModalId[e.target.id];
+    if (!modalId) {
+      console.log("ERROR: modal lookup table missing button element");
+      return;
+    } 
+    openModal(modalId);
+  });
+});
+closeModalButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    closeModal();
+  });
+});
 
-// // for the bottom right navigator button, only make it appear if the user has scrolled down
-// // make sure a modal is not being displayed before displaying the arrow link
-// window.addEventListener('scroll', function() {
-//   var link = document.getElementById('bottom-right-link');
-//   if (window.scrollY < 1 || currentOpenModal) {
-//     link.style.display = 'none'; // Hide the link when at the top of the page
-//   } else {
-//     link.style.display = 'block'; // Show the link when scrolling down
-//   }
-// });
+// for the bottom right navigator button, only make it appear if the user has scrolled down
+// make sure a modal is not being displayed before displaying the arrow link
+window.addEventListener('scroll', function() {
+  var link = document.getElementById('bottom-right-link');
+  if (window.scrollY < 1 || currentOpenModal) {
+    link.style.display = 'none'; // Hide the link when at the top of the page
+  } else {
+    link.style.display = 'block'; // Show the link when scrolling down
+  }
+});
 
 // // -----------------------------------------------------------------------------------------------
 // //    Scroll Animations
