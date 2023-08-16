@@ -5,13 +5,9 @@
     import AboutMeSection from "../components/aboutMeSection.svelte";
     import ContactMeSection from "../components/contactMeSection.svelte";
 
-    import { env } from '$env/dynamic/private';
-
-    async function getJson() {
-        const jsonPageInfo = await fetch(env.JSON_BLOB_LOCATION)
-        console.log(jsonPageInfo);
-    }    
-    getJson()
+    import type { PageServerData } from './$types';
+  
+    export let data: PageServerData;
 </script>
 
 <style lang="scss">
