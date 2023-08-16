@@ -1,0 +1,26 @@
+{
+    "websiteName": "Cole Stainsby's Personal Website",
+    "title": "",
+    "greeting": "Hello!\nI'm Cole Stainsby.",
+    "extraDescriptor": "Gonzaga Computer Science B.S. Graduate.\nEntry Level Software Engineer.",
+
+    "settings": {
+        "colorScheme": {
+            
+        }
+    },
+
+    "user": {
+        "firstName": "Cole",
+        "lastName": "Stainsby",
+
+        "professionalLinks": {
+            "GitHub": "https://github.com/cstainsby",
+            "Linkedin": "https://www.linkedin.com/in/colestainsby/",
+            "Kaggle": "https://www.kaggle.com/colestainsby",
+            "Resume": "https://coles-resume-bucket.s3.us-west-2.amazonaws.com/ColeStainsbyResume.pdf"
+        } 
+    }
+
+
+}
