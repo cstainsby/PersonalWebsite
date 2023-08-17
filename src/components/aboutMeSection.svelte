@@ -2,19 +2,19 @@
     import AboutMeGroupComponent from "./aboutMeGroupComponent.svelte";
 
     import type Job from "../templates/Job";
-    import type Achievement from "../templates/Achievement";
     import type PersonalBlurb from "../templates/PersonalBlurb";
+    import type Education from "../templates/Education";
 
 
     interface AboutMeSectionProps {
         jobs: Job[]
-        achievements: Achievement[]
+        education: Education[]
         personalBlurbs: PersonalBlurb[]
     }
 
     export let jobs: AboutMeSectionProps["jobs"]
-    export let educationAndCredentials: AboutMeSectionProps["achievements"]
-    export let aboutMePersonally: AboutMeSectionProps["personalBlurbs"]
+    export let education: AboutMeSectionProps["education"]
+    export let personalBlurbs: AboutMeSectionProps["personalBlurbs"]
 
     function convertDateToDisplayDateString(date: Date) {
         let dateString = "";
@@ -81,73 +81,79 @@
         <p>I am an entry-level software engineer based in the Greater Seattle Area with a passion for data looking for a full-time programming position that will allow me to provide business impact, solve problems and contribute to a team.</p>
         <!-- <img src="media/space-needle.png" alt="space needle icon"/> -->
 
-        <div class="list-container">
-            {#each aboutMePersonally as personalItem, personalItemIndex}
-                <div class="listed-item">
-                    <div>
-                        <h3>{personalItem.title}</h3>
-                        <p>{personalItem.textContent}</p>
+        {#if personalBlurbs }
+            <div class="list-container">
+                {#each personalBlurbs as personalItem, personalItemIndex}
+                    <div class="listed-item">
+                        <div>
+                            <h3>{personalItem.title}</h3>
+                            <p>{personalItem.textContent}</p>
+                        </div>
+                        <img src={String(personalItem.imgPath)} alt={String(personalItem.imgAltText)}/>
                     </div>
-                    <img src={String(personalItem.imgPath)} alt={String(personalItem.imgAltText)}/>
-                </div>
-                {#if personalItemIndex < aboutMePersonally.length - 1}
-                    <div class="vertical-border"></div>
-                {/if}
-            {/each}
-        </div>
+                    {#if personalItemIndex < personalBlurbs.length - 1}
+                        <div class="vertical-border"></div>
+                    {/if}
+                {/each}
+            </div>
+        {/if}
     </div>
 
-    <div id="about-me-education-and-credentials">
-        <h2>Education/Credentials</h2>
-        <div class="list-container">
-            {#each educationAndCredentials as edOrCred, edOrCredIndex}
-                <div class="listed-item">
-                    <div>
-                        <h3>{edOrCred.title}</h3>
-                        {#if edOrCred.titleCaption}
-                            <p>{edOrCred.titleCaption}</p>
-                        {/if}
-                        <p>{edOrCred.fromWho}</p>
-                        <p>
-                            {convertDateToDisplayDateString(edOrCred.startDate)} - 
-                            {#if edOrCred.endDate}
-                                {convertDateToDisplayDateString(edOrCred.endDate)}
-                            {:else}
-                                In Progress
+    {#if education}
+        <div id="about-me-education-and-credentials">
+            <h2>Education/Credentials</h2>
+            <div class="list-container">
+                {#each education as educationItem, educationItemIndex}
+                    <div class="listed-item">
+                        <div>
+                            <h3>{educationItem.title}</h3>
+                            {#if educationItem.titleCaption}
+                                <p>{educationItem.titleCaption}</p>
                             {/if}
-                        </p>
+                            <p>{educationItem.fromWho}</p>
+                            <p>
+                                {convertDateToDisplayDateString(educationItem.startDate)} - 
+                                {#if educationItem.endDate}
+                                    {convertDateToDisplayDateString(educationItem.endDate)}
+                                {:else}
+                                    In Progress
+                                {/if}
+                            </p>
+                        </div>
+                        <img src={String(educationItem.imgPath)} alt={String(educationItem.imgAltText)}/>
                     </div>
-                    <img src={String(edOrCred.imgPath)} alt={String(edOrCred.imgAltText)}/>
-                </div>
-                {#if edOrCredIndex < educationAndCredentials.length - 1}
-                    <div class="vertical-border"></div>
-                {/if}
-            {/each}
+                    {#if educationItemIndex < education.length - 1}
+                        <div class="vertical-border"></div>
+                    {/if}
+                {/each}
+            </div>
         </div>
-    </div>
+    {/if}
 
-    <div id="about-me-work">
-        <h2>Work History</h2>
-        <div class="list-container">
-            {#each jobs as job}
-                <div class="listed-item">
-                    <div class="listed-item-text">
-                        <h3>{job.title}</h3>
-                        <p>{job.employer}</p>
-                        <p>
-                            {convertDateToDisplayDateString(job.startDate)} - 
-                            {#if job.endDate}
-                                {convertDateToDisplayDateString(job.endDate)}
-                            {:else}
-                                In Progress
-                            {/if}
-                        </p>
+    {#if jobs}
+        <div id="about-me-work">
+            <h2>Work History</h2>
+            <div class="list-container">
+                {#each jobs as job}
+                    <div class="listed-item">
+                        <div class="listed-item-text">
+                            <h3>{job.title}</h3>
+                            <p>{job.employer}</p>
+                            <p>
+                                {convertDateToDisplayDateString(job.startDate)} - 
+                                {#if job.endDate}
+                                    {convertDateToDisplayDateString(job.endDate)}
+                                {:else}
+                                    In Progress
+                                {/if}
+                            </p>
+                        </div>
+                        <img src={String(job.imgPath)} alt={String(job.imgAltText)}/>
                     </div>
-                    <img src={String(job.imgPath)} alt={String(job.imgAltText)}/>
-                </div>
-            {/each}
+                {/each}
+            </div>
         </div>
-    </div>
+    {/if}
 
       <!-- <div id="about-me-work">
         <div class="row-section">

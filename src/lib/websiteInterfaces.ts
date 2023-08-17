@@ -1,5 +1,8 @@
 
 
+import type Education from "../templates/Education"
+import type Job from "../templates/Job"
+import type PersonalBlurb from "../templates/PersonalBlurb"
 import type Project from "../templates/Project"
 import type Skill from "../templates/Skill"
 
@@ -17,6 +20,10 @@ interface WebsiteData {
 
     projects?: Project[]
     skills?: Skill[]
+
+    jobs?: Job[]
+    education?: Education[]
+    personalBlurbs?: PersonalBlurb[]
 }
 
 /** WebsiteSettings

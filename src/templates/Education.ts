@@ -1,4 +1,4 @@
-export default interface Achievement {
+export default interface Education {
     title: String,
     titleCaption?: String,
     fromWho: String,

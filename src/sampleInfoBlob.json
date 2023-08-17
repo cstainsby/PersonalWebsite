@@ -231,28 +231,28 @@
                 "employer": "Gonzaga University",
                 "imgPath": "media/Math-research-screenshot.png",
                 "imgAltText": "Petersen Graph",
-                "startDate": new Date(2022, 1),
-                "endDate": new Date(2023, 5)
+                "startDate": "2022-01",
+                "endDate": "2023-05"
             }
         ],
 
 
-        "educationAndCredentials": [
+        "education": [
             {
                 "title": "Computer Science B.S.",
                 "titleCaption": "With a concentration in Data Science",
                 "fromWho": "Gonzaga University",
                 "imgPath": "media/gonzaga.png",
                 "imgAltText": "gonzaga logo",
-                "startDate": new Date(2019, 9),
-                "endDate": new Date(2023, 5)
+                "startDate": "2019-09",
+                "endDate": "2023-05"
             },
             {
                 "title": "AWS Solutions Architect Certification",
                 "fromWho": "Amazon Web Services",
                 "imgPath": "media/AWS-solutions-architect-ass.png",
                 "imgAltText": "aws sol. arch. logo",
-                "startDate": new Date(2023, 6)
+                "startDate": "2023-06"
             }
         ],
 
