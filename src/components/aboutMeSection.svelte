@@ -5,40 +5,22 @@
     import type PersonalBlurb from "../templates/PersonalBlurb";
     import type Education from "../templates/Education";
 
+    import { yearMonthFormatToDate, convertDateToMonthYearDateDisplayStr } from "$lib/dates" 
+
+    // import function to register Swiper custom elements
+    // import { register } from 'swiper/element/bundle';
+    // // register Swiper custom elements
+    // register();
 
     interface AboutMeSectionProps {
-        jobs: Job[]
-        education: Education[]
-        personalBlurbs: PersonalBlurb[]
+        jobs?: Job[]
+        education?: Education[]
+        personalBlurbs?: PersonalBlurb[]
     }
 
     export let jobs: AboutMeSectionProps["jobs"]
     export let education: AboutMeSectionProps["education"]
     export let personalBlurbs: AboutMeSectionProps["personalBlurbs"]
-
-    function convertDateToDisplayDateString(date: Date) {
-        let dateString = "";
-        
-        if (date) {
-            const dateStringList = date.toDateString().split(" ");
-
-            if (dateStringList.length === 4) {
-                // toDateString() should return "Day Month DayInMonth Year"
-                const month = dateStringList[1]
-                const year = dateStringList[3]
-                dateString += month;
-
-                // add period indicating contraction if month word length greater than 4
-                if (month.toLowerCase() !== "may" || 
-                    month.toLowerCase() !== "june" || 
-                    month.toLowerCase() !== "july") {
-                        dateString += ".";
-                }
-                dateString += (" " + year);
-            }
-        }
-        return dateString;
-    }
 </script>
 
 
@@ -49,12 +31,13 @@
         width: 80%;
         margin-left: 6%;
         margin-right: 6%;
+        margin-bottom: 24px;
         padding: 24px;
         justify-content: center;
 
         background-color: var(--darkT-grey-2);
         border-radius: 4px;
-        border: 2px solid var(--darkT-black-2);
+        border: 2px solid var(--blue);
     }
     #about-me-personal {
         
@@ -71,6 +54,70 @@
         & img {
             height: 8rem;
             width: 8rem; 
+        }
+    }
+
+    .list-container {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-items: center;
+        // justify-content: space-evenly;
+
+        @media (min-width: 0px) and (max-width: 800px) {
+            flex-direction: column;
+        }
+    }
+
+    .vertical-border {
+        @media (min-width: 0px) and (max-width: 800px) {
+            border-bottom: 2px solid var(--darkT-black-2);
+            width: 180px;
+        }
+        @media (min-width: 800px) {
+            border-left: 2px solid var(--darkT-black-2);
+            height: 90px;
+        }
+    }
+
+    .listed-item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        // margin-top: 12px;
+        margin-right: 12px;
+        margin-left: 12px;
+        padding: 12px;
+        border-radius: 4px;
+        width: fit-content;
+
+        border-radius: 4px;
+        // border: 2px solid var(--white);
+        border-radius: 4px;
+        min-height: 160px;
+        width: 30%;
+
+        @media (min-width: 0px) and (max-width: 800px) {
+            justify-content: center;
+        }
+
+        // space the text from the images slightly
+        & .listed-item-text-section {
+          // margin-right: 16px;
+            width: 65%;
+            padding: 24px;
+
+            & p {
+                margin-left: 8px;
+            }
+        }
+
+
+
+        & img {
+            margin-left: 12px;
+            height: 5rem;
         }
     }
 </style>
@@ -110,11 +157,11 @@
                             {#if educationItem.titleCaption}
                                 <p>{educationItem.titleCaption}</p>
                             {/if}
-                            <p>{educationItem.fromWho}</p>
+                            <p>Through: {educationItem.fromWho}</p>
                             <p>
-                                {convertDateToDisplayDateString(educationItem.startDate)} - 
+                                {convertDateToMonthYearDateDisplayStr(yearMonthFormatToDate(educationItem.startDate))} - 
                                 {#if educationItem.endDate}
-                                    {convertDateToDisplayDateString(educationItem.endDate)}
+                                    {convertDateToMonthYearDateDisplayStr(yearMonthFormatToDate(educationItem.endDate))}
                                 {:else}
                                     In Progress
                                 {/if}
@@ -134,15 +181,17 @@
         <div id="about-me-work">
             <h2>Work History</h2>
             <div class="list-container">
-                {#each jobs as job}
+                {#each jobs as job, jobIndex}
                     <div class="listed-item">
                         <div class="listed-item-text">
                             <h3>{job.title}</h3>
-                            <p>{job.employer}</p>
+                            {#if job.employer}
+                                <p>Employer: {job.employer}</p>
+                            {/if}
                             <p>
-                                {convertDateToDisplayDateString(job.startDate)} - 
+                                {convertDateToMonthYearDateDisplayStr(yearMonthFormatToDate(job.startDate))} - 
                                 {#if job.endDate}
-                                    {convertDateToDisplayDateString(job.endDate)}
+                                    {convertDateToMonthYearDateDisplayStr(yearMonthFormatToDate(job.endDate))}
                                 {:else}
                                     In Progress
                                 {/if}
@@ -150,6 +199,9 @@
                         </div>
                         <img src={String(job.imgPath)} alt={String(job.imgAltText)}/>
                     </div>
+                    {#if jobIndex < jobs.length - 1}
+                        <div class="vertical-border"></div>
+                    {/if}
                 {/each}
             </div>
         </div>

@@ -7,47 +7,93 @@
  -->
 
 <script lang="ts">
+    import { onMount } from 'svelte'
+
+
+    // let SwiperCode;
+    // onMount(async () => {
+    //     SwiperCode = (await import("https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"))
+    // })
+
+    // import function to register Swiper custom elements
+    import { register } from 'swiper/element/bundle';
+    // register Swiper custom elements
+    register();
+
+
     interface DynamicSideScrollComponentProps {
         title: String 
-        allItems: Array<T>,
+        allItems: [],
         itemsVisibleAtOnce: number,
         startingIndex: number
     }
+
+    // const 
 
     export let title: DynamicSideScrollComponentProps["title"]
     export let allItems: DynamicSideScrollComponentProps["allItems"];
     export let itemsVisibleAtOnce: DynamicSideScrollComponentProps["itemsVisibleAtOnce"]
     export let startingIndex: DynamicSideScrollComponentProps["startingIndex"]
 
+    // the current index of the list
     let currIndex = startingIndex;
+    // indicates whether the carousel is in motion or not
+    let moving = false; 
+    // time in milliseconds it takes for the transition to happen
+    const transitionTime = 500;
 
-    function isLeftScrollDisabled(): boolean {
-        return Boolean(currIndex === 0);
-    }
-    function isRightScrollDisabled(): boolean {
-        return Boolean(currIndex > (allItems.length - itemsVisibleAtOnce))
-    }
+    // function isLeftScrollDisabled(): boolean {
+    //     return Boolean(currIndex === 0);
+    // }
+    // function isRightScrollDisabled(): boolean {
+    //     return Boolean(currIndex > (allItems.length - itemsVisibleAtOnce))
+    // }
+    
 
-    function scrollLeft() {
-        if (currIndex > 0) {
-            currIndex -= 1;
-        }
-    }
-    function scrollRight() {
-        if (currIndex < (allItems.length - itemsVisibleAtOnce)) {
-            currIndex += 1;
-        }
-    }
-    function scrollToLeftEnd() {
-        currIndex = 0;
-    }
-    function scrollToRightEnd() {
-        currIndex =  (allItems.length - itemsVisibleAtOnce)
-    }
+    // function scrollLeft() {
+    //     if (!moving && currIndex > 0) {
+    //         currIndex -= 1;
+    //         moveCarouselToIndex(currIndex);
+    //     }
+    // }
+    // function scrollRight() {
+    //     if (!moving && currIndex < (allItems.length - itemsVisibleAtOnce)) {
+    //         currIndex += 1;
+    //         moveCarouselToIndex(currIndex);
+    //     }
+    // }
+    // function scrollToLeftEnd() {
+    //     if (!moving) {
+    //         currIndex = 0;
+    //         moveCarouselToIndex(currIndex);
+    //     }
+    // }
+    // function scrollToRightEnd() {
+    //     if (!moving) {
+    //         currIndex =  (allItems.length - itemsVisibleAtOnce);
+    //         moveCarouselToIndex(currIndex);
+    //     }
+    // }
 
-    function getDisplayedItems() {
-        return allItems.slice(currIndex, currIndex + itemsVisibleAtOnce)
-    }
+    // function moveCarouselToIndex(index: number) {
+    //     if (!moving) {
+    //         // disable interaction with the carousel until transition is over
+            
+    //     }
+    // }
+
+    // function getDisplayedItems() {
+    //     return allItems.slice(currIndex, currIndex + itemsVisibleAtOnce)
+    // }
+
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+    });
 </script>
 
 <style lang="scss">
@@ -120,34 +166,11 @@
 
 
 <div class="side-scroll-component">
-    <div class="header">
-        <h2>{title}</h2>
-        <div class="scoll-button-group">
-            <!-- {#if }
-                
-            {/if} -->
-            <button 
-                disabled={isLeftScrollDisabled()}
-                on:click={() => scrollToLeftEnd()}
-            >LeftEnd</button>
-            <button 
-                disabled={isLeftScrollDisabled()}
-                on:click={() => scrollLeft()}
-            >Left</button>
-            <button 
-                disabled={isRightScrollDisabled()}
-                on:click={() => scrollRight()}
-            >Right</button>
-            <button 
-                disabled={isRightScrollDisabled()}
-                on:click={() => scrollToRightEnd()}
-            >RightEnd</button>
-        </div>
-    </div>
+    <h2>{title}</h2>
 
-    <div class="list-container">
+    <swiper-container class="list-container">
         {#each getDisplayedItems() as edOrCred, edOrCredIndex}
-            <div class="listed-item">
+            <swiper-slide class="listed-item">
                 <div>
                     <h3>{edOrCred.title}</h3>
                     {#if edOrCred.titleCaption}
@@ -164,10 +187,10 @@
                     </p>
                 </div>
                 <img src={String(edOrCred.imgPath)} alt={String(edOrCred.imgAltText)}/>
-            </div>
+            </swiper-slide>
             {#if edOrCredIndex < educationAndCredentials.length - 1}
                 <div class="vertical-border"></div>
             {/if}
         {/each}
-    </div>
+    </swiper-container>
 </div>

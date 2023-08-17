@@ -18,12 +18,12 @@ interface WebsiteData {
     settings: WebsiteSettings
     professionalLinks: ImageLink[]
 
-    projects?: Project[]
-    skills?: Skill[]
+    projects: Project[]
+    skills: Skill[]
 
-    jobs?: Job[]
-    education?: Education[]
-    personalBlurbs?: PersonalBlurb[]
+    jobs: Job[]
+    education: Education[]
+    personalBlurbs: PersonalBlurb[]
 }
 
 /** WebsiteSettings
@@ -44,9 +44,10 @@ interface User {
  *      contains the data for a link which is an image 
  */
 interface ImageLink {
-    href: string
+    title: string
     imgPath: string
     altText: string
+    href: string
 }
 
 export type {

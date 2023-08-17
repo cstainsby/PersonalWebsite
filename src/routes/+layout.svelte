@@ -22,7 +22,7 @@
         --zind-perm-end: 1;
 
         // font 
-        --font: 'Source Sans Pro';
+        --font: "Roboto";
     }
 
 
@@ -40,7 +40,8 @@
     //     }
     :global(html) {
         scroll-behavior: smooth;
-        font-family: var(--font), sans-serif;
+        // font-family: var(--font), sans-serif;
+        font-family: "Roboto";
         background-color: var(--darkT-black-1);
         font-size: 16px; 
         overflow: auto;
@@ -54,11 +55,11 @@
         font-size: 1rem;
         color: var(--white);
     }
-    input[type="text"], 
-    input[type="email"],
-    textarea {
+    :global(input[type="text"], 
+            input[type="email"],
+            textarea) {
         font-size: 1rem;
-        font-family: var(--font), sans-serif;
+        font-family: var(--font);
     }
     // ------------------------------------------------------------------
     //    global link classes
@@ -97,36 +98,6 @@
     :global(.image-link:hover img) {
         transform: scale(1.15); /* Increase the size of the image on hover */
     }
-
-    // :global(.gradient-border) {
-    //     border: 10px solid transparent; /* Set a transparent solid border */
-    //     border-image: linear-gradient(to right, #f06, #00f); /* Define the linear gradient */
-    //     border-image-slice: 1; /* Slice the border image */
-    // }
-
-    // :global(.fade-border) {
-    //     position: relative; // Required for pseudo-element
-    //     border: 2px solid #007bff; // Initial border
-    //     transition: border-color 0.3s ease; // Smooth transition for border color
-
-    //     &:before {
-    //         content: "";
-    //         position: absolute;
-    //         top: -4px;
-    //         left: -4px;
-    //         right: -4px;
-    //         bottom: -4px;
-    //         border: 2px solid transparent;
-    //         transition: border-color 0.3s ease;
-    //     }
-
-    //     &:hover {
-    //         border-color: transparent; // Fading out the border on hover
-    //         &:before {
-    //             border-color: #007bff; // Highlight the border on hover
-    //         }
-    //     }
-    // }
 
     :global(.gradient-border) {
         position: relative;

@@ -33,7 +33,11 @@
     <ProjectSection
         projects={websiteData.projects}/>
 
-    <AboutMeSection/>
+    <AboutMeSection
+        jobs={websiteData.jobs}
+        education={websiteData.education}
+        personalBlurbs={websiteData.personalBlurbs}
+        />
 
 
     <SkillSection

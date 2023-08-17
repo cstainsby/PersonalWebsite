@@ -39,7 +39,7 @@
 <div class="proffesional-link-row">
     {#if imageLinks}
         {#each imageLinks as imageLink}
-            <a class="image-link" href={imageLink.href} target="_blank" rel="noopener noreferrer" title="LinkedIn">
+            <a class="image-link" href={imageLink.href} target="_blank" rel="noopener noreferrer" title={imageLink.title}>
                 <img src={imageLink.imgPath} alt={imageLink.altText} height="40px" width="40px" />
             </a>  
         {/each} 

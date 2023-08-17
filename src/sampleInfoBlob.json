@@ -1,7 +1,7 @@
 [
     {
         "websiteName": "Cole Stainsby's Personal Website",
-        "title": "Hello!\nI'm Cole Stainsby.",
+        "title": "Hello!\nI'm Cole Stainsby",
         "extraDescriptor": "Gonzaga Computer Science B.S. Graduate.\nEntry Level Software Engineer.",
 
         "settings": {
@@ -20,19 +20,27 @@
         "professionalLinks": [
             {
                 "href": "https://github.com/cstainsby",
-                "imgPath": "media/github-link-icon.png"
+                "imgPath": "media/github-link-icon.png",
+                "imgAltText": "GitHub",
+                "title": "GitHub"
             },
             {
                 "href": "https://www.linkedin.com/in/colestainsby/",
-                "imgPath": "media/linkedin-link-icon.png"
+                "imgPath": "media/linkedin-link-icon.png",
+                "imgAltText": "LinkedIn",
+                "title": "LinkedIn"
             },
             {
                 "href": "https://www.kaggle.com/colestainsby",
-                "imgPath": "media/kaggle-link-icon.png"
+                "imgPath": "media/kaggle-link-icon.png",
+                "imgAltText": "Kaggle",
+                "title": "Kaggle"
             },
             { 
                 "href": "https://coles-resume-bucket.s3.us-west-2.amazonaws.com/ColeStainsbyResume.pdf",
-                "imgPath": "media/resume-link-icon.png"
+                "imgPath": "media/cv.png",
+                "imgAltText": "Resume",
+                "title": "Resume"
             }
         ],
 
@@ -233,6 +241,12 @@
                 "imgAltText": "Petersen Graph",
                 "startDate": "2022-01",
                 "endDate": "2023-05"
+            },
+            {
+                "title": "Looking For Work",
+                "imgPath": "media/looking.png",
+                "imgAltText": "Looking",
+                "startDate": "2023-05"
             }
         ],
 
@@ -257,24 +271,7 @@
         ],
 
         "personalBlurbs": [
-            {
-                "title": "M's Fan",
-                "textContent": "I am an entry-level software engineer based in the Greater Seattle Area with a passion for data looking for a full-time programming position that will allow me to provide business impact, solve problems and contribute to a team.",
-                "imgPath": "media/space-needle.png",
-                "imgAltText": "space needle icon"
-            },
-            {
-                "title": "Fishing",
-                "textContent": "",
-                "imgPath": "",
-                "imgAltText": "fishing picture"
-            },
-            {
-                "title": "Gaming",
-                "textContent": "I love to game, my favorites currently being Civilization 6 and Baldur's Gate 3.",
-                "imgPath": "",
-                "imgAltText": ""
-            }
+            
         ]
     }
 ]

@@ -7,12 +7,22 @@
     interface ContactMeSectionProps {
         phoneNumber?: string
         email?: string
-        links?: ImageLink[]
+        links: ImageLink[]
     }
 
     export let phoneNumber: ContactMeSectionProps["phoneNumber"];
     export let email: ContactMeSectionProps["email"];
-    export let links: ContactMeSectionProps["links"]    
+    export let links: ContactMeSectionProps["links"];
+
+
+    let sendingMail = false
+    let responseMessage = ""
+
+    const onEmailSend = () => {
+        sendingMail = true
+
+        
+    }
 </script>
 
 <style lang="scss">
@@ -24,20 +34,15 @@
         width: 100%;
         background-color: var(--darkT-grey-2);
         border-top: 2px solid var(--darkT-black-2);
+
+        @media (min-width: 0px) and (max-width: 800px) {
+            height: 100vh;
+        }
         
         & .section-title {
             text-align: center;
         }
 
-        // & #email-contact-section {
-        //   display: flex;
-        //   flex-direction: row;
-        //   justify-content: center;
-
-        //   & #email-contact-section-header {
-        //     max-width: 200px;
-        //   }
-        // }
         #email-contact-section {
             margin: 24px;
             padding: 24px;
@@ -49,7 +54,7 @@
             grid-template-areas: 
             "fullname fullname  email email"
             "message message    message message"
-            "none none          none submit";
+            "response response  response submit";
             grid-template-columns: 1fr 1fr 1fr 1fr;
             gap: 6px;
             align-items: center;
@@ -68,8 +73,12 @@
             }
             #message { 
                 grid-area: message;
-                height: 72px;
                 resize: vertical;
+                height: 150px;
+            }
+            #response {
+                padding-left: 4px;
+                grid-area: response;
             }
             // allow the load spinner and response messages to be put into the submit area
             & .email-response-item,
@@ -98,11 +107,16 @@
             <h2>Contact Me</h2>
             <p>Send me a quick message if you're interesed in working with me!</p>
         </div>
-        <form id="email-form">
-            <input type="text" id="from_name" name="from_name" placeholder="Full Name" required>
-            <input type="email" id="from_email" name="from_email" placeholder="Email" required>
+        <form id="email-form" method="POST">
+            <input type="text" id="from_name" name="from-name" placeholder="Full Name" required>
+            <input type="email" id="from_email" name="from-email" placeholder="Email" required>
             <textarea id="message" name="message" placeholder="Message" required></textarea>
-            <a class="word-link button" type="submit" id="email_submit" name="email_submit">Send</a>
+            {#if sendingMail}
+                <div class="spinner"></div>
+            {:else}
+                <button class="word-link button" type="submit" id="email_submit" name="email_submit">Send</button>
+            {/if}
+            <div id="response">{responseMessage}</div>
         </form>
     </div>
     
