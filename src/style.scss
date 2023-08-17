@@ -1,17 +1,3 @@
-/* this file is used to ensure consitstancy across elements like buttons
-    which should look the same across the entire page */
-
-input[type="text"], 
-input[type="email"],
-textarea {
-    font-size: 1rem;
-    font-family: var(--font), sans-serif;
-}
-
-a {
-    text-decoration: none;
-    cursor: pointer;
-}
 
  /* styling for elements inside the dialog modal */
 dialog {

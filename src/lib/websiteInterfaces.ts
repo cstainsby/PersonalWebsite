@@ -50,9 +50,20 @@ interface ImageLink {
     href: string
 }
 
+/** Toast
+ *      a notification 
+ */
+interface Toast {
+    id?: number
+    type: "success" | "error" | "info"
+    message: string
+    timeoutTime: number // in ms
+}
+
 export type {
     WebsiteData,
     WebsiteSettings,
     User,
     ImageLink,
+    Toast,
 }

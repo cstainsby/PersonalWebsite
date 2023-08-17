@@ -8,6 +8,8 @@
     import type { PageServerData } from './$types';
     import type { WebsiteData } from '$lib/websiteInterfaces';
 
+    import Toasts from "../components/Toasts.svelte";
+
   
     export let data: PageServerData;
     
@@ -23,8 +25,8 @@
     }
 </style>
 
-
 <div id="personal-website-home">
+    <Toasts/>
     <HeaderSection 
         title={websiteData.title}
         extraDescriptor={websiteData.extraDescriptor}

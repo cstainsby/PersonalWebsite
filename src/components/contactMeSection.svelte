@@ -3,6 +3,9 @@
 
 
     import type { ImageLink } from "$lib/websiteInterfaces";
+    import { addToast } from "$lib/store";
+    import type { Toast } from "$lib/websiteInterfaces";
+    import Spinner from "./Spinner.svelte";
 
     interface ContactMeSectionProps {
         phoneNumber?: string
@@ -21,7 +24,13 @@
     const onEmailSend = () => {
         sendingMail = true
 
-        
+        const sendingToast: Toast = {
+            message: "Sending Email",
+            type: "info",
+            timeoutTime: 5000,
+        }
+        addToast(sendingToast)
+
     }
 </script>
 
@@ -107,14 +116,18 @@
             <h2>Contact Me</h2>
             <p>Send me a quick message if you're interesed in working with me!</p>
         </div>
-        <form id="email-form" method="POST">
+        <form id="email-form" method="POST" action="?/sendEmail">
             <input type="text" id="from_name" name="from-name" placeholder="Full Name" required>
             <input type="email" id="from_email" name="from-email" placeholder="Email" required>
             <textarea id="message" name="message" placeholder="Message" required></textarea>
             {#if sendingMail}
-                <div class="spinner"></div>
+                <Spinner/>
             {:else}
-                <button class="word-link button" type="submit" id="email_submit" name="email_submit">Send</button>
+                <button class="word-link button" 
+                        type="submit" 
+                        id="email_submit" 
+                        name="email_submit"
+                        on:click={onEmailSend}>Send</button>
             {/if}
             <div id="response">{responseMessage}</div>
         </form>

@@ -13,7 +13,7 @@ export const load: PageServerLoad = async ({ params }) => {
 }
 
 export const actions = {
-	default: async ({ cookies, request }) => {
+	sendEmail: async ({ cookies, request }) => {
 		const data = await request.formData();
         const email: Email = {
             fullName: String(data.get("from-name")),
@@ -22,7 +22,7 @@ export const actions = {
         }
         console.log(email);
         
-        sendEmailViaSES()
+        // sendEmailViaSES()
 		// .createTodo(cookies.get('userid'), data.get('description'));
 	}
 };
