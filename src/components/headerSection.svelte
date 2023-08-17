@@ -1,6 +1,17 @@
-<script>
+<script lang="ts">
     import ProfessionalLinkRow from "./professionalLinkRow.svelte";
 
+    import type { ImageLink } from "$lib/websiteInterfaces";
+
+    interface HeaderSectionProps {
+        title: string
+        extraDescriptor: string
+        links: ImageLink[]
+    }
+
+    export let title: HeaderSectionProps["title"];
+    export let extraDescriptor: HeaderSectionProps["extraDescriptor"];
+    export let links: HeaderSectionProps["links"]    
 </script>
 
 <style lang="scss">
@@ -91,31 +102,32 @@
     </div>
 
     <div class="section-content">
-        <div class="header">
-            <div class="section-title">Hello!</div>
-            <div class="section-title">I'm Cole Stainsby.</div>
+        <div class="title">
+            {#each title.split('\n') as titleLine}
+                <div class="section-title">{titleLine}</div>
+            {/each}
         </div>
     
-        <ProfessionalLinkRow/>
+        <ProfessionalLinkRow imageLinks={links}/>
     
         <div class="section-body">
-            <p>Gonzaga Computer Science B.S. Graduate.</p>
-            <p>Entry Level Software Engineer.</p>
+            {#each extraDescriptor.split('\n') as desLine}
+                <p>{desLine}</p>
+            {/each}
         </div>
     
         <div id="navigation-links">
             <a class="word-link" href="#projects-section">
-            <b>Projects</b>
+                <b>Projects</b>
             </a>
-            <!-- </a> -->
             <a class="word-link" href="#about-me-section">
-            <b>About Me</b>
+                <b>About Me</b>
             </a>
             <a class="word-link" href="#skills-section">
-            <b>Skills</b>
+                <b>Skills</b>
             </a>
             <a class="word-link" href="#contact-section">
-            <b>Contact Me</b>
+                <b>Contact Me</b>
             </a>
         </div>
     </div>

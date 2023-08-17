@@ -1,4 +1,13 @@
 
+<script lang="ts">
+    import type { ImageLink } from "$lib/websiteInterfaces"; 
+
+    interface ProfessionalLinkRowProps {
+        imageLinks: ImageLink[]
+    }
+
+    export let imageLinks: ProfessionalLinkRowProps["imageLinks"]
+</script>
 
 <style lang="scss">
     // links to indeed, github, etc
@@ -28,16 +37,11 @@
 </style>
 
 <div class="proffesional-link-row">
-    <a class="image-link" href="https://www.linkedin.com/in/colestainsby/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
-        <img src="media/linkedin-link-icon.png" alt="LinkedIn" height="40px" width="40px" />
-    </a>      
-    <a class="image-link" href="https://github.com/cstainsby" target="_blank" rel="noopener noreferrer" title="GitHub">
-        <img src="media/github-link-icon.png" alt="GitHub" height="40px" width="40px"/>
-    </a>
-    <a class="image-link" href="https://www.kaggle.com/colestainsby" target="_blank" rel="noopener noreferrer" title="Kaggle">
-        <img src="media/kaggle-link-icon.png" alt="Kaggle" height="40px" width="40px"/>
-    </a>
-    <a class="image-link" href="https://coles-resume-bucket.s3.us-west-2.amazonaws.com/ColeStainsbyResume.pdf" target="_blank" rel="noopener noreferrer" title="Resume">
-        <img src="media/resume-link-icon.png" alt="Resume" height="40px" width="30px"/>
-    </a>
+    {#if imageLinks}
+        {#each imageLinks as imageLink}
+            <a class="image-link" href={imageLink.href} target="_blank" rel="noopener noreferrer" title="LinkedIn">
+                <img src={imageLink.imgPath} alt={imageLink.altText} height="40px" width="40px" />
+            </a>  
+        {/each} 
+    {/if}
 </div>

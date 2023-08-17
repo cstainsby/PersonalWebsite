@@ -1,7 +1,8 @@
-export default interface Achievement {
+
+
+export default interface Job {
     title: String,
-    titleCaption?: String,
-    fromWho: String,
+    employer: String,
     imgPath: String,
     imgAltText: String,
     startDate: Date,

@@ -1,8 +1,7 @@
 [
     {
         "websiteName": "Cole Stainsby's Personal Website",
-        "title": "",
-        "greeting": "Hello!\nI'm Cole Stainsby.",
+        "title": "Hello!\nI'm Cole Stainsby.",
         "extraDescriptor": "Gonzaga Computer Science B.S. Graduate.\nEntry Level Software Engineer.",
 
         "settings": {
@@ -14,15 +13,268 @@
         "user": {
             "firstName": "Cole",
             "lastName": "Stainsby",
+            "phoneNumber": "425-214-3518", 
+            "email": "c.p.stainsby@outlook.com"
+        },
 
-            "professionalLinks": {
-                "GitHub": "https://github.com/cstainsby",
-                "Linkedin": "https://www.linkedin.com/in/colestainsby/",
-                "Kaggle": "https://www.kaggle.com/colestainsby",
-                "Resume": "https://coles-resume-bucket.s3.us-west-2.amazonaws.com/ColeStainsbyResume.pdf"
-            } 
-        }
+        "professionalLinks": [
+            {
+                "href": "https://github.com/cstainsby",
+                "imgPath": "media/github-link-icon.png"
+            },
+            {
+                "href": "https://www.linkedin.com/in/colestainsby/",
+                "imgPath": "media/linkedin-link-icon.png"
+            },
+            {
+                "href": "https://www.kaggle.com/colestainsby",
+                "imgPath": "media/kaggle-link-icon.png"
+            },
+            { 
+                "href": "https://coles-resume-bucket.s3.us-west-2.amazonaws.com/ColeStainsbyResume.pdf",
+                "imgPath": "media/resume-link-icon.png"
+            }
+        ],
 
 
+        "projects": [
+            {
+                "name": "BioPath",
+                "shortDescription": "Senior Capstone Project",
+                "award": "Gonzaga SEAS 2023 Best Computer Science Project",
+                "description": "My small team partnered with the Gonzaga University Biochemistry department to create a web app which aids students in learning Biochemical pathways.",
+                "screenShotImgPath": "../../media/biopath-screenshot.png",
+                "demoLink": "https://ifdfgjpy82.us-west-2.awsapprunner.com",
+                "posterLink": "https://github.com/cstainsby/BiopathPoster",
+                "repositoryLink": "https://github.com/SD-2022-CPSC-10/BioPath",
+                "skillsUsed": [
+                    {"name": "Javascript"},
+                    {"name": "React"},
+                    {"name": "Bootstrap"},
+                    {"name": "AWS"},
+                    {"name": "Docker"},
+                    {"name": "PostgreSQL"},
+                    {"name": "Python"}, 
+                    {"name": "Django"},
+                    {"name": "REST API"}
+                ],
+                "importance": "High"
+            },
+            {
+                "name": "Reddit r/AITA NLP Sentiment Classifier",
+                "shortDescription": "Personal Project",
+                "description": "An app which leverages a HuggingFace BERT multiclass classifier to judge reddit posts from the popular r/AmITheAsshole subreddit according to their defined classification rules.",
+                "screenShotImgPath": "../../media/AITA-screenshot.png",
+                "demoLink": "https://backend-model-service-zkidffnq6a-uc.a.run.app/models/AITAclassmodel",
+                "repositoryLink": "https://github.com/cstainsby/B-Onion",
+                "skillsUsed": [
+                    {"name": "Python"},
+                    {"name": "ML Data Structures"},
+                    {"name": "Docker"},
+                    {"name": "GCP BigQuery"},
+                    {"name": "GCP CloudRun"},
+                    {"name": "Flask"},
+                    {"name": "HuggingFace"},
+                    {"name": "Jupyter Notebooks"}
+                ],
+                "importance": "High"
+            },
+            {
+                "name": "Personal Website",
+                "shortDescription": "This Website",
+                "description": "A website which shows off every",
+                "repositoryLink": "https://github.com/cstainsby/PersonalWebsite",
+                "skillsUsed": [
+                    {"name": "Typescript"},
+                    {"name": "AWS EC2"},
+                    {"name": "SvelteKit"},
+                    {"name": "HTML"},
+                    {"name": "SCSS"},
+                    {"name": "NGINX"}
+                ],
+                "importance": "Medium"
+            },
+            {
+                "name": "Hockey Data Project",
+                "shortDescription": "Class Project",
+                "description": "In a team of three members, we used Kaggle and NHL data for exploratory data analysis in conjunction with self-made and self-trained machine learning models (decision trees, random forests, KNN, and Naïve Bayes) to predict which NHL teams would make the playoffs (classification).",
+                "repositoryLink": "https://github.com/cstainsby/HockeyDataProject",
+                "skillsUsed": [
+                    {"name": "Python"},
+                    {"name": "ML Data Structures"},
+                    {"name": "Jupyter Notebooks"},
+                    {"name": "EDA"}
+                ],
+                "importance": "Medium"
+            }
+        ],
+
+        "skills": [
+            {
+                "skillType": "Languages",
+                "skillsAssociated": [
+                    {
+                        "name": "Python",
+                        "iconPath": "../../media/python.png"
+                    },
+                    {
+                        "name": "Java",
+                        "iconPath": "../../media/java.png"
+                    },
+                    {
+                        "name": "MySQL",
+                        "iconPath": "../../media/mysql.png"
+                    },
+                    {
+                        "name": "Javascript",
+                        "iconPath": "../../media/javascript.png"
+                    }
+                ]
+            },
+            {
+                "skillType": "Frontend",
+                "skillsAssociated": [
+                    {
+                        "name": "React",
+                        "iconPath": "../../media/react.png"
+                    },
+                    {
+                        "name": "HTML",
+                        "iconPath": "../../media/html.png"
+                    },
+                    {
+                        "name": "CSS",
+                        "iconPath": "../../media/css.png"
+                    }
+                ]
+            },
+            {
+                "skillType": "Backend",
+                "skillsAssociated": [
+                    {
+                        "name": "Flask",
+                        "iconPath": "../../media/flask.png"
+                    },
+                    {
+                        "name": "Django",
+                        "iconPath": "../../media/django.png"
+                    },
+                    {
+                        "name": "Node.js",
+                        "iconPath": "../../media/node.js.png"
+                    }
+                ]
+            },
+            {
+                "skillType": "Data Science",
+                "skillsAssociated": [
+                    {
+                        "name": "Jupyter",
+                        "iconPath": "../../media/jupyter.png"
+                    },
+                    {
+                        "name": "Pandas",
+                        "iconPath": "../../media/pandas.png"
+                    },
+                    {
+                        "name": "Numpy",
+                        "iconPath": "../../media/numpy.png"
+                    },
+                    {
+                        "name": "SKLearn",
+                        "iconPath": "../../media/sklearn.png"
+                    }
+                ]
+            },
+            {
+                "skillType": "Tools and Platform",
+                "skillsAssociated": [
+                    {
+                        "name": "Docker",
+                        "iconPath": "../../media/docker.png"
+                    },
+                    {
+                        "name": "AWS",
+                        "iconPath": "../../media/aws.png"
+                    },
+                    {
+                        "name": "Github",
+                        "iconPath": "../../media/github.png"
+                    },
+                    {
+                        "name": "Linux",
+                        "iconPath": "../../media/linux.png"
+                    }
+                ]
+            },
+            {
+                "skillType": "Dev. Practices",
+                "skillsAssociated": [
+                    {
+                        "name": "Agile",
+                        "iconPath": "../../media/agile.png"
+                    },
+                    {
+                        "name": "CI/CD",
+                        "iconPath": "../../media/cicd.png"
+                    }
+                ]
+            }
+        ],
+
+
+
+
+        "jobs": [
+            {
+                "title": "Linear Algebra Researcher",
+                "employer": "Gonzaga University",
+                "imgPath": "media/Math-research-screenshot.png",
+                "imgAltText": "Petersen Graph",
+                "startDate": new Date(2022, 1),
+                "endDate": new Date(2023, 5)
+            }
+        ],
+
+
+        "educationAndCredentials": [
+            {
+                "title": "Computer Science B.S.",
+                "titleCaption": "With a concentration in Data Science",
+                "fromWho": "Gonzaga University",
+                "imgPath": "media/gonzaga.png",
+                "imgAltText": "gonzaga logo",
+                "startDate": new Date(2019, 9),
+                "endDate": new Date(2023, 5)
+            },
+            {
+                "title": "AWS Solutions Architect Certification",
+                "fromWho": "Amazon Web Services",
+                "imgPath": "media/AWS-solutions-architect-ass.png",
+                "imgAltText": "aws sol. arch. logo",
+                "startDate": new Date(2023, 6)
+            }
+        ],
+
+        "personalBlurbs": [
+            {
+                "title": "M's Fan",
+                "textContent": "I am an entry-level software engineer based in the Greater Seattle Area with a passion for data looking for a full-time programming position that will allow me to provide business impact, solve problems and contribute to a team.",
+                "imgPath": "media/space-needle.png",
+                "imgAltText": "space needle icon"
+            },
+            {
+                "title": "Fishing",
+                "textContent": "",
+                "imgPath": "",
+                "imgAltText": "fishing picture"
+            },
+            {
+                "title": "Gaming",
+                "textContent": "I love to game, my favorites currently being Civilization 6 and Baldur's Gate 3.",
+                "imgPath": "",
+                "imgAltText": ""
+            }
+        ]
     }
 ]

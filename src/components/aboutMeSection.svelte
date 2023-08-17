@@ -1,77 +1,20 @@
 <script lang="ts">
     import AboutMeGroupComponent from "./aboutMeGroupComponent.svelte";
 
+    import type Job from "../templates/Job";
+    import type Achievement from "../templates/Achievement";
+    import type PersonalBlurb from "../templates/PersonalBlurb";
 
-    const jobs: {
-        title: String,
-        employer: String,
-        imgPath: String,
-        imgAltText: String,
-        startDate: Date,
-        endDate?: Date
-    }[] = [
-        {
-            title: "Linear Algebra Researcher",
-            employer: "Gonzaga University",
-            imgPath: "media/Math-research-screenshot.png",
-            imgAltText: "Petersen Graph",
-            startDate: new Date(2022, 1),
-            endDate: new Date(2023, 5)
-        }
-    ]
 
-    const educationAndCredentials: {
-        title: String,
-        titleCaption?: String,
-        fromWho: String,
-        imgPath: String,
-        imgAltText: String,
-        startDate: Date,
-        endDate?: Date
-    }[] = [
-        {
-            title: "Computer Science B.S.",
-            titleCaption: "With a concentration in Data Science",
-            fromWho: "Gonzaga University",
-            imgPath: "media/gonzaga.png",
-            imgAltText: "gonzaga logo",
-            startDate: new Date(2019, 9),
-            endDate: new Date(2023, 5)
-        },
-        {
-            title: "AWS Solutions Architect Certification",
-            fromWho: "Amazon Web Services",
-            imgPath: "media/AWS-solutions-architect-ass.png",
-            imgAltText: "aws sol. arch. logo",
-            startDate: new Date(2023, 6)
-        }
-    ]
+    interface AboutMeSectionProps {
+        jobs: Job[]
+        achievements: Achievement[]
+        personalBlurbs: PersonalBlurb[]
+    }
 
-    const aboutMePersonally: {
-        title: String,
-        textContent: String,
-        imgPath: String,
-        imgAltText: String,
-    }[] = [
-        // {
-        //     title: "M's Fan",
-        //     textContent: "I am an entry-level software engineer based in the Greater Seattle Area with a passion for data looking for a full-time programming position that will allow me to provide business impact, solve problems and contribute to a team.",
-        //     imgPath: "media/space-needle.png",
-        //     imgAltText: "space needle icon"
-        // },
-        // {
-        //     title: "Fishing",
-        //     textContent: "",
-        //     imgPath: "",
-        //     imgAltText: "fishing picture"
-        // },
-        // {
-        //     title: "Gaming",
-        //     textContent: "I love to game, my favorites currently being Civilization 6 and Baldur's Gate 3.",
-        //     imgPath: "",
-        //     imgAltText: ""
-        // }
-    ]
+    export let jobs: AboutMeSectionProps["jobs"]
+    export let educationAndCredentials: AboutMeSectionProps["achievements"]
+    export let aboutMePersonally: AboutMeSectionProps["personalBlurbs"]
 
     function convertDateToDisplayDateString(date: Date) {
         let dateString = "";

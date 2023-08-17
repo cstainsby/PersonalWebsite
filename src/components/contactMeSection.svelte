@@ -1,6 +1,18 @@
-<script>
+<script lang="ts">
     import ProfessionalLinkRow from "./professionalLinkRow.svelte";
 
+
+    import type { ImageLink } from "$lib/websiteInterfaces";
+
+    interface ContactMeSectionProps {
+        phoneNumber?: string
+        email?: string
+        links?: ImageLink[]
+    }
+
+    export let phoneNumber: ContactMeSectionProps["phoneNumber"];
+    export let email: ContactMeSectionProps["email"];
+    export let links: ContactMeSectionProps["links"]    
 </script>
 
 <style lang="scss">
@@ -95,14 +107,19 @@
     </div>
     
     <div id="contact-info">
-        <div>
-            <h3>Phone</h3>
-            <p>425-214-3518</p>
-        </div>
-        <div>
-            <h3>Email</h3>
-            <p>c.p.stainsby@outlook.com</p>
-        </div>
-        <ProfessionalLinkRow/>
+        {#if phoneNumber}
+            <div>
+                <h3>Phone</h3>
+                <p>{phoneNumber}</p>
+            </div>
+        {/if}
+        {#if email}
+            <div>
+                <h3>Email</h3>
+                <p>{email}</p>
+            </div>
+        {/if}
+        <ProfessionalLinkRow
+            imageLinks={links}/>
     </div>
 </div>
