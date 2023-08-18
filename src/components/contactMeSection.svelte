@@ -1,11 +1,10 @@
 <script lang="ts">
     import ProfessionalLinkRow from "./professionalLinkRow.svelte";
-
-
     import type { ImageLink } from "$lib/websiteInterfaces";
     import { addToast } from "$lib/store";
     import type { Toast } from "$lib/websiteInterfaces";
     import Spinner from "./Spinner.svelte";
+    import type Email from "../templates/Email";
 
     interface ContactMeSectionProps {
         phoneNumber?: string
@@ -16,21 +15,52 @@
     export let phoneNumber: ContactMeSectionProps["phoneNumber"];
     export let email: ContactMeSectionProps["email"];
     export let links: ContactMeSectionProps["links"];
-
+    
 
     let sendingMail = false
     let responseMessage = ""
 
-    const onEmailSend = () => {
+    const onEmailSend = async (e: SubmitEvent) => {
+        e.preventDefault()
+
         sendingMail = true
+        
+        const formElement = e.target as HTMLFormElement;
+        if (formElement !== null) {
+            const formData = new FormData(formElement);
 
-        const sendingToast: Toast = {
-            message: "Sending Email",
-            type: "info",
-            timeoutTime: 5000,
+            // send out informational toast that the email send has been started
+            // const sendingToast: Toast = {
+            //     message: "Sending Email",
+            //     type: "info",
+            //     timeoutTime: 5000,
+            // }
+            // addToast(sendingToast);
+
+
+            const res = await fetch(formElement.action, {
+                method: "POST",
+                body: formData
+            })
+            .then(res => res.json())
+            .catch(err => {
+                const errorToast: Toast = {
+                    message: "Email Send Attempt Failed",
+                    type: "error",
+                    timeoutTime: 5000,
+                }
+                addToast(errorToast)
+                return 
+            })
+            .finally(() => { sendingMail = false })
+
+            const successToast: Toast = { 
+                message: "Email Successfully Sent",
+                type: "success",
+                timeoutTime: 5000,
+            }
+            addToast(successToast)
         }
-        addToast(sendingToast)
-
     }
 </script>
 
@@ -116,7 +146,10 @@
             <h2>Contact Me</h2>
             <p>Send me a quick message if you're interesed in working with me!</p>
         </div>
-        <form id="email-form" method="POST" action="?/sendEmail">
+        <form id="email-form" 
+            method="POST" 
+            action="?/sendEmail"
+            on:submit|preventDefault={e => onEmailSend(e)}>
             <input type="text" id="from_name" name="from-name" placeholder="Full Name" required>
             <input type="email" id="from_email" name="from-email" placeholder="Email" required>
             <textarea id="message" name="message" placeholder="Message" required></textarea>
@@ -126,8 +159,7 @@
                 <button class="word-link button" 
                         type="submit" 
                         id="email_submit" 
-                        name="email_submit"
-                        on:click={onEmailSend}>Send</button>
+                        name="email_submit">Send</button>
             {/if}
             <div id="response">{responseMessage}</div>
         </form>

@@ -23,6 +23,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"aws-sdk": "^2.1440.0",
 		"swiper": "^10.2.0"
 	}
 }

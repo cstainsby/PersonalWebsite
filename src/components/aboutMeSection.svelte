@@ -1,11 +1,9 @@
 <script lang="ts">
-    import AboutMeGroupComponent from "./aboutMeGroupComponent.svelte";
-
     import type Job from "../templates/Job";
     import type PersonalBlurb from "../templates/PersonalBlurb";
     import type Education from "../templates/Education";
 
-    import { yearMonthFormatToDate, convertDateToMonthYearDateDisplayStr } from "$lib/dates" 
+    import { yearMonthFormatToDate, convertDateToMonthYearDateDisplayStr } from "$lib/dates"
 
     // import function to register Swiper custom elements
     // import { register } from 'swiper/element/bundle';
