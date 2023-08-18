@@ -23,6 +23,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@aws-sdk/client-ses": "^3.395.0",
 		"aws-sdk": "^2.1440.0",
 		"swiper": "^10.2.0"
 	}

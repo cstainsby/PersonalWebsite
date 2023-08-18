@@ -37,6 +37,12 @@
             // }
             // addToast(sendingToast);
 
+            const errorToast: Toast = {
+                message: "Email Send Attempt Failed",
+                type: "error",
+                timeoutTime: 5000,
+            }
+
 
             const res = await fetch(formElement.action, {
                 method: "POST",
@@ -44,22 +50,23 @@
             })
             .then(res => res.json())
             .catch(err => {
-                const errorToast: Toast = {
-                    message: "Email Send Attempt Failed",
-                    type: "error",
-                    timeoutTime: 5000,
-                }
                 addToast(errorToast)
                 return 
             })
             .finally(() => { sendingMail = false })
 
-            const successToast: Toast = { 
-                message: "Email Successfully Sent",
-                type: "success",
-                timeoutTime: 5000,
+            console.log(res);
+            if (res.type === "success") {
+
+                const successToast: Toast = { 
+                    message: "Email Successfully Sent",
+                    type: "success",
+                    timeoutTime: 5000,
+                }
+                addToast(successToast)
             }
-            addToast(successToast)
+            addToast(errorToast)
+            return
         }
     }
 </script>

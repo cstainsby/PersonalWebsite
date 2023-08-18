@@ -1,8 +1,10 @@
 import { getJsonBlobById } from '$lib/dataStore'
 import type Email from '../templates/Email';
 import type { PageServerLoad } from './$types';
+import { fail, json } from '@sveltejs/kit';
 
 import { sendEmailViaSES } from "$lib/aws"
+
 
 /** timeout()
  *      helper function for testing interactions between frontend and backend
@@ -26,11 +28,21 @@ export const actions = {
             theirEmail: String(data.get("from-email")),
             theirMessage: String(data.get("message"))
         }
-        console.log(email);
+        let resData = {
+            success: false,
+            errors: []
+        }
         
+        try {
+            const res = await sendEmailViaSES(email)
+        } catch (err) {
+            resData.success = false
+            let resInitObj: ResponseInit = { status: 400 }
+            return json(resData, resInitObj)
+        }
         
+        resData.success = true
         
-        // sendEmailViaSES()
-		// .createTodo(cookies.get('userid'), data.get('description'));
+        return json(resData, { status: 200 })
 	}
 };
