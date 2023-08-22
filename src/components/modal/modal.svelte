@@ -37,11 +37,11 @@
 </script>
   
 
-<style lang="scss">
-    // .modal-container {
-    //     text-align: center;
-    //     margin: 2rem;
-    // }
+<!-- <style lang="scss">
+    .modal-container {
+        text-align: center;
+        margin: 2rem;
+    }
     .backdrop {
         position: fixed;
         top: 0;
@@ -127,11 +127,11 @@
             }
         }
         }
-  </style>
+  </style> -->
   
 <button class="word-link" on:click={openDialog}>{ buttonText }</button>
 {#if showDialog === true}
-    <button class="backdrop" on:click={closeDialog}>Close</button>
+    <!-- <button class="backdrop" on:click={closeDialog}>Close</button> -->
     <div class="dialog">
         <h2>Dialog Title</h2>
         <p>This is the content of the dialog.</p>

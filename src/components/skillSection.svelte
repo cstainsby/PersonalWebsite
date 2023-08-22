@@ -22,14 +22,18 @@
     #skills-section {
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        // justify-content: space-evenly;
         align-items: center;
-        background-color: var(--darkT-grey-1);
-        margin-top: 24px;
-        margin-bottom: 24px;
-        padding-bottom: 24px;
-        padding-left: 6%;
-        padding-right: 6%;
+        background-color: var(--darkT-grey-2);
+        border-radius: 4px;
+        border: 2px solid var(--blue);
+        width: 80%;
+        margin-left: 6%;
+        margin-right: 6%;
+        margin-bottom: 48px;
+        padding: 24px;
+        margin-top: 48px;
+        padding-bottom: 48px;
 
         & .section-title {
             font-size: 36px;
@@ -47,12 +51,12 @@
 
             @media (min-width: 768px) {
             /* For screens larger than 768px, have two columns */
-            grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(2, 1fr);
             }
             
             @media (min-width: 1024px) {
             /* For screens larger than 1024px, have three columns */
-            grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(3, 1fr);
             }
         }
     }

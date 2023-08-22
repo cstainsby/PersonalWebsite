@@ -1,5 +1,5 @@
 
-<script lang="ts">
+<!-- <script lang="ts">
     import type Project from "../templates/Project";
     import type Skill from "../templates/Skill";
     import ProjectModal from "./projectModal.svelte";
@@ -108,4 +108,4 @@
             Poster</a>
         </div>
     </div>
-    </dialog>
+    </dialog> -->

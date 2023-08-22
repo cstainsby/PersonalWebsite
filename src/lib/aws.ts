@@ -6,11 +6,11 @@ import { SendEmailCommand,
     SESClient } from "@aws-sdk/client-ses"
 
 
-    /**
-     * send an Email using SES
-     * @param email 
-     * @returns EmailCommandOutput or null
-     */
+/**
+ * send an Email using SES
+ * @param email 
+ * @returns EmailCommandOutput or null
+ */
 async function sendEmailViaSES(email: Email): Promise<SendEmailCommandOutput> {
 
     const emailStr = `
@@ -50,7 +50,7 @@ async function sendEmailViaSES(email: Email): Promise<SendEmailCommandOutput> {
         const res: SendEmailCommandOutput = await client.send(sendCmd);
         return res;
     } catch (e) {
-        console.log("Failed to send Email");
+        console.log("AWS Error: " + e);
         throw e
     }
     

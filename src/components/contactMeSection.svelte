@@ -49,22 +49,40 @@
                 body: formData
             })
             .then(res => res.json())
+            .then(resJson => {
+                const resData = JSON.parse(resJson.data)
+                const resDataDirector = resData[0]
+
+                console.log(resJson);
+                console.log(JSON.parse(resJson.data));
+
+                if (!resDataDirector.success) {
+                    console.log("Error: missing success property in form server return data");
+                    addToast(errorToast)
+                    return 
+                }
+
+                const emailSentSuccessfully = resData[resDataDirector.success]
+                console.log(emailSentSuccessfully);
+                
+
+                if (emailSentSuccessfully) {
+                    const successToast: Toast = { 
+                        message: "Email Successfully Sent",
+                        type: "success",
+                        timeoutTime: 5000,
+                    }
+                    addToast(successToast)
+                    return
+                }
+            })
             .catch(err => {
                 addToast(errorToast)
                 return 
             })
             .finally(() => { sendingMail = false })
 
-            console.log(res);
-            if (res.type === "success") {
-
-                const successToast: Toast = { 
-                    message: "Email Successfully Sent",
-                    type: "success",
-                    timeoutTime: 5000,
-                }
-                addToast(successToast)
-            }
+            // default to faliure
             addToast(errorToast)
             return
         }
@@ -83,10 +101,6 @@
 
         @media (min-width: 0px) and (max-width: 800px) {
             height: 100vh;
-        }
-        
-        & .section-title {
-            text-align: center;
         }
 
         #email-contact-section {
@@ -127,8 +141,7 @@
                 grid-area: response;
             }
             // allow the load spinner and response messages to be put into the submit area
-            & .email-response-item,
-            #email_submit { 
+            & #email_submit { 
                 grid-area: submit;
             }
         }

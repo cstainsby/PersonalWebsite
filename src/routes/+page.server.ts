@@ -28,21 +28,14 @@ export const actions = {
             theirEmail: String(data.get("from-email")),
             theirMessage: String(data.get("message"))
         }
-        let resData = {
-            success: false,
-            errors: []
-        }
         
         try {
             const res = await sendEmailViaSES(email)
+            return { success: true }
         } catch (err) {
-            resData.success = false
-            let resInitObj: ResponseInit = { status: 400 }
-            return json(resData, resInitObj)
+            console.log("Error sending Email");
         }
-        
-        resData.success = true
-        
-        return json(resData, { status: 200 })
+
+        return { success: false}
 	}
 };

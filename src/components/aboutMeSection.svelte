@@ -44,17 +44,6 @@
         }
     }
 
-    #main-description {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        
-        & img {
-            height: 8rem;
-            width: 8rem; 
-        }
-    }
-
     .list-container {
         display: flex;
         flex-wrap: wrap;
@@ -100,18 +89,10 @@
             justify-content: center;
         }
 
-        // space the text from the images slightly
-        & .listed-item-text-section {
-          // margin-right: 16px;
-            width: 65%;
-            padding: 24px;
-
-            & p {
-                margin-left: 8px;
-            }
+        & > div > p {
+            font-size: smaller;
+            margin-left: 8px;
         }
-
-
 
         & img {
             margin-left: 12px;

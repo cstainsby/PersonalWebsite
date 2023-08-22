@@ -2,7 +2,7 @@
 <script lang="ts">
     import type Project from "../templates/Project";
     import type Skill from "../templates/Skill";
-    import Modal from "./modal.svelte";
+    import Modal from "./modal/modal.svelte";
     import ProjectModal from "./projectModal.svelte";
 
     import SkillComponent from "./skillSection.svelte";
@@ -14,16 +14,17 @@
 
     // props 
     export let project: ProjectProps["project"];
-    export let projectIndex: ProjectProps["projectIndex"];
     
 </script>
 
 <style lang="scss">
-    .high-importance {
-        max-width: 100%;
-    }
-    .medium-importance {
-        width: 43%;
+    @media (min-width: 1024px) {
+        .high-importance {
+            max-width: 100%;
+        }
+        .medium-importance {
+            width: 43%;
+        }
     }
 
     .project {
@@ -38,8 +39,6 @@
         & .project-content {
             display: flex;
             flex-direction: column;
-            // margin-bottom: 48px;
-            height:auto;
 
             @media (min-width: 1024px) {
                 /* For screens larger than 768px, have two columns */
@@ -131,7 +130,7 @@
     
             <!-- skills section -->
             <ul class="skills-used">
-                {#each project.skillsUsed as skill, skillIndex }
+                {#each project.skillsUsed as skill }
                     <li>{ skill.name }</li>
                 {/each}
             </ul>

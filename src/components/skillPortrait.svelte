@@ -1,6 +1,8 @@
 
 
 <script lang="ts">
+    import { linear } from 'svelte/easing';
+    import { fade } from 'svelte/transition';
 
     interface SkillPortraitProps {
         name: String 
@@ -35,7 +37,7 @@
     }
 </style>
 
-<div class="skill-portrait">
+<div class="skill-portrait" transition:fade={{delay: 0, duration: 1000, easing: linear}}>
     <p>{name}</p>
     <img src={imgPath.toString()} alt="{name} skill image"/>
 </div>

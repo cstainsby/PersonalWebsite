@@ -21,8 +21,7 @@
         align-items: center;
         padding: 12px;
         border-radius: 4px;
-        background-color: var(--darkT-grey-2);
-        border: 2px solid var(--blue);
+        background-color: var(--darkT-black-1);
 
         & .portrait-section {
             display: flex;
@@ -35,7 +34,9 @@
     <h2>{typeName}</h2>
     <div class="portrait-section">
         {#each skillsOfType as skill}
-            <SkillPortrait name={String(skill.name)} imgPath={String(skill.iconPath)}/>
+            <SkillPortrait 
+                name={String(skill.name)} 
+                imgPath={String(skill.iconPath)}/>
         {/each}
     </div>
 </div>

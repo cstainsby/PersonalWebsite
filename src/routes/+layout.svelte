@@ -120,14 +120,14 @@
     // ------------------------------------------------------------------
     //    layout css
     // ------------------------------------------------------------------
-    #bottom-right-link {
-        display: none; /* Hide the link by default */
-        position: fixed;
-        bottom: 12px;
-        right: 2%;
-        padding: 10px;
-        z-index: var(--zind-perm-top);
-    }
+    // #bottom-right-link {
+    //     display: none; /* Hide the link by default */
+    //     position: fixed;
+    //     bottom: 12px;
+    //     right: 2%;
+    //     padding: 10px;
+    //     z-index: var(--zind-perm-top);
+    // }
 </style>
 
 <slot />
