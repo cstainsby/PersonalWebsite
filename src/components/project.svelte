@@ -28,7 +28,8 @@
     }
 
     .project {
-        position: relative;
+        display: flex;
+        flex-direction: column;
         padding: 24px;
         margin-bottom: 48px;
         margin-right: 24px;
@@ -88,6 +89,7 @@
                 align-self: center;
                 border-radius: 4px;
                 margin-top: 12px;
+                margin-bottom: 12px;
                 width: 100%;
                 max-width: 512px;
                 height: auto;
@@ -99,13 +101,7 @@
             flex-direction: row;
             flex-wrap: wrap;
             height: fit-content;
-            // position: absolute;
-            // bottom: 24px;
-            // make sure there is some margin between the buttons
-            & > * {
-                margin-right: 8px;
-                height: 20px;
-            }
+            margin-top: auto;
         }
     }
 </style>

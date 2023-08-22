@@ -155,6 +155,14 @@
             margin: 24px;
             width: 80%;
             text-align: start;
+
+            // only display login on larger display sizes
+            & > #sign-in-link {
+                border-radius: 50px;
+                @media (min-width: 0px) and (max-width: 800px) {
+                    display: none;
+                }
+            }
         }
         }
 </style>
@@ -200,5 +208,9 @@
         {/if}
         <ProfessionalLinkRow
             imageLinks={links}/>
+        <div>
+            <button id="sign-in-link" class="word-link">Login</button>
+            <button class="word-link">Settings</button>
+        </div>
     </div>
 </div>

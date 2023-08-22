@@ -47,8 +47,8 @@
 
 <div id="projects-section">
     {#if projects}
-        {#each projects as project, projectIndex}
-            <ProjectComponent {project} {projectIndex}/>
+        {#each projects as project}
+            <ProjectComponent {project} />
         {/each}
     {/if}
 </div>

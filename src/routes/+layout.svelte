@@ -61,13 +61,26 @@
         font-size: 1rem;
         font-family: var(--font);
     }
+    :global(button, a) {
+        /* Reset default styles for buttons and links */
+        display: inline-block; /* Buttons and links should have the same inline-block behavior */
+        padding: 0;
+        margin: 0;
+        border: none;
+        background-color: transparent;
+        color: inherit; /* Inherit the color from the parent */
+        font: inherit; /* Inherit the font from the parent */
+        text-decoration: none; /* Remove underline from links */
+        cursor: pointer; /* Show pointer cursor on hover */
+    }
     // ------------------------------------------------------------------
     //    global link classes
     // ------------------------------------------------------------------
     :global(.word-link) {
         max-height: 48px;
-        margin-right: 2%;
-        margin-top: 2%;
+        margin-right: 8px;
+        margin-top: 8px;
+        margin-bottom: 8px;
         display: inline-block;
         padding: 12px 24px;
         font-size: 1rem;
@@ -82,6 +95,7 @@
         // margin: 1%;
     }
     :global(.word-link:hover) {
+        cursor: pointer;
         background-color: var(--blue);
         box-shadow: 1px 4px var(--darkT-black-2);
         transform: translate(0px, -4px);
