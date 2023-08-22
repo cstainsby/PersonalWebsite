@@ -1,8 +1,8 @@
 
 <script lang="ts">
     import snarkdown from "snarkdown"
-    import { onMount } from "svelte";
     import Spinner from "../Spinner.svelte";
+    import { timeout } from "$lib/frontendUtil";
 
 
 
@@ -60,7 +60,11 @@
             .then(content => {
                 readmeContent = content
             })
-            .then(() => { isLoadingReadme = false })
+            .then(() => { 
+                timeout(0.3).then(() => {
+                    isLoadingReadme = false
+                })
+            })
     };
     const closeDialog = () => {
         showDialog = false;
@@ -87,8 +91,8 @@
     }
 
     .dialog {
-		max-width: 65%;
-        max-height: 80%;
+		width: 65%;
+        height: 80%;
         padding: 24px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         border-radius: 4px; 
@@ -97,7 +101,25 @@
         color: black;
         z-index: 99999;
         overflow-y: auto;
+
 	}
+
+    .dialog-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        
+        & > button {
+            margin-left: auto;
+        }
+    }
+
+    .dialog-body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
     // .modal-overlay.open {
     //     display: flex;
@@ -165,17 +187,19 @@
 {#if showDialog === true}
     <div class="modal-overlay">
         <div class="dialog">
-            <div>
+            <div class="dialog-header">
                 <h1>Details</h1>
                 <button class="word-link" on:click={closeDialog}>X</button>
             </div>
-            {#if isLoadingReadme}
-                <Spinner/>
-            {:else}
-                <!-- Show readmeContent when not loading -->
-                <div>{@html snarkdown(readmeContent)}</div>
-            {/if}
-            <button on:click={closeDialog}>Close</button>
+            <hr/>
+            <div class="dialog-body">
+                {#if isLoadingReadme}
+                    <Spinner/>
+                {:else}
+                    <!-- Show readmeContent when not loading -->
+                    <div>{@html snarkdown(readmeContent)}</div>
+                {/if}
+            </div>
         </div>
     </div>
 {/if}
