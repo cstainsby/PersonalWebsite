@@ -27,6 +27,7 @@
 		"@auth/sveltekit": "^0.3.6",
 		"@aws-sdk/client-ses": "^3.395.0",
 		"aws-sdk": "^2.1440.0",
+		"snarkdown": "^2.0.0",
 		"swiper": "^10.2.0"
 	}
 }

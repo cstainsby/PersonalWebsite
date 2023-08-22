@@ -130,6 +130,10 @@
         border-image-slice: 1;
     }
 
+    :global(.no-scroll) {
+        overflow: hidden;
+    }
+
 
     // ------------------------------------------------------------------
     //    layout css

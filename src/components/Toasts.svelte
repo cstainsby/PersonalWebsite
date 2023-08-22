@@ -4,18 +4,18 @@
 </script>
   
 {#if $toasts}
-<section>
-    {#each $toasts as toast (toast.id)}
+<div id="toast-list">
+    {#each $toasts as toast, id}
     <ToastComponent
         type={toast.type}
-        on:dismiss={() => dismissToast(toast.id)}>{toast.message}
+        on:dismiss={() => dismissToast(id)}>{toast.message}
     </ToastComponent>
     {/each}
-</section>
+</div>
 {/if}
   
 <style lang="postcss">
-    section {
+    #toast-list {
         position: fixed;
         top: 0;
         left: 0;

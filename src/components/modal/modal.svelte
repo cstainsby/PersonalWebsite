@@ -1,6 +1,10 @@
 
 <script lang="ts">
-    import { onMount } from 'svelte';
+    import snarkdown from "snarkdown"
+    import { onMount } from "svelte";
+    import Spinner from "../Spinner.svelte";
+
+
 
     interface ModalProps {
         buttonText: String
@@ -8,136 +12,174 @@
 
     export let buttonText: ModalProps["buttonText"];
   
-    let showDialog = false;
+    let showDialog: boolean = false;
+    let isLoadingReadme: boolean = true;
+
+    let readmeContent: string = "" 
 
 
     // Function to enable scrolling
-    function enableScroll() {
-        const body = document.body;
-        body.classList.remove('no-scroll');
+    function enablePageScroll() {
+        const root = document.querySelector('html')
+        if (root) {
+            root.classList.remove('no-scroll');
+        }
     }
 
     // Function to disable scrolling
-    function disableScroll() {
-        const body = document.body;
-        body.classList.add('no-scroll');
+    function disablePageScroll() {
+        const root = document.querySelector('html')
+        if (root) {
+            root.classList.add('no-scroll');
+        }
+    }
+
+    async function getReadmeByGithubApi(repoOwner: string, repoName: string, pathToReadme: string): Promise<string> {
+        const res: string | void = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${pathToReadme}`)
+            .then(res => res.json())
+            .then(data => {
+                const readmeContent = atob(data.content)
+                return readmeContent 
+            })
+            .catch(err => console.log(err));
+
+        if (!res) {
+            return ""
+        } else {
+            return res
+        }
     }
   
     const openDialog = () => {
         showDialog = true;
+        isLoadingReadme = true;
+        disablePageScroll()
+
+        // set content for modal on component mount
+        getReadmeByGithubApi("cstainsby", "B-Onion", "README.md")
+            .then(content => {
+                readmeContent = content
+            })
+            .then(() => { isLoadingReadme = false })
     };
     const closeDialog = () => {
         showDialog = false;
+        enablePageScroll()
     };
-  
-    // Close the dialog when the component is mounted
-    onMount(() => {
-        closeDialog();
-    });
 </script>
   
 
 <style lang="scss">
-    .modal-container {
-        text-align: center;
-        margin: 2rem;
-    }
-    .backdrop {
+
+    .modal-overlay {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 9998;
+        background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent gray overlay */
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
     }
-  
+
     .dialog {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+		max-width: 65%;
+        max-height: 80%;
+        padding: 24px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        border-radius: 4px; 
+		border: none;
         background-color: white;
-        padding: 1rem;
-        border-radius: 5px;
-        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-        z-index: 9999;
-    }
+        color: black;
+        z-index: 99999;
+        overflow-y: auto;
+	}
+
+    // .modal-overlay.open {
+    //     display: flex;
+    // }
+
+    // .modal {
+    //     background-color: white;
+    //     border-radius: 5px;
+    //     max-width: 80%;
+    //     max-height: 80%;
+    //     overflow: auto;
+    //     position: relative;
+    //     padding: 20px;
+    //     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    // }
+
+    // .close-button {
+    //     position: absolute;
+    //     top: 10px;
+    //     right: 10px;
+    //     background: none;
+    //     border: none;
+    //     font-size: 20px;
+    //     cursor: pointer;
+    // }
+
+    // .modal-content {
+    //     padding: 10px;
+    // }
+    // .modal-container {
+    //     text-align: center;
+    //     margin: 2rem;
+    // }
+    // .backdrop {
+    //     position: fixed;
+    //     top: 0;
+    //     left: 0;
+    //     width: 100%;
+    //     height: 100%;
+    //     background-color: rgba(0, 0, 0, 0.5);
+    //     z-index: 9998;
+    // }
   
-    .dialog h2 {
-        margin-top: 0;
-    }
-
-    dialog {
-        & .proj-dialog-header {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-
-            & a {
-            margin-left: auto;
-            margin-right: 24px;
-            }
-        }
-        & .proj-dialog-body {
-            padding: 12px;
-
-            & p {
-            padding-left: 12px;
-            }
-
-            & .dialog-body-diagram-section {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 32px;
-
-                // adjust diagram display direction when screen gets too small
-                @media (min-width: 0px) and (max-width: 1024px) {
-                    flex-direction: column;
-                }
-
-                & .dialog-body-stack-lists {
-                    display: flex;
-                    flex-direction: row;
-
-                    & div {
-                    padding-right: 12px;
-                    }
-                }
-
-                & img {
-                    @media (min-width: 1024px) {
-                    max-width: 45%;
-                    max-height: 300px;
-                    }
-
-                    // ensure diagram stays a readable size on smaller screens
-                    @media (min-width: 0px) and (max-width: 1024px) {
-                    width: 75%;
-                    height: auto;
-                    }
-                }
-
-                & h3 {
-                    max-width: 128px;
-                    margin-right: 12px;
-                }
-            }
-        }
-        }
-  </style>
+    // .dialog {
+    //     position: fixed;
+    //     top: 50%;
+    //     left: 50%;
+    //     transform: translate(-50%, -50%);
+    //     background-color: white;
+    //     padding: 1rem;
+    //     border-radius: 5px;
+    //     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    //     z-index: 9999;
+    // }
   
-<button class="word-link modal" on:click={openDialog}>{ buttonText }</button>
+    // .dialog h2 {
+    //     margin-top: 0;
+    // }
+
+    
+</style>
+
+<!-- <zero-md src></zero-md> -->
+<button class="word-link" on:click={openDialog}>{ buttonText }</button>
 {#if showDialog === true}
-    <!-- <button class="backdrop" on:click={closeDialog}>Close</button> -->
-    <div class="dialog">
-        <h2>Dialog Title</h2>
-        <p>This is the content of the dialog.</p>
-        <button on:click={closeDialog}>Close</button>
+    <div class="modal-overlay">
+        <div class="dialog">
+            <div>
+                <h1>Details</h1>
+                <button class="word-link" on:click={closeDialog}>X</button>
+            </div>
+            {#if isLoadingReadme}
+                <Spinner/>
+            {:else}
+                <!-- Show readmeContent when not loading -->
+                <div>{@html snarkdown(readmeContent)}</div>
+            {/if}
+            <button on:click={closeDialog}>Close</button>
+        </div>
     </div>
 {/if}
+
   
 <dialog id="BioPathprojModal" class="modal">
     <div class="proj-dialog-header">
