@@ -1,24 +1,20 @@
 import type Skill from "./Skill"
 import type Stack from "./Stack"
 
-interface ProjectDetails {
-    aboutTheProject: String
-    stacksUsed?: Stack[]
-}
 
 export default interface Project {
-    name: String
-    shortDescription: String
+    name: string
+    shortDescription: string
     skillsUsed: Skill[]
-    award?: String 
-    description: String
-    screenShotImgPath?: String
-    importance: "High" | "Medium" | "Low"
+    award?: string 
+    description: string
+    screenShotImgPath?: string
+    importanceRanking: number
 
     // links
-    demoLink?: String
-    repositoryLink?: String
-    posterLink?: String
+    demoLink?: string
+    repositoryLink?: string
+    posterLink?: string
 
-    details?: ProjectDetails
+    customReadme?: string 
 }

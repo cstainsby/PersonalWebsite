@@ -23,6 +23,11 @@
         flex-direction: column;
         align-items: center;
         background-color: var(--darkT-grey-1);
+
+        #page-content {
+            padding-left: 6%;
+            padding-right: 6%;
+        }
     }
 </style>
 
@@ -34,22 +39,21 @@
         extraDescriptor={websiteData.extraDescriptor}
         links={websiteData.professionalLinks}/>
 
-    <ProjectSection
-        projects={websiteData.projects}/>
+    <div id="page-content">
+        <ProjectSection
+            projects={websiteData.projects}/>
 
-    <AboutMeSection
-        jobs={websiteData.jobs}
-        education={websiteData.education}
-        personalBlurbs={websiteData.personalBlurbs}
-        />
-
-
-    <SkillSection
-        skillCollections={websiteData.skills}/>
+        <AboutMeSection
+            jobs={websiteData.jobs}
+            education={websiteData.education}
+            personalBlurbs={websiteData.personalBlurbs}
+            />
 
 
+        <SkillSection
+            skillCollections={websiteData.skills}/>
+    </div>
 
-    
     <ContactMeSection
         phoneNumber={websiteData.user.phoneNumber}
         email={websiteData.user.email}

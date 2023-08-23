@@ -9,12 +9,12 @@
 
     interface ProjectProps {
         project: Project 
-        projectIndex: number
+        projectGridArea: string
     }
 
     // props 
     export let project: ProjectProps["project"];
-    
+    export let projectGridArea: ProjectProps["projectGridArea"]
 </script>
 
 <style lang="scss">
@@ -23,27 +23,24 @@
             max-width: 100%;
         }
         .medium-importance {
-            width: 43%;
+            width: 44%;
         }
     }
 
     .project {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         padding: 24px;
-        margin-bottom: 48px;
-        margin-right: 24px;
         background-color: var(--darkT-grey-2);
         border-radius: 4px;
-        border: 2px solid var(--blue);
 
         & .project-content {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
 
             @media (min-width: 1024px) {
                 /* For screens larger than 768px, have two columns */
-                flex-direction: row;
+                flex-direction: column;
             }
 
             & .project-info {
@@ -84,35 +81,33 @@
                     }
                 }
             }
-
-            & .project-img {
-                align-self: center;
-                border-radius: 4px;
-                margin-top: 12px;
-                margin-bottom: 12px;
-                width: 100%;
-                max-width: 512px;
-                height: auto;
-            }
-        }
-
-        & .button-group {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            height: fit-content;
-            margin-top: auto;
         }
     }
-</style>
+    .button-group {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        height: fit-content;
+        margin-top: auto;
+    }
 
-<div class="project 
-    {project.importance === "High" 
+    .project-img {
+        align-self: center;
+        border-radius: 4px;
+        margin-top: 12px;
+        margin-bottom: 12px;
+        margin-left: 12px;
+        width: 100%;
+        max-width: 512px;
+        height: auto;
+    }
+</style>
+<!-- {project.importance === "High" 
         ? "high-importance"
         : project.importance === "Medium" 
             ? "medium-importance"
-            : "low-importance"}"
->
+            : "low-importance"}" -->
+<div class="project" style='grid-area: {projectGridArea};'>
     <div class="project-content">
         <div class="project-info">
             <!-- project information -->
@@ -133,32 +128,24 @@
             <p>{ project.description }</p>
             
         </div> 
-        {#if (project.screenShotImgPath)}
-            <img class="project-img" alt="project screenshot" src={project.screenShotImgPath.toString()}/>           
-        {/if} 
+        <!-- buttons -->
+        <div class="button-group">
+            {#if (project.demoLink)}
+                <a class="word-link" href={String(project.demoLink)} target="_blank" rel="noopener noreferrer">
+                    Demo</a>
+            {/if}
+            {#if (project.repositoryLink)}
+                <a class="word-link" href={String(project.repositoryLink)} target="_blank" rel="noopener noreferrer">
+                    Code</a>
+            {/if}
+            {#if (project.posterLink)}
+                <a class="word-link" href={String(project.posterLink)} target="_blank" rel="noopener noreferrer">
+                    Poster</a>
+            {/if}
+            <Modal buttonText={"Details"}/>
+        </div>
     </div> 
-
-    <!-- buttons -->
-    <div class="button-group">
-        {#if (project.demoLink)}
-            <a class="word-link" href={String(project.demoLink)} target="_blank" rel="noopener noreferrer">
-                Demo</a>
-        {/if}
-        {#if (project.details)}
-            <a id="BioPathprojDescBtn" class=" open-modal-button word-link">Details</a>
-        {/if}
-        {#if (project.repositoryLink)}
-            <a class="word-link" href={String(project.repositoryLink)} target="_blank" rel="noopener noreferrer">
-                Code</a>
-        {/if}
-        {#if (project.posterLink)}
-            <a class="word-link" href={String(project.posterLink)} target="_blank" rel="noopener noreferrer">
-                Poster</a>
-        {/if}
-
-        <!-- modal -->
-        <!-- <button on:click={() => (showModal = true)} class="open-modal-button word-link">Details</button>
-        <ProjectModal bind:showModal {project} {projectIndex}/> -->
-        <Modal buttonText={"Details"}/>
-    </div>
+    {#if (project.screenShotImgPath)}
+        <img class="project-img" alt="project screenshot" src={project.screenShotImgPath.toString()}/>           
+    {/if} 
 </div>

@@ -74,7 +74,6 @@
   
 
 <style lang="scss">
-
     .modal-overlay {
         display: flex;
         justify-content: center;
@@ -120,66 +119,6 @@
         justify-content: center;
         align-items: center;
     }
-
-    // .modal-overlay.open {
-    //     display: flex;
-    // }
-
-    // .modal {
-    //     background-color: white;
-    //     border-radius: 5px;
-    //     max-width: 80%;
-    //     max-height: 80%;
-    //     overflow: auto;
-    //     position: relative;
-    //     padding: 20px;
-    //     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    // }
-
-    // .close-button {
-    //     position: absolute;
-    //     top: 10px;
-    //     right: 10px;
-    //     background: none;
-    //     border: none;
-    //     font-size: 20px;
-    //     cursor: pointer;
-    // }
-
-    // .modal-content {
-    //     padding: 10px;
-    // }
-    // .modal-container {
-    //     text-align: center;
-    //     margin: 2rem;
-    // }
-    // .backdrop {
-    //     position: fixed;
-    //     top: 0;
-    //     left: 0;
-    //     width: 100%;
-    //     height: 100%;
-    //     background-color: rgba(0, 0, 0, 0.5);
-    //     z-index: 9998;
-    // }
-  
-    // .dialog {
-    //     position: fixed;
-    //     top: 50%;
-    //     left: 50%;
-    //     transform: translate(-50%, -50%);
-    //     background-color: white;
-    //     padding: 1rem;
-    //     border-radius: 5px;
-    //     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
-    //     z-index: 9999;
-    // }
-  
-    // .dialog h2 {
-    //     margin-top: 0;
-    // }
-
-    
 </style>
 
 <!-- <zero-md src></zero-md> -->

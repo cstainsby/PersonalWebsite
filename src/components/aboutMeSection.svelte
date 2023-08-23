@@ -26,21 +26,35 @@
     #about-me-section {
         display: flex;
         flex-direction: column;
-        width: 80%;
-        margin-left: 6%;
-        margin-right: 6%;
-        margin-bottom: 24px;
+        margin-bottom: 80px;
         padding: 24px;
         justify-content: center;
 
         background-color: var(--darkT-grey-2);
         border-radius: 4px;
-        border: 2px solid var(--blue);
     }
     #about-me-personal {
         
         & p {
             font-size: large;
+        }
+    }
+
+    .header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-top: 16px;
+
+        & > img {
+            width: 40px;
+            height: 40px;
+            margin-right: 12px;
+        }
+
+        & > h2 {
+            margin-bottom: 0px;
+            margin-top: 0px;
         }
     }
 
@@ -67,27 +81,20 @@
         }
     }
 
-    .listed-item {
+
+    .listed-content-block {
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
         align-items: center;
-        // margin-top: 12px;
-        margin-right: 12px;
-        margin-left: 12px;
-        padding: 12px;
-        border-radius: 4px;
+        // padding: 12px;
         width: fit-content;
-
+        // border: 2px solid var(--darkT-black-2);
+        // background-color: var(--darkT-black-1);
         border-radius: 4px;
-        // border: 2px solid var(--white);
-        border-radius: 4px;
-        min-height: 160px;
+        min-height: 200px;
+        height: auto;
         width: 30%;
-
-        @media (min-width: 0px) and (max-width: 800px) {
-            justify-content: center;
-        }
 
         & > div > p {
             font-size: smaller;
@@ -98,6 +105,21 @@
             margin-left: 12px;
             height: 5rem;
         }
+    }
+
+    .listed-transition-item {
+        border-radius: 50%;
+        padding: 8px;
+        background-color: var(--blue);
+    }
+
+    .listed-item {
+        margin-right: 24px;
+
+        @media (min-width: 0px) and (max-width: 800px) {
+            justify-content: center;
+        }
+
     }
 </style>
 
@@ -118,7 +140,8 @@
                         <img src={String(personalItem.imgPath)} alt={String(personalItem.imgAltText)}/>
                     </div>
                     {#if personalItemIndex < personalBlurbs.length - 1}
-                        <div class="vertical-border"></div>
+                        <!-- <div class="vertical-border"></div> -->
+                        <div class="listed-item listed-transition-item">&&</div>
                     {/if}
                 {/each}
             </div>
@@ -127,10 +150,13 @@
 
     {#if education}
         <div id="about-me-education-and-credentials">
-            <h2>Education/Credentials</h2>
+            <div class="header">
+                <img src="../../media/education.png" alt="education icon"/>
+                <h2>Education/Credentials</h2>
+            </div>
             <div class="list-container">
                 {#each education as educationItem, educationItemIndex}
-                    <div class="listed-item">
+                    <div class="listed-item listed-content-block">
                         <div>
                             <h3>{educationItem.title}</h3>
                             {#if educationItem.titleCaption}
@@ -149,7 +175,8 @@
                         <img src={String(educationItem.imgPath)} alt={String(educationItem.imgAltText)}/>
                     </div>
                     {#if educationItemIndex < education.length - 1}
-                        <div class="vertical-border"></div>
+                        <!-- <div class="vertical-border"></div> -->
+                        <div class="listed-item vertical-border"></div>
                     {/if}
                 {/each}
             </div>
@@ -158,10 +185,13 @@
 
     {#if jobs}
         <div id="about-me-work">
-            <h2>Work History</h2>
+            <div class="header">
+                <img src="../../media/suitcase.png" alt="work icon"/>
+                <h2>Work History</h2>
+            </div>
             <div class="list-container">
                 {#each jobs as job, jobIndex}
-                    <div class="listed-item">
+                    <div class="listed-item listed-content-block">
                         <div class="listed-item-text">
                             <h3>{job.title}</h3>
                             {#if job.employer}

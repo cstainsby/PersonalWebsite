@@ -12,9 +12,6 @@
         skillsAssociated: Skill[]
     }
 
-
-    // const skillAndTypeList: SkillCollection[] = 
-
     export let skillCollections: SkillSectionProps["skillCollections"];
 </script>
 
@@ -22,17 +19,11 @@
     #skills-section {
         display: flex;
         flex-direction: column;
-        // justify-content: space-evenly;
         align-items: center;
         background-color: var(--darkT-grey-2);
         border-radius: 4px;
-        border: 2px solid var(--blue);
-        width: 80%;
-        margin-left: 6%;
-        margin-right: 6%;
         margin-bottom: 48px;
         padding: 24px;
-        margin-top: 48px;
         padding-bottom: 48px;
 
         & .section-title {
@@ -64,7 +55,7 @@
 
 <div id="skills-section">
     {#if skillCollections}
-        <h2 class="section-title">Skills</h2>
+        <h2 class="section-title">Technical Skills</h2>
         <div id="skills-section-content" class="section-content">
             {#each skillCollections as skillCollection}
                 <SkillOfTypeCollection typeName={String(skillCollection.skillType)} skillsOfType={skillCollection.skillsAssociated}/>

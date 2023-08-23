@@ -30,6 +30,7 @@
     }
 </style>
 
+{#if skillsOfType.length > 0}
 <div class="skillset-of-type">
     <h2>{typeName}</h2>
     <div class="portrait-section">
@@ -40,3 +41,4 @@
         {/each}
     </div>
 </div>
+{/if}

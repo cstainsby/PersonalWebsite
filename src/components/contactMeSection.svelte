@@ -208,9 +208,5 @@
         {/if}
         <ProfessionalLinkRow
             imageLinks={links}/>
-        <div>
-            <button id="sign-in-link" class="word-link">Login</button>
-            <button class="word-link">Settings</button>
-        </div>
     </div>
 </div>

@@ -66,7 +66,8 @@
                     {"name": "Django"},
                     {"name": "REST API"}
                 ],
-                "importance": "High"
+                "importanceRanking": 1,
+                "customReadme": ""
             },
             {
                 "name": "Reddit r/AITA NLP Sentiment Classifier",
@@ -85,22 +86,23 @@
                     {"name": "HuggingFace"},
                     {"name": "Jupyter Notebooks"}
                 ],
-                "importance": "High"
+                "importanceRanking": 2
             },
             {
                 "name": "Personal Website",
                 "shortDescription": "This Website",
-                "description": "A website which shows off every",
+                "description": "This project is intended to show off who I am as well as my accomplishments. It gives those interested an easy way to get in contact with me. It also allows for easy alterations to the underlying data allowing for continued future updates.",
                 "repositoryLink": "https://github.com/cstainsby/PersonalWebsite",
                 "skillsUsed": [
                     {"name": "Typescript"},
-                    {"name": "AWS EC2"},
+                    {"name": "EC2"},
+                    {"name": "Route 53"},
                     {"name": "SvelteKit"},
                     {"name": "HTML"},
                     {"name": "SCSS"},
                     {"name": "NGINX"}
                 ],
-                "importance": "Medium"
+                "importanceRanking": 3
             },
             {
                 "name": "Hockey Data Project",
@@ -113,7 +115,7 @@
                     {"name": "Jupyter Notebooks"},
                     {"name": "EDA"}
                 ],
-                "importance": "Medium"
+                "importanceRanking": 4
             }
         ],
 
