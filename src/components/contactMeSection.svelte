@@ -155,14 +155,6 @@
             margin: 24px;
             width: 80%;
             text-align: start;
-
-            // only display login on larger display sizes
-            & > #sign-in-link {
-                border-radius: 50px;
-                @media (min-width: 0px) and (max-width: 800px) {
-                    display: none;
-                }
-            }
         }
         }
 </style>

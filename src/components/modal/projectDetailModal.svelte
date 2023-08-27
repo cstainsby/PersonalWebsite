@@ -1,0 +1,211 @@
+
+<script lang="ts">
+    import snarkdown from "snarkdown"
+    import Spinner from "../Spinner.svelte";
+    import { timeout } from "$lib/frontendUtil";
+
+    interface GithubReadme {
+        repoOwner: string
+        repoName: string 
+        pathToReadme: string 
+    } 
+
+    // for now I'm going to assume any custom readme will be stored locally in the data/<location>
+    //  folder 
+
+    interface ProjectDetailModalProps {
+        buttonText: string
+        projectName: string 
+
+        // readme can either use a string to point to a location on 
+        readmeSrc: string | GithubReadme
+    }
+
+    export let buttonText: ProjectDetailModalProps["buttonText"];
+  
+    let showDialog: boolean = false;
+    let isLoadingReadme: boolean = true;
+
+    let readmeContent: string = "" 
+
+    // constants 
+    const githubApiPrefix = "https://api.github.com/repos/"
+
+
+    // Function to enable scrolling
+    function enablePageScroll() {
+        const root = document.querySelector('html')
+        if (root) {
+            root.classList.remove('no-scroll');
+        }
+    }
+
+    // Function to disable scrolling
+    function disablePageScroll() {
+        const root = document.querySelector('html')
+        if (root) {
+            root.classList.add('no-scroll');
+        }
+    }
+
+    async function getCustomReadme(): Promise<string> {
+        const res: string | void = await fetch("../")
+            .then(res => res.json())
+            .then(data => {
+                return data.content;
+            })
+            .catch(err => console.log(err));
+        if (!res) {
+            return ""
+        } else {
+            return res
+        }
+    }
+
+    async function getReadmeByGithubApi(repoOwner: string, repoName: string, pathToReadme: string): Promise<string> {
+        const res: string | void = await fetch(githubApiPrefix + `${repoOwner}/${repoName}/contents/${pathToReadme}`)
+            .then(res => res.json())
+            .then(data => {
+                const readmeContent = atob(data.content)
+                return readmeContent 
+            })
+            .catch(err => console.log(err));
+        if (!res) {
+            return ""
+        } else {
+            return res
+        }
+    }
+
+    function formatReadmeString(repoOwner: string, repoName: string, readme: string) {
+        const readmeProcessed = snarkdown(readme)
+
+        // get images in readme are likely relative so I will add a prefix to get the images 
+        //  for this I will use the DOM to make life a bit simpler
+        const htmlStringContainer = document.createElement('div')
+        htmlStringContainer.innerHTML = readmeProcessed;
+
+        const imgElements = htmlStringContainer.querySelectorAll('img');
+
+        imgElements.forEach((element) => {
+            const currentSrc = element.getAttribute('src');
+            // ensure the img src exists and is relative
+            if (currentSrc && (currentSrc.length > 8 && currentSrc.slice(0, 8) != "https://")) {
+                const newSrc = githubApiPrefix + `${repoOwner}/${repoName}/contents/` + currentSrc;
+
+                fetch(newSrc)
+                    .then(res => res.json())
+                    .then(data => {
+                        const body = atob(data.body)
+                        console.log(body);
+                        
+                    })
+                    // .then(jsonRes => {
+                    //     element.setAttribute('src', jsonRes.html_url);
+                    // })
+            }
+        })
+
+        const modifiedHtmlString = htmlStringContainer.innerHTML;
+        return modifiedHtmlString;
+    }
+  
+    const openDialog = () => {
+        showDialog = true;
+        isLoadingReadme = true;
+        disablePageScroll()
+
+        // set content for modal on component mount
+        getReadmeByGithubApi("cstainsby", "B-Onion", "README.md")
+            .then(rawContent => {
+                console.log("test");
+                console.log(rawContent);
+                
+                
+                const correctedContent = formatReadmeString("cstainsby", "B-Onion", rawContent);
+                console.log(correctedContent);
+                
+                readmeContent = correctedContent;
+            })
+            .then(() => { 
+                timeout(0.3).then(() => {
+                    isLoadingReadme = false
+                })
+            })
+    };
+    const closeDialog = () => {
+        showDialog = false;
+        enablePageScroll()
+    };
+</script>
+  
+
+<style lang="scss">
+    .modal-overlay {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent gray overlay */
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+    }
+
+    .dialog {
+		width: 65%;
+        height: 80%;
+        padding: 24px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        border-radius: 4px; 
+		border: none;
+        background-color: white;
+        color: black;
+        z-index: 99999;
+        overflow-y: auto;
+
+	}
+
+    .dialog-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        
+        & > button {
+            margin-left: auto;
+        }
+    }
+
+    .dialog-body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+<!-- <zero-md src></zero-md> -->
+<button class="word-link" on:click={openDialog}>{ buttonText }</button>
+{#if showDialog === true}
+    <div class="modal-overlay">
+        <div class="dialog">
+            <div class="dialog-header">
+                <h1>Details</h1>
+                <button class="word-link" on:click={closeDialog}>X</button>
+            </div>
+            <hr/>
+            <div class="dialog-body">
+                {#if isLoadingReadme}
+                    <Spinner/>
+                {:else}
+                    <!-- Show readmeContent when not loading -->
+                    <div>{@html snarkdown(readmeContent)}</div>
+                {/if}
+            </div>
+        </div>
+    </div>
+{/if}

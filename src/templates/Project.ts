@@ -16,5 +16,5 @@ export default interface Project {
     repositoryLink?: string
     posterLink?: string
 
-    customReadme?: string 
+    customReadmePath?: string 
 }

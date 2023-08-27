@@ -2,7 +2,8 @@
 <script lang="ts">
     import type Project from "../templates/Project";
     import type Skill from "../templates/Skill";
-    import Modal from "./modal/modal.svelte";
+    import ProjectDetailModal from "./modal/projectDetailModal.svelte";
+    import Modal from "./modal/projectDetailModal.svelte";
     import ProjectModal from "./projectModal.svelte";
 
     import SkillComponent from "./skillSection.svelte";
@@ -18,14 +19,6 @@
 </script>
 
 <style lang="scss">
-    @media (min-width: 1024px) {
-        .high-importance {
-            max-width: 100%;
-        }
-        .medium-importance {
-            width: 44%;
-        }
-    }
 
     .project {
         display: flex;
@@ -142,7 +135,7 @@
                 <a class="word-link" href={String(project.posterLink)} target="_blank" rel="noopener noreferrer">
                     Poster</a>
             {/if}
-            <Modal buttonText={"Details"}/>
+            <ProjectDetailModal buttonText={"Details"}/>
         </div>
     </div> 
     {#if (project.screenShotImgPath)}
