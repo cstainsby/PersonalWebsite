@@ -5,6 +5,7 @@
     import type { Toast } from "$lib/websiteInterfaces";
     import Spinner from "./Spinner.svelte";
     import type Email from "../templates/Email";
+    import MenuToolbar from "./menuToolbar.svelte";
 
     interface ContactMeSectionProps {
         phoneNumber?: string
@@ -200,5 +201,7 @@
         {/if}
         <ProfessionalLinkRow
             imageLinks={links}/>
+
+            <MenuToolbar/>
     </div>
 </div>

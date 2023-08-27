@@ -2,6 +2,7 @@
     import ProfessionalLinkRow from "./professionalLinkRow.svelte";
 
     import type { ImageLink } from "$lib/websiteInterfaces";
+    import MenuToolbar from "./menuToolbar.svelte";
 
     interface HeaderSectionProps {
         title: string
@@ -83,7 +84,7 @@
                 display: flex;
                 flex-wrap: wrap;
                 & a {
-                z-index: var(--zind-foreground);
+                    z-index: var(--zind-foreground);
                 }
             }
         }

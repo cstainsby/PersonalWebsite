@@ -88,76 +88,76 @@ skillDict = {
 // //    Email Form
 // // -----------------------------------------------------------------------------------------------
 
-// // send email 
-// const emailContactForm = document.getElementById('email-form');
-// const emailContactSubmitBtn = document.getElementById('email_submit');
+// send email 
+const emailContactForm = document.getElementById('email-form');
+const emailContactSubmitBtn = document.getElementById('email_submit');
 
-// emailContactSubmitBtn.addEventListener('click', (e) => {
-//     e.preventDefault();
-//     // Email Payload needs 
-//     //  1) from_name
-//     //  2) from_email
-//     //  3) message
+emailContactSubmitBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    // Email Payload needs 
+    //  1) from_name
+    //  2) from_email
+    //  3) message
 
-//     const spinner = document.createElement('div');
-//     spinner.className = 'spinner email-response-item'; 
+    const spinner = document.createElement('div');
+    spinner.className = 'spinner email-response-item'; 
 
-//     emailContactSubmitBtn.disabled = true;
+    emailContactSubmitBtn.disabled = true;
 
-//     // Replace the button with the spinner
-//     emailContactSubmitBtn.parentNode.replaceChild(spinner, emailContactSubmitBtn);
+    // Replace the button with the spinner
+    emailContactSubmitBtn.parentNode.replaceChild(spinner, emailContactSubmitBtn);
 
-//     // Remove the spinner and display the result message after the result
-//     // returns from the request
-//     const displayMessage = document.createElement('p');
-//     displayMessage.className = 'email-response-item';
+    // Remove the spinner and display the result message after the result
+    // returns from the request
+    const displayMessage = document.createElement('p');
+    displayMessage.className = 'email-response-item';
 
 
 
-//     // Get form values
-//     const from_name = document.getElementById('from_name').value;
-//     const from_email = document.getElementById('from_email').value;
-//     const email_message = document.getElementById('message').value;
+    // Get form values
+    const from_name = document.getElementById('from_name').value;
+    const from_email = document.getElementById('from_email').value;
+    const email_message = document.getElementById('message').value;
 
-//     // Create a FormData object to send the values as JSON
-//     let formData = JSON.stringify({
-//       from_name: from_name,
-//       from_email: from_email,
-//       message: email_message
-//     });
+    // Create a FormData object to send the values as JSON
+    let formData = JSON.stringify({
+      from_name: from_name,
+      from_email: from_email,
+      message: email_message
+    });
 
-//     fetch('/send-email', {
-//       method: 'POST',
-//       headers: {
-//         "Content-Type": "application/json"
-//       },
-//       body: formData
-//     })
-//     .then((response) => response.text())
-//     .then((result) => {
-//       console.log(result); // Optional: Log the server response
-//       // Handle success or display a success message to the user
-//       displayMessage.textContent = "Successfully Sent!"
-//       document.getElementById('from_name').value = "";
-//       document.getElementById('from_email').value = "";
-//       document.getElementById('message').value = "";
-//     })
-//     .catch(function(error) {
-//         console.log('FAILED...', error);
-//         displayMessage.textContent = 'Error occurred trying to send email.';
-//     })
-//     .finally(function() {
-//         // Replace the spinner with the result message
-//         spinner.parentNode.replaceChild(displayMessage, spinner);
+    fetch('/send-email', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: formData
+    })
+    .then((response) => response.text())
+    .then((result) => {
+      console.log(result); // Optional: Log the server response
+      // Handle success or display a success message to the user
+      displayMessage.textContent = "Successfully Sent!"
+      document.getElementById('from_name').value = "";
+      document.getElementById('from_email').value = "";
+      document.getElementById('message').value = "";
+    })
+    .catch(function(error) {
+        console.log('FAILED...', error);
+        displayMessage.textContent = 'Error occurred trying to send email.';
+    })
+    .finally(function() {
+        // Replace the spinner with the result message
+        spinner.parentNode.replaceChild(displayMessage, spinner);
 
-//         // Re-enable the button after a brief delay
-//         setTimeout(function() {
-//           emailContactSubmitBtn.disabled = false;
-//           message.parentNode.replaceChild(emailContactSubmitBtn, displayMessage);
-//         }, 2000);
-//     });
+        // Re-enable the button after a brief delay
+        setTimeout(function() {
+          emailContactSubmitBtn.disabled = false;
+          message.parentNode.replaceChild(emailContactSubmitBtn, displayMessage);
+        }, 2000);
+    });
 
-// });
+});
 
 
 // // -----------------------------------------------------------------------------------------------
