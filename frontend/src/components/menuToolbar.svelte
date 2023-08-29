@@ -2,7 +2,6 @@
 <script lang="ts">
     
     let isSignedIn = false;
-    let GITHUB_CLIENT_ID = "630fcc6321fa2f336446";
 
     function loginWithGithub() {
         console.log("logging in");

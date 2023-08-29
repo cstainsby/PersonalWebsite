@@ -4,9 +4,10 @@ import requests
 
 app = Flask(__name__)
 
-github_target_url = ""
+# https://www.geeksforgeeks.org/how-to-use-flask-session-in-python-flask/
 
-GITHUB_CLIENT_ID = "630fcc6321fa2f336446"
+
+github_target_url = ""
 
 # configure sessions
 app.config[""]

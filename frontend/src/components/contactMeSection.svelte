@@ -202,6 +202,6 @@
         <ProfessionalLinkRow
             imageLinks={links}/>
 
-            <MenuToolbar/>
+            <!-- <MenuToolbar/> -->
     </div>
 </div>
