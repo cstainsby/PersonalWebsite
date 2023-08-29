@@ -1,6 +1,6 @@
 
 <script lang="ts">
-    import type Project from "../templates/Project";
+    import type { Project } from "../templates/Project";
     import type Skill from "../templates/Skill";
     import ProjectDetailModal from "./modal/projectDetailModal.svelte";
     import Modal from "./modal/projectDetailModal.svelte";
@@ -135,7 +135,11 @@
                 <a class="word-link" href={String(project.posterLink)} target="_blank" rel="noopener noreferrer">
                     Poster</a>
             {/if}
-            <ProjectDetailModal buttonText={"Details"}/>
+            <ProjectDetailModal 
+                buttonText={"Details"} 
+                projectName={project.name} 
+                readmeSrc={project.readmeLocationSrc}
+                githubProjectInfo={project.githubInfo}/>
         </div>
     </div> 
     {#if (project.screenShotImgPath)}

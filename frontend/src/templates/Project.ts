@@ -1,8 +1,12 @@
 import type Skill from "./Skill"
 import type Stack from "./Stack"
 
+export interface GithubInfo {
+    repoOwner: string
+    repoName: string
+}
 
-export default interface Project {
+export interface Project {
     name: string
     shortDescription: string
     skillsUsed: Skill[]
@@ -16,5 +20,7 @@ export default interface Project {
     repositoryLink?: string
     posterLink?: string
 
-    customReadmePath?: string 
+    readmeLocationSrc: "local" | "github"
+
+    githubInfo?: GithubInfo 
 }

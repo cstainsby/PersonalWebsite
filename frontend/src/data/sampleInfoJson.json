@@ -67,7 +67,7 @@
                     {"name": "REST API"}
                 ],
                 "importanceRanking": 1,
-                "customReadmePath": "BiopathDetails"
+                "readmeLocationSrc": "local"
             },
             {
                 "name": "Reddit r/AITA NLP Sentiment Classifier",

@@ -25,13 +25,11 @@ The teachers will also have special permission to add "verified pathways" for al
 
 ### Architecture
 
-<img alt="biopath architecture" src="biopath-architecture.png" width="50%">
 
 <i>Architecture Diagram</i>
 
 ### Cloud and CI/CD
 
-<img alt="Biopath dev workflow" src="biopath-dev-workflow.png" width="50%">
 
 <i>Cloud Architecture and Dev Workflow</i>
 

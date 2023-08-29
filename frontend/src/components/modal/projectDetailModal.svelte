@@ -1,27 +1,25 @@
 
 <script lang="ts">
+    import type { GithubInfo } from "../../templates/Project";
     import snarkdown from "snarkdown"
     import Spinner from "../Spinner.svelte";
     import { timeout } from "$lib/frontendUtil";
 
-    interface GithubReadme {
-        repoOwner: string
-        repoName: string 
-        pathToReadme: string 
-    } 
-
-    // for now I'm going to assume any custom readme will be stored locally in the data/<location>
-    //  folder 
 
     interface ProjectDetailModalProps {
         buttonText: string
         projectName: string 
 
         // readme can either use a string to point to a location on 
-        readmeSrc: string | GithubReadme
+        readmeSrc: "local" | "github"
+
+        githubProjectInfo?: GithubInfo
     }
 
     export let buttonText: ProjectDetailModalProps["buttonText"];
+    export let projectName: ProjectDetailModalProps["projectName"];
+    export let readmeSrc: ProjectDetailModalProps["readmeSrc"];
+    export let githubProjectInfo: ProjectDetailModalProps["githubProjectInfo"];
   
     let showDialog: boolean = false;
     let isLoadingReadme: boolean = true;
@@ -48,13 +46,15 @@
         }
     }
 
-    async function getCustomReadme(): Promise<string> {
-        const res: string | void = await fetch("../")
-            .then(res => res.json())
-            .then(data => {
-                return data.content;
-            })
-            .catch(err => console.log(err));
+    /**
+     * Gets a readme from the json blob if it exists
+     */
+    async function getReadmeFromLocal(projectName: string): Promise<string> {
+        console.log(`looking locally in /readme?projectName=${projectName}`);
+        
+        const res: string = await fetch(`/readme?projectName=${projectName}`)
+            .then(data => data.text());
+        
         if (!res) {
             return ""
         } else {
@@ -62,7 +62,13 @@
         }
     }
 
-    async function getReadmeByGithubApi(repoOwner: string, repoName: string, pathToReadme: string): Promise<string> {
+    /**
+     * Gets a readme fro the github api based on repository information
+     * @param repoOwner
+     * @param repoName
+     * @param pathToReadme
+     */
+    async function getReadmeFromGithubApi(repoOwner: string, repoName: string, pathToReadme: string): Promise<string> {
         const res: string | void = await fetch(githubApiPrefix + `${repoOwner}/${repoName}/contents/${pathToReadme}`)
             .then(res => res.json())
             .then(data => {
@@ -77,7 +83,13 @@
         }
     }
 
-    function formatReadmeString(repoOwner: string, repoName: string, readme: string) {
+    /**
+     * Adds any needed custom formating to a readme necessary for it to render as expected
+     * @param repoOwner
+     * @param repoName
+     * @param readme
+     */
+    function formatGithubReadmeString(repoOwner: string, repoName: string, readme: string) {
         const readmeProcessed = snarkdown(readme)
 
         // get images in readme are likely relative so I will add a prefix to get the images 
@@ -100,9 +112,6 @@
                         console.log(body);
                         
                     })
-                    // .then(jsonRes => {
-                    //     element.setAttribute('src', jsonRes.html_url);
-                    // })
             }
         })
 
@@ -115,23 +124,36 @@
         isLoadingReadme = true;
         disablePageScroll()
 
-        // set content for modal on component mount
-        getReadmeByGithubApi("cstainsby", "B-Onion", "README.md")
-            .then(rawContent => {
-                console.log("test");
-                console.log(rawContent);
-                
-                
-                const correctedContent = formatReadmeString("cstainsby", "B-Onion", rawContent);
-                console.log(correctedContent);
-                
-                readmeContent = correctedContent;
-            })
-            .then(() => { 
-                timeout(0.3).then(() => {
-                    isLoadingReadme = false
+        console.log("dialog open");
+        console.log(`readme src ${readmeSrc}`);
+    
+        
+        if (readmeSrc === "local") {
+            getReadmeFromLocal(projectName)
+                .then(rawContent => {
+                    const correctedContent = rawContent
+                    readmeContent = correctedContent;
                 })
-            })
+                .then(() => { 
+                    timeout(0.3).then(() => {
+                        isLoadingReadme = false
+                    })
+                })
+        } else if (readmeSrc === "github"  && githubProjectInfo !== undefined) {
+            const repoOwner = githubProjectInfo.repoOwner
+            const repoName = githubProjectInfo.repoName
+        
+            getReadmeFromGithubApi(repoOwner, repoName, "README.md")
+                .then(rawContent => {
+                    const correctedContent = formatGithubReadmeString(repoOwner, repoName, rawContent);
+                    readmeContent = correctedContent;
+                })
+                .then(() => { 
+                    timeout(0.3).then(() => {
+                        isLoadingReadme = false
+                    })
+                })
+        }
     };
     const closeDialog = () => {
         showDialog = false;
