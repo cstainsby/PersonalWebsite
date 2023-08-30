@@ -135,7 +135,6 @@
         width: fit-content;
 
         border-radius: 4px;
-        // border: 2px solid var(--white);
         background-color: var(--darkT-grey-2);
         border-radius: 4px;
         min-height: 160px;

@@ -29,9 +29,9 @@
     </button>
 </article>
   
-  <style lang="postcss">
+  <style lang="scss">
         article {
-            color: white;
+            color: var(--white);
             padding: 0.75rem 1.5rem;
             border-radius: 0.2rem;
             display: flex;
@@ -52,7 +52,7 @@
             margin-left: 1rem;
         }
         button {
-            color: white;
+            color: var(--white);
             background: transparent;
             border: 0 none;
             padding: 0;

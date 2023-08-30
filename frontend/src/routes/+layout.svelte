@@ -4,7 +4,7 @@
     // ------------------------------------------------------------------
     :root {
         // color palatte
-        --white: #e7e6e6;
+        --white: #e4e4e4;
         --blue: #007acc;
         --darkT-grey-1: #3e3e42;
         --darkT-grey-2: #2d2d30;
@@ -29,15 +29,6 @@
     // ------------------------------------------------------------------
     //    overrides of html provided elements
     // ------------------------------------------------------------------
-    // :global(html) {
-    //         margin: 0;
-    //         padding: 0;
-    //         border: 0;
-    //         outline: 0;
-    //         font-size: 100%;
-    //         vertical-align: baseline;
-    //         background: transparent;
-    //     }
     :global(html) {
         scroll-behavior: smooth;
         // font-family: var(--font), sans-serif;

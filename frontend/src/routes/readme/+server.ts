@@ -11,8 +11,27 @@ export async function GET({ url }) {
     
     try {
         const fileContent = await readReadmeFromLocal(projectName)
-        return json(fileContent)
+        const cleanFileContent = cleanLocallyReadReadme(fileContent);
+    
+        return new Response(btoa(cleanFileContent))
     } catch (err) {
         throw error(500, "Issue Reading file")
     }
+}
+
+
+// ----------------------------------------------------------------
+//      helper functions
+// ----------------------------------------------------------------
+
+/**
+ * parses and cleans locally stored readme's
+ * @param rawReadmeContent  
+ */
+function cleanLocallyReadReadme(rawReadmeContent: string): string {
+    const cleanContent: string = rawReadmeContent
+        .replace(/\n/g, "\n")
+        .replaceAll("\"", " ")
+
+    return cleanContent;
 }

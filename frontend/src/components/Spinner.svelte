@@ -1,6 +1,6 @@
 <style lang="scss">
     .spinner {
-        border: 8px solid white; /* Light grey */
+        border: 8px solid var(--white); /* Light grey */
         border-top: 8px solid var(--darkT-black-1); /* Blue */
         border-radius: 50%;
         width: 30px;

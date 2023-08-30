@@ -30,19 +30,18 @@
         if (formElement !== null) {
             const formData = new FormData(formElement);
 
-            // send out informational toast that the email send has been started
-            // const sendingToast: Toast = {
-            //     message: "Sending Email",
-            //     type: "info",
-            //     timeoutTime: 5000,
-            // }
-            // addToast(sendingToast);
-
             const errorToast: Toast = {
                 message: "Email Send Attempt Failed",
                 type: "error",
                 timeoutTime: 5000,
             }
+            const successToast: Toast = { 
+                message: "Email Successfully Sent",
+                type: "success",
+                timeoutTime: 5000,
+            }
+
+            let emailSuccessFlag: boolean = false
 
 
             const res = await fetch(formElement.action, {
@@ -54,12 +53,10 @@
                 const resData = JSON.parse(resJson.data)
                 const resDataDirector = resData[0]
 
-                console.log(resJson);
-                console.log(JSON.parse(resJson.data));
 
                 if (!resDataDirector.success) {
                     console.log("Error: missing success property in form server return data");
-                    addToast(errorToast)
+                    emailSuccessFlag = false;
                     return 
                 }
 
@@ -68,24 +65,21 @@
                 
 
                 if (emailSentSuccessfully) {
-                    const successToast: Toast = { 
-                        message: "Email Successfully Sent",
-                        type: "success",
-                        timeoutTime: 5000,
-                    }
-                    addToast(successToast)
+                    emailSuccessFlag = true;
                     return
                 }
             })
             .catch(err => {
-                addToast(errorToast)
+                emailSuccessFlag = false;
                 return 
             })
             .finally(() => { sendingMail = false })
 
-            // default to faliure
-            addToast(errorToast)
-            return
+            if (emailSuccessFlag) {
+                addToast(successToast)
+            } else {
+                addToast(errorToast)
+            }
         }
     }
 </script>

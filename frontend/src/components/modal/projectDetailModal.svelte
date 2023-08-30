@@ -50,8 +50,6 @@
      * Gets a readme from the json blob if it exists
      */
     async function getReadmeFromLocal(projectName: string): Promise<string> {
-        console.log(`looking locally in /readme?projectName=${projectName}`);
-        
         const res: string = await fetch(`/readme?projectName=${projectName}`)
             .then(data => data.text());
         
@@ -69,15 +67,26 @@
      * @param pathToReadme
      */
     async function getReadmeFromGithubApi(repoOwner: string, repoName: string, pathToReadme: string): Promise<string> {
-        const res: string | void = await fetch(githubApiPrefix + `${repoOwner}/${repoName}/contents/${pathToReadme}`)
+        const abortController = new AbortController()
+
+        const timeoutId = setTimeout(() => abortController.abort(), 5000)
+
+
+        const res: string | void = await fetch(githubApiPrefix + `${repoOwner}/${repoName}/contents/${pathToReadme}`, { signal: abortController.signal})
             .then(res => res.json())
             .then(data => {
-                const readmeContent = atob(data.content)
-                return readmeContent 
+                const readmeContentFromGithub = atob(data.content)
+                return readmeContentFromGithub 
             })
             .catch(err => console.log(err));
         if (!res) {
-            return ""
+            return `
+            # Readme Couldn't Be Located\n\n
+
+            There was an issue finding your readme at ${githubApiPrefix}**${repoOwner}**/**${repoName}**/contents/**${pathToReadme}**
+
+                
+            `
         } else {
             return res
         }
@@ -109,8 +118,6 @@
                     .then(res => res.json())
                     .then(data => {
                         const body = atob(data.body)
-                        console.log(body);
-                        
                     })
             }
         })
@@ -123,26 +130,22 @@
         showDialog = true;
         isLoadingReadme = true;
         disablePageScroll()
-
-        console.log("dialog open");
-        console.log(`readme src ${readmeSrc}`);
-    
         
         if (readmeSrc === "local") {
             getReadmeFromLocal(projectName)
                 .then(rawContent => {
-                    const correctedContent = rawContent
+                    const correctedContent = atob(rawContent)
                     readmeContent = correctedContent;
                 })
                 .then(() => { 
-                    timeout(0.3).then(() => {
+                    timeout(0.1).then(() => {
                         isLoadingReadme = false
                     })
                 })
         } else if (readmeSrc === "github"  && githubProjectInfo !== undefined) {
             const repoOwner = githubProjectInfo.repoOwner
             const repoName = githubProjectInfo.repoName
-        
+            
             getReadmeFromGithubApi(repoOwner, repoName, "README.md")
                 .then(rawContent => {
                     const correctedContent = formatGithubReadmeString(repoOwner, repoName, rawContent);
@@ -185,11 +188,11 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         border-radius: 4px; 
 		border: none;
-        background-color: white;
-        color: black;
+        // background-color: white;
+        color: var(--white);
         z-index: 99999;
         overflow-y: auto;
-
+        background-color: var(--darkT-grey-1);
 	}
 
     .dialog-header {
@@ -200,6 +203,7 @@
         
         & > button {
             margin-left: auto;
+            margin-right: 8px;
         }
     }
 
@@ -217,7 +221,9 @@
         <div class="dialog">
             <div class="dialog-header">
                 <h1>Details</h1>
-                <button class="word-link" on:click={closeDialog}>X</button>
+                <button on:click={closeDialog}>
+                    <img src="media/close.png" alt="Close" height="20">
+                </button>
             </div>
             <hr/>
             <div class="dialog-body">

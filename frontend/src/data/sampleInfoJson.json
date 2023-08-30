@@ -86,7 +86,12 @@
                     {"name": "HuggingFace"},
                     {"name": "Jupyter Notebooks"}
                 ],
-                "importanceRanking": 2
+                "importanceRanking": 2,
+                "readmeLocationSrc": "github",
+                "githubInfo": {
+                    "repoOwner": "cstainsby",
+                    "repoName": "B-Onion"
+                }
             },
             {
                 "name": "Personal Website",
@@ -102,7 +107,12 @@
                     {"name": "SCSS"},
                     {"name": "NGINX"}
                 ],
-                "importanceRanking": 3
+                "importanceRanking": 3,
+                "readmeLocationSrc": "github",
+                "githubInfo": {
+                    "repoOwner": "cstainsby",
+                    "repoName": "PersonalWebsite"
+                }
             },
             {
                 "name": "Hockey Data Project",
