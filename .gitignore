@@ -1,9 +1,2 @@
-PersonalServerKeyPair.pem
 ssh_ec2.sh
-docker.py
-
-node_modules
-vars.env
 aws_info
-
-.env
