@@ -1,5 +1,5 @@
 import { SESV2 } from "aws-sdk";
-import type Email from "../templates/Email";
+import type Email from "./templates/Email";
 import { SendEmailCommand, 
     type SendEmailCommandInput,
     type SendEmailCommandOutput,

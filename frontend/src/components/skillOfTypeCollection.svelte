@@ -1,7 +1,7 @@
 
 
 <script lang="ts">
-    import type Skill from "../templates/Skill";
+    import type { Skill } from '$lib/templates/Skill';
     import SkillPortrait from "./skillPortrait.svelte";
 
     interface SkillOfTypeCollection {

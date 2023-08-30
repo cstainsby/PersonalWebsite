@@ -1,4 +1,4 @@
-export default interface PersonalBlurb {
+export interface PersonalBlurb {
     title: String,
     textContent: String,
     imgPath: String,

@@ -1,7 +1,7 @@
 
 <script lang="ts">
-    import type { Project } from "../templates/Project";
-    import type Skill from "../templates/Skill";
+    import type { Project } from '$lib/templates/Project';
+    import type { Skill } from "$lib/templates/Skill";
     import ProjectDetailModal from "./modal/projectDetailModal.svelte";
     import Modal from "./modal/projectDetailModal.svelte";
     import ProjectModal from "./projectModal.svelte";

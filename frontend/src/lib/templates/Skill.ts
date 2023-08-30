@@ -1,5 +1,5 @@
 
-export default interface Skill {
+export interface Skill {
     name: String
     iconPath?: String
 }

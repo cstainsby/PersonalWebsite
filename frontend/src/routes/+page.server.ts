@@ -1,13 +1,18 @@
 import { readPageJsonById } from '$lib/dataStore'
-import type Email from '../templates/Email';
+import type { Email } from '$lib/templates/Email';
 import type { PageServerLoad } from './$types';
 import { fail, json } from '@sveltejs/kit';
 // import { RequestHandler } from './$types';
 
-import { sendEmailViaSES } from "$lib/aws"
+import { sendEmailViaSES } from "$lib/aws";
+
+import { type Education } from '$lib/templates/Education'
 
 export const load: PageServerLoad = async ({ params }) => {
     const jsonBlob = await readPageJsonById(0);  
+
+    
+
     return {
         jsonBlob: jsonBlob
     };

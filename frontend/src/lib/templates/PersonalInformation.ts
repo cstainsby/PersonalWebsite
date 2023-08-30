@@ -11,7 +11,7 @@ interface Credential {
 // }
 
 
-export default interface PersonalInformation {
+export interface PersonalInformation {
     firstName: String
     lastName: String
     phoneNumber: number

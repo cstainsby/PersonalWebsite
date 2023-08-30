@@ -1,7 +1,7 @@
 <script lang="ts">
-    import type Job from "../templates/Job";
-    import type PersonalBlurb from "../templates/PersonalBlurb";
-    import type Education from "../templates/Education";
+    import type Job from "../lib/templates/Job";
+    import type PersonalBlurb from "../lib/templates/PersonalBlurb";
+    import type Education from "../lib/templates/Education";
 
     import { yearMonthFormatToDate, convertDateToMonthYearDateDisplayStr } from "$lib/dates"
 

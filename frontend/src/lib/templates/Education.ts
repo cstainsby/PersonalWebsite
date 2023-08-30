@@ -1,8 +1,7 @@
-
-
-export default interface Job {
+export interface Education {
     title: string,
-    employer: string,
+    titleCaption?: string,
+    fromWho: string,
     imgPath: string,
     imgAltText: string,
     startDate: string,

@@ -1,7 +1,7 @@
 <script lang="ts">
     // interfaces
-    import type Project from "../templates/Project";
-    import type Skill from "../templates/Skill";
+    import type { Project } from '$lib/templates/Project';
+    import type { Skill } from '$lib/templates/Skill';
 
     // projects
     import ProjectComponent from "./project.svelte";
