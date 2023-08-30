@@ -29,12 +29,7 @@
 
         & .project-content {
             display: flex;
-            flex-direction: row;
-
-            @media (min-width: 1024px) {
-                /* For screens larger than 768px, have two columns */
-                flex-direction: column;
-            }
+            flex-direction: column;
 
             & .project-info {
                 display: flex;
@@ -93,6 +88,10 @@
         width: 100%;
         max-width: 512px;
         height: auto;
+
+        @media (min-width: 0px) and (max-width: 1024px) {
+            display: none;
+        }
     }
 </style>
 <!-- {project.importance === "High" 
