@@ -2,7 +2,7 @@
     import ProfessionalLinkRow from "./professionalLinkRow.svelte";
 
     import type { ImageLink } from "$lib/websiteInterfaces";
-    import MenuToolbar from "./menuToolbar.svelte";
+    import MenuToolbar from "./headerMenuToolbar.svelte";
 
     interface HeaderSectionProps {
         title: string
@@ -108,7 +108,6 @@
                 <div class="section-title">{titleLine}</div>
             {/each}
         </div>
-    
         <ProfessionalLinkRow imageLinks={links}/>
     
         <div class="section-body">

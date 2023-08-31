@@ -1,6 +1,6 @@
 
 <script lang="ts">
-    import type { GithubInfo } from "../../templates/Project";
+    import type { GithubInfo } from "$lib/templates/Project";
     import snarkdown from "snarkdown"
     import Spinner from "../Spinner.svelte";
     import { timeout } from "$lib/frontendUtil";
@@ -130,7 +130,7 @@
         showDialog = true;
         isLoadingReadme = true;
         disablePageScroll()
-        
+
         if (readmeSrc === "local") {
             getReadmeFromLocal(projectName)
                 .then(rawContent => {
