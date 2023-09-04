@@ -4,6 +4,7 @@
     import snarkdown from "snarkdown"
     import Spinner from "../Spinner.svelte";
     import { timeout } from "$lib/frontendUtil";
+    import GenericModal from "./genericModal.svelte";
 
 
     interface ProjectDetailModalProps {
@@ -22,29 +23,11 @@
     export let githubProjectInfo: ProjectDetailModalProps["githubProjectInfo"];
   
     let showDialog: boolean = false;
-    let isLoadingReadme: boolean = true;
 
     let readmeContent: string = "" 
 
     // constants 
     const githubApiPrefix = "https://api.github.com/repos/"
-
-
-    // Function to enable scrolling
-    function enablePageScroll() {
-        const root = document.querySelector('html')
-        if (root) {
-            root.classList.remove('no-scroll');
-        }
-    }
-
-    // Function to disable scrolling
-    function disablePageScroll() {
-        const root = document.querySelector('html')
-        if (root) {
-            root.classList.add('no-scroll');
-        }
-    }
 
     /**
      * Gets a readme from the json blob if it exists
@@ -125,115 +108,32 @@
         const modifiedHtmlString = htmlStringContainer.innerHTML;
         return modifiedHtmlString;
     }
-  
-    const openDialog = () => {
-        showDialog = true;
-        isLoadingReadme = true;
-        disablePageScroll()
 
+    /**
+     * Get specific data needed for this modal, inject it into the generic modal on Open
+     */
+    const onOpen = async () => {
         if (readmeSrc === "local") {
-            getReadmeFromLocal(projectName)
-                .then(rawContent => {
-                    const correctedContent = atob(rawContent)
-                    readmeContent = correctedContent;
-                })
-                .then(() => { 
-                    timeout(0.1).then(() => {
-                        isLoadingReadme = false
-                    })
-                })
+            let rawContent = await getReadmeFromLocal(projectName);
+
+            const correctedContent = atob(rawContent);
+            readmeContent = correctedContent;
+
         } else if (readmeSrc === "github"  && githubProjectInfo !== undefined) {
             const repoOwner = githubProjectInfo.repoOwner
             const repoName = githubProjectInfo.repoName
             
-            getReadmeFromGithubApi(repoOwner, repoName, "README.md")
-                .then(rawContent => {
-                    const correctedContent = formatGithubReadmeString(repoOwner, repoName, rawContent);
-                    readmeContent = correctedContent;
-                })
-                .then(() => { 
-                    timeout(0.3).then(() => {
-                        isLoadingReadme = false
-                    })
-                })
+            let rawContent = await getReadmeFromGithubApi(repoOwner, repoName, "README.md");
+            const correctedContent = formatGithubReadmeString(repoOwner, repoName, rawContent);
+            readmeContent = correctedContent;
         }
-    };
-    const closeDialog = () => {
-        showDialog = false;
-        enablePageScroll()
-    };
+    }
+
+    const onClose = async () => {}
 </script>
-  
 
-<style lang="scss">
-    .modal-overlay {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent gray overlay */
-        justify-content: center;
-        align-items: center;
-        z-index: 999;
-    }
-
-    .dialog {
-		width: 65%;
-        height: 80%;
-        padding: 24px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-        border-radius: 4px; 
-		border: none;
-        // background-color: white;
-        color: var(--white);
-        z-index: 99999;
-        overflow-y: auto;
-        background-color: var(--darkT-grey-1);
-	}
-
-    .dialog-header {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        
-        & > button {
-            margin-left: auto;
-            margin-right: 8px;
-        }
-    }
-
-    .dialog-body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-</style>
-
-<!-- <zero-md src></zero-md> -->
-<button class="word-link" on:click={openDialog}>{ buttonText }</button>
-{#if showDialog === true}
-    <div class="modal-overlay">
-        <div class="dialog">
-            <div class="dialog-header">
-                <h1>Details</h1>
-                <button on:click={closeDialog}>
-                    <img src="media/close.png" alt="Close" height="20">
-                </button>
-            </div>
-            <hr/>
-            <div class="dialog-body">
-                {#if isLoadingReadme}
-                    <Spinner/>
-                {:else}
-                    <!-- Show readmeContent when not loading -->
-                    <div>{@html snarkdown(readmeContent)}</div>
-                {/if}
-            </div>
-        </div>
-    </div>
-{/if}
+<GenericModal {onOpen} {onClose}>
+    <span slot="title">Details</span>
+    <span slot="open-clickable-element">Details</span>
+    <div slot="content">{@html snarkdown(readmeContent)}</div>
+</GenericModal>

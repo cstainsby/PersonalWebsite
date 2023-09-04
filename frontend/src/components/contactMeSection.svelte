@@ -1,11 +1,10 @@
 <script lang="ts">
     import ProfessionalLinkRow from "./professionalLinkRow.svelte";
     import type { ImageLink } from "$lib/websiteInterfaces";
-    import { addToast } from "$lib/store";
+    import { addToast } from "$lib/toastStore";
     import type { Toast } from "$lib/websiteInterfaces";
     import Spinner from "./Spinner.svelte";
     import type { Email } from "$lib/templates/Email";
-    import MenuToolbar from "./headerMenuToolbar.svelte";
 
     interface ContactMeSectionProps {
         phoneNumber?: string
@@ -195,7 +194,5 @@
         {/if}
         <ProfessionalLinkRow
             imageLinks={links}/>
-
-            <MenuToolbar/>
     </div>
 </div>

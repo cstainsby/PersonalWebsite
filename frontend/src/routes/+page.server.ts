@@ -6,7 +6,7 @@ import type { Actions } from "./$types"
 // import { RequestHandler } from './$types';
 
 import { sendEmailViaSES } from "$lib/aws";
-import { AuthApiError, type Provider } from "@supabase/supabase-js"
+import { AuthApiError, type Provider } from "@supabase/supabase-js";
 
 import { type Education } from '$lib/templates/Education'
 

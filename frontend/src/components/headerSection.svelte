@@ -2,7 +2,8 @@
     import ProfessionalLinkRow from "./professionalLinkRow.svelte";
 
     import type { ImageLink } from "$lib/websiteInterfaces";
-    import MenuToolbar from "./headerMenuToolbar.svelte";
+    // import MenuToolbar from "./headerNavToolbar.svelte";
+    import HeaderNavToolbar from "./headerNavToolbar.svelte";
 
     interface HeaderSectionProps {
         title: string
@@ -17,8 +18,8 @@
 
 <style lang="scss">
     #greeting-section {
-        min-height: 100svh;
-        min-width: 100vw;
+        height: 100svh;
+        width: 100vw;
         background-color: var(--darkT-black-1);
         z-index: var(--zind-foreground);
 
@@ -68,17 +69,26 @@
         }
 
 
-        & .section-content {
-            margin: 32px;
+        .section-content {
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            padding: 32px;
+            z-index: var(--zind-foreground);
+
+            #intro-content-block {
+                margin-right: auto;
+            }
+
             & .section-title {
                 margin-top: 12px;
                 font-size: 64px;
                 text-align: left;
             }
 
-            & .section-body {
-                z-index: var(--zind-foreground);
-            }
+            // & .section-body {
+            //     ;
+            // }
 
             & #navigation-links {
                 display: flex;
@@ -103,33 +113,35 @@
     </div>
 
     <div class="section-content">
-        <div class="title">
-            {#each title.split('\n') as titleLine}
-                <div class="section-title">{titleLine}</div>
-            {/each}
+        <div id="intro-content-block">
+            <div class="title">
+                {#each title.split('\n') as titleLine}
+                    <div class="section-title">{titleLine}</div>
+                {/each}
+            </div>
+            <ProfessionalLinkRow imageLinks={links}/>
+        
+            <div class="section-body">
+                {#each extraDescriptor.split('\n') as desLine}
+                    <p>{desLine}</p>
+                {/each}
+            </div>
+        
+            <div id="navigation-links">
+                <a class="word-link" href="#projects-section">
+                    <b>Projects</b>
+                </a>
+                <a class="word-link" href="#about-me-section">
+                    <b>About Me</b>
+                </a>
+                <a class="word-link" href="#skills-section">
+                    <b>Skills</b>
+                </a>
+                <a class="word-link" href="#contact-section">
+                    <b>Contact Me</b>
+                </a>
+            </div>
         </div>
-        <ProfessionalLinkRow imageLinks={links}/>
-    
-        <div class="section-body">
-            {#each extraDescriptor.split('\n') as desLine}
-                <p>{desLine}</p>
-            {/each}
-        </div>
-    
-        <div id="navigation-links">
-            <a class="word-link" href="#projects-section">
-                <b>Projects</b>
-            </a>
-            <a class="word-link" href="#about-me-section">
-                <b>About Me</b>
-            </a>
-            <a class="word-link" href="#skills-section">
-                <b>Skills</b>
-            </a>
-            <a class="word-link" href="#contact-section">
-                <b>Contact Me</b>
-            </a>
-        </div>
-    </div>
-    
+        <HeaderNavToolbar/>
+    </div>  
 </div>

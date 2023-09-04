@@ -24,6 +24,7 @@
 	"type": "module",
 	"dependencies": {
 		"@aws-sdk/client-ses": "^3.395.0",
+		"@supabase/auth-helpers-sveltekit": "^0.10.2",
 		"@supabase/supabase-js": "^2.33.1",
 		"aws-sdk": "^2.1440.0",
 		"snarkdown": "^2.0.0",

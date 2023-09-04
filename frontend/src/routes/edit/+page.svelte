@@ -1,0 +1,5 @@
+
+
+<div id="editorPage">
+    <h1>Editor</h1>
+</div>
