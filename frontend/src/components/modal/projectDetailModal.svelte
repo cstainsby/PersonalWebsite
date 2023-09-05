@@ -134,6 +134,8 @@
 
 <GenericModal {onOpen} {onClose}>
     <span slot="title">Details</span>
-    <span slot="open-clickable-element">Details</span>
+    <button slot="open-clickable-element" class="word-link">
+        Details
+    </button>
     <div slot="content">{@html snarkdown(readmeContent)}</div>
 </GenericModal>

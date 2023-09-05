@@ -1,7 +1,6 @@
-// import type { LayoutServerLoad } from "./$types"
-
-// export const load: LayoutServerLoad = async (event) => {
-//   return {
-//     session: await event.locals.getSession(),
-//   }
-// }
+// makes the session across the UI 
+export const load = async ({ locals: { getSession } }) => {
+    return {
+        session: await getSession(),
+    }
+  }

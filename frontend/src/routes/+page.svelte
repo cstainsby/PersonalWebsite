@@ -6,7 +6,7 @@
     import ContactMeSection from "../components/contactMeSection.svelte";
 
     import type { PageServerData } from './$types';
-    import type { WebsiteData } from '$lib/websiteInterfaces';
+    import type { WebsiteData } from "$lib/templates/WebsiteData";
 
     import { writable } from "svelte/store";
     import Toasts from "../components/Toasts.svelte";

@@ -1,21 +1,15 @@
 
 <script lang="ts">
-    import { enhance } from "$app/forms";
-    import type { SubmitFunction } from "@sveltejs/kit";
-    import { signInWithProvider } from "$lib/userStore";
+    import LoginModal from "./modal/loginModal.svelte";
+    import { isAuthenticated } from '$lib/authStore'
 
-    let isSignedIn = false;
+    let isSignedIn: boolean;
+    isAuthenticated.subscribe((value) => {
+        isSignedIn = value
+    })
 
-    const submitSocialLogin: SubmitFunction = async ({ action, cancel }) => {
-        switch (action.searchParams.get('provider')) {
-            case "github":
-                await signInWithProvider("github")
-                break;
-            default:
-                break;
-        } 
-        cancel();
-    }
+    // const { data: { user } } = await supabase.auth.getUser()
+        // .then()
 
 </script>
 
@@ -25,7 +19,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-direction: row;
+        flex-direction: column;
         z-index: 99999;
         background-color: var(--white);
         color: var(--darkT-black-2);
@@ -37,34 +31,26 @@
         margin-bottom: 128px;
         padding: 8px;
         border-radius: 4px;
+        border-style: solid;
+        border-color: var(--blue);
 
-        button {
-            margin-left: 8px;
-            margin-right: 8px;
+        // all listed elements
+        & > * {
+            margin-top: 4px;
+            margin-bottom: 4px;
         }
     }
 </style>
 
 <div id="header-nav-toolbar">
-    <!-- <form method="POST" use:enhance={submitSocialLogin}>
-        <button formaction="?/login&provider=github">Github</button>
-    </form> -->
     {#if isSignedIn}
-        <!-- <button class="image-link">
-            <img src="media/user.png" alt="Sign In" title="Sign In" height="30px" width="30px"/>
-        </button> -->
-    {:else}
-        <form method="POST" use:enhance={submitSocialLogin}>
-            <button class="image-link">
-                <img src="media/user.png" alt="Sign In" title="Sign In" height="30px" width="30px"/>
-            </button>
-        </form>
-    {/if}
-
-    {#if isSignedIn} 
-        <button class="image-link">
+        <a class="image-link" href="/edit">
             <img src="media/edit.png" alt="Edit" title="Edit" height="30px" width="30px"/>
-        </button>
+        </a>
+    {:else}
+        <a class="image-link" href="/auth">
+            <img src="media/user.png" alt="Edit" title="Edit" height="30px" width="30px"/>
+        </a>
     {/if}
     
     <button class="image-link">

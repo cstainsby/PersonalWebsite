@@ -40,40 +40,27 @@ export const actions: Actions = {
         return { success: false}
 	},
 
-    login: async ({ request, locals, url }) => {
-
-        const provider = url.searchParams.get("provider") as Provider
-        const body = Object.fromEntries(await request.formData())
-
-        // const { data, error: err } = await locals.sb.auth.signInWithPassword({
-        //     email: body.email as string,
-        //     password: body.password as string
-        // }) 
-
-        if (provider) {
-            const { data, error: err } = await locals.sb.auth.signInWithOAuth({
-                provider: provider
-            })
-
-            if (err) {
-                return fail(400, {
-                    message: "Somthing went wrong."
-                })
-            }
-            throw redirect(303, data.url)
+    login: async ({ request, url, locals: { supabase } }) => {
+        const formData = await request.formData()
+        const email = formData.get('email') as string
+        const password = formData.get('password') as string
+    
+        const { error } = await supabase.auth.signUp({
+            email,
+            password,
+            options: {
+                emailRedirectTo: `${url.origin}/auth/callback`,
+            },
+        })
+    
+        if (error) {
+            return fail(500, { message: 'Server error. Try again later.', success: false, email })
         }
-
-        // if (err) {
-        //     if (err instanceof AuthApiError && err.status === 400) {
-        //         return fail(400, {
-        //             error: "Invalid credentials"
-        //         })
-        //     }
-        //     return fail(500, {
-        //         message: "Server error. Try again."
-        //     })
-        // }
-        throw redirect(303, "/")
+    
+        return {
+            message: 'Please check your email for a magic link to log into the website.',
+            success: true,
+        }
     },
 };
 

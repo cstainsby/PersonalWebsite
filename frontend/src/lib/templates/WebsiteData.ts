@@ -5,11 +5,12 @@ import type { PersonalBlurb } from "./PersonalBlurb"
 import type { Project } from "./Project"
 import type { Skill } from "./Skill"
 import type { User } from "./User"
+import type { ImageLink } from "./ImageLink"
 
 /** WebsiteData
  *      An interface which defines the structure of a the data which goes into a website
  */
-interface WebsiteData {
+export interface WebsiteData {
     websiteName: string
     title: string
     extraDescriptor: string
