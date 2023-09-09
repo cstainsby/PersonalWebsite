@@ -1,8 +1,8 @@
 <script lang="ts">
     import ProfessionalLinkRow from "./professionalLinkRow.svelte";
-    import type { ImageLink } from "$lib/websiteInterfaces";
+    import type { ImageLink } from "$lib/templates/ImageLink";
     import { addToast } from "$lib/toastStore";
-    import type { Toast } from "$lib/websiteInterfaces";
+    import type { Toast } from "$lib/templates/Toast";
     import Spinner from "./Spinner.svelte";
     import type { Email } from "$lib/templates/Email";
 

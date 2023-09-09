@@ -1,21 +1,25 @@
 
 <script lang="ts">
     import LoginModal from "./modal/loginModal.svelte";
-    import { isAuthenticated } from '$lib/authStore'
+    // import { isAuthenticated } from '$lib/userStore'
 
-    let isSignedIn: boolean;
-    isAuthenticated.subscribe((value) => {
-        isSignedIn = value
-    })
+    
+
+    export let isSignedIn: boolean;
+    // isAuthenticated.subscribe((value) => {
+    //     isSignedIn = value
+    // })
+
 
     // const { data: { user } } = await supabase.auth.getUser()
         // .then()
-
+    
 </script>
 
 <style lang="scss">
     #header-nav-toolbar {
-        height: fit-content;
+        height: 40px;
+        width: 40px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -24,15 +28,13 @@
         background-color: var(--white);
         color: var(--darkT-black-2);
 
-        max-width: fit-content;
-
         position: sticky;
         top: 32px;
         margin-bottom: 128px;
         padding: 8px;
-        border-radius: 4px;
-        border-style: solid;
-        border-color: var(--blue);
+        border-radius: 50%;
+        // border-style: solid;
+        // border-color: var(--blue);
 
         // all listed elements
         & > * {
@@ -44,16 +46,16 @@
 
 <div id="header-nav-toolbar">
     {#if isSignedIn}
-        <a class="image-link" href="/edit">
+        <a href="/edit">
             <img src="media/edit.png" alt="Edit" title="Edit" height="30px" width="30px"/>
         </a>
     {:else}
-        <a class="image-link" href="/auth">
-            <img src="media/user.png" alt="Edit" title="Edit" height="30px" width="30px"/>
+        <a href="/auth">
+            <img src="media/user.png" alt="Sign In" title="Sign In" height="30px" width="30px"/>
         </a>
     {/if}
     
-    <button class="image-link">
+    <!-- <button class="image-link">
         <img src="media/setting.png" alt="Settings" title="Settings" height="30px" width="30px"/>
-    </button>
+    </button> -->
 </div>

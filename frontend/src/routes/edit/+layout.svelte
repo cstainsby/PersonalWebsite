@@ -1,13 +1,14 @@
 
 <script lang="ts">
     import DataSelectorSidebar from "./dataSelectorSidebar.svelte";
+    import Toasts from "../../components/Toasts.svelte";
 
-    import { isAuthenticated } from '$lib/authStore'
+    // import { isAuthenticated } from '$lib/userStore'
 
     let isSignedIn: boolean;
-    isAuthenticated.subscribe((value) => {
-        isSignedIn = value
-    })
+    // isAuthenticated.subscribe((value) => {
+    //     isSignedIn = value
+    // })
 </script>
 
 <style lang="scss">
@@ -18,6 +19,7 @@
 </style>
 
 <div id="edit-layout">
+    <Toasts/>
     <a href="/">Back</a>
     {#if isSignedIn}
         <slot/>

@@ -1,5 +1,4 @@
-import type Skill from "./Skill"
-import type Stack from "./Stack"
+import type { Skill } from "./Skill"
 
 export interface GithubInfo {
     repoOwner: string

@@ -1,7 +1,6 @@
 <script lang="ts">
     import { invalidate } from '$app/navigation'
     import { onMount } from 'svelte'
-    import { isAuthenticated } from '$lib/authStore'
   
     export let data
   
@@ -9,14 +8,13 @@
     $: ({ supabase, session } = data)
   
     onMount(() => {
+        // root layout monitors the state of authentication 
         const {
             data: { subscription },
         } = supabase.auth.onAuthStateChange((event, _session) => {
             if (_session?.expires_at !== session?.expires_at) {
                 invalidate('supabase:auth')
-                isAuthenticated.set(false)
             } else {
-                isAuthenticated.set(true)
             }
         })
     

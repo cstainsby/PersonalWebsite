@@ -10,6 +10,10 @@
     import type { Project } from "$lib/templates/Project"
     import type { Skill } from "$lib/templates/Skill"
 
+    import SkillForm from '../../components/forms/skillForm.svelte';
+    import ProjectForm from '../../components/forms/projectForm.svelte';
+    import EducationForm from '../../components/forms/educationForm.svelte';
+
 
     export let data: PageServerData;
     const websiteData: WebsiteData = data.jsonBlob;
@@ -176,14 +180,44 @@
             <button on:click={() => onDataFilterButtonClick("jobs")}>Jobs</button>
             <button on:click={() => onDataFilterButtonClick("education")}>Education</button>
         </div>
-        <form>
-            {#if selectedDisplayType === "json"}
-                <!-- <textarea id="json-text-area">
+        <div id="data-edit-area">
+            <!-- show what the data would look like when rendered, given the users prefferences as well -->
+            <!-- <div id="example-render">
+                <h3>Example Render</h3>
+                {#if selectedDataFilter === "projects"}
+
+                {:else if selectedDataFilter === "skills"}
+
+                {:else if selectedDataFilter === "jobs"}
+                
+                {:else if selectedDataFilter === "education"}
+                {/if}
+            </div> -->
+
+            <div id="data-editor">
+                {#if selectedDisplayType === "json"}
+                
+                    <JSONEditor content={displayableDataToEditorContentString(displayData)}/>
+                {:else}
+                    {#if selectedDataFilter === "all"}
+                        <h1>Select a filter</h1>
+                    <!-- {:else if selectedDataFilter === ""}
+                        <form> 
+                            
+                        </form> -->
+
+                    {:else if selectedDataFilter === "projects"}
+                        <ProjectForm/>
+                    {:else if selectedDataFilter === "skills"}
+                        <SkillForm/>
+                    {:else if selectedDataFilter === "jobs"}
+                        
+                    {:else if selectedDataFilter === "education"}
+                        <EducationForm/>
+                    {/if}
                     
-                </textarea> -->
-                <JSONEditor content={displayableDataToEditorContentString(displayData)}/>
-            {:else}
-            {/if}
-        </form>
+                {/if}
+            </div>
+        </div>
     </div>
 </div>

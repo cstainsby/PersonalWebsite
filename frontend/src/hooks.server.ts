@@ -1,18 +1,12 @@
-// import type { Handle } from '@sveltejs/kit';
-
-// import { SvelteKitAuth } from "@auth/sveltekit"
-// import GitHub from "@auth/core/providers/github"
-// import { GITHUB_ID, GITHUB_SECRET } from "$env/static/private"
-
-// export const handle = SvelteKitAuth({
-//     providers: [GitHub({ clientId: GITHUB_ID, clientSecret: GITHUB_SECRET })],
-// })
-
-
 import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } from '$env/static/public'
 import { createSupabaseServerClient } from '@supabase/auth-helpers-sveltekit'
 import type { Handle } from '@sveltejs/kit'
 
+/**
+ * All server load functions will have access to the supabase data
+ * @param obj 
+ * @returns 
+ */
 export const handle: Handle = async ({ event, resolve }) => {
     event.locals.supabase = createSupabaseServerClient({
         supabaseUrl: PUBLIC_SUPABASE_URL,
