@@ -9,11 +9,15 @@
         title: string
         extraDescriptor: string
         links: ImageLink[]
+
     }
 
     export let title: HeaderSectionProps["title"];
     export let extraDescriptor: HeaderSectionProps["extraDescriptor"];
-    export let links: HeaderSectionProps["links"]    
+    export let links: HeaderSectionProps["links"]   
+    
+    
+    let isSignedIn = false;
 </script>
 
 <style lang="scss">
@@ -99,6 +103,17 @@
             }
         }
     }
+
+    .account-button {
+        height: 45px;
+        width: 45px;
+        z-index: 99999;
+        background-color: var(--white);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 </style>
 
 
@@ -142,6 +157,15 @@
                 </a>
             </div>
         </div>
-        <HeaderNavToolbar/>
+    
+        {#if isSignedIn}
+            <a class="account-button" href="/edit">
+                <img src="media/edit.png" alt="Edit" title="Edit" height="30px" width="30px"/>
+            </a>
+        {:else}
+            <a class="account-button" href="/login">
+                <img src="media/user.png" alt="Sign In" title="Sign In" height="30px" width="30px"/>
+            </a>
+        {/if}
     </div>  
 </div>

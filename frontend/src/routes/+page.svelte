@@ -14,6 +14,7 @@
   
     export let data: PageServerData;
     
+    
     const websiteData: WebsiteData = data.jsonBlob;
 </script>
 

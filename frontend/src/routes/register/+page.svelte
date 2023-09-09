@@ -8,9 +8,9 @@
 
 <FormContainer>
     <form 
-        action="?/login" 
+        action="?/register" 
         method="POST" use:enhance>
-        <h1>Login</h1>
+        <h1>Register</h1>
         <label>
             Email
             <input name="email" value={form?.email ?? ''} />
@@ -20,9 +20,9 @@
             <input type="password" name="password" />
         </label>
         <p>
-            No Account:
-            <a href="/register" style="color: var(--blue)">Register</a>
+            Already have an account:
+            <a href="/login" style="color: var(--blue)">Login</a>
         </p>
-        <button class="word-link">Sign In</button>
+        <button class="word-link">Sign Up</button>
     </form>
 </FormContainer>

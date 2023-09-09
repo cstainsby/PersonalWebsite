@@ -88,6 +88,7 @@
         text-decoration: none; /* Remove underline from links */
         cursor: pointer; /* Show pointer cursor on hover */
     }
+
     // ------------------------------------------------------------------
     //    global link classes
     // ------------------------------------------------------------------
