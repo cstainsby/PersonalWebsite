@@ -9,10 +9,11 @@
     import type { WebsiteData } from "$lib/templates/WebsiteData";
 
     import { writable } from "svelte/store";
-    import Toasts from "../components/Toasts.svelte";
 
   
     export let data: PageServerData;
+    // console.log("data " + JSON.stringify(data.supabase));
+    
     
     
     const websiteData: WebsiteData = data.jsonBlob;
@@ -33,8 +34,6 @@
 </style>
 
 <div id="personal-website-home">
-    <Toasts/>
-
     <HeaderSection 
         title={websiteData.title}
         extraDescriptor={websiteData.extraDescriptor}

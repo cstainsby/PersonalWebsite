@@ -1,7 +1,6 @@
 
 <script lang="ts">
     import DataSelectorSidebar from "./dataSelectorSidebar.svelte";
-    import Toasts from "../../components/Toasts.svelte";
 
     // import { isAuthenticated } from '$lib/userStore'
 
@@ -19,7 +18,6 @@
 </style>
 
 <div id="edit-layout">
-    <Toasts/>
     <a href="/">Back</a>
     {#if isSignedIn}
         <slot/>

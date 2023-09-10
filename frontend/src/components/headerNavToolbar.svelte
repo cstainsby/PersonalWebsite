@@ -46,7 +46,7 @@
 
 <div id="header-nav-toolbar">
     {#if isSignedIn}
-        <a href="/edit">
+        <a href="/auth/edit">
             <img src="media/edit.png" alt="Edit" title="Edit" height="30px" width="30px"/>
         </a>
     {:else}

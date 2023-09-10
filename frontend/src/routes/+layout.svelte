@@ -1,6 +1,8 @@
 <script lang="ts">
     import { invalidate } from '$app/navigation'
     import { onMount } from 'svelte'
+
+    import Toasts from "../components/Toasts.svelte";
   
     export let data
   
@@ -164,4 +166,10 @@
     // }
 </style>
 
-<slot />
+<div id="root-layout">
+    <!-- allow each page in the app to post toast notifications -->
+    <Toasts/>
+
+    
+    <slot />
+</div>

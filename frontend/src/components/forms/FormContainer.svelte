@@ -1,19 +1,26 @@
 
 
 <script lang="ts">
+    import type { Toast } from "$lib/templates/Toast";
 
     interface FormContainerProps {
         
     }
+
+
+
 </script>
 
 
 <style>
+    .standard-form-container {
+        max-width: 400px;
+        margin: auto;
+    }
+
     .standard-form-container :global(form) {
         display: flex;
         flex-direction: column;
-        max-width: 400px;
-        margin: auto;
     }
   
     .standard-form-container :global(label) {

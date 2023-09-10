@@ -159,11 +159,11 @@
         </div>
     
         {#if isSignedIn}
-            <a class="account-button" href="/edit">
+            <a class="account-button" href="/auth/edit">
                 <img src="media/edit.png" alt="Edit" title="Edit" height="30px" width="30px"/>
             </a>
         {:else}
-            <a class="account-button" href="/login">
+            <a class="account-button" href="/auth/login">
                 <img src="media/user.png" alt="Sign In" title="Sign In" height="30px" width="30px"/>
             </a>
         {/if}
