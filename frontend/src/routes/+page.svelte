@@ -8,12 +8,21 @@
     import type { PageServerData } from './$types';
     import type { WebsiteData } from "$lib/templates/WebsiteData";
 
-    import { writable } from "svelte/store";
+    import { publicUserData } from "$lib/userStore";
 
   
-    export let data: PageServerData;
-    // console.log("data " + JSON.stringify(data.supabase));
+    export let data;
+    console.log(data.supabase);
     
+    if (data?.supabase) {
+        let name = ""
+        let email = ""
+
+        publicUserData.set({
+            name: name,
+            email: email
+        })
+    }
     
     
     const websiteData: WebsiteData = data.jsonBlob;

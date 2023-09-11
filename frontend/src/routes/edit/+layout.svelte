@@ -1,13 +1,20 @@
 
 <script lang="ts">
     import DataSelectorSidebar from "./dataSelectorSidebar.svelte";
+    import { publicUserData } from "$lib/userStore";
+    import { redirect } from "@sveltejs/kit";
 
-    // import { isAuthenticated } from '$lib/userStore'
+    let isSignedIn = false;
+    publicUserData.subscribe(value => {
+        if (value) {
+            isSignedIn = true
+        }
+    });
 
-    let isSignedIn: boolean;
-    // isAuthenticated.subscribe((value) => {
-    //     isSignedIn = value
-    // })
+    // redirect user to the login page if the user isn't signed in
+    if (!isSignedIn) {
+        throw redirect(300, "/auth/login")
+    } 
 </script>
 
 <style lang="scss">
@@ -19,9 +26,5 @@
 
 <div id="edit-layout">
     <a href="/">Back</a>
-    {#if isSignedIn}
-        <slot/>
-    {:else}
-
-    {/if}
+    <slot/>
 </div>

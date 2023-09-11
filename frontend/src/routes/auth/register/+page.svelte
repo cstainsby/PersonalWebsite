@@ -48,7 +48,6 @@
     
         applyAction(result);
     }
-
 </script>
 
 {#if !successfulRegistration}

@@ -4,6 +4,7 @@
     import type { ImageLink } from "$lib/websiteInterfaces";
     // import MenuToolbar from "./headerNavToolbar.svelte";
     import HeaderNavToolbar from "./headerNavToolbar.svelte";
+    import { publicUserData } from "$lib/userStore";
 
     interface HeaderSectionProps {
         title: string
@@ -16,8 +17,12 @@
     export let extraDescriptor: HeaderSectionProps["extraDescriptor"];
     export let links: HeaderSectionProps["links"]   
     
-    
     let isSignedIn = false;
+    publicUserData.subscribe(value => {
+        if (value) {
+            isSignedIn = true
+        }
+    })
 </script>
 
 <style lang="scss">
@@ -159,7 +164,7 @@
         </div>
     
         {#if isSignedIn}
-            <a class="account-button" href="/auth/edit">
+            <a class="account-button" href="/edit">
                 <img src="media/edit.png" alt="Edit" title="Edit" height="30px" width="30px"/>
             </a>
         {:else}
