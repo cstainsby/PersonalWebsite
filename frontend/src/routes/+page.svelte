@@ -14,15 +14,19 @@
     export let data;
     
     if (data?.supabase) {
-        let name = ""
-        let email = ""
-        let userId = "";
-
-        publicUserData.set({
-            name: name,
-            userId: userId,
-            email: email
-        })
+        // get public user data for rendering in page
+        data.supabase.auth.getUser()
+            .then(userRes => {
+                const { data: { user }} = userRes
+                console.log(user?.user_metadata);
+                
+                publicUserData.set({
+                    name: user?.user_metadata.name ? user?.user_metadata.name : "",
+                    authenticated: user?.aud ? (user.aud === "authenticated") : false,
+                    userId: user?.id ? user.id : "",
+                    email: user?.email ? user.email : ""
+                })
+            })
     }
     
     

@@ -11,12 +11,6 @@
 
     const changeTab = (newTab: Tab) => {
         selectedTab = newTab;
-        console.log("new selected tab " + selectedTab);
-        
-    }
-
-    function highlightTabIfSelected(tab: Tab) {
-        return selectedTab === tab ? 'selected-tab' : '';
     }
 
     onMount(() => {
@@ -60,15 +54,15 @@
         <a href="/">Back</a>
         <a 
             href="/personal-portal/"
-            class="{highlightTabIfSelected("Profile")}" 
+            class:selected-tab={selectedTab === "Profile"}
             on:click={() => changeTab("Profile")}>Profile</a>
         <a 
             href="/personal-portal/website" 
-            class="{highlightTabIfSelected("Website")}" 
+            class:selected-tab={selectedTab === "Website"}
             on:click={() => changeTab("Website")}>Website</a>
         <a 
             href="/personal-portal/employment" 
-            class="{highlightTabIfSelected("Employment")}" 
+            class:selected-tab={selectedTab === "Employment"}
             on:click={() => changeTab("Employment")}>Employment</a>
     </div>
 

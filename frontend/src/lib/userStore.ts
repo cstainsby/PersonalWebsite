@@ -3,7 +3,8 @@ import { writable, type Writable } from 'svelte/store';
 
 
 interface SignedInUser {
-    name?: string
+    name: string
+    authenticated: boolean
     userId: string
     email: string
 }

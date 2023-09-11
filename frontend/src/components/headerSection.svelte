@@ -3,7 +3,6 @@
 
     import type { ImageLink } from "$lib/websiteInterfaces";
     // import MenuToolbar from "./headerNavToolbar.svelte";
-    import HeaderNavToolbar from "./headerNavToolbar.svelte";
     import { publicUserData } from "$lib/userStore";
 
     interface HeaderSectionProps {
@@ -16,11 +15,18 @@
     export let title: HeaderSectionProps["title"];
     export let extraDescriptor: HeaderSectionProps["extraDescriptor"];
     export let links: HeaderSectionProps["links"]   
+
+    let accountDropdownLabel: string = "";
+    let accountDropdownToggle: boolean = false;
     
     let isSignedIn = false;
-    publicUserData.subscribe(value => {
-        if (value) {
+    publicUserData.subscribe(data => {
+        if (data && data.authenticated) {
             isSignedIn = true
+
+            if (data.name && data.name.length > 0) {
+                accountDropdownLabel = data.name[0].toUpperCase()
+            } 
         }
     })
 </script>
@@ -118,6 +124,29 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        color: black;
+    }
+
+    .dropdown {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--darkT-grey-1);
+        border-radius: 4px;
+        padding: 4px;
+        margin-top: 4px;
+        width: 128px;
+    }
+
+    .dropdown-container {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        position: sticky;
+        top: 32px;
+        margin-bottom: 64px;
+        z-index: 99999;
+        
+        height: fit-content;
     }
 </style>
 
@@ -162,15 +191,24 @@
                 </a>
             </div>
         </div>
-    
-        {#if isSignedIn}
-            <a class="account-button" href="/personal-portal">
-                <img src="media/edit.png" alt="Edit" title="Edit" height="30px" width="30px"/>
-            </a>
-        {:else}
-            <a class="account-button" href="/auth/login">
-                <img src="media/user.png" alt="Sign In" title="Sign In" height="30px" width="30px"/>
-            </a>
-        {/if}
+        
+        <div class="dropdown-container">
+            {#if isSignedIn}
+                <button class="account-button" on:click={() => { accountDropdownToggle = !accountDropdownToggle }}>
+                    <h2>{accountDropdownLabel}</h2>
+                </button>
+            {:else}
+                <a class="account-button" href="/auth/login">
+                    <img src="media/user.png" alt="Sign In" title="Sign In" height="30px" width="30px"/>
+                </a>
+            {/if}
+
+            {#if accountDropdownToggle} 
+            <div class="dropdown">
+                <a href="/personal-portal">Profile</a>
+                
+            </div>
+            {/if}
+        </div>
     </div>  
 </div>
