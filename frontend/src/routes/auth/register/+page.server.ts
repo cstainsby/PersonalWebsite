@@ -12,10 +12,7 @@ export const actions: Actions = {
 			email: email,
 			password: password
             
-		})
-
-        console.log("returned data " + JSON.stringify(data));
-        console.log("error " + error);
+		});
 
 		if (error) {
 			if (error instanceof AuthApiError && error.status === 400) {
@@ -26,8 +23,6 @@ export const actions: Actions = {
 			return fail(500, {
 				error: "Server error. Please try again later.",
 			})
-		} else {
-            return data
-        }
+		} 
 	},
 }

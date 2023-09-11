@@ -46,8 +46,6 @@
     function setUploadedFilesInLocalStorage(uploadedFiles: File[]) {
         const fileJsonString = JSON.stringify(uploadedFiles)
         localStorage.setItem(uploadedFilesLocalStoreKey, fileJsonString)
-        console.log("Placed file into local store: " + fileJsonString);
-        
     }
 
     /**

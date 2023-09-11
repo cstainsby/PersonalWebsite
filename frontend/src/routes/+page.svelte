@@ -12,14 +12,15 @@
 
   
     export let data;
-    console.log(data.supabase);
     
     if (data?.supabase) {
         let name = ""
         let email = ""
+        let userId = "";
 
         publicUserData.set({
             name: name,
+            userId: userId,
             email: email
         })
     }

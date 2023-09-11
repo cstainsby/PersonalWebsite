@@ -21,8 +21,6 @@
         });
     
         const result: ActionResult = deserialize(await response.text());
-
-        console.log("result " + JSON.stringify(result));
         
     
         if (result.type === 'success') {
@@ -45,17 +43,6 @@
         }
     
         applyAction(result);
-    }
-
-    const submitSocialLogin: SubmitFunction = async ({ action, cancel }) => {
-        switch (action.searchParams.get('provider')) {
-            case "github":
-                await signInWithProvider("github")
-                break;
-            default:
-                break;
-        } 
-        cancel();
     }
 </script>
 

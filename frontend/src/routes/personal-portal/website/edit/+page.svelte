@@ -51,11 +51,8 @@
     const onDataFilterButtonClick = (filterBy: DataFilterType) => {
         selectedDataFilter = filterBy;
         localStorage.setItem(selectedDataFilterLocalStorageKey, filterBy)
-        console.log("filtering by " + filterBy);
         
         const filteredData = getDataByFilterForDisplay(filterBy)
-        console.log(filteredData);
-        
 
         displayData = filteredData
     }

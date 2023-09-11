@@ -164,7 +164,7 @@
         </div>
     
         {#if isSignedIn}
-            <a class="account-button" href="/edit">
+            <a class="account-button" href="/personal-portal">
                 <img src="media/edit.png" alt="Edit" title="Edit" height="30px" width="30px"/>
             </a>
         {:else}
