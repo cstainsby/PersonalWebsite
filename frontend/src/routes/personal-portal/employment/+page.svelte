@@ -1,5 +1,6 @@
 
 <script lang="ts">
+    import CollapsableSection from "$components/CollapsableSection.svelte";
     import FormContainer from "$components/forms/FormContainer.svelte";
     import GenericModal from "$components/modal/genericModal.svelte"
     import type { JobApplication } from "$lib/templates/JobApplication";
@@ -76,13 +77,13 @@
 <h3>Past Employment</h3>
 
 <h3>Current Status</h3>
-
-{#if isCurrentlyEmployed}
-    <div>
-
-    </div>
-{:else}
-    <div class="table-container">
+<CollapsableSection title="Job Hunt">
+    <p slot="info">
+        This section, by default, will show you the jobs that you have applied for since marking 
+        a job as <b>"Accepted"</b> in the status section. If you want to see the a full list of 
+        applications follow <a>This Link</a> 
+    </p>
+    <div slot="content" class="table-container">
         <div class="header">
             <h3>Applications Sent</h3>
             <GenericModal> 
@@ -175,4 +176,15 @@
             {/each}
         </table>
     </div>
+</CollapsableSection>
+
+
+
+
+{#if isCurrentlyEmployed}
+    <div>
+
+    </div>
+{:else}
+    
 {/if}

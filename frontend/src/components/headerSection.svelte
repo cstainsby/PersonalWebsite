@@ -1,7 +1,7 @@
 <script lang="ts">
     import ProfessionalLinkRow from "./professionalLinkRow.svelte";
 
-    import type { ImageLink } from "$lib/websiteInterfaces";
+    import type { ImageLink } from "$lib/templates/ImageLink";
     // import MenuToolbar from "./headerNavToolbar.svelte";
     import { publicUserData } from "$lib/userStore";
 
@@ -27,8 +27,39 @@
             if (data.name && data.name.length > 0) {
                 accountDropdownLabel = data.name[0].toUpperCase()
             } 
+        } else {
+            isSignedIn = false;
+            accountDropdownLabel = "";
         }
     })
+
+
+    function onSignOutButtonClick() {
+        fetch('/auth/logout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            // Add any other headers if required (e.g., authorization token)
+        },
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            publicUserData.set(null)
+        })
+        .then(data => {
+            // Handle successful response (if any)
+            console.log('Logged out successfully', data);
+        })
+        .catch(error => {
+            // Handle errors
+            console.error('Error logging out:', error);
+        })
+        .finally(() => {
+            accountDropdownToggle = false;
+        });
+    }
 </script>
 
 <style lang="scss">
@@ -136,11 +167,15 @@
         margin-top: 4px;
         width: 128px;
 
-        & > a {
+        & > a, button {
             padding: 8px;
             border-radius: 4px;
+            text-align: start;
         }
         & > a:hover {
+            background-color: grey;
+        }
+        & > button:hover {
             background-color: grey;
         }
     }
@@ -225,6 +260,8 @@
                 <a href="/personal-portal">Profile</a>
                 <a href="/personal-portal/website">Website</a>
                 <a href="/personal-portal/employment">Employment</a>
+                <div style="width: 80%; align-self:center;"><hr/></div>
+                <button on:click={onSignOutButtonClick}>Sign Out</button>
             </div>
             {/if}
         </div>

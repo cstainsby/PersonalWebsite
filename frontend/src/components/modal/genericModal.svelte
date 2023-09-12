@@ -5,25 +5,10 @@
     import { timeout } from "$lib/frontendUtil";
 
 
-    // interface ProjectDetailModalProps {
-    //     buttonText: string
-    //     projectName: string 
-
-    //     // readme can either use a string to point to a location on 
-    //     readmeSrc: "local" | "github"
-
-    //     githubProjectInfo?: GithubInfo
-    // }
-
     interface GenericModal {
         onOpen?: () => Promise<void>  // calls this function on open
         onClose?: () => Promise<void> // calls this function on close
     }
-
-    // export let buttonText: ProjectDetailModalProps["buttonText"];
-    // export let projectName: ProjectDetailModalProps["projectName"];
-    // export let readmeSrc: ProjectDetailModalProps["readmeSrc"];
-    // export let githubProjectInfo: ProjectDetailModalProps["githubProjectInfo"];
 
     export let onOpen: GenericModal["onOpen"] = async () => {};
     export let onClose: GenericModal["onClose"] = async () => {};

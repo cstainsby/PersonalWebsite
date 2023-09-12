@@ -18,7 +18,6 @@
         data.supabase.auth.getUser()
             .then(userRes => {
                 const { data: { user }} = userRes
-                console.log(user?.user_metadata);
                 
                 publicUserData.set({
                     name: user?.user_metadata.name ? user?.user_metadata.name : "",

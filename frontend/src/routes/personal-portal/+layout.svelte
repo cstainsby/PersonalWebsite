@@ -20,9 +20,27 @@
             }
         });
         // redirect user to the login page if the user isn't signed in
-        if (!isSignedIn) {
-            goto("/auth/login")
+        // if (!isSignedIn) {
+        //     goto("/auth/login")
+        // } 
+
+        // set the currently selected tab
+        const splitRoute = window.location.href.split("/");
+        const layoutRouteRootIndex = splitRoute.indexOf("personal-portal");
+        console.log(splitRoute[splitRoute.length - 1]);
+        // no extra directions after route? default to profile 
+        if(layoutRouteRootIndex === splitRoute.length - 1) {
+            selectedTab = "Profile"
         } 
+        let extraSubRouteLabel = splitRoute[splitRoute.length - 1]
+        switch (extraSubRouteLabel) {
+            case "website": selectedTab = "Website"; break;
+            case "employment": selectedTab = "Employment"; break;
+            default: 
+                selectedTab = "Profile"; 
+                goto("/personal-portal")
+                break;
+        }
     })
 </script>
 
