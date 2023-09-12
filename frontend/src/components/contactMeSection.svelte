@@ -20,6 +20,11 @@
     let sendingMail = false
     let responseMessage = ""
 
+    /**
+     * On the email send button event, pull the data out of the email form and post it to the 
+     * AWS SES email endpoint in the sveltekit server
+     * @param e
+     */
     const onEmailSend = async (e: SubmitEvent) => {
         e.preventDefault()
 
@@ -60,8 +65,6 @@
                 }
 
                 const emailSentSuccessfully = resData[resDataDirector.success]
-                console.log(emailSentSuccessfully);
-                
 
                 if (emailSentSuccessfully) {
                     emailSuccessFlag = true;

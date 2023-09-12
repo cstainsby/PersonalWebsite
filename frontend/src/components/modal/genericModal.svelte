@@ -25,8 +25,8 @@
     // export let readmeSrc: ProjectDetailModalProps["readmeSrc"];
     // export let githubProjectInfo: ProjectDetailModalProps["githubProjectInfo"];
 
-    export let onOpen: GenericModal["onOpen"];
-    export let onClose: GenericModal["onClose"];
+    export let onOpen: GenericModal["onOpen"] = async () => {};
+    export let onClose: GenericModal["onClose"] = async () => {};
   
     let showDialog: boolean = false; // toggle for showing modal
     let isLoading: boolean = true;   // toggle for showing that modal is lodaing
@@ -54,7 +54,7 @@
         isLoading = true;
         disablePageScroll();
 
-        if (onOpen !== undefined) {
+        if (onOpen) {
             onOpen()
                 .then(() => {
                     isLoading = false;
@@ -65,7 +65,7 @@
     };
 
     const closeDialog = () => {
-        if (onClose !== undefined) {
+        if (onClose) {
             onClose()
                 .then(() => {
                     isLoading = false;
@@ -137,9 +137,9 @@
     <div class="modal-overlay">
         <div class="dialog">
             <div class="dialog-header">
-                <h1>
+                <h3>
                     <slot name="title"/>
-                </h1>
+                </h3>
                 <button on:click={closeDialog}>
                     <img src="media/close.png" alt="Close" height="20">
                 </button>

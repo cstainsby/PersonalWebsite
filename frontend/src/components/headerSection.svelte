@@ -135,6 +135,14 @@
         padding: 4px;
         margin-top: 4px;
         width: 128px;
+
+        & > a {
+            padding: 8px;
+            border-radius: 4px;
+        }
+        & > a:hover {
+            background-color: grey;
+        }
     }
 
     .dropdown-container {
@@ -147,6 +155,14 @@
         z-index: 99999;
         
         height: fit-content;
+
+        // & > .background {
+        //     height: 100vh;
+        //     width: 100vw;
+        //     position: absolute;
+        //     top: 0;
+        //     z-index: 2;
+        // }
     }
 </style>
 
@@ -193,6 +209,7 @@
         </div>
         
         <div class="dropdown-container">
+            <!-- <div class="background"></div> -->
             {#if isSignedIn}
                 <button class="account-button" on:click={() => { accountDropdownToggle = !accountDropdownToggle }}>
                     <h2>{accountDropdownLabel}</h2>
@@ -206,7 +223,8 @@
             {#if accountDropdownToggle} 
             <div class="dropdown">
                 <a href="/personal-portal">Profile</a>
-                
+                <a href="/personal-portal/website">Website</a>
+                <a href="/personal-portal/employment">Employment</a>
             </div>
             {/if}
         </div>
