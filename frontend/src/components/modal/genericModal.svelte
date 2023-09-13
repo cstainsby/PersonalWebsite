@@ -112,10 +112,14 @@
         justify-content: center;
         align-items: center;
     }
+
+    // .add-button {
+    //     margin-left: auto;
+    // }
 </style>
 
 <!-- open button allows for any clickable to trigger the open procedure -->
-<div on:click={openDialog}>
+<div class="add-button" on:click={openDialog}>
     <slot name="open-clickable-element"/>
 </div>
 {#if showDialog === true}

@@ -47,7 +47,8 @@
 <style lang="scss">
     .top-bar {
         width: fit-content;
-        background-color: var(--darkT-grey-2);
+        // background-color: var(--darkT-grey-2);
+        background-color: var(--darkT-grey-1);
         margin: 8px;
         font-size: large;
         border-radius: 4px;
