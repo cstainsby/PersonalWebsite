@@ -3,14 +3,50 @@
     import { publicUserData } from "$lib/userStore";
     import { goto } from "$app/navigation";
     import { onMount } from "svelte";
+    import UserIconButton from "$components/UserIconButton.svelte";
 
-    type Tab = "Profile" | "Website" | "Employment"
+    type MainTab = "Profile" | "Website" | "Employment"
+    type ProfileTabSubSections = ""
+    type EmploymentTabSubSections = "Resume"
+    type WebsiteTabSubSections = ""
+
+    interface TabPathInfo {
+        mainTabName: string
+        subTabs?: string[]
+    }
+
+    interface SelectedPathingInfo {
+        mainTabSelected: string
+        subsectionTabSelected?: string 
+    }
+
 
     let isSignedIn = false;
-    let selectedTab: Tab = "Profile"
+    let selectedTab: MainTab = "Profile"
+    let subTabText: string | null = null
 
-    const changeTab = (newTab: Tab) => {
+    const changeTab = (newTab: MainTab) => {
         selectedTab = newTab;
+    }
+
+    function parseCurrentPath(currentHref: string): SelectedPathingInfo {
+        const splitRoute = currentHref.split("/");
+        const layoutRouteRootIndex = splitRoute.indexOf("personal-portal");
+
+        let pathInfo: SelectedPathingInfo = {
+            mainTabSelected: "Profile"
+        }
+        let mainTabRouteLabel = splitRoute[layoutRouteRootIndex + 1]
+        if(mainTabRouteLabel) {
+            pathInfo.mainTabSelected = mainTabRouteLabel
+        }
+
+        let subTabRouteLabel = splitRoute[layoutRouteRootIndex + 2]
+        if (subTabRouteLabel) {
+            pathInfo["subsectionTabSelected"] = subTabRouteLabel
+        }
+
+        return pathInfo
     }
 
     onMount(() => {
@@ -25,17 +61,22 @@
         // } 
 
         // set the currently selected tab
-        const splitRoute = window.location.href.split("/");
-        const layoutRouteRootIndex = splitRoute.indexOf("personal-portal");
-        console.log(splitRoute[splitRoute.length - 1]);
-        // no extra directions after route? default to profile 
-        if(layoutRouteRootIndex === splitRoute.length - 1) {
-            selectedTab = "Profile"
-        } 
-        let extraSubRouteLabel = splitRoute[splitRoute.length - 1]
-        switch (extraSubRouteLabel) {
-            case "website": selectedTab = "Website"; break;
-            case "employment": selectedTab = "Employment"; break;
+
+        let pathInfo = parseCurrentPath(window.location.href)
+        pathInfo.subsectionTabSelected 
+            ? (subTabText = pathInfo.subsectionTabSelected)
+            : null
+        
+        
+        switch (pathInfo.mainTabSelected) {
+            case "website": 
+                selectedTab = "Website"; 
+                pathInfo.subsectionTabSelected 
+                    && (subTabText = pathInfo.subsectionTabSelected);
+                break;
+            case "employment": 
+                selectedTab = "Employment"; 
+                break;
             default: 
                 selectedTab = "Profile"; 
                 goto("/personal-portal")
@@ -46,17 +87,39 @@
 
 <style lang="scss">
     .top-bar {
-        width: fit-content;
-        // background-color: var(--darkT-grey-2);
+        height: 65px;
+        display: flex;
         background-color: var(--darkT-grey-1);
-        margin: 8px;
         font-size: large;
-        border-radius: 4px;
+        align-items: center;
+        border-color: black;
 
         & > a {
+            // display: flex;
+            //     flex-direction: column;
             margin: 8px;
             padding: 4px;
             border-radius: 4px;
+
+            .link-contents {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+
+                & > img {
+                    margin-left: 8px;
+                    transform: rotate(90deg)
+                }
+            }
+
+            .link-text {
+                display: flex;
+                flex-direction: column;
+
+                & > small {
+                    margin-left: auto;
+                }
+            }
         }
         & > a:hover {
             background-color: grey;
@@ -66,6 +129,10 @@
     .selected-tab {
         background-color: var(--blue);
     }
+
+    // .user-button-container {
+    //     margin-left: auto;
+    // }
 </style>
 
 <div id="portal-layout">
@@ -74,7 +141,9 @@
         <a 
             href="/personal-portal/"
             class:selected-tab={selectedTab === "Profile"}
-            on:click={() => changeTab("Profile")}>Profile</a>
+            on:click={() => changeTab("Profile")}>
+            Profile
+        </a>
         <a 
             href="/personal-portal/website" 
             class:selected-tab={selectedTab === "Website"}
@@ -82,7 +151,21 @@
         <a 
             href="/personal-portal/employment" 
             class:selected-tab={selectedTab === "Employment"}
-            on:click={() => changeTab("Employment")}>Employment</a>
+            on:click={() => changeTab("Employment")}>
+            <div class="link-contents">
+                <div class="link-text">
+                    <large>Employment</large>
+                    {#if subTabText && selectedTab === "Employment"} 
+                        <small>{subTabText}</small>
+                    {/if}
+                </div>
+                <img src="../../media/arrow.png" alt="dropdown" height="10px" width="10px"/>
+            </div>
+        </a>
+
+        <div class="user-button-container">
+            <UserIconButton/>
+        </div>
     </div>
 
     <slot/>
