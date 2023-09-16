@@ -1,9 +1,11 @@
 <script lang="ts">
-    import type Job from "../lib/templates/Job";
-    import type PersonalBlurb from "../lib/templates/PersonalBlurb";
-    import type Education from "../lib/templates/Education";
+    import type { Job } from "$lib/templates/Job";
+    import type { PersonalBlurb } from "$lib/templates/PersonalBlurb";
+    import type { Education } from "$lib/templates/Education";
 
     import { yearMonthFormatToDate, convertDateToMonthYearDateDisplayStr } from "$lib/dates"
+    import GenericModal from "./modal/genericModal.svelte";
+    import Project from "./project.svelte";
 
     // import function to register Swiper custom elements
     // import { register } from 'swiper/element/bundle';
@@ -19,6 +21,9 @@
     export let jobs: AboutMeSectionProps["jobs"]
     export let education: AboutMeSectionProps["education"]
     export let personalBlurbs: AboutMeSectionProps["personalBlurbs"]
+
+    console.log(jobs);
+    
 </script>
 
 
@@ -205,6 +210,29 @@
                                     In Progress
                                 {/if}
                             </p>
+                            {#if job.sampleProjects}
+                                <GenericModal>
+                                    <p class="word-link" slot="open-clickable-element">Details</p>
+                                    <h3 slot="title">{job.title} Job Details</h3>
+                                    <div slot="content">
+                                        {#if job.employer}
+                                            <p>Employer: {job.employer}</p>
+                                        {/if}
+                                        <p>
+                                            {convertDateToMonthYearDateDisplayStr(yearMonthFormatToDate(job.startDate))} - 
+                                            {#if job.endDate}
+                                                {convertDateToMonthYearDateDisplayStr(yearMonthFormatToDate(job.endDate))}
+                                            {:else}
+                                                In Progress
+                                            {/if}
+                                        </p>
+                                        <p>{job.jobDescription}</p>
+                                        {#each job.sampleProjects as sampleProject}
+                                            <Project project={sampleProject} projectGridArea={"temp"}/>
+                                        {/each}
+                                    </div>
+                                </GenericModal>
+                            {/if}
                         </div>
                         <img src={String(job.imgPath)} alt={String(job.imgAltText)}/>
                     </div>
@@ -215,55 +243,4 @@
             </div>
         </div>
     {/if}
-
-      <!-- <div id="about-me-work">
-        <div class="row-section">
-          <h2>Work</h2>
-          <div class="listed-item">
-            <div class="listed-item-text-section">
-              <h3>Linear Algebra Researcher</h3>
-              <p>Gonzaga University</p>
-              <p>Jan. 2022 - May 2023</p>
-              <a id="MathResearchBtn" class="button open-modal-button word-link">Details</a>
-              <dialog id="MathResearchModal" class="modal">
-                <div class="proj-dialog-header">
-                  <h1>Math Research</h1>
-                  <a class="close-modal-button image-link" href="#">
-                    <img src="media/close.png" alt="close" height="20">
-                  </a>
-                </div>
-                <hr>
-                <div class="proj-dialog-body">
-                  <div class="dialog-body-text">
-                    <h3 class="dialog-body-section-header">About The Group</h3>
-                    <p>
-                      In this paid research position, I work with two professors and a five-person team to create proofs and solve problems that are important to the larger math community. Our work has included finding proofs to show a relation between upper triangle square root matrices and “Cholesky root” matrices over a field of two, as well as finding how Kneser graphs total roman domination number behave over a range of sizes.
-                    </p>
-                    <hr/>
-                    <div class="dialog-body-diagram-section">
-                      <h3 class="dialog-body-section-header">Cholesky</h3>
-                      <p>I created a script to help my linear algebra research group quickly find matrices of nxn size over a specified field. It uses recursive tree generation and branch pruning to find all possible paths to any given upper triangle square root matrix or “Cholesky root” matrix. 
-                        <b>Follow link on the right for the code.</b>
-                      </p>
-                    </div>
-                    <div class="dialog-body-diagram-section">
-                      <h3 class="dialog-body-section-header">Total Roman Domination</h3>
-                      <p>My team worked on and presented our work on finding either exact values for or bounds of varying Knesser Graphs.
-                        <b>More information about our work can be found through the T.R.D. link</b>
-                      </p>
-                    </div>
-                  </div>
-                  <div class="project-links">
-                    <a class="word-link" href="https://github.com/cstainsby/CholeskyRootsOverF2" target="_blank" rel="noopener noreferrer">
-                      Cholesky Code</a>
-                    <a class="word-link" href="https://github.com/cstainsby/MathResearchPosters" target="_blank" rel="noopener noreferrer">
-                      T.R.D. Poster</a>
-                  </div>
-                </div>
-              </dialog>
-            </div>
-            <img src="media/Math-research-screenshot.png" alt="research screenshot" height="100px">
-          </div>
-        </div>
-    </div> -->
 </div>

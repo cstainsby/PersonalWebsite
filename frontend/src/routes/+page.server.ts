@@ -9,10 +9,17 @@ import { sendEmailViaSES } from "$lib/aws";
 import { AuthApiError, type Provider } from "@supabase/supabase-js";
 
 import { type Education } from '$lib/templates/Education'
+import { getWebsiteData } from '$lib/dynamoDB';
 
-export const load: PageServerLoad = async ({ params }) => {
+export const load: PageServerLoad = async ({ locals: { supabase, getSession } }) => {
+
+    
+
     const jsonBlob = await readPageJsonById(0);  
 
+
+
+    // getWebsiteData()
     
 
     return {

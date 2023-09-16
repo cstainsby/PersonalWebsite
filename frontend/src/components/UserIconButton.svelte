@@ -61,6 +61,8 @@
     }
     
     .dropdown {
+        position: absolute;
+        top: 100%;
         display: flex;
         flex-direction: column;
         background-color: var(--darkT-grey-1);
@@ -68,6 +70,7 @@
         padding: 4px;
         margin-top: 4px;
         width: 128px;
+        border: 2px solid var(--white);
 
         & > a, button {
             padding: 8px;
@@ -86,10 +89,11 @@
         display: flex;
         flex-direction: column;
         align-items: end;
-        position: sticky;
-        top: 32px;
-        margin-bottom: 64px;
+        // position: sticky;
+        // top: 32px;
+        // margin-bottom: 64px;
         z-index: 99999;
+        position: relative;
         
         height: fit-content;
     }

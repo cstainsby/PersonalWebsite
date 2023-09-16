@@ -24,6 +24,7 @@
         display: flex;
         flex-direction: row;
         padding: 24px;
+        margin:12px;
         background-color: var(--darkT-grey-2);
         border-radius: 4px;
 
@@ -134,11 +135,13 @@
                 <a class="word-link" href={String(project.posterLink)} target="_blank" rel="noopener noreferrer">
                     Poster</a>
             {/if}
+            {#if project.githubInfo}
             <ProjectDetailModal 
                 buttonText={"Details"} 
                 projectName={project.name} 
                 readmeSrc={project.readmeLocationSrc}
                 githubProjectInfo={project.githubInfo}/>
+            {/if}
         </div>
     </div> 
     {#if (project.screenShotImgPath)}

@@ -2,12 +2,29 @@
     import { invalidate } from '$app/navigation'
     import { onMount } from 'svelte'
 
+    import { publicUserData } from "$lib/userStore";
+    
     import Toasts from "../components/Toasts.svelte";
   
-    export let data
+    export let data;
   
     let { supabase, session } = data
     $: ({ supabase, session } = data)
+    
+    if (data?.supabase) {
+        // get public user data for rendering in page
+        data.supabase.auth.getUser()
+            .then(userRes => {
+                const { data: { user }} = userRes
+                
+                publicUserData.set({
+                    name: user?.user_metadata.name ? user?.user_metadata.name : "",
+                    authenticated: user?.aud ? (user.aud === "authenticated") : false,
+                    userId: user?.id ? user.id : "",
+                    email: user?.email ? user.email : ""
+                })
+            })
+    }
   
     onMount(() => {
         // root layout monitors the state of authentication 

@@ -54,7 +54,7 @@
                 "screenShotImgPath": "../../media/biopath-screenshot.png",
                 "demoLink": "https://ifdfgjpy82.us-west-2.awsapprunner.com",
                 "posterLink": "https://github.com/cstainsby/BiopathPoster",
-                "repositoryLink": "https://github.com/SD-2022-CPSC-10/BioPath",
+                "repositoryLink": "https://github.com/cstainsby/BioPathBackup",
                 "skillsUsed": [
                     {"name": "Javascript"},
                     {"name": "React"},
@@ -254,10 +254,43 @@
             {
                 "title": "Linear Algebra Researcher",
                 "employer": "Gonzaga University",
+                "jobDescription": "In this paid research position, I work with two professors and a five-person team to create proofs and solve problems that are important to the larger math community. Our work has included finding proofs to show a relation between upper triangle square root matrices and “Cholesky root” matrices over a field of two, as well as finding how Kneser graphs total roman domination number behave over a range of sizes.",
                 "imgPath": "media/Math-research-screenshot.png",
                 "imgAltText": "Petersen Graph",
                 "startDate": "2022-01",
-                "endDate": "2023-05"
+                "endDate": "2023-05",
+
+                "sampleProjects": [
+                    {
+                        "name": "Cholesky Roots Over F2",
+                        "shortDescription": "Math Research Group Project",
+                        "description": "I created a script to help my linear algebra research group quickly find matrices of nxn size over a specified field. It uses recursive tree generation and branch pruning to find all possible paths to any given upper triangle square root matrix or “Cholesky root” matrix",
+                        "repositoryLink": "https://github.com/cstainsby/CholeskyRootsOverF2",
+                        "skillsUsed": [
+                            {"name": "Linear Algebra"},
+                            {"name": "python"},
+                            {"name": "pytest"}
+                        ],
+                        "importanceRanking": 1,
+                        "readmeLocationSrc": "github",
+                        "githubInfo": {
+                            "repoOwner": "cstainsby",
+                            "repoName": "CholeskyRootsOverF2"
+                        }
+                    },
+                    {
+                        "name": "Total Roman Domination",
+                        "shortDescription": "Math Research Group Project",
+                        "description": "My team worked on and presented our work on finding either exact values for or bounds of varying Knesser Graphs.",
+                        "posterLink": "https://github.com/cstainsby/MathResearchPosters",
+                        "skillsUsed": [
+                            {"name": "Linear Algebra"},
+                            {"name": "Graph Theory"}
+                        ],
+                        "importanceRanking": 2,
+                        "readmeLocationSrc": "local"
+                    }
+                ]
             },
             {
                 "title": "Looking For Work",

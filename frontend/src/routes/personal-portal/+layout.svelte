@@ -49,6 +49,11 @@
         return pathInfo
     }
 
+    function onTabButtonClick(newPagePath: string, selectedTab: MainTab) {
+        changeTab(selectedTab)
+        goto(newPagePath)
+    }
+
     onMount(() => {
         publicUserData.subscribe(value => {
             if (value) {
@@ -93,8 +98,10 @@
         font-size: large;
         align-items: center;
         border-color: black;
+        padding-left: 16px;
+        padding-right: 16px;
 
-        & > a {
+        & > button {
             // display: flex;
             //     flex-direction: column;
             margin: 8px;
@@ -121,7 +128,7 @@
                 }
             }
         }
-        & > a:hover {
+        & > button:hover {
             background-color: grey;
         }
     }
@@ -130,38 +137,40 @@
         background-color: var(--blue);
     }
 
-    // .user-button-container {
-    //     margin-left: auto;
-    // }
+    .user-button-container {
+        margin-left: auto;
+    }
 </style>
 
 <div id="portal-layout">
     <div class="top-bar">
-        <a href="/">Back</a>
         <a 
-            href="/personal-portal/"
-            class:selected-tab={selectedTab === "Profile"}
-            on:click={() => changeTab("Profile")}>
-            Profile
+            href="/">
+            Back
         </a>
-        <a 
-            href="/personal-portal/website" 
+        <button 
+            class:selected-tab={selectedTab === "Profile"}
+            on:click={() => onTabButtonClick("/personal-portal/", "Profile")}>
+            Profile
+        </button>
+        <button 
             class:selected-tab={selectedTab === "Website"}
-            on:click={() => changeTab("Website")}>Website</a>
-        <a 
-            href="/personal-portal/employment" 
+            on:click={() => onTabButtonClick("/personal-portal/website", "Website")}>
+            Website
+        </button>
+        <button 
             class:selected-tab={selectedTab === "Employment"}
-            on:click={() => changeTab("Employment")}>
+            on:click={() => onTabButtonClick("/personal-portal/employment", "Employment")}>
             <div class="link-contents">
                 <div class="link-text">
                     <large>Employment</large>
                     {#if subTabText && selectedTab === "Employment"} 
-                        <small>{subTabText}</small>
+                        <small>/{subTabText}</small>
                     {/if}
                 </div>
                 <img src="../../media/arrow.png" alt="dropdown" height="10px" width="10px"/>
             </div>
-        </a>
+        </button>
 
         <div class="user-button-container">
             <UserIconButton/>

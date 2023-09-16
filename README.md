@@ -28,3 +28,4 @@ I would like this app to be a bit more helpful to job search. Building on that s
 
 ### Customizability 
 I would like to add more customizability to the frontend. Because, as of 8/28, everything is being dynamically rendered, I can add addtional design prefference options for each user to make their website unique.
+

@@ -6,6 +6,9 @@
     import PastEmploymentSection from "./PastEmploymentSection.svelte";
     import DocumentsSection from "./DocumentsSection.svelte";
 
+    import type { Job as JobType } from "$lib/templates/Job"
+    import Job from "$components/Job.svelte"
+
     let count: number;
 	let index: number;
 	let offset: number;
@@ -15,6 +18,15 @@
 	let bottom = 0.9;
 
     let isCurrentlyEmployed = false
+
+    let job: JobType = {
+        "title": "Linear Algebra Researcher",
+        "employer": "Gonzaga University",
+        "imgPath": "media/Math-research-screenshot.png",
+        "imgAltText": "Petersen Graph",
+        "startDate": "2022-01",
+        "endDate": "2023-05"
+    }
 </script>
 
 <style lang="scss">
@@ -43,6 +55,8 @@
         <section>This is the third section.</section>
       </div>
 </Scroller> -->
+
+<Job job={job}/>
 <CurrentEmploymentSection/>
 <PastEmploymentSection/>
 <DocumentsSection/>
