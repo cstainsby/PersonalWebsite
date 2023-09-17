@@ -10,9 +10,9 @@
     import type { Project } from "$lib/templates/Project"
     import type { Skill } from "$lib/templates/Skill"
 
-    import SkillForm from '../../components/forms/skillForm.svelte';
-    import ProjectForm from '../../components/forms/projectForm.svelte';
-    import EducationForm from '../../components/forms/educationForm.svelte';
+    // import SkillForm from '../../components/forms/skillForm.svelte';
+    // import ProjectForm from '../../components/forms/projectForm.svelte';
+    // import EducationForm from '../../components/forms/educationForm.svelte';
 
 
     export let data: PageServerData;
@@ -104,10 +104,10 @@
     #editor-page {
         width: 90%
     }
-    #json-text-area {
-        width: 50%;
-        height: auto;
-    }
+    // #json-text-area {
+    //     width: 50%;
+    //     height: auto;
+    // }
     #display-type-selector {
         display: flex;
         flex-direction: row;
@@ -132,10 +132,6 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-
-        & > #save-button {
-            margin-left: auto;
-        }
     }
     .content {
         display: flex;
@@ -150,10 +146,6 @@
                 text-align: left;
                 margin: 8px;
             }
-        }
-
-        & > form {
-            width: inherit
         }
     }
 </style>
@@ -203,14 +195,14 @@
                             
                         </form> -->
 
-                    {:else if selectedDataFilter === "projects"}
+                    <!-- {:else if selectedDataFilter === "projects"}
                         <ProjectForm/>
                     {:else if selectedDataFilter === "skills"}
                         <SkillForm/>
                     {:else if selectedDataFilter === "jobs"}
                         
                     {:else if selectedDataFilter === "education"}
-                        <EducationForm/>
+                        <EducationForm/> -->
                     {/if}
                     
                 {/if}

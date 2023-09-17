@@ -59,45 +59,45 @@
 
 
 <style lang="scss">
-    .job {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        align-items: center;
-        // padding: 12px;
-        width: fit-content;
-        // border: 2px solid var(--darkT-black-2);
-        // background-color: var(--darkT-black-1);
-        border-radius: 4px;
-        min-height: 200px;
-        height: auto;
-        width: 30%;
+    // .job {
+    //     display: flex;
+    //     flex-direction: row;
+    //     justify-content: space-evenly;
+    //     align-items: center;
+    //     // padding: 12px;
+    //     width: fit-content;
+    //     // border: 2px solid var(--darkT-black-2);
+    //     // background-color: var(--darkT-black-1);
+    //     border-radius: 4px;
+    //     min-height: 200px;
+    //     height: auto;
+    //     width: 30%;
 
-        & > div > p {
-            font-size: smaller;
-            margin-left: 8px;
-        }
+    //     & > div > p {
+    //         font-size: smaller;
+    //         margin-left: 8px;
+    //     }
 
-        & img {
-            margin-left: 12px;
-            height: 5rem;
-        }
-    }
+    //     & img {
+    //         margin-left: 12px;
+    //         height: 5rem;
+    //     }
+    // }
 
-    .listed-transition-item {
-        border-radius: 50%;
-        padding: 8px;
-        background-color: var(--blue);
-    }
+    // .listed-transition-item {
+    //     border-radius: 50%;
+    //     padding: 8px;
+    //     background-color: var(--blue);
+    // }
 
-    .listed-item {
-        margin-right: 24px;
+    // .listed-item {
+    //     margin-right: 24px;
 
-        @media (min-width: 0px) and (max-width: 800px) {
-            justify-content: center;
-        }
+    //     @media (min-width: 0px) and (max-width: 800px) {
+    //         justify-content: center;
+    //     }
 
-    }
+    // }
 </style>
 
 <div class="job">

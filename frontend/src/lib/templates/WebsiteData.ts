@@ -14,6 +14,7 @@ export interface WebsiteData {
     websiteName: string
     title: string
     extraDescriptor: string
+    ownedByUserID: string,
 
     user: User
     settings: WebsiteSettings

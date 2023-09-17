@@ -30,9 +30,7 @@
 </script>
 
 <style lang="scss">
-    section {
-        height: 80vh;
-    }
+    
 </style>
 
 <!-- <Scroller
@@ -68,6 +66,6 @@
     <div>
 
     </div>
-{:else}
+<!-- {:else} -->
     
 {/if}

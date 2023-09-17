@@ -10,7 +10,7 @@
     import type { Toast } from "$lib/templates/Toast";
     import { addToast } from "$lib/toastStore";
 
-	export let form;
+	// export let form;
 
     async function handleSubmit(event: { currentTarget: EventTarget & HTMLFormElement }) {
         const data = new FormData(event.currentTarget);
@@ -68,13 +68,13 @@
     #github-oauth-btn {
         background-color: #000000;
     }
-    #discord-oauth-btn {
-        background-color: #7e61ab;
-    }
+    // #discord-oauth-btn {
+    //     background-color: #7e61ab;
+    // }
 </style>
 
 <FormContainer>
-    <form 
+    <!-- <form 
         action="?/login" 
         method="POST" 
         on:submit|preventDefault={handleSubmit}>
@@ -92,7 +92,7 @@
             <a href="/auth/register" style="color: var(--blue)">Register</a>
         </p>
         <button class="word-link">Sign In</button>
-    </form>
+    </form> -->
 
     <div id="or-login-break">
         <hr/>
