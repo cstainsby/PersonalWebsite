@@ -1,35 +1,32 @@
+import { readFileSync } from "fs";
+import { join } from "path"
 
-import { LOCAL_DATA_DIR } from '$env/static/private'
+const localDataDir = join(process.cwd(), "/src/localdata")
 
 /**
  * read page data from local storageS
  * @param userId 
  * @returns 
  */
-async function readPageJsonById(userId: number) {
-    const jsonDataPath = `${LOCAL_DATA_DIR}/sampleInfoJson.json`
+function readPageJsonById(userId: number) {
+    const dataPath = join(localDataDir, "sampleInfoJson.json")
+    const jsonData = readFileSync(dataPath, 'utf-8')
+    const parsedData = JSON.parse(jsonData)
     
-    return await fetch(`${jsonDataPath}`)
-        .then(fullBlobSet => fullBlobSet.json())
-        .then(jsonBlob => jsonBlob[userId])
-        .catch(err => {
-            throw err
-        })
+    return parsedData[userId]
 }
 
 /**
  * read a local project readme from local storage
  * @param projectName 
- * @returns Promise for text content
+ * @returns text content of readme
  */
-async function readReadmeFromLocal(projectName: string): Promise<string> {
-    const filePath = `${LOCAL_DATA_DIR}/readme/${projectName}/README.md`;
-
-    return await fetch(`${filePath}`)
-        .then(readmeFileRes => readmeFileRes.text())
-        .catch(err => {
-            throw err
-        })
+function readReadmeFromLocal(projectName: string): string {
+    const dataPath = join(localDataDir, "readme", projectName, "README.md")
+    const readmeData = readFileSync(dataPath, 'utf-8')
+    // const parsedData = JSON.parse(jsonData)
+    
+    return readmeData
 }
 
 export {

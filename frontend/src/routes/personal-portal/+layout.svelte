@@ -56,7 +56,7 @@
 
     onMount(() => {
         publicUserData.subscribe(value => {
-            if (value) {
+            if (value && value.authenticated) {
                 isSignedIn = true
             }
         });
@@ -143,6 +143,7 @@
 </style>
 
 <div id="portal-layout">
+    {#if isSignedIn}
     <div class="top-bar">
         <a 
             href="/">
@@ -178,4 +179,9 @@
     </div>
 
     <slot/>
+    {:else}
+    <div>
+        Not Signed in
+    </div>
+    {/if}
 </div>

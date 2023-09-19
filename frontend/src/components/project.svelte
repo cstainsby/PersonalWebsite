@@ -135,13 +135,13 @@
                 <a class="word-link" href={String(project.posterLink)} target="_blank" rel="noopener noreferrer">
                     Poster</a>
             {/if}
-            {#if project.githubInfo}
+            <!-- {#if project.githubInfo} -->
             <ProjectDetailModal 
                 buttonText={"Details"} 
                 projectName={project.name} 
                 readmeSrc={project.readmeLocationSrc}
                 githubProjectInfo={project.githubInfo}/>
-            {/if}
+            <!-- {/if} -->
         </div>
     </div> 
     {#if (project.screenShotImgPath)}

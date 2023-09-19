@@ -9,17 +9,30 @@
     import * as d3Sankey from 'd3-sankey';
 
     import type { JobApplication } from "$lib/templates/JobApplication";
+    import ApplicationTable from './ApplicationTable.svelte';
+    import { getUserJobApplications } from '$lib/aws';
+    import { publicUserData } from '$lib/userStore';
 
     // stores the applications sent out since last job was accepted
     let currentApplicationList: JobApplication[] = []
+    publicUserData.subscribe(userInfo => {
+        if (userInfo?.userId) {
+            getUserJobApplications(userInfo.userId)
+            .then(data => {
+                // console.log(data);
+                
+            })
+        }
+    })
 
     let el;
 
     let walgreensApp: JobApplication = {
+        applicantId: "1",
         companyName: "Walgreens",
         positionName: "Software Engineer (RxR) Bellevue V",
         appliedOn: new Date(2023, 7, 12),
-        location: [
+        locations: [
             {
                 cityName: "Bellevue",
                 stateName: "Washington",
@@ -85,3 +98,5 @@
 
 <div bind:this={el} id="sankey-diagram">
 </div>
+
+<ApplicationTable jobApplications={currentApplicationList}/>

@@ -22,8 +22,6 @@
         });
     
         const result: ActionResult = deserialize(await response.text());
-
-        console.log("result " + JSON.stringify(result));
         
     
         if (result.type === 'success') {

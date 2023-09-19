@@ -8,8 +8,7 @@ interface Location {
 }
 
 
-export interface JobApplication {
-    applicantId: string,
+export interface JobApplication {Style 
     companyName: string,
     positionName: string,
     positionId?: string,
@@ -31,6 +30,6 @@ export interface JobApplication {
     rejected?: "automated email" | "personalized email" | "after interview"
 
     // was the full 
-    status: "In-Progress" | "Rejected" | "Accepted"
+    status: "In-Progress" | "Rejected" | "Accepted" | "Took Job"
 
 }

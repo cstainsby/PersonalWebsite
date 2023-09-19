@@ -13,7 +13,6 @@ export const getWebsiteData = async (userId: string) => {
     });
 
     const response = await docClient.send(command);
-    console.log(response);
     return response;
 };
 

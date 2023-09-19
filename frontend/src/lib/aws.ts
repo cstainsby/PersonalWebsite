@@ -13,7 +13,9 @@ import type { JobApplication } from "./templates/JobApplication";
 
 
 const sesClient = new SESClient();
-const dynamoDBClient = new DynamoDBClient();
+const dynamoDBClient = new DynamoDBClient({ 
+    region: "us-west-2"
+});
 
 
 // Define the table name and sort key value
@@ -74,8 +76,8 @@ async function sendEmailViaSES(email: Email): Promise<SendEmailCommandOutput> {
  * @param userId 
  * @returns job applications sorted by userId
  */
-async function getUserJobApplications(userId: string) {
-    let response = {};
+async function getUserJobApplications(userId: string): Promise<JobApplication[]> {
+    let response: JobApplication[] = [];
 
     // Define the query parameters
     const params = {
@@ -92,7 +94,6 @@ async function getUserJobApplications(userId: string) {
     try {
         const command = new QueryCommand(params);
         const response = await dynamoDBClient.send(command);
-        console.log(response.Items);
     } catch (error) {
         console.error(error);
     }

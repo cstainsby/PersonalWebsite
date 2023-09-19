@@ -21,8 +21,6 @@
     export let jobs: AboutMeSectionProps["jobs"]
     export let education: AboutMeSectionProps["education"]
     export let personalBlurbs: AboutMeSectionProps["personalBlurbs"]
-
-    console.log(jobs);
     
 </script>
 

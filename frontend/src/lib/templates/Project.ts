@@ -19,7 +19,7 @@ export interface Project {
     repositoryLink?: string
     posterLink?: string
 
-    readmeLocationSrc?: "local" | "github"
+    readmeLocationSrc: "local" | "github"
 
     githubInfo?: GithubInfo 
 }
