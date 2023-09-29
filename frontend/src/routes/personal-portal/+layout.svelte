@@ -140,6 +140,10 @@
     .user-button-container {
         margin-left: auto;
     }
+
+    .page-container {
+        padding: 16px;
+    }
 </style>
 
 <div id="portal-layout">
@@ -178,7 +182,9 @@
         </div>
     </div>
 
-    <slot/>
+    <div class="page-container">
+        <slot/>
+    </div>
     {:else}
     <div>
         Not Signed in

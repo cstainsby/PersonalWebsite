@@ -1,6 +1,7 @@
 <script lang="ts">
     import CollapsableSection from "$components/CollapsableSection.svelte";
     import FormContainer from "$components/forms/FormContainer.svelte";
+    import ApplicationForm from "$components/forms/applicationForm.svelte";
     import GenericModal from "$components/modal/genericModal.svelte"
     import type { JobApplication } from "$lib/templates/JobApplication";
 
@@ -51,51 +52,12 @@
     <div class="header">
         <h3>Applications Sent</h3>
         <GenericModal> 
-            <p slot="title">title</p>
+            <p slot="title">Application Form</p>
             <button class="add-button word-link" slot="open-clickable-element">Add</button>
             <div slot="content">
                 <FormContainer>
-                    <form 
-                        action="?/postJobApplication" 
-                        method="POST" 
-                        on:submit|preventDefault={handleSubmit}>
-                        <label>
-                            Company Name
-                            <input name="companyName" type="text"/>
-                        </label>
-                        <label>
-                            Position Name
-                            <input name="positionName" type="text"/>
-                        </label>
-                        <label>
-                            Position Id*
-                            <input name="positionName" type="text"/>
-                        </label>
-                        <label>
-                            Posted On*
-                            <input name="postedOn" type="date" />
-                        </label>
-                        <label>
-                            Applied On
-                            <input name="appliedOn" type="date" />
-                        </label>
-                        <label>
-                            Location
-                            <input name="location" type="text"/>
-                        </label>
-                        <label>
-                            Salary Range Low
-                            <input name="salaryRangeLow" type="number"/>
-                        </label>
-                        <label>
-                            Position Id*
-                            <input name="positionName" />
-                        </label>
-
-                        <button class="word-link">Save</button>
-                    </form>
+                    <ApplicationForm/>
                 </FormContainer>
-        
             </div>
         </GenericModal>
     </div>

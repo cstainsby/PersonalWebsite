@@ -201,7 +201,9 @@
                                 <p>Employer: {job.employer}</p>
                             {/if}
                             <p>
-                                {convertDateToMonthYearDateDisplayStr(yearMonthFormatToDate(job.startDate))} - 
+                                {#if job.startDate}
+                                    {convertDateToMonthYearDateDisplayStr(yearMonthFormatToDate(job.startDate))} -
+                                {/if} 
                                 {#if job.endDate}
                                     {convertDateToMonthYearDateDisplayStr(yearMonthFormatToDate(job.endDate))}
                                 {:else}

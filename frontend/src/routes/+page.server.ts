@@ -15,12 +15,7 @@ export const load: PageServerLoad = async ({ locals: { supabase, getSession } })
 
     
 
-    const jsonBlob = await readPageJsonById(0);  
-
-    // getWebsiteData()
-
-    // getWebsiteData()
-    
+    const jsonBlob = await readPageJsonById(0);    
 
     return {
         jsonBlob: jsonBlob

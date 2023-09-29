@@ -12,7 +12,9 @@ import type { Email } from "./templates/Email";
 import type { JobApplication } from "./templates/JobApplication";
 
 
-const sesClient = new SESClient();
+const sesClient = new SESClient({
+    region: "us-west-2"
+});
 const dynamoDBClient = new DynamoDBClient({ 
     region: "us-west-2"
 });

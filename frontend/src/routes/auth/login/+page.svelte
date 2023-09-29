@@ -47,13 +47,17 @@
 </script>
 
 <style lang="scss">
-    #or-login-break {
-        display: flex;
-        flex-direction: row;
+    // #or-login-break {
+    //     display: flex;
+    //     flex-direction: row;
 
-        & > hr {
-            transform: rotate(90deg);
-        }
+    //     & > hr {
+    //         transform: rotate(90deg);
+    //     }
+    // }
+
+    p {
+        padding-left: 4px;
     }
 
     #oauth-buttons {
@@ -62,6 +66,7 @@
 
         & > button {
             height: 32px;
+            border-radius: 4px;
         }
     }
 
@@ -94,11 +99,14 @@
         <button class="word-link">Sign In</button>
     </form> -->
 
-    <div id="or-login-break">
+    <!-- <div id="or-login-break">
         <hr/>
         <h2>Or</h2>
         <hr/>
-    </div>
+    </div> -->
+    <h1>OAuth Login</h1>
+    <p>Login in using 3rd party authentication services.</p>
+    <hr/>
     <form id="oauth-buttons" method="POST">
         <button formaction="?/login&provider=github" id="github-oauth-btn">Github</button>
         <!-- <button id="discord-oauth-btn">Discord</button> -->

@@ -12,7 +12,7 @@
 </script>
 
 
-<style>
+<style lang="scss">
     .standard-form-container {
         max-width: 400px;
         margin: auto;
@@ -25,13 +25,14 @@
   
     .standard-form-container :global(label) {
         display: block;
-        margin-bottom: 10px;
+        margin-top: 12px;
+        margin-bottom: 8px;
     }
   
     .standard-form-container :global(input) {
         width: 100%;
         padding: 8px;
-        margin-top: 4px;
+        margin-bottom: 4px;
         box-sizing: border-box;
     }
   
