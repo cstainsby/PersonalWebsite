@@ -1,5 +1,5 @@
 # Use an official Node.js runtime as base image for build stage
-FROM node:18-alpine AS build
+FROM node:20-alpine AS build
 
 WORKDIR /app
 

@@ -2,6 +2,8 @@ version: '3'
 
 services:
   svelte-app:
+    env_file: 
+      - ./frontend/.env
     build:
       context: ./frontend
       dockerfile: Dockerfile

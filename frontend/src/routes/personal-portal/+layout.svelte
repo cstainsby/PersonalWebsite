@@ -5,7 +5,7 @@
     import { onMount } from "svelte";
     import UserIconButton from "$components/UserIconButton.svelte";
 
-    type MainTab = "Profile" | "Website" | "Employment"
+    type MainTab = "Website" | "Employment" 
     type ProfileTabSubSections = ""
     type EmploymentTabSubSections = "Resume"
     type WebsiteTabSubSections = ""
@@ -22,7 +22,7 @@
 
 
     let isSignedIn = false;
-    let selectedTab: MainTab = "Profile"
+    let selectedTab: MainTab = "Website"
     let subTabText: string | null = null
 
     const changeTab = (newTab: MainTab) => {
@@ -83,7 +83,7 @@
                 selectedTab = "Employment"; 
                 break;
             default: 
-                selectedTab = "Profile"; 
+                selectedTab = "Website"; 
                 goto("/personal-portal")
                 break;
         }
@@ -149,15 +149,8 @@
 <div id="portal-layout">
     {#if isSignedIn}
     <div class="top-bar">
-        <a 
-            href="/">
-            Back
-        </a>
-        <button 
-            class:selected-tab={selectedTab === "Profile"}
-            on:click={() => onTabButtonClick("/personal-portal/", "Profile")}>
-            Profile
-        </button>
+        <a href="/">Back</a>
+
         <button 
             class:selected-tab={selectedTab === "Website"}
             on:click={() => onTabButtonClick("/personal-portal/website", "Website")}>

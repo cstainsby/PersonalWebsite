@@ -3,10 +3,9 @@ import { SendEmailCommand,
     type SendEmailCommandInput,
     type SendEmailCommandOutput,
     SESClient } from "@aws-sdk/client-ses"
-import { DynamoDBClient, 
-    PutItemCommand,
-    QueryCommand, 
-    type PutItemCommandInput} from "@aws-sdk/client-dynamodb";
+import { GetObjectCommand, 
+    S3Client } from "@aws-sdk/client-s3";
+
 
 import type { Email } from "./templates/Email";
 import type { JobApplication } from "./templates/JobApplication";
@@ -15,14 +14,8 @@ import type { JobApplication } from "./templates/JobApplication";
 const sesClient = new SESClient({
     region: "us-west-2"
 });
-const dynamoDBClient = new DynamoDBClient({ 
-    region: "us-west-2"
-});
+const s3Client = new S3Client({});
 
-
-// Define the table name and sort key value
-const JOB_APPLICATION_TABLE = 'JobApplication';
-// const JOB_APPLICATION_TABLE_SORT_KEY = 'userId';
 
 /**
  * send an Email using SES
@@ -74,85 +67,43 @@ async function sendEmailViaSES(email: Email): Promise<SendEmailCommandOutput> {
 }
 
 /**
- * Finds all job applications that a user has added to the database
- * @param userId 
- * @returns job applications sorted by userId
+ * Get website data blob from s3 by a website ID 
+ * @param websiteID 
+ * @returns 
  */
-async function getUserJobApplications(userId: string): Promise<JobApplication[]> {
-    let response: JobApplication[] = [];
+async function getWebsiteData(websiteID: string) {
+    const bucketName = "cstainsby-personal-website-bucket"
+    const objectKey = "site-data/cole-stainsby.json"
 
-    // Define the query parameters
-    const params = {
-        TableName: JOB_APPLICATION_TABLE,
-        KeyConditionExpression: '#sk = :sk',
-        ExpressionAttributeNames: {
-            '#sk': 'userId'
-        },
-        ExpressionAttributeValues: {
-            ':sk': { S: userId }
+    const getCommand = new GetObjectCommand({
+        Bucket: bucketName,
+        Key: objectKey
+    })
+
+    
+  try {
+        const response = await s3Client.send(getCommand);
+
+        if (response.Body === undefined) {
+            throw new Error("Missing json data returned from s3 GET call")
         }
-    };
 
-    try {
-        const command = new QueryCommand(params);
-        const response = await dynamoDBClient.send(command);
-    } catch (error) {
-        console.error(error);
-    }
+        const siteJsonBody = await response.Body;
+        const encoding = await siteJsonBody.transformToString();
 
-    return response
+        if (encoding === undefined) {
+            throw new Error("Error getting encoding from site body")
+        }
+        console.log(encoding);
+
+
+        return JSON.parse(encoding);
+  } catch (err) {
+        console.error(err);
+  }
 }
-
-async function putUserJobApplication(userJobApplication: JobApplication) {
-    let params: PutItemCommandInput = {
-        TableName: JOB_APPLICATION_TABLE,
-        Item: {
-            applicationId: { S: uuidv4() },
-            userId: { S: userJobApplication.applicantId },
-            companyName: { S: userJobApplication.companyName },
-            positionName: { S: userJobApplication.positionName },
-            appliedOn : { S: userJobApplication.appliedOn.toDateString() },
-            locations: { L: userJobApplication.locations.map(location => {
-                return { M: {
-                    cityName: { S: location.cityName},
-                    countryName: { S: location.cityName },
-                    ...(location.stateName && { stateName : { S: location.stateName }}),
-                    ...(location.address && { address : { S: location.address }}),
-                }}
-            })},
-            referencesUsed: { L: userJobApplication.referencesUsed.map(reference => {
-                return { M: {
-                    firstName: { S: reference.firstName},
-                    lastName: { S: reference.lastName },
-                    ...(reference.phoneNumber && { phoneNumber : { N: reference.phoneNumber.toString() }}),
-                    ...(reference.linkedin && { linkedin : { S: reference.linkedin }}),
-                    ...(reference.worksAt && { worksAt : { S: reference.worksAt }}),
-                }}
-            })},
-
-            //optional attributes
-            ...(userJobApplication.positionId && { positionId : { S: userJobApplication.positionId }}),
-            ...(userJobApplication.postedOn && { postedOn : { S: userJobApplication.postedOn.toDateString() }}),
-            ...(userJobApplication.responsibilities && { responsibilities : { S: userJobApplication.responsibilities }}),
-            ...(userJobApplication.requirements && { requirements : { S: userJobApplication.requirements }}),
-            ...(userJobApplication.salaryRangeLow && { salaryRangeLow : { N: userJobApplication.salaryRangeLow.toString() }}),
-            ...(userJobApplication.salaryRangeHigh && { salaryRangeHigh : { N: userJobApplication.salaryRangeHigh.toString() }}),
-            ...(userJobApplication.rejected && { rejected : { S: userJobApplication.rejected }}),
-            ...(userJobApplication.status && { status : { S: userJobApplication.status }}),
-        }
-      };
-      
-      try {
-        const command = new PutItemCommand(params);
-        await dynamoDBClient.send(command);
-        console.log('Item added successfully!');
-    } catch (error) {
-        console.error(error);
-    }
-} 
 
 export {
     sendEmailViaSES,
-    getUserJobApplications,
-    putUserJobApplication
+    getWebsiteData
 }

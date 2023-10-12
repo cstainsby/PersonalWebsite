@@ -1,327 +1,325 @@
-[
-    {
-        "websiteName": "Cole Stainsby's Personal Website",
-        "registeredUrl": "https://colestainsby.com",
-        "title": "Hello!\nI'm Cole Stainsby",
-        "extraDescriptor": "Gonzaga Computer Science B.S. Graduate.\nEntry Level Software Engineer.",
+{
+    "websiteName": "Cole Stainsby's Personal Website",
+    "registeredUrl": "https://colestainsby.com",
+    "title": "Hello!\nI'm Cole Stainsby",
+    "extraDescriptor": "Gonzaga Computer Science B.S. Graduate.\nEntry Level Software Engineer.",
 
-        "settings": {
-            "colorScheme": {
-                
-            }
-        },
-
-        "user": {
-            "firstName": "Cole",
-            "lastName": "Stainsby",
-            "phoneNumber": "425-214-3518", 
-            "email": "c.p.stainsby@outlook.com"
-        },
-
-        "professionalLinks": [
-            {
-                "href": "https://github.com/cstainsby",
-                "imgPath": "media/github-link-icon.png",
-                "imgAltText": "GitHub",
-                "title": "GitHub"
-            },
-            {
-                "href": "https://www.linkedin.com/in/colestainsby/",
-                "imgPath": "media/linkedin-link-icon.png",
-                "imgAltText": "LinkedIn",
-                "title": "LinkedIn"
-            },
-            {
-                "href": "https://www.kaggle.com/colestainsby",
-                "imgPath": "media/kaggle-link-icon.png",
-                "imgAltText": "Kaggle",
-                "title": "Kaggle"
-            },
-            { 
-                "href": "https://coles-resume-bucket.s3.us-west-2.amazonaws.com/ColeStainsbyResume.pdf",
-                "imgPath": "media/cv.png",
-                "imgAltText": "Resume",
-                "title": "Resume"
-            }
-        ],
-
-
-        "projects": [
-            {
-                "name": "BioPath",
-                "shortDescription": "Senior Capstone Project",
-                "award": "Gonzaga SEAS 2023 Best Computer Science Project",
-                "description": "My small team partnered with the Gonzaga University Biochemistry department to create a web app which aids students in learning Biochemical pathways.",
-                "screenShotImgPath": "../../media/biopath-screenshot.png",
-                "demoLink": "https://ifdfgjpy82.us-west-2.awsapprunner.com",
-                "posterLink": "https://github.com/cstainsby/BiopathPoster",
-                "repositoryLink": "https://github.com/cstainsby/BioPathBackup",
-                "skillsUsed": [
-                    {"name": "Javascript"},
-                    {"name": "React"},
-                    {"name": "Bootstrap"},
-                    {"name": "AWS"},
-                    {"name": "Docker"},
-                    {"name": "PostgreSQL"},
-                    {"name": "Python"}, 
-                    {"name": "Django"},
-                    {"name": "REST API"}
-                ],
-                "importanceRanking": 1,
-                "readmeLocationSrc": "local"
-            },
-            {
-                "name": "Reddit r/AITA NLP Sentiment Classifier",
-                "shortDescription": "Personal Project",
-                "description": "An app which leverages a HuggingFace BERT multiclass classifier to judge reddit posts from the popular r/AmITheAsshole subreddit according to their defined classification rules.",
-                "screenShotImgPath": "../../media/AITA-screenshot.png",
-                "demoLink": "https://backend-model-service-zkidffnq6a-uc.a.run.app/models/AITAclassmodel",
-                "repositoryLink": "https://github.com/cstainsby/B-Onion",
-                "skillsUsed": [
-                    {"name": "Python"},
-                    {"name": "ML Data Structures"},
-                    {"name": "Docker"},
-                    {"name": "GCP BigQuery"},
-                    {"name": "GCP CloudRun"},
-                    {"name": "Flask"},
-                    {"name": "HuggingFace"},
-                    {"name": "Jupyter Notebooks"}
-                ],
-                "importanceRanking": 2,
-                "readmeLocationSrc": "github",
-                "githubInfo": {
-                    "repoOwner": "cstainsby",
-                    "repoName": "B-Onion"
-                }
-            },
-            {
-                "name": "Personal Website",
-                "shortDescription": "This Website",
-                "description": "This project is intended to show off who I am as well as my accomplishments. It gives those interested an easy way to get in contact with me. It also allows for easy alterations to the underlying data allowing for continued future updates.",
-                "repositoryLink": "https://github.com/cstainsby/PersonalWebsite",
-                "skillsUsed": [
-                    {"name": "Typescript"},
-                    {"name": "EC2"},
-                    {"name": "Route 53"},
-                    {"name": "SvelteKit"},
-                    {"name": "HTML"},
-                    {"name": "SCSS"},
-                    {"name": "NGINX"}
-                ],
-                "importanceRanking": 3,
-                "readmeLocationSrc": "github",
-                "githubInfo": {
-                    "repoOwner": "cstainsby",
-                    "repoName": "PersonalWebsite"
-                }
-            },
-            {
-                "name": "Hockey Data Project",
-                "shortDescription": "Class Project",
-                "description": "In a team of three members, we used Kaggle and NHL data for exploratory data analysis in conjunction with self-made and self-trained machine learning models (decision trees, random forests, KNN, and Naïve Bayes) to predict which NHL teams would make the playoffs (classification).",
-                "repositoryLink": "https://github.com/cstainsby/HockeyDataProject",
-                "skillsUsed": [
-                    {"name": "Python"},
-                    {"name": "ML Data Structures"},
-                    {"name": "Jupyter Notebooks"},
-                    {"name": "EDA"}
-                ],
-                "importanceRanking": 4,
-                "readmeLocationSrc": "github",
-                "githubInfo": {
-                    "repoOwner": "cstainsby",
-                    "repoName": "HockeyDataProject"
-                }
-            }
-        ],
-
-        "skills": [
-            {
-                "skillType": "Languages",
-                "skillsAssociated": [
-                    {
-                        "name": "Python",
-                        "iconPath": "../../media/python.png"
-                    },
-                    {
-                        "name": "Java",
-                        "iconPath": "../../media/java.png"
-                    },
-                    {
-                        "name": "MySQL",
-                        "iconPath": "../../media/mysql.png"
-                    },
-                    {
-                        "name": "Javascript",
-                        "iconPath": "../../media/javascript.png"
-                    }
-                ]
-            },
-            {
-                "skillType": "Frontend",
-                "skillsAssociated": [
-                    {
-                        "name": "React",
-                        "iconPath": "../../media/react.png"
-                    },
-                    {
-                        "name": "HTML",
-                        "iconPath": "../../media/html.png"
-                    },
-                    {
-                        "name": "CSS",
-                        "iconPath": "../../media/css.png"
-                    }
-                ]
-            },
-            {
-                "skillType": "Backend",
-                "skillsAssociated": [
-                    {
-                        "name": "Flask",
-                        "iconPath": "../../media/flask.png"
-                    },
-                    {
-                        "name": "Django",
-                        "iconPath": "../../media/django.png"
-                    },
-                    {
-                        "name": "Node.js",
-                        "iconPath": "../../media/node.js.png"
-                    }
-                ]
-            },
-            {
-                "skillType": "Data Science",
-                "skillsAssociated": [
-                    {
-                        "name": "Jupyter",
-                        "iconPath": "../../media/jupyter.png"
-                    },
-                    {
-                        "name": "Pandas",
-                        "iconPath": "../../media/pandas.png"
-                    },
-                    {
-                        "name": "Numpy",
-                        "iconPath": "../../media/numpy.png"
-                    },
-                    {
-                        "name": "SKLearn",
-                        "iconPath": "../../media/sklearn.png"
-                    }
-                ]
-            },
-            {
-                "skillType": "Tools and Platform",
-                "skillsAssociated": [
-                    {
-                        "name": "Docker",
-                        "iconPath": "../../media/docker.png"
-                    },
-                    {
-                        "name": "AWS",
-                        "iconPath": "../../media/aws.png"
-                    },
-                    {
-                        "name": "Github",
-                        "iconPath": "../../media/github.png"
-                    },
-                    {
-                        "name": "Linux",
-                        "iconPath": "../../media/linux.png"
-                    }
-                ]
-            },
-            {
-                "skillType": "Dev. Practices",
-                "skillsAssociated": [
-                    {
-                        "name": "Agile",
-                        "iconPath": "../../media/agile.png"
-                    },
-                    {
-                        "name": "CI/CD",
-                        "iconPath": "../../media/cicd.png"
-                    }
-                ]
-            }
-        ],
-
-
-
-
-        "jobs": [
-            {
-                "title": "Linear Algebra Researcher",
-                "employer": "Gonzaga University",
-                "jobDescription": "In this paid research position, I work with two professors and a five-person team to create proofs and solve problems that are important to the larger math community. Our work has included finding proofs to show a relation between upper triangle square root matrices and “Cholesky root” matrices over a field of two, as well as finding how Kneser graphs total roman domination number behave over a range of sizes.",
-                "imgPath": "media/Math-research-screenshot.png",
-                "imgAltText": "Petersen Graph",
-                "startDate": "2022-01",
-                "endDate": "2023-05",
-
-                "sampleProjects": [
-                    {
-                        "name": "Cholesky Roots Over F2",
-                        "shortDescription": "Math Research Group Project",
-                        "description": "I created a script to help my linear algebra research group quickly find matrices of nxn size over a specified field. It uses recursive tree generation and branch pruning to find all possible paths to any given upper triangle square root matrix or “Cholesky root” matrix",
-                        "repositoryLink": "https://github.com/cstainsby/CholeskyRootsOverF2",
-                        "skillsUsed": [
-                            {"name": "Linear Algebra"},
-                            {"name": "python"},
-                            {"name": "pytest"}
-                        ],
-                        "importanceRanking": 1,
-                        "readmeLocationSrc": "github",
-                        "githubInfo": {
-                            "repoOwner": "cstainsby",
-                            "repoName": "CholeskyRootsOverF2"
-                        }
-                    },
-                    {
-                        "name": "Total Roman Domination",
-                        "shortDescription": "Math Research Group Project",
-                        "description": "My team worked on and presented our work on finding either exact values for or bounds of varying Knesser Graphs.",
-                        "posterLink": "https://github.com/cstainsby/MathResearchPosters",
-                        "skillsUsed": [
-                            {"name": "Linear Algebra"},
-                            {"name": "Graph Theory"}
-                        ],
-                        "importanceRanking": 2,
-                        "readmeLocationSrc": "local"
-                    }
-                ]
-            },
-            {
-                "title": "Looking For Work",
-                "imgPath": "media/looking.png",
-                "imgAltText": "Looking"
-            }
-        ],
-
-
-        "education": [
-            {
-                "title": "Computer Science B.S.",
-                "titleCaption": "With a concentration in Data Science",
-                "fromWho": "Gonzaga University",
-                "imgPath": "media/gonzaga.png",
-                "imgAltText": "gonzaga logo",
-                "startDate": "2019-09",
-                "endDate": "2023-05"
-            },
-            {
-                "title": "AWS Solutions Architect Certification",
-                "fromWho": "Amazon Web Services",
-                "imgPath": "media/AWS-solutions-architect-ass.png",
-                "imgAltText": "aws sol. arch. logo",
-                "startDate": "2023-06"
-            }
-        ],
-
-        "personalBlurbs": [
+    "settings": {
+        "colorScheme": {
             
-        ]
-    }
-]
+        }
+    },
+
+    "user": {
+        "firstName": "Cole",
+        "lastName": "Stainsby",
+        "phoneNumber": "425-214-3518", 
+        "email": "c.p.stainsby@outlook.com"
+    },
+
+    "professionalLinks": [
+        {
+            "href": "https://github.com/cstainsby",
+            "imgPath": "media/github-link-icon.png",
+            "imgAltText": "GitHub",
+            "title": "GitHub"
+        },
+        {
+            "href": "https://www.linkedin.com/in/colestainsby/",
+            "imgPath": "media/linkedin-link-icon.png",
+            "imgAltText": "LinkedIn",
+            "title": "LinkedIn"
+        },
+        {
+            "href": "https://www.kaggle.com/colestainsby",
+            "imgPath": "media/kaggle-link-icon.png",
+            "imgAltText": "Kaggle",
+            "title": "Kaggle"
+        },
+        { 
+            "href": "https://coles-resume-bucket.s3.us-west-2.amazonaws.com/ColeStainsbyResume.pdf",
+            "imgPath": "media/cv.png",
+            "imgAltText": "Resume",
+            "title": "Resume"
+        }
+    ],
+
+
+    "projects": [
+        {
+            "name": "BioPath",
+            "shortDescription": "Senior Capstone Project",
+            "award": "Gonzaga SEAS 2023 Best Computer Science Project",
+            "description": "My small team partnered with the Gonzaga University Biochemistry department to create a web app which aids students in learning Biochemical pathways.",
+            "screenShotImgPath": "../../media/biopath-screenshot.png",
+            "demoLink": "https://ifdfgjpy82.us-west-2.awsapprunner.com",
+            "posterLink": "https://github.com/cstainsby/BiopathPoster",
+            "repositoryLink": "https://github.com/cstainsby/BioPathBackup",
+            "skillsUsed": [
+                {"name": "Javascript"},
+                {"name": "React"},
+                {"name": "Bootstrap"},
+                {"name": "AWS"},
+                {"name": "Docker"},
+                {"name": "PostgreSQL"},
+                {"name": "Python"}, 
+                {"name": "Django"},
+                {"name": "REST API"}
+            ],
+            "importanceRanking": 1,
+            "readmeLocationSrc": "local"
+        },
+        {
+            "name": "Reddit r/AITA NLP Sentiment Classifier",
+            "shortDescription": "Personal Project",
+            "description": "An app which leverages a HuggingFace BERT multiclass classifier to judge reddit posts from the popular r/AmITheAsshole subreddit according to their defined classification rules.",
+            "screenShotImgPath": "../../media/AITA-screenshot.png",
+            "demoLink": "https://backend-model-service-zkidffnq6a-uc.a.run.app/models/AITAclassmodel",
+            "repositoryLink": "https://github.com/cstainsby/B-Onion",
+            "skillsUsed": [
+                {"name": "Python"},
+                {"name": "ML Data Structures"},
+                {"name": "Docker"},
+                {"name": "GCP BigQuery"},
+                {"name": "GCP CloudRun"},
+                {"name": "Flask"},
+                {"name": "HuggingFace"},
+                {"name": "Jupyter Notebooks"}
+            ],
+            "importanceRanking": 2,
+            "readmeLocationSrc": "github",
+            "githubInfo": {
+                "repoOwner": "cstainsby",
+                "repoName": "B-Onion"
+            }
+        },
+        {
+            "name": "Personal Website",
+            "shortDescription": "This Website",
+            "description": "This project is intended to show off who I am as well as my accomplishments. It gives those interested an easy way to get in contact with me. It also allows for easy alterations to the underlying data allowing for continued future updates.",
+            "repositoryLink": "https://github.com/cstainsby/PersonalWebsite",
+            "skillsUsed": [
+                {"name": "Typescript"},
+                {"name": "EC2"},
+                {"name": "Route 53"},
+                {"name": "SvelteKit"},
+                {"name": "HTML"},
+                {"name": "SCSS"},
+                {"name": "NGINX"}
+            ],
+            "importanceRanking": 3,
+            "readmeLocationSrc": "github",
+            "githubInfo": {
+                "repoOwner": "cstainsby",
+                "repoName": "PersonalWebsite"
+            }
+        },
+        {
+            "name": "Hockey Data Project",
+            "shortDescription": "Class Project",
+            "description": "In a team of three members, we used Kaggle and NHL data for exploratory data analysis in conjunction with self-made and self-trained machine learning models (decision trees, random forests, KNN, and Naïve Bayes) to predict which NHL teams would make the playoffs (classification).",
+            "repositoryLink": "https://github.com/cstainsby/HockeyDataProject",
+            "skillsUsed": [
+                {"name": "Python"},
+                {"name": "ML Data Structures"},
+                {"name": "Jupyter Notebooks"},
+                {"name": "EDA"}
+            ],
+            "importanceRanking": 4,
+            "readmeLocationSrc": "github",
+            "githubInfo": {
+                "repoOwner": "cstainsby",
+                "repoName": "HockeyDataProject"
+            }
+        }
+    ],
+
+    "skills": [
+        {
+            "skillType": "Languages",
+            "skillsAssociated": [
+                {
+                    "name": "Python",
+                    "iconPath": "../../media/python.png"
+                },
+                {
+                    "name": "Java",
+                    "iconPath": "../../media/java.png"
+                },
+                {
+                    "name": "MySQL",
+                    "iconPath": "../../media/mysql.png"
+                },
+                {
+                    "name": "Javascript",
+                    "iconPath": "../../media/javascript.png"
+                }
+            ]
+        },
+        {
+            "skillType": "Frontend",
+            "skillsAssociated": [
+                {
+                    "name": "React",
+                    "iconPath": "../../media/react.png"
+                },
+                {
+                    "name": "HTML",
+                    "iconPath": "../../media/html.png"
+                },
+                {
+                    "name": "CSS",
+                    "iconPath": "../../media/css.png"
+                }
+            ]
+        },
+        {
+            "skillType": "Backend",
+            "skillsAssociated": [
+                {
+                    "name": "Flask",
+                    "iconPath": "../../media/flask.png"
+                },
+                {
+                    "name": "Django",
+                    "iconPath": "../../media/django.png"
+                },
+                {
+                    "name": "Node.js",
+                    "iconPath": "../../media/node.js.png"
+                }
+            ]
+        },
+        {
+            "skillType": "Data Science",
+            "skillsAssociated": [
+                {
+                    "name": "Jupyter",
+                    "iconPath": "../../media/jupyter.png"
+                },
+                {
+                    "name": "Pandas",
+                    "iconPath": "../../media/pandas.png"
+                },
+                {
+                    "name": "Numpy",
+                    "iconPath": "../../media/numpy.png"
+                },
+                {
+                    "name": "SKLearn",
+                    "iconPath": "../../media/sklearn.png"
+                }
+            ]
+        },
+        {
+            "skillType": "Tools and Platform",
+            "skillsAssociated": [
+                {
+                    "name": "Docker",
+                    "iconPath": "../../media/docker.png"
+                },
+                {
+                    "name": "AWS",
+                    "iconPath": "../../media/aws.png"
+                },
+                {
+                    "name": "Github",
+                    "iconPath": "../../media/github.png"
+                },
+                {
+                    "name": "Linux",
+                    "iconPath": "../../media/linux.png"
+                }
+            ]
+        },
+        {
+            "skillType": "Dev. Practices",
+            "skillsAssociated": [
+                {
+                    "name": "Agile",
+                    "iconPath": "../../media/agile.png"
+                },
+                {
+                    "name": "CI/CD",
+                    "iconPath": "../../media/cicd.png"
+                }
+            ]
+        }
+    ],
+
+
+
+
+    "jobs": [
+        {
+            "title": "Linear Algebra Researcher",
+            "employer": "Gonzaga University",
+            "jobDescription": "In this paid research position, I work with two professors and a five-person team to create proofs and solve problems that are important to the larger math community. Our work has included finding proofs to show a relation between upper triangle square root matrices and “Cholesky root” matrices over a field of two, as well as finding how Kneser graphs total roman domination number behave over a range of sizes.",
+            "imgPath": "media/Math-research-screenshot.png",
+            "imgAltText": "Petersen Graph",
+            "startDate": "2022-01",
+            "endDate": "2023-05",
+
+            "sampleProjects": [
+                {
+                    "name": "Cholesky Roots Over F2",
+                    "shortDescription": "Math Research Group Project",
+                    "description": "I created a script to help my linear algebra research group quickly find matrices of nxn size over a specified field. It uses recursive tree generation and branch pruning to find all possible paths to any given upper triangle square root matrix or “Cholesky root” matrix",
+                    "repositoryLink": "https://github.com/cstainsby/CholeskyRootsOverF2",
+                    "skillsUsed": [
+                        {"name": "Linear Algebra"},
+                        {"name": "python"},
+                        {"name": "pytest"}
+                    ],
+                    "importanceRanking": 1,
+                    "readmeLocationSrc": "github",
+                    "githubInfo": {
+                        "repoOwner": "cstainsby",
+                        "repoName": "CholeskyRootsOverF2"
+                    }
+                },
+                {
+                    "name": "Total Roman Domination",
+                    "shortDescription": "Math Research Group Project",
+                    "description": "My team worked on and presented our work on finding either exact values for or bounds of varying Knesser Graphs.",
+                    "posterLink": "https://github.com/cstainsby/MathResearchPosters",
+                    "skillsUsed": [
+                        {"name": "Linear Algebra"},
+                        {"name": "Graph Theory"}
+                    ],
+                    "importanceRanking": 2,
+                    "readmeLocationSrc": "local"
+                }
+            ]
+        },
+        {
+            "title": "Looking For Work",
+            "imgPath": "media/looking.png",
+            "imgAltText": "Looking"
+        }
+    ],
+
+
+    "education": [
+        {
+            "title": "Computer Science B.S.",
+            "titleCaption": "With a concentration in Data Science",
+            "fromWho": "Gonzaga University",
+            "imgPath": "media/gonzaga.png",
+            "imgAltText": "gonzaga logo",
+            "startDate": "2019-09",
+            "endDate": "2023-05"
+        },
+        {
+            "title": "AWS Solutions Architect Certification",
+            "fromWho": "Amazon Web Services",
+            "imgPath": "media/AWS-solutions-architect-ass.png",
+            "imgAltText": "aws sol. arch. logo",
+            "startDate": "2023-06"
+        }
+    ],
+
+    "personalBlurbs": [
+        
+    ]
+}

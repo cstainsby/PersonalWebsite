@@ -5,17 +5,17 @@ import { fail, json, redirect } from '@sveltejs/kit';
 import type { Actions } from "./$types" 
 // import { RequestHandler } from './$types';
 
-import { sendEmailViaSES } from "$lib/aws";
+import { sendEmailViaSES, getWebsiteData } from "$lib/aws";
 import { AuthApiError, type Provider } from "@supabase/supabase-js";
 
 import { type Education } from '$lib/templates/Education'
-import { getWebsiteData } from '$lib/dynamoDB';
 
 export const load: PageServerLoad = async ({ locals: { supabase, getSession } }) => {
 
     
 
-    const jsonBlob = await readPageJsonById(0);    
+    // const jsonBlob = await readPageJsonById(0);  
+    const jsonBlob = getWebsiteData("")
 
     return {
         jsonBlob: jsonBlob
