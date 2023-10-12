@@ -1,21 +1,30 @@
-import { readPageJsonById } from '$lib/dataStore'
 import type { Email } from '$lib/templates/Email';
 import type { PageServerLoad } from './$types';
 import { fail, json, redirect } from '@sveltejs/kit';
 import type { Actions } from "./$types" 
-// import { RequestHandler } from './$types';
 
-import { sendEmailViaSES, getWebsiteData } from "$lib/aws";
+import { sendEmailViaSES, getWebsiteDataS3, getDataRouteS3 } from "$lib/aws";
 import { AuthApiError, type Provider } from "@supabase/supabase-js";
 
-import { type Education } from '$lib/templates/Education'
+import { page } from '$app/stores';  
 
-export const load: PageServerLoad = async ({ locals: { supabase, getSession } }) => {
+
+export const load: PageServerLoad = async ({ locals: { supabase, getSession }}) => {
+    let s3WebsiteDataStorePath = ""
+    let s3SiteSpecificDataPath = ""
+
+    // get page data on load
+    page.subscribe(pageData => {
+        const pageHostname = pageData.url.hostname
+        getDataRouteS3("colestainsby.com")
+            .then(dataRoute => {s3SiteSpecificDataPath = dataRoute})
+            .then(() => console.log(s3SiteSpecificDataPath))
+    })
+
+    // s3SiteSpecificDataPath = await getDataRouteS3("colestainsby.com")
 
     
-
-    // const jsonBlob = await readPageJsonById(0);  
-    const jsonBlob = getWebsiteData("")
+    const jsonBlob = await getWebsiteDataS3(s3SiteSpecificDataPath + "/site-data.json")
 
     return {
         jsonBlob: jsonBlob
@@ -70,23 +79,5 @@ export const actions: Actions = {
 // -----------------------------------------------------------------------
 //      helper functions
 // -----------------------------------------------------------------------
-// import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-// import { PutCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
-
-// const client = new DynamoDBClient({});
-// const docClient = DynamoDBDocumentClient.from(client);
-
-// export const main = async () => {
-//   const command = new PutCommand({
-//     TableName: "HappyAnimals",
-//     Item: {
-//       CommonName: "Shiba Inu",
-//     },
-//   });
-
-//   const response = await docClient.send(command);
-//   console.log(response);
-//   return response;
-// };
 
  

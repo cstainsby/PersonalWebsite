@@ -1,6 +1,7 @@
 import { json, error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { readReadmeFromLocal } from '$lib/dataStore';
+import { readReadmeFromLocal } from '$lib/localDataAccess';
+import { getReadmeS3 } from '$lib/aws';
 
 export async function GET({ url }) {
     const projectName = String(url.searchParams.get("projectName") ?? "");
@@ -8,6 +9,8 @@ export async function GET({ url }) {
     if (projectName === "") {
         throw error(400, "No Project name passed")
     }
+
+    // getReadmeS3()
     
     try {
         const fileContent = await readReadmeFromLocal(projectName)

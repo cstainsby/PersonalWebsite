@@ -4,11 +4,15 @@ import { SendEmailCommand,
     type SendEmailCommandOutput,
     SESClient } from "@aws-sdk/client-ses"
 import { GetObjectCommand, 
+    PutObjectCommand,
     S3Client } from "@aws-sdk/client-s3";
 
 
 import type { Email } from "./templates/Email";
 import type { JobApplication } from "./templates/JobApplication";
+import type { WebsiteData } from './templates/WebsiteData';
+
+import { S3_STORAGE_BUCKET } from "$env/static/private";
 
 
 const sesClient = new SESClient({
@@ -67,21 +71,19 @@ async function sendEmailViaSES(email: Email): Promise<SendEmailCommandOutput> {
 }
 
 /**
- * Get website data blob from s3 by a website ID 
- * @param websiteID 
- * @returns 
+ * Gets the correct path to the website's data on s3 based on the url that is used to access the site.
+ * NOTE: This site should be accessable via multiple root urls which will be unique to a data source.
+ *       There is a dedicated "page routing object" which can be read to determine where to find the data.
+ * @param urlKey 
  */
-async function getWebsiteData(websiteID: string) {
-    const bucketName = "cstainsby-personal-website-bucket"
-    const objectKey = "site-data/cole-stainsby.json"
-
+async function getDataRouteS3(urlKey: string): Promise<string> {
+    const directoryKey = "site-directory.json"
     const getCommand = new GetObjectCommand({
-        Bucket: bucketName,
-        Key: objectKey
+        Bucket: S3_STORAGE_BUCKET,
+        Key: directoryKey
     })
-
     
-  try {
+    try {
         const response = await s3Client.send(getCommand);
 
         if (response.Body === undefined) {
@@ -94,16 +96,103 @@ async function getWebsiteData(websiteID: string) {
         if (encoding === undefined) {
             throw new Error("Error getting encoding from site body")
         }
-        console.log(encoding);
 
+        return JSON.parse(encoding)[urlKey];
+    } catch (err) {
+        console.error(err);
+    }
+    return ""
+}
+
+/**
+ * Get website data blob from s3 by a website ID 
+ * @param websiteKey 
+ * @returns WebsiteData or undefined
+ */
+async function getWebsiteDataS3(websiteKey: string): Promise<WebsiteData | undefined> {
+    const getCommand = new GetObjectCommand({
+        Bucket: S3_STORAGE_BUCKET,
+        Key: websiteKey
+    })
+    
+    try {
+        const response = await s3Client.send(getCommand);
+
+        if (response.Body === undefined) {
+            throw new Error("Missing json data returned from s3 GET call")
+        }
+
+        const siteJsonBody = await response.Body;
+        const encoding = await siteJsonBody.transformToString();
+
+        if (encoding === undefined) {
+            throw new Error("Error getting encoding from site body")
+        }
 
         return JSON.parse(encoding);
-  } catch (err) {
+    } catch (err) {
         console.error(err);
-  }
+    }
+    return undefined
+}
+
+/**
+ * puts a new website data version into s3 bucket with corresponding website Key
+ * @param websiteKey 
+ * @param websiteData 
+ */
+async function putWebsiteDataS3(websiteKey: string, websiteData: WebsiteData) {
+    const putCommand = new PutObjectCommand({
+        Bucket: S3_STORAGE_BUCKET,
+        Key: websiteKey,
+        Body: JSON.stringify(websiteData),
+    });
+
+    try {
+        const response = await s3Client.send(putCommand);
+        console.log(response);
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+/**
+ * Get readme data from s3
+ * @param readmePath 
+ * @returns readme data or empty string
+ */
+async function getReadmeS3(readmePath: string): Promise<string> {
+    
+    const getCommand = new GetObjectCommand({
+        Bucket: S3_STORAGE_BUCKET,
+        Key: readmePath
+    })
+    
+    try {
+        const response = await s3Client.send(getCommand);
+
+        if (response.Body === undefined) {
+            throw new Error("Missing readme data returned from s3 GET call")
+        }
+
+        const siteJsonBody = await response.Body;
+        const encoding = await siteJsonBody.transformToString();
+
+        if (encoding === undefined) {
+            throw new Error("Error getting encoding from site body")
+        }
+
+        return encoding
+    } catch (err) {
+        console.error(err);
+    }
+    return ""
 }
 
 export {
     sendEmailViaSES,
-    getWebsiteData
+    getDataRouteS3,
+    getWebsiteDataS3,
+    putWebsiteDataS3,
+    getReadmeS3
 }
