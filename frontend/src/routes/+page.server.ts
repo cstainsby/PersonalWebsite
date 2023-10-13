@@ -9,23 +9,16 @@ import { AuthApiError, type Provider } from "@supabase/supabase-js";
 import { page } from '$app/stores';  
 
 
-export const load: PageServerLoad = async ({ locals: { supabase, getSession }}) => {
-    let s3WebsiteDataStorePath = ""
-    let s3SiteSpecificDataPath = ""
-
-    // get page data on load
-    page.subscribe(pageData => {
-        const pageHostname = pageData.url.hostname
-        getDataRouteS3("colestainsby.com")
-            .then(dataRoute => {s3SiteSpecificDataPath = dataRoute})
-            .then(() => console.log(s3SiteSpecificDataPath))
-    })
-
-    // s3SiteSpecificDataPath = await getDataRouteS3("colestainsby.com")
-
+export const load: PageServerLoad = async ({ locals: { supabase, getSession }, url}) => {
     
-    const jsonBlob = await getWebsiteDataS3(s3SiteSpecificDataPath + "/site-data.json")
+    console.log(url.hostname);
+    const currentHostname = "colestainsby.com"
 
+    // use url to get site display info for dynamic render 
+    const s3WebsiteDirectoryObj = await getDataRouteS3(currentHostname);
+    const siteDataPath = s3WebsiteDirectoryObj["s3StoreKey"]
+    const jsonBlob = await getWebsiteDataS3(siteDataPath + "/site-data.json")
+    
     return {
         jsonBlob: jsonBlob
     };

@@ -9,7 +9,6 @@ import { GetObjectCommand,
 
 
 import type { Email } from "./templates/Email";
-import type { JobApplication } from "./templates/JobApplication";
 import type { WebsiteData } from './templates/WebsiteData';
 
 import { S3_STORAGE_BUCKET } from "$env/static/private";
@@ -76,7 +75,7 @@ async function sendEmailViaSES(email: Email): Promise<SendEmailCommandOutput> {
  *       There is a dedicated "page routing object" which can be read to determine where to find the data.
  * @param urlKey 
  */
-async function getDataRouteS3(urlKey: string): Promise<string> {
+async function getDataRouteS3(urlKey: string) {
     const directoryKey = "site-directory.json"
     const getCommand = new GetObjectCommand({
         Bucket: S3_STORAGE_BUCKET,
@@ -92,16 +91,18 @@ async function getDataRouteS3(urlKey: string): Promise<string> {
 
         const siteJsonBody = await response.Body;
         const encoding = await siteJsonBody.transformToString();
-
+        
         if (encoding === undefined) {
             throw new Error("Error getting encoding from site body")
         }
 
-        return JSON.parse(encoding)[urlKey];
+        const routeInfo = JSON.parse(encoding)[urlKey]
+
+        return routeInfo;
     } catch (err) {
         console.error(err);
     }
-    return ""
+    return {}
 }
 
 /**
@@ -110,6 +111,8 @@ async function getDataRouteS3(urlKey: string): Promise<string> {
  * @returns WebsiteData or undefined
  */
 async function getWebsiteDataS3(websiteKey: string): Promise<WebsiteData | undefined> {
+    console.log("WEBSITE KEY " + websiteKey);
+    
     const getCommand = new GetObjectCommand({
         Bucket: S3_STORAGE_BUCKET,
         Key: websiteKey
@@ -161,11 +164,12 @@ async function putWebsiteDataS3(websiteKey: string, websiteData: WebsiteData) {
  * @param readmePath 
  * @returns readme data or empty string
  */
-async function getReadmeS3(readmePath: string): Promise<string> {
-    
+async function getReadmeS3(readmeKey: string): Promise<string> {
+    console.log("README KEY " + readmeKey);
+
     const getCommand = new GetObjectCommand({
         Bucket: S3_STORAGE_BUCKET,
-        Key: readmePath
+        Key: readmeKey
     })
     
     try {
