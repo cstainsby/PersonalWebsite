@@ -1,5 +1,5 @@
 import { fail, redirect, type Actions } from "@sveltejs/kit"
-import { AuthApiError, type Provider } from "@supabase/supabase-js"
+import type { Provider } from "@supabase/supabase-js"
 
 export const actions: Actions = {
     login: async ({ request, url, locals: { supabase } }) => {
@@ -24,26 +24,27 @@ export const actions: Actions = {
             }
 
             throw redirect(303, data.url)
-        } else {
-            const { data, error } = await supabase.auth.signInWithPassword({
-                email,
-                password,
-                // options: {
-                //     emailRedirectTo: `${url.origin}/auth/callback`,
-                // },
-            })
+        } 
+        // else {
+        //     const { data, error } = await supabase.auth.signInWithPassword({
+        //         email,
+        //         password,
+        //         // options: {
+        //         //     emailRedirectTo: `${url.origin}/auth/callback`,
+        //         // },
+        //     })
 
-            if (error) {
-                if (error instanceof AuthApiError) {
-                    return fail(400, {
-                        error: "Invalid credentials",
-                    })
-                }
-                return fail(500, {
-                    message: "Server error. Try again later.",
-                })
-            }
-            throw redirect(303, "/")
-        }
+        //     if (error) {
+        //         if (error instanceof AuthApiError) {
+        //             return fail(400, {
+        //                 error: "Invalid credentials",
+        //             })
+        //         }
+        //         return fail(500, {
+        //             message: "Server error. Try again later.",
+        //         })
+        //     }
+        //     throw redirect(303, "/")
+        // }
     },
 }

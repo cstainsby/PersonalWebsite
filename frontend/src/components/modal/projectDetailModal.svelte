@@ -17,7 +17,7 @@
         githubProjectInfo?: GithubInfo
     }
 
-    export let buttonText: ProjectDetailModalProps["buttonText"];
+    // export let buttonText: ProjectDetailModalProps["buttonText"];
     export let projectName: ProjectDetailModalProps["projectName"];
     export let readmeSrc: ProjectDetailModalProps["readmeSrc"];
     export let githubProjectInfo: ProjectDetailModalProps["githubProjectInfo"];

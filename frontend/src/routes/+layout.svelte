@@ -11,8 +11,9 @@
     let { supabase, session } = data
     $: ({ supabase, session } = data)
     
-    if (data?.supabase) {
-        // get public user data for rendering in page
+    if (data?.supabase && data?.session) {
+        // get public user data for rendering in page when a session is active and 
+        // database connection is reachable
         data.supabase.auth.getUser()
             .then(userRes => {
                 const { data: { user }} = userRes

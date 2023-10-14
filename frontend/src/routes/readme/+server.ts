@@ -26,7 +26,6 @@ export async function GET({ url }) {
         const siteDataPath = s3WebsiteDirectoryObj["s3StoreKey"] + "/"
             + "READMEs/"
             + "project_" + projectName + ".md" 
-        console.log("site Data path " + siteDataPath);
         
         const readme = await getReadmeS3(siteDataPath)
 

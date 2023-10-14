@@ -1,22 +1,26 @@
 import { v4 as uuidv4 } from 'uuid'
-import { SendEmailCommand, 
+import { 
+    SendEmailCommand, 
     type SendEmailCommandInput,
     type SendEmailCommandOutput,
-    SESClient } from "@aws-sdk/client-ses"
-import { GetObjectCommand, 
+    SESClient 
+} from "@aws-sdk/client-ses"
+import { 
+    GetObjectCommand, 
     PutObjectCommand,
-    S3Client } from "@aws-sdk/client-s3";
+    S3Client 
+} from "@aws-sdk/client-s3";
 
 
 import type { Email } from "./templates/Email";
 import type { WebsiteData } from './templates/WebsiteData';
 
-import { S3_STORAGE_BUCKET } from "$env/static/private";
+import { 
+    S3_STORAGE_BUCKET
+} from "$env/static/private";
 
 
-const sesClient = new SESClient({
-    region: "us-west-2"
-});
+const sesClient = new SESClient({});
 const s3Client = new S3Client({});
 
 
@@ -111,8 +115,6 @@ async function getDataRouteS3(urlKey: string) {
  * @returns WebsiteData or undefined
  */
 async function getWebsiteDataS3(websiteKey: string): Promise<WebsiteData | undefined> {
-    console.log("WEBSITE KEY " + websiteKey);
-    
     const getCommand = new GetObjectCommand({
         Bucket: S3_STORAGE_BUCKET,
         Key: websiteKey
@@ -165,8 +167,6 @@ async function putWebsiteDataS3(websiteKey: string, websiteData: WebsiteData) {
  * @returns readme data or empty string
  */
 async function getReadmeS3(readmeKey: string): Promise<string> {
-    console.log("README KEY " + readmeKey);
-
     const getCommand = new GetObjectCommand({
         Bucket: S3_STORAGE_BUCKET,
         Key: readmeKey

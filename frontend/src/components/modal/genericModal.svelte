@@ -119,9 +119,9 @@
 </style>
 
 <!-- open button allows for any clickable to trigger the open procedure -->
-<div class="add-button" on:click={openDialog}>
+<button class="add-button" on:click={openDialog}>
     <slot name="open-clickable-element"/>
-</div>
+</button>
 {#if showDialog === true}
     <div class="modal-overlay">
         <div class="dialog">

@@ -4,14 +4,12 @@ import { fail, json, redirect } from '@sveltejs/kit';
 import type { Actions } from "./$types" 
 
 import { sendEmailViaSES, getWebsiteDataS3, getDataRouteS3 } from "$lib/aws";
-import { AuthApiError, type Provider } from "@supabase/supabase-js";
-
-import { page } from '$app/stores';  
+import { AuthApiError, type Provider } from "@supabase/supabase-js"; 
 
 
 export const load: PageServerLoad = async ({ locals: { supabase, getSession }, url}) => {
     
-    console.log(url.hostname);
+    // console.log(url.hostname);
     const currentHostname = "colestainsby.com"
 
     // use url to get site display info for dynamic render 
