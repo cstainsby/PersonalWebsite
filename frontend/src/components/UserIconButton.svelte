@@ -1,5 +1,6 @@
 
 <script lang="ts">
+    import { addToast } from "$lib/toastStore";
     import { publicUserData } from "$lib/userStore";
 
 
@@ -19,7 +20,7 @@
         }
     })
 
-    function onSignOutButtonClick() {
+    function onSignInButtonClick() {
         fetch('/auth/logout', {
         method: 'POST',
         headers: {
@@ -36,10 +37,58 @@
         .then(data => {
             // Handle successful response (if any)
             console.log('Logged out successfully', data);
+
+            addToast({
+                type: "success",
+                message: "Sign Out Successful",
+                timeoutTime: 5000 // in ms
+            })
         })
         .catch(error => {
             // Handle errors
             console.error('Error logging out:', error);
+
+            addToast({
+                type: "error",
+                message: "Sign Out Unsuccessful",
+                timeoutTime: 5000 // in ms
+            })
+        })
+        .finally(() => {
+            accountDropdownToggle = false;
+        });
+    }
+
+    function onSignOutButtonClick() {
+        fetch('/auth/logout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            // Add any other headers if required (e.g., authorization token)
+        },
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            publicUserData.set(null)
+        })
+        .then(data => {
+            addToast({
+                type: "success",
+                message: "Sign Out Successful",
+                timeoutTime: 5000 // in ms
+            })
+        })
+        .catch(error => {
+            // Handle errors
+            console.error('Error logging out:', error);
+
+            addToast({
+                type: "error",
+                message: "Sign Out Unsuccessful",
+                timeoutTime: 5000 // in ms
+            })
         })
         .finally(() => {
             accountDropdownToggle = false;

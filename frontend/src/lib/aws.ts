@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid'
+// import { v4 as uuidv4 } from 'uuid'
 import { 
     SendEmailCommand, 
     type SendEmailCommandInput,
@@ -10,19 +10,68 @@ import {
     PutObjectCommand,
     S3Client 
 } from "@aws-sdk/client-s3";
+import { 
+    SSM 
+} from "@aws-sdk/client-ssm";
 
 
 import type { Email } from "./templates/Email";
 import type { WebsiteData } from './templates/WebsiteData';
 
 import { 
-    S3_STORAGE_BUCKET
+    AWS_REGION
 } from "$env/static/private";
 
+const sesClient = new SESClient({
+    region: AWS_REGION
+});
+const s3Client = new S3Client({
+    region: AWS_REGION
+});
+const ssmClient = new SSM({
+    region: AWS_REGION
+})
 
-const sesClient = new SESClient({});
-const s3Client = new S3Client({});
+let S3_STORAGE_BUCKET = ""
 
+/**
+ * Get a parameter value from SSM given an ssm key
+ * @param ssmKey 
+ * @returns 
+ */
+async function getSsmParameterValue(ssmKey: string): Promise<string> {
+    let paramValue = ""
+    const params = {
+        Name: ssmKey,
+        WithDecryption: false // If the parameter is encrypted
+    };
+    
+    // Retrieve the parameter value
+    return new Promise((resolve, reject) => {
+        ssmClient.getParameter(params, (err, data) => {
+            if (err) {
+                console.error(err, err.stack);
+                reject(err)
+            } 
+    
+            if (data && data.Parameter && data.Parameter.Value) {
+                paramValue = data.Parameter.Value;
+                resolve(paramValue)
+            } 
+            
+            resolve("")
+        });
+    })
+}
+
+/**
+ * Simple function used to inflate the s3 bucket pointer
+ * I WANT A BETTER SOLUTION TO THIS, THIS IS GROSS CODE
+ * Its just a cheap workaround to get by the svelte compiler
+ */
+async function inflateS3BucketPath() {
+    S3_STORAGE_BUCKET = await getSsmParameterValue("S3_STORAGE_BUCKET")
+}
 
 /**
  * send an Email using SES
@@ -80,6 +129,8 @@ async function sendEmailViaSES(email: Email): Promise<SendEmailCommandOutput> {
  * @param urlKey 
  */
 async function getDataRouteS3(urlKey: string) {
+    if (S3_STORAGE_BUCKET === "") { await inflateS3BucketPath() }
+
     const directoryKey = "site-directory.json"
     const getCommand = new GetObjectCommand({
         Bucket: S3_STORAGE_BUCKET,
@@ -115,6 +166,8 @@ async function getDataRouteS3(urlKey: string) {
  * @returns WebsiteData or undefined
  */
 async function getWebsiteDataS3(websiteKey: string): Promise<WebsiteData | undefined> {
+    if (S3_STORAGE_BUCKET === "") { await inflateS3BucketPath() }
+
     const getCommand = new GetObjectCommand({
         Bucket: S3_STORAGE_BUCKET,
         Key: websiteKey
@@ -147,6 +200,8 @@ async function getWebsiteDataS3(websiteKey: string): Promise<WebsiteData | undef
  * @param websiteData 
  */
 async function putWebsiteDataS3(websiteKey: string, websiteData: WebsiteData) {
+    if (S3_STORAGE_BUCKET === "") { await inflateS3BucketPath() }
+
     const putCommand = new PutObjectCommand({
         Bucket: S3_STORAGE_BUCKET,
         Key: websiteKey,
@@ -167,6 +222,8 @@ async function putWebsiteDataS3(websiteKey: string, websiteData: WebsiteData) {
  * @returns readme data or empty string
  */
 async function getReadmeS3(readmeKey: string): Promise<string> {
+    if (S3_STORAGE_BUCKET === "") { await inflateS3BucketPath() }
+
     const getCommand = new GetObjectCommand({
         Bucket: S3_STORAGE_BUCKET,
         Key: readmeKey

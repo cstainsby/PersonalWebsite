@@ -17,7 +17,7 @@
         githubProjectInfo?: GithubInfo
     }
 
-    // export let buttonText: ProjectDetailModalProps["buttonText"];
+    export let buttonText: ProjectDetailModalProps["buttonText"];
     export let projectName: ProjectDetailModalProps["projectName"];
     export let readmeSrc: ProjectDetailModalProps["readmeSrc"];
     export let githubProjectInfo: ProjectDetailModalProps["githubProjectInfo"];
@@ -135,7 +135,7 @@
 <GenericModal {onOpen} {onClose}>
     <span slot="title">Details</span>
     <button slot="open-clickable-element" class="word-link">
-        Details
+        {buttonText}
     </button>
     <div slot="content">{@html snarkdown(readmeContent)}</div>
 </GenericModal>
