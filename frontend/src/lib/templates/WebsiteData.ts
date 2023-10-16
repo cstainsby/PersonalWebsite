@@ -3,7 +3,7 @@ import type { Education } from "./Education"
 import type { Job } from "./Job"
 import type { PersonalBlurb } from "./PersonalBlurb"
 import type { Project } from "./Project"
-import type { Skill } from "./Skill"
+import type { Skill, SkillCollection } from "./Skill"
 import type { User } from "./User"
 import type { ImageLink } from "./ImageLink"
 
@@ -21,7 +21,7 @@ export interface WebsiteData {
     professionalLinks: ImageLink[]
 
     projects: Project[]
-    skills: Skill[]
+    skills: SkillCollection[]
 
     jobs: Job[]
     education: Education[]

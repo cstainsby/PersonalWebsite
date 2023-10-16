@@ -1,17 +1,19 @@
 <script lang="ts">
-    import ProjectSection from "../components/projectSection.svelte";
-    import HeaderSection from "../components/headerSection.svelte";
-    import SkillSection from "../components/skillSection.svelte";
-    import AboutMeSection from "../components/aboutMeSection.svelte";
-    import ContactMeSection from "../components/contactMeSection.svelte";
+    import ProjectSection from "../components/Section_Projects.svelte";
+    import HeaderSection from "../components/Section_Header.svelte";
+    import SkillSection from "../components/Section_Skills.svelte";
+    import AboutMeSection from "../components/Section_AboutMe.svelte";
+    import ContactMeSection from "../components/Section_ContactMe.svelte";
+    import ErrorSection from "../components/Section_Error.svelte";
 
     import type { PageServerData } from './$types';
     import type { WebsiteData } from "$lib/templates/WebsiteData";
+    import { websiteBlob } from "$lib/localCache";
 
   
     export let data;
     
-    const websiteData: WebsiteData = data.jsonBlob;
+    const websiteData: WebsiteData | undefined = data.jsonBlob;
 </script>
 
 <style lang="scss">
@@ -29,6 +31,7 @@
 </style>
 
 <div id="personal-website-home">
+    {#if websiteData}
     <HeaderSection 
         title={websiteData.title}
         extraDescriptor={websiteData.extraDescriptor}
@@ -53,4 +56,7 @@
         phoneNumber={websiteData.user.phoneNumber}
         email={websiteData.user.email}
         links={websiteData.professionalLinks}/>
+    {:else}
+    <ErrorSection/>
+    {/if}
 </div>

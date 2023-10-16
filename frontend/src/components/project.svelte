@@ -6,7 +6,7 @@
     import Modal from "./modal/projectDetailModal.svelte";
     import ProjectModal from "./projectModal.svelte";
 
-    import SkillComponent from "./skillSection.svelte";
+    import SkillComponent from "./Section_Skills.svelte";
 
     interface ProjectProps {
         project: Project 
