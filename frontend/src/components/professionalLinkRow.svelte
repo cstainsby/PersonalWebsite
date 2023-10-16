@@ -1,6 +1,6 @@
 
 <script lang="ts">
-    import type { ImageLink } from "$lib/websiteInterfaces"; 
+    import type { ImageLink } from "$lib/templates/ImageLink"; 
 
     interface ProfessionalLinkRowProps {
         imageLinks: ImageLink[]

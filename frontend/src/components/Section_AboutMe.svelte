@@ -5,7 +5,7 @@
 
     import { yearMonthFormatToDate, convertDateToMonthYearDateDisplayStr } from "$lib/dates"
     import GenericModal from "./modal/genericModal.svelte";
-    import Project from "./project.svelte";
+    import Project from "./Project.svelte";
 
     // import function to register Swiper custom elements
     // import { register } from 'swiper/element/bundle';

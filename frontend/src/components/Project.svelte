@@ -1,12 +1,7 @@
 
 <script lang="ts">
     import type { Project } from '$lib/templates/Project';
-    import type { Skill } from "$lib/templates/Skill";
     import ProjectDetailModal from "./modal/projectDetailModal.svelte";
-    import Modal from "./modal/projectDetailModal.svelte";
-    import ProjectModal from "./projectModal.svelte";
-
-    import SkillComponent from "./Section_Skills.svelte";
 
     interface ProjectProps {
         project: Project 

@@ -167,8 +167,8 @@
             method="POST" 
             action="?/sendEmail"
             on:submit|preventDefault={e => onEmailSend(e)}>
-            <input type="text" id="from_name" name="from-name" placeholder="Full Name" required>
-            <input type="email" id="from_email" name="from-email" placeholder="Email" required>
+            <input type="text" id="from_name" name="from-name" placeholder="Your Full Name" required>
+            <input type="email" id="from_email" name="from-email" placeholder="Your Email" required>
             <textarea id="message" name="message" placeholder="Message" required></textarea>
             {#if sendingMail}
                 <Spinner/>
