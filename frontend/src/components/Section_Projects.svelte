@@ -4,8 +4,7 @@
     import type { Skill } from '$lib/templates/Skill';
 
     // projects
-    import ProjectComponent from "./project.svelte";
-    import ProjectModal from "./projectModal.svelte";
+    import ProjectComponent from "./Project.svelte";
 
     interface ProjectImportanceObject {
         High: Project[], Medium: Project[], Low: Project[]

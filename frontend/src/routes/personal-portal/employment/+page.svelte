@@ -1,6 +1,4 @@
-
 <script lang="ts">
-    import Scroller from "@sveltejs/svelte-scroller";
     import JobHuntSection from "./JobHuntSection.svelte";
     import CurrentEmploymentSection from "./CurrentEmploymentSection.svelte";
     import PastEmploymentSection from "./PastEmploymentSection.svelte";
@@ -8,64 +6,117 @@
 
     import type { Job as JobType } from "$lib/templates/Job"
     import Job from "$components/Job.svelte"
+    import { goto } from "$app/navigation";
+    import { onMount } from "svelte";
+    import SectionError from "$components/Section_Error.svelte";
 
-    let count: number;
-	let index: number;
-	let offset: number;
-	let progress: number;
-	let top = 0.1;
-	let threshold = 0.5;
-	let bottom = 0.9;
+    let currentlySelectedPage: "ApplicationPage" | "ResumePage" | "CoverLetterPage" | "OverviewPage" = "OverviewPage"
 
-    let isCurrentlyEmployed = false
-
-    let job: JobType = {
-        "title": "Linear Algebra Researcher",
-        "employer": "Gonzaga University",
-        "imgPath": "media/Math-research-screenshot.png",
-        "imgAltText": "Petersen Graph",
-        "startDate": "2022-01",
-        "endDate": "2023-05"
+    /**
+     * Changes the current url parameter which indicates the current tab selected
+     */
+    function changeTabUrlParam() {
+        const currentUrl = new URL(window.location.href);
+        currentUrl.searchParams.set('tab', currentlySelectedPage)
+        goto(currentUrl.toString())
     }
+
+    /**
+     * Event handler for a button click which changes the tab
+     * @param event
+     */
+    function onPageSelectChange(event: Event) {
+        if (event === null 
+            || event.currentTarget === null) { return }
+        
+        const target = event.currentTarget as HTMLButtonElement
+        
+        switch (target.value) {
+            case "OverviewPage":
+                currentlySelectedPage = "OverviewPage"
+                break;
+            case "ApplicationPage":
+                currentlySelectedPage = "ApplicationPage"
+                break;
+            case "ResumePage":
+                currentlySelectedPage = "ResumePage"
+                break;
+            case "CoverLetterPage":
+                currentlySelectedPage = "CoverLetterPage"
+                break;
+            default:
+                console.error("Un-covered tab option returned from tab switch button. Value: " + currentlySelectedPage)
+                break;
+        }
+	}
 </script>
 
 <style lang="scss">
     
+    .tablist {
+        list-style-type: none;
+
+        & > li {
+            display: inline-block;
+
+            & > button {
+                min-width: 100px;
+            }
+        }
+    }
+    
+    .active-page-btn {
+        background-color: var(--blue);
+    }
 </style>
 
-<!-- <Scroller
-    {top}
-    {threshold}
-    {bottom}
-    bind:count
-    bind:index
-    bind:offset
-    bind:progress>
-    <div slot="background">
-        <button></button>
-    
-        <p>Section {index + 1} is currently active.</p>
-      </div>
-    
-      <div class="foreground" slot="foreground">
-        
-        <section>This is the second section.</section>
-        <section>This is the third section.</section>
-      </div>
-</Scroller> -->
 
-<Job job={job}/>
-<CurrentEmploymentSection/>
-<PastEmploymentSection/>
-<DocumentsSection/>
-<JobHuntSection/>
-
-
-
-{#if isCurrentlyEmployed}
+<div id="employment-page">
     <div>
-
+        <ul class="tablist">
+            <li>
+                <button 
+                    class:active-page-btn={currentlySelectedPage==="OverviewPage"} 
+                    on:click={onPageSelectChange}
+                    value="OverviewPage">
+                    Overview
+                </button> 
+            </li>
+            <li>
+                <button 
+                    class:active-page-btn={currentlySelectedPage==="ApplicationPage"} 
+                    on:click={onPageSelectChange}
+                    value="ApplicationPage">
+                    Applications
+                </button> 
+            </li>
+            <li>
+                <button 
+                    class:active-page-btn={currentlySelectedPage==="CoverLetterPage"} 
+                    on:click={onPageSelectChange}
+                    value="CoverLetterPage">
+                    Cover Letter
+                </button> 
+            </li>
+            <li>
+                <button 
+                    class:active-page-btn={currentlySelectedPage==="ResumePage"} 
+                    on:click={onPageSelectChange}
+                    value="ResumePage">
+                    Resume
+                </button> 
+            </li>
+        </ul>
+        
     </div>
-<!-- {:else} -->
-    
-{/if}
+
+    {#if currentlySelectedPage === "OverviewPage"}
+
+    <!-- {:else if}
+
+    {:else if} -->
+
+    {:else}
+        <SectionError/>
+    {/if}
+</div>

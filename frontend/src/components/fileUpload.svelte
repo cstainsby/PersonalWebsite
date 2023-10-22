@@ -5,7 +5,7 @@
     import { onDestroy, onMount } from "svelte";
     import { addToast } from "$lib/toastStore";
     import type { Toast } from "$lib/templates/Toast";
-    import Toast from "./Toast.svelte";
+    import ToastComponent from "./Toast.svelte";
 
 
     interface FileUploadProps {
