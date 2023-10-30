@@ -24,23 +24,23 @@ export const load: PageServerLoad = async ({ locals: { supabase, getSession }, u
 
 // form actions
 export const actions: Actions = {
-	sendEmail: async ({ cookies, request }) => {
-		const data = await request.formData();
-        const email: Email = {
-            fullName: data.get("from-name") as string,
-            theirEmail: data.get("from-email") as string,
-            theirMessage: data.get("message") as string
-        }
+	// sendEmail: async ({ cookies, request }) => {
+	// 	const data = await request.formData();
+    //     const email: Email = {
+    //         fullName: data.get("from-name") as string,
+    //         theirEmail: data.get("from-email") as string,
+    //         theirMessage: data.get("message") as string
+    //     }
         
-        try {
-            const res = await sendEmailViaSES(email)
-            return { success: true }
-        } catch (err) {
-            console.log("Error sending Email");
-        }
+    //     try {
+    //         const res = await sendEmailViaSES(email)
+    //         return { success: true }
+    //     } catch (err) {
+    //         console.log("Error sending Email");
+    //     }
 
-        return { success: false}
-	},
+    //     return { success: false}
+	// },
 
     // login: async ({ request, url, locals: { supabase } }) => {
     //     const formData = await request.formData()

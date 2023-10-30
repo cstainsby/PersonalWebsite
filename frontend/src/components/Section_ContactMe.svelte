@@ -100,48 +100,48 @@
             height: 100vh;
         }
 
-        #email-contact-section {
-            margin: 24px;
-            padding: 24px;
-            width: 80%;
-        }
+        // #email-contact-section {
+        //     margin: 24px;
+        //     padding: 24px;
+        //     width: 80%;
+        // }
 
-        & #email-form {
-            display: grid;
-            grid-template-areas: 
-            "fullname fullname  email email"
-            "message message    message message"
-            "response response  response submit";
-            grid-template-columns: 1fr 1fr 1fr 1fr;
-            gap: 6px;
-            align-items: center;
-            justify-content: center;
-            // margin: 5%;
-            // margin-right: 15%;
-            // margin-left: 15%;
+        // & #email-form {
+        //     display: grid;
+        //     grid-template-areas: 
+        //     "fullname fullname  email email"
+        //     "message message    message message"
+        //     "response response  response submit";
+        //     grid-template-columns: 1fr 1fr 1fr 1fr;
+        //     gap: 6px;
+        //     align-items: center;
+        //     justify-content: center;
+        //     // margin: 5%;
+        //     // margin-right: 15%;
+        //     // margin-left: 15%;
 
-            #from_name { 
-                grid-area: fullname;
-                height: 36px;
-            }
-            #from_email { 
-                grid-area: email;
-                height: 36px;
-            }
-            #message { 
-                grid-area: message;
-                resize: vertical;
-                height: 150px;
-            }
-            #response {
-                padding-left: 4px;
-                grid-area: response;
-            }
-            // allow the load spinner and response messages to be put into the submit area
-            & #email_submit { 
-                grid-area: submit;
-            }
-        }
+        //     #from_name { 
+        //         grid-area: fullname;
+        //         height: 36px;
+        //     }
+        //     #from_email { 
+        //         grid-area: email;
+        //         height: 36px;
+        //     }
+        //     #message { 
+        //         grid-area: message;
+        //         resize: vertical;
+        //         height: 150px;
+        //     }
+        //     #response {
+        //         padding-left: 4px;
+        //         grid-area: response;
+        //     }
+        //     // allow the load spinner and response messages to be put into the submit area
+        //     & #email_submit { 
+        //         grid-area: submit;
+        //     }
+        // }
 
         & #contact-info {
             display: flex;
@@ -158,7 +158,7 @@
 
 
 <div id="contact-section">
-    <div id="email-contact-section">
+    <!-- <div id="email-contact-section">
         <div id="email-contact-section-header">
             <h2>Contact Me</h2>
             <p>Send me a quick message if you're interesed in working with me!</p>
@@ -180,7 +180,7 @@
             {/if}
             <div id="response">{responseMessage}</div>
         </form>
-    </div>
+    </div> -->
     
     <div id="contact-info">
         {#if phoneNumber}

@@ -110,13 +110,13 @@
         
     </div>
 
-    {#if currentlySelectedPage === "OverviewPage"}
+    <!-- {#if currentlySelectedPage === "OverviewPage"}
 
-    <!-- {:else if}
-
-    {:else if} -->
+    {:else if currentlySelectedPage === "ApplicationPage"}
+        <
+    {:else if currentlySelectedPage === "ResumePage"}
 
     {:else}
         <SectionError/>
-    {/if}
+    {/if} -->
 </div>

@@ -167,7 +167,9 @@
                             {/if}
                             <p>Through: {educationItem.fromWho}</p>
                             <p>
-                                {convertDateToMonthYearDateDisplayStr(yearMonthFormatToDate(educationItem.startDate))} - 
+                                {#if educationItem.startDate}
+                                    {convertDateToMonthYearDateDisplayStr(yearMonthFormatToDate(educationItem.startDate))} - 
+                                {/if}
                                 {#if educationItem.endDate}
                                     {convertDateToMonthYearDateDisplayStr(yearMonthFormatToDate(educationItem.endDate))}
                                 {:else}
